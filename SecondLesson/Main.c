@@ -82,7 +82,8 @@ int main(int argc, const char* argv[]) {
 	// функция пользователького ввода в консоли
 	scanf_s("%d",&inputNum);
 	// принимает тип значения переменной и адресс переменной для записи значения
-	printf("\nyou tipe this %d number and we multiply it %d",inputNum/*,inputNum*2 ВНУТРИСТРОЧНЫЙ КОММЕНТАРИЙ*/);
+	// printf("\nyou tipe this %d number and we multiply it %d", inputNum/*,inputNum*2 ВНУТРИСТРОЧНЫЙ КОММЕНТАРИЙ*/);
+	printf("\nyou tipe this %d number and we multiply it",inputNum);
 
 
 	// Арифметические операции

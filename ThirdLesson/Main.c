@@ -8,7 +8,7 @@ int main(int argc, const char* argv[]) {
 	scanf_s("%c", &bool);
 	
 	// операция if else
-	if (bool = 'y') printf("It's Checked");
+	if (bool == 'y') printf("It's Checked");
 	else printf("As you wana");
 	printf("\n");
 
