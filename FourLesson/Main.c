@@ -19,6 +19,22 @@ int main(int argc, const char* argv[]) {
 	printf("100 / %d = %d\n", input, 100 / input);
 	printf("and the reminder will be %d,by the way \n", 100 % input);
 
+	int number = 71;
+	printf("input a number");
+	scanf_s("%d",&number);
+	int d = 0, i = 1;
+	while (i <= number) {
+		if (number % i++ == 0) d++;
+		else continue;
+		if (d == 3)break;
+	}
+	printf("input number %d is %s simple\n",number,(d==2)?"":"not");
+
+	int significative = 10;
+	int base = 2;
+	int result = 1;
+	for (i = 0; i < significative; i++) result *= base;
+	printf("%d powered by %d is %d\n",base,significative,result);
 
 
 
