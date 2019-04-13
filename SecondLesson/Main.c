@@ -46,25 +46,68 @@ int main(int argc, const char* argv[]) {
 
 	 для числовых типов используется следующая маска ввода
 	 %05d для записи значений с лидирующими нулями 00050
-	 %5d вместо нулей используются пробелы
+	 %5d вместо нулей используются пробелы    50
 	 %.2f указывает сколько знаков должно быть после запятой  50.00
 */
-
+	short shrt = 345;
 	int num = 50;
 	char sym = 'A';
+	char sym2 = 75;
 	float flo = 50.02f;
-	//no boolean int равное 1 - true, 0 - false
+	double dbl = 50.24;
+	// нет типа boolean, используется как int равное 1 - true, 0 - false
 
+	
+	// типы имеющие unsigned:   char,int
+	
 
 	printf("This is int %d \n", num);
 	printf("This is int %05d with pre 0 \n", num);
 	printf("This is int %5d with pre   \n", num);
 	printf("%c \n", sym);
+	printf("%c \n", sym2);
 	printf("This is float %f \n", flo);
 	printf("This is float %.2f with after numbers \n", flo);
+	printf("This is float %.2lf with after numbers \n", flo);
 	
+
+	// передача переменной по значению
 	printf("%d \n", num);
-	printf("%d \n",num);
+	// передача адресса переменной
+	printf("%p \n",&num);
+
+
+	printf("Tipe any number: ");
+	int inputNum;
+	// функция пользователького ввода в консоли
+	scanf_s("%d",&inputNum);
+	// принимает тип значения переменной и адресс переменной для записи значения
+	printf("\nyou tipe this %d number and we multiply it %d",inputNum/*,inputNum*2 ВНУТРИСТРОЧНЫЙ КОММЕНТАРИЙ*/);
+
+
+	// Арифметические операции
+	/*
+	операции: +, -, *, /, %
+
+	бинарные операции: 
+	  & - и
+	  | - или
+	  ! - не
+	  ^ - исключающее или
+	  << >> - сдвиг влево и вправо
+	
+	инкремент и декремент ++var, var++, --var, var--
+
+	а также операции с присвоением изменённого значения в первую переменную(+=, -=, *=, ...)
+	*/
+
+	int variable = 70;
+	printf("var is: %d\n",variable);
+	variable +=50;
+	variable++;
+	++variable;
+	printf("now var is: %d\n", variable);
+
 
 /*
 	   Обязательно должна возвращать ноль, как успешное завершение программы
