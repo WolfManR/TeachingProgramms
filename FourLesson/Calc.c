@@ -48,8 +48,6 @@ int calc() {
 	{
 		printf("%f %c %f = %f", first, operatorSign, second, result);
 	}
-	else prinf("wrong operation");
-
-
+	else printf("wrong operation");
 	return 0;
 }

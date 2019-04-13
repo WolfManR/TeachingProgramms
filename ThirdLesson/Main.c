@@ -2,13 +2,14 @@
 
 int main(int argc, const char* argv[]) {
 	// Логическое сравнение
-	
-	prinf("Check this: y/n\n");
-	char bool;
-	scanf_s("%c", &bool);
+
+
+	char ch;
+	printf("Check this: y/n\n");
+	scanf("%c", &ch);
 	
 	// операция if else
-	if (bool == 'y') printf("It's Checked");
+	if (ch == 'y') printf("It's Checked");
 	else printf("As you wana");
 	printf("\n");
 
