@@ -4,13 +4,19 @@ int main(int argc, const char* argv[]) {
 	// Логическое сравнение
 
 
-	char ch;
-	printf("Check this: y/n\n");
-	scanf("%c", &ch);
 	
+	printf("Check this: y/n\n");
+	char ch = getchar();
+	
+	printf("enter something");
+	char h[20];
+	gets_s(h,20);
+	printf("%s",h);
+
+
 	// операция if else
-	if (ch == 'y') printf("It's Checked");
-	else printf("As you wana");
+	if (ch == 'y') printf("\nIt's Checked");
+	else printf("\nAs you wana");
 	printf("\n");
 
 	int a = 20;
