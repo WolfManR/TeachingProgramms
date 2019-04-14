@@ -1,21 +1,21 @@
 #include <stdio.h>
 
-int calc() {
+int calc_main() {
 	float first,second;
 	int operator;
-	printf("Enter first operator:");
+	printf("Enter first operator: ");
 	scanf_s("%f",&first);
 	printf("\nenter  1 for+\n       2 for -\n       * for -\n       4 for /\n");
 	scanf_s("%d", &operator);
 
-	if (operator ==4) {
+	if (operator == 4) {
 		do {
-			printf("\nenter second operand:");
+			printf("\nenter second operand: ");
 			scanf_s("%f", &second);
 		} while (second == 0);
 	}
 	else {
-		printf("\nenter second operand:");
+		printf("\nenter second operand: ");
 		scanf_s("%f", &second);
 	}
 	float result;

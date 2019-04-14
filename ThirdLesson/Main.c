@@ -3,17 +3,9 @@
 int main(int argc, const char* argv[]) {
 	// Логическое сравнение
 
-
-	
 	printf("Check this: y/n\n");
 	char ch = getchar();
 	
-	printf("enter something");
-	char h[20];
-	gets_s(h,20);
-	printf("%s",h);
-
-
 	// операция if else
 	if (ch == 'y') printf("\nIt's Checked");
 	else printf("\nAs you wana");

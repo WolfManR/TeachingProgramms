@@ -36,7 +36,7 @@ int main(int argc, const char* argv[]) {
 	for (i = 0; i < significative; i++) result *= base;
 	printf("%d powered by %d is %d\n",base,significative,result);
 
-	Calc();
+	calc_main();
 
 	return 0;
 }
