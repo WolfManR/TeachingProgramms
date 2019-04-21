@@ -2,11 +2,12 @@
 
 int main() {
 	printf("tipe \"q\", if you wana exit: ");
-	char exit = getchar();
-	while ( exit!= 'q') {
+	while ( getch()!= 'q') {
 		int lesson;
-		printf("Choose on which lesson you wana check homework work\nLessons:\n 1 : Five\n");
+		printf("\n\nChoose on which lesson you wana check homework work\nLessons:\n 1 : Five\n");
+		printf("Number: ");
 		scanf_s("%d", &lesson);
+		printf("\n");
 		switch (lesson)
 		{
 		case 1:
@@ -19,7 +20,6 @@ int main() {
 		}
 
 		printf("\ntipe \"q\", if you wana exit: ");
-		exit=getchar();
 	}
 	
 	
