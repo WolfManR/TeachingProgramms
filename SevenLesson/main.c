@@ -19,9 +19,9 @@ int main() {
 	printf("value of a is %d\n",a);
 	printf("address of a is %p\n\n",&a);
 	int* pointer = &a;
-	printf("value of pointer is %d\n",pointer);
+	printf("value of pointer is %p\n",pointer);
 	printf("address of pointer is %p\n", &pointer);
-	printf("variable 'pointer' point at %p\n", *pointer); // операция называется разименование указателя
+	printf("variable 'pointer' point at %d\n", *pointer); // операция называется разименование указателя
 	*pointer = 70;
 	printf("value of a is %d\n\n",a);
 
