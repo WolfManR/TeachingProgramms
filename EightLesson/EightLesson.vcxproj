@@ -23,6 +23,7 @@
     <ProjectGuid>{605E8875-15A8-4D0D-9391-71CE536F763A}</ProjectGuid>
     <RootNamespace>EightLesson</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>EightToTenLessons</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -124,6 +125,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="someFunctions.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />

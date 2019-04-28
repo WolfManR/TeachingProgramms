@@ -18,11 +18,29 @@
 #define ARRAY_LENGTH 10
 #define NUMBER_AMOUNT 1000000
 
+void printArray(int* array, int length) {
+	for (int i = 0; i < length; i++) printf("%d", array[i]);
+}
+
+
+float average(int* array, int length) {
+	float result = 0;
+	for (int i = 0; i < length; i++) 
+		result += *(array + i);
+	return result;
+}
+
+void voidFunctionMain();  // прототип вызываемой функции в другом файле
+void advancedArray();
 int main() {
 
-	int array[ARRAY_LENGTH];
-	array[0] = 1;
-	array[1] = 2;
+	voidFunctionMain(); // вызов функции из другого файла
+	
+	
+	 // массив представл€ет собой единую структуру €чеек в пам€ти, в которой размещаетс€ группа однотипных данных
+	int array[ARRAY_LENGTH];   
+	array[0] = 1;			   // доступ к данным осуществл€етс€ через указатель на €чейку пам€ти
+	array[1] = 2;			    
 	// ....
 
 	int array1[5] = { 0,1,2,3,4 };
@@ -42,8 +60,21 @@ int main() {
 		printf("Numbers %d generated %6d (%5.2f%%) times\n", i, frequency[i], ((float)frequency[i] / NUMBER_AMOUNT * 100));
 	}
 
+	// јрифметика указателей и передача массива в функцию
+	i = 0;
+	int arr[ARRAY_LENGTH];
+	while (i < ARRAY_LENGTH) {
+		printf("Enter value no.%d",i);
+		scanf_s("%d",arr+i);                  // arr+i дл€ прохождени€ по элементам массива
+		i++;
+	}
+	printf("\nOur array is: ");
+	printArray(arr,ARRAY_LENGTH);           // вызов функции и передача массива
+	printf("\nAnd the average is: ");
+	printf("%f\n", average(arr,ARRAY_LENGTH));
 
 
+	advancedArray();
 
 	return 0;
 }
