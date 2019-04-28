@@ -4,7 +4,11 @@ int main() {
 	printf("tipe \"q\", if you wana exit: ");
 	while ( getch()!= 'q') {
 		int lesson;
-		printf("\n\nChoose on which lesson you wana check homework work\nLessons:\n 1 : Five\n");
+		printf("\n\nChoose on which lesson you wana check homework work\nLessons:\n");
+		printf("1 : Five\n");
+		printf("2 : Ten\n");
+
+		printf("\n");
 		printf("Number: ");
 		scanf_s("%d", &lesson);
 		printf("\n");
@@ -14,6 +18,11 @@ int main() {
 			LessonFive_main();
 			printf("End Lesson Five Homework!\n");
 			break;
+		case 2:
+			LessonTen_main();
+			printf("End Lesson Ten Homework!\n");
+			break;
+
 		default:
 			printf("There no lesson with this number!\n");
 			break;
