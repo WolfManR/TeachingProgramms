@@ -37,11 +37,10 @@
 #include <stdio.h>
 
 int calculateSquareEquality(int a, int b, int c, float* x1, float* x2) {
-
-	int d = b*b - 4 * a * c;
+	int d = b * b - 4 * a * c;
 	if (d < 0) return -1;
 	else if (d == 0) {
-		*x1 = *x2 = (float)((-b + (float)sqrt(d)) / (2 * a));
+		*x1 = *x2 = (float)(-b / (2 * a));
 		return 0;
 	}
 	else
@@ -52,16 +51,15 @@ int calculateSquareEquality(int a, int b, int c, float* x1, float* x2) {
 	}
 }
 
-int checkArray(int* arr, int length,int* changed ) {
+int checkArray(int* arr, int length, int* changed) {
 	int result = 0;
 	for (int i = 0; i < length; i++)
 	{
 		if (arr[i] % 2 != 0) {
 			for (int k = 0; k < length; k++)
-			{
 				if (arr[k] % 2 != 0)
-					arr[k] = *(arr+k) * 2;
-			}
+					arr[k] *= 2;
+
 			*changed = 1;
 			result = 1;
 			break;
@@ -71,61 +69,67 @@ int checkArray(int* arr, int length,int* changed ) {
 	return result;
 }
 
-short* intToShortArray(int* array) {
-	short* arr[5];
-	for (int i = 0; i < 5; i++)
-	{
-		arr[i] = (short)array[i];
-	}
+void intToShortArray(unsigned int* array) {
+	unsigned short* arr = array;
+	printf("this is array after ");
+	for (int i = 0; i < 20; i++) printf("%d ", *(arr + i));
 	return *arr;
 }
 
 int LessonTen_main() {
 	printf("This is Lesson Ten Homework\n");
+
+	// 1
 	int a, b, c;
 	float x1, x2;
 	printf("Enter numbers in square equality ax^2+bx+c=0, like a b c\n");
 	scanf_s("%d %d %d", &a, &b, &c);
-	switch (calculateSquareEquality(a,b,c,&x1,&x2))
-	{
-	case -1:
-		printf("d < 0  x1 = %f, x2 = %f",x1,x2);
-		break;
-	case 0:
-		printf("d = 0  x1 = %5.2f, x2 = %5.2f", x1, x2);
-		break;
-	case 1:
-		printf("d > 0  x1 = %5.2f, x2 = %5.2f", x1, x2);
-		break;
-	default:
-		break;
+	if (a == 0) printf("x = %f",(float)(-c/b));
+	else {
+		switch (calculateSquareEquality(a, b, c, &x1, &x2))
+		{
+		case -1:
+			printf("d < 0  x1 = %f, x2 = %f", x1, x2);
+			break;
+		case 0:
+			printf("d = 0  x1 = %5.2f, x2 = %5.2f", x1, x2);
+			break;
+		case 1:
+			printf("d > 0  x1 = %5.2f, x2 = %5.2f", x1, x2);
+			break;
+		default:
+			break;
+		}
 	}
 	printf("\n");
-	
-	
+
+	// 2
 	int array[5];
 	printf("enter array\n");
 	for (int i = 0; i < 5; i++) {
-		printf("n.%d is ",i);
-		scanf_s("%d",array+i);
+		printf("n.%d is ", i);
+		scanf_s("%d", array + i);
 	}
-		
-	printf("base array is: ");
-	for (int i = 0; i < 5; i++) printf("%d ",array[i]);
-	printf("\n");
 
-	int change=0;
-	checkArray(&array,5,&change);
-	printf("changed array is: ");
+	printf("base array is: ");
 	for (int i = 0; i < 5; i++) printf("%d ", array[i]);
 	printf("\n");
 
+	int change = 0;
+	checkArray(&array, 5, &change);
+	if (change == 1) {
+		printf("changed array is: ");
+		for (int i = 0; i < 5; i++) printf("%d ", array[i]);
+		printf("\n");
+	}
+	else printf("array not changed\n");
+	
+
 
 	printf("enter five integers\n");
-	for (int i = 0; i < 5; i++) scanf_s("%d",array+i);
-	short* arr = intToShortArray(&array);
-	printf("this is array after");
-	for (int i = 0; i < 5; i++) printf("%hd ", arr + i);
+	unsigned int array2[10] = { 2000000,1000000,3000000,4000000,100000,200000 , 30000 , 400000 , 65535, 65536 };
+	intToShortArray(array2);
+	
 	printf("\n");
 
 	return 0;
