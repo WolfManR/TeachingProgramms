@@ -20,6 +20,6 @@ int main() {
 	area = realloc(area, sizeof(int) * (newsize + 10));
 	for (i = 0; i < newsize; i++) * (area + i) = i * 10;
 	for (i = 0; i < newsize; i++)printf("%d ", *(area + i));
-
+	free(area); // не забывать освобождать память
 	return 0;
 }
