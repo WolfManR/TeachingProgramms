@@ -64,25 +64,25 @@ int main() {
 			printf("End Lesson First work!\n");
 			break;
 		case 2:
-			LessonFive_main();
+			First_main();
 			printf("End Lesson Two work!\n");
 			break;
 		case 3:
-			LessonFive_main();
+			First_main();
 			printf("End Lesson Three work!\n");
 			break;
 		case 4:
 
 		case 5:
-			LessonFive_main();
+			First_main();
 			printf("End Lessons Four and Five work!\n");
 			break;
 		case 6:
-			LessonTen_main();
+			First_main();
 			printf("End Lesson Six work!\n");
 			break;
 		case 7:
-			LessonTen_main();
+			First_main();
 			printf("End Lesson Seven work!\n");
 			break;
 		case 8:
@@ -90,23 +90,23 @@ int main() {
 		case 9:
 
 		case 10:
-			LessonTen_main();
+			First_main();
 			printf("End Lesson Eight to Ten work!\n");
 			break;
 		case 11:
-			LessonTen_main();
+			First_main();
 			printf("End Lesson Eleven work!\n");
 			break;
 		case 12:
-			LessonTen_main();
+			First_main();
 			printf("End Lesson Twelve work!\n");
 			break;
 		case 13:
-			LessonTen_main();
+			First_main();
 			printf("End Lesson Thirteen work!\n");
 			break;
 		case 14:
-			LessonTen_main();
+			First_main();
 			printf("End Lesson Fourteen work!\n");
 			break;
 
