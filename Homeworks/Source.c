@@ -7,6 +7,7 @@ int main() {
 		printf("\n\nChoose on which lesson you wana check homework work\nLessons:\n");
 		printf("1 : Five\n");
 		printf("2 : Ten\n");
+		printf("3 : Fourteen\n");
 
 		printf("\n");
 		printf("Number: ");
@@ -22,7 +23,10 @@ int main() {
 			LessonTen_main();
 			printf("End Lesson Ten Homework!\n");
 			break;
-
+		case 3:
+			LessonFourteen_main();
+			printf("End Lesson Fourteen Homework!\n");
+			break;
 		default:
 			printf("There no lesson with this number!\n");
 			break;

@@ -24,3 +24,10 @@
 
 
 */
+
+int LessonFourteen_main() {
+	printf("This is Lesson Fourteen Homework\n");
+
+
+	return 0;
+}

@@ -24,7 +24,7 @@
     <ClCompile Include="LessonTen.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="LessonForteen.c">
+    <ClCompile Include="LessonFourteen.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

@@ -124,7 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="LessonFive.c" />
-    <ClCompile Include="LessonForteen.c" />
+    <ClCompile Include="LessonFourteen.c" />
     <ClCompile Include="LessonTen.c" />
     <ClCompile Include="Source.c" />
   </ItemGroup>
