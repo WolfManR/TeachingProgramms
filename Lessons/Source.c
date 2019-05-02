@@ -5,8 +5,8 @@ typedef struct {
 	char Theme[256];
 }Lessons;
 
-int size(char* str) {
-	return sizeof(str) / sizeof(char);
+void EndLessonStr(char* str) {
+	printf("\nEnd Lesson %s work!\n",str);
 }
 
 
@@ -61,29 +61,29 @@ int main() {
 		{
 		case 1:
 			First_main();
-			printf("End Lesson First work!\n");
+			EndLessonStr("First");
 			break;
 		case 2:
-			First_main();
-			printf("End Lesson Two work!\n");
+			Second_main();
+			EndLessonStr("Two");
 			break;
 		case 3:
-			First_main();
-			printf("End Lesson Three work!\n");
+			Third_main();
+			EndLessonStr("Three");
 			break;
 		case 4:
 
 		case 5:
-			First_main();
+			FourAndFive_main();
 			printf("End Lessons Four and Five work!\n");
 			break;
 		case 6:
 			First_main();
-			printf("End Lesson Six work!\n");
+			EndLessonStr("Six");
 			break;
 		case 7:
 			First_main();
-			printf("End Lesson Seven work!\n");
+			EndLessonStr("Seven");
 			break;
 		case 8:
 
@@ -95,19 +95,19 @@ int main() {
 			break;
 		case 11:
 			First_main();
-			printf("End Lesson Eleven work!\n");
+			EndLessonStr("Eleven");
 			break;
 		case 12:
 			First_main();
-			printf("End Lesson Twelve work!\n");
+			EndLessonStr("Twelve");
 			break;
 		case 13:
 			First_main();
-			printf("End Lesson Thirteen work!\n");
+			EndLessonStr("Thirteen");
 			break;
 		case 14:
 			First_main();
-			printf("End Lesson Fourteen work!\n");
+			EndLessonStr("Fourteen");
 			break;
 
 

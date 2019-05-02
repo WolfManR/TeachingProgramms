@@ -124,7 +124,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="First_main.c" />
+    <ClCompile Include="FourAndFive_calc.c" />
+    <ClCompile Include="FourAndFive_main.c" />
+    <ClCompile Include="Second_main.c" />
     <ClCompile Include="Source.c" />
+    <ClCompile Include="Third_main.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
