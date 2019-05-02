@@ -1,6 +1,4 @@
-#include <stdio.h>  
-
-int Third_main(int argc, const char* argv[]) {
+int Third_main() {
 	// Логическое сравнение
 
 	printf("Check this: y/n\n");

@@ -123,12 +123,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EightToTen_main.c" />
+    <ClCompile Include="EightToTen_SomeFunctions.c" />
+    <ClCompile Include="Eleven_main.c" />
     <ClCompile Include="First_main.c" />
     <ClCompile Include="FourAndFive_calc.c" />
     <ClCompile Include="FourAndFive_main.c" />
+    <ClCompile Include="Fourteen_main.c" />
     <ClCompile Include="Second_main.c" />
+    <ClCompile Include="Seven_main.c" />
+    <ClCompile Include="Six_main.c" />
     <ClCompile Include="Source.c" />
     <ClCompile Include="Third_main.c" />
+    <ClCompile Include="Thirteen_main.c" />
+    <ClCompile Include="Twelve_main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EightToTen_header.h" />
+    <ClInclude Include="Six_header.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 int FourAndFive_calc() {
 	float first, second;
 	int operator;

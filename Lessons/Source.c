@@ -10,6 +10,21 @@ void EndLessonStr(char* str) {
 }
 
 
+int First_main();
+int Second_main();
+int Third_main();
+int FourAndFive_main();
+int Six_main();
+int Seven_main();
+int EightToTen_main();
+int Eleven_main();
+int Twelve_main();
+int Thirteen_main();
+int Fourteen_main();
+
+
+
+
 int main() {
 	printf("tipe \"q\", if you wana exit: ");
 	while (getch() != 'q') {
@@ -78,11 +93,11 @@ int main() {
 			printf("\nEnd Lessons Four and Five work!\n");
 			break;
 		case 6:
-			First_main();
+			Six_main();
 			EndLessonStr("Six");
 			break;
 		case 7:
-			First_main();
+			Seven_main();
 			EndLessonStr("Seven");
 			break;
 		case 8:
@@ -90,23 +105,23 @@ int main() {
 		case 9:
 
 		case 10:
-			First_main();
+			EightToTen_main();
 			printf("\nEnd Lesson Eight to Ten work!\n");
 			break;
 		case 11:
-			First_main();
+			Eleven_main();
 			EndLessonStr("Eleven");
 			break;
 		case 12:
-			First_main();
+			Twelve_main();
 			EndLessonStr("Twelve");
 			break;
 		case 13:
-			First_main();
+			Thirteen_main();
 			EndLessonStr("Thirteen");
 			break;
 		case 14:
-			First_main();
+			Fourteen_main();
 			EndLessonStr("Fourteen");
 			break;
 

@@ -1,6 +1,5 @@
-#include <stdio.h>  
-
-int FourAndFive_main(int argc, const char* argv[]) {
+int FourAndFive_calc();
+int FourAndFive_main() {
 
 	int a = 10;
 	int b = 20;
