@@ -1,6 +1,6 @@
 #include <stdio.h>  
 
-int main(int argc, const char* argv[]) {
+int Third_main(int argc, const char* argv[]) {
 	// Логическое сравнение
 
 	printf("Check this: y/n\n");
@@ -26,6 +26,6 @@ int main(int argc, const char* argv[]) {
 
 	*/
 
-	printf("/n");
+	printf("\n");
 	return 0;
 }

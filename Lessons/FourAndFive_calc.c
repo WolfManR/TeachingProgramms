@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int calc_main() {
+int FourAndFive_calc() {
 	float first, second;
 	int operator;
 	printf("Enter first operator: ");

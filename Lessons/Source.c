@@ -75,7 +75,7 @@ int main() {
 
 		case 5:
 			FourAndFive_main();
-			printf("End Lessons Four and Five work!\n");
+			printf("\nEnd Lessons Four and Five work!\n");
 			break;
 		case 6:
 			First_main();
@@ -91,7 +91,7 @@ int main() {
 
 		case 10:
 			First_main();
-			printf("End Lesson Eight to Ten work!\n");
+			printf("\nEnd Lesson Eight to Ten work!\n");
 			break;
 		case 11:
 			First_main();
@@ -112,7 +112,7 @@ int main() {
 
 
 		default:
-			printf("There no lesson with this number!\n");
+			printf("\nThere no lesson with this number!\n");
 			break;
 		}
 
