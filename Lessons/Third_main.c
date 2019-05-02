@@ -2,7 +2,7 @@ int Third_main() {
 	// Логическое сравнение
 
 	printf("Check this: y/n\n");
-	char ch = getchar();
+	char ch = getch();
 
 	// операция if else
 	if (ch == 'y') printf("\nIt's Checked");
