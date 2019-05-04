@@ -25,7 +25,7 @@
 
 */
 #include <string.h>
-
+/*
 
 void Binary(int num,char* str) {
 	char bin[64]="";
@@ -41,7 +41,7 @@ void Binary(int num,char* str) {
 	}
 
 	printf("%s",bin);
-	strcat(str,bin);
+strcat(str,bin);
 	
 }
 
@@ -62,10 +62,10 @@ void CalculateRectangle(rectangle* rect) {
 int* arrayInit(int size) {
 	return calloc(size, sizeof(int));
 }
-
+*/
 int LessonFourteen_main() {
 	printf("This is Lesson Fourteen Homework\n");
-
+	/*
 	// 1
 	char* string="";
 		Binary(156,&string);
@@ -85,6 +85,7 @@ int LessonFourteen_main() {
 	puts("");
 	for (int c; c < Size; c++) printf("%d ", *(array + c));
 	puts("");
-
+	*/
+	// не работает
 	return 0;
 }
