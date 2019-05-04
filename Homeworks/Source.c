@@ -24,7 +24,7 @@ int main() {
 			printf("End Lesson Ten Homework!\n");
 			break;
 		case 3:
-			LessonFourteen_main();
+			//LessonFourteen_main(); не работает из-за компилятора vs
 			printf("End Lesson Fourteen Homework!\n");
 			break;
 		default:

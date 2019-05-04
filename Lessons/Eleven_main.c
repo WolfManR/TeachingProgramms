@@ -7,7 +7,7 @@ void helloFunction(char* name, char* out) {
 	if (strcmp("ivan", name) == 0)
 		strcpy_s(name, 8, "Master!");
 	name[0] = toupper(name[0]);
-	strcat_s(welcome, sizeof(name)/sizeof(char), name);
+	strcat_s(welcome, sizeof(*name) / sizeof(char), name);
 	strcpy_s(out, sizeof(welcome) / sizeof(char), welcome);
 }
 
