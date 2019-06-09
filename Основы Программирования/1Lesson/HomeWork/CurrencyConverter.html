@@ -5,5 +5,8 @@ var euro=parseFloat(prompt("Введите текущий курс евро в �
 var rubleCount=parseInt(prompt("Сколько рублей вы хотите конвертировать в доллары и евро?"));
 var dollarResult=rubleCount/dollar;
 var euroResult=rubleCount/euro;
-alert("В долларах это: "+dollarResult+" В евро это: "+euroResult);
+alert(
+    "В долларах это: "+dollarResult.toFixed(2)+
+    "/n"
+    +" В евро это: "+euroResult.toFixed(2));
 </script>
