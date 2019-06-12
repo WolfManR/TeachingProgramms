@@ -1,0 +1,87 @@
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<script>
+    //GameData
+    var isUser1Win = 0;               // Переменная проверки победы первого игрока
+    var isUser2Win = 0;               // Переменная проверки победы второго игрока
+    var quitMsg = ("quit");         // строка команды на выход
+    var isQuit = 0;                 // команда на выход
+    var repeatAnswer = 0;             // костыль, раз continue не работает будем так    
+    var user1WinCount = 0;          // сколько раз выйграл первый игрок    
+    var user2WinCount = 0;          // сколько раз выйграл второй игрок
+
+    //Game
+    alert("Угадайте число от 0 до 100");
+    do {
+
+        var answer = parseInt(Math.random() * 100);
+        //First User Play
+        do {
+            alert(answer);
+            var userAnswer = prompt("Первый игрок, ваш ход!\nВаше число?\nЕсли желаете выйти напишите " + quitMsg);
+            if (userAnswer == quitMsg) {
+                isQuit = 1;
+                break;
+            }
+            userAnswer = parseInt(userAnswer);
+            repeatAnswer = 0;
+            if (isNaN(userAnswer)) {
+                alert("Вы должны были ввести число!");
+                repeatAnswer = 1;
+            } else if (userAnswer > 100 || userAnswer < 0) {
+                alert("Вы должны были ввести число от 0 до 100");
+                repeatAnswer = 1;
+            }
+        } while (repeatAnswer != 0);
+        if (isQuit == 1) break;
+        if (userAnswer == answer)
+            isUser1Win++;
+        //Second User Play
+        do {
+            var userAnswer = prompt("Второй игрок, ваш ход!\nВаше число?\nЕсли желаете выйти напишите " + quitMsg);
+            if (userAnswer == quitMsg) {
+                isQuit = 1;
+                break;
+            }
+            userAnswer = parseInt(userAnswer);
+            repeatAnswer = 0;
+            if (isNaN(userAnswer)) {
+                alert("Вы должны были ввести число!");
+                repeatAnswer = 1;
+            } else if (userAnswer > 100 || userAnswer < 0) {
+                alert("Вы должны были ввести число от 0 до 100");
+                repeatAnswer = 1;
+            }
+        } while (repeatAnswer != 0);
+        if (isQuit == 1) break;
+        if (userAnswer == answer)
+            isUser2Win++;
+
+        //Game Result
+        if (isUser1Win == 0 & isUser2Win == 0) alert("Правильный ответ в этом раунде: " + answer);
+        else if (isUser1Win > 0 & isUser2Win > 0) {
+            alert("Ничья");
+            user1WinCount++;
+            user2WinCount++;
+        }
+        else if (isUser1Win > 0) {
+            user1WinCount++;
+            alert("В этом раунде победил первый игрок");
+        }
+        else {
+            user2WinCount++;
+            alert("В этом раунде победил второй игрок");
+        }
+        alert("Текущий счёт:\nПервый игрок: " + user1WinCount + "\nВторой игрок: " + user2WinCount);
+        //Next Game?
+        if (prompt("Если желаете выйти напишите " + quitMsg)) break;
+        isUser1Win = isUser2Win = 0; // подготовка к следующей игре
+    } while (true);
+
+    //Who is win?
+    var winner = "первый";
+    if (user1WinCount < user2WinCount)
+        winner = "второй";
+    if (user1WinCount == 0 & user2WinCount == 0) alert("Вы хоть пытались?");
+    else if (user1WinCount == user2WinCount) alert("Победила дружба");
+    else alert("Победил" + winner + "игрок!");
+</script>
