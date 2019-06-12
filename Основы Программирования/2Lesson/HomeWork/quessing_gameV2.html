@@ -56,8 +56,8 @@
             isUser2Win++;
 
         //Game Result
-        if (isUser1Win == 0 & isUser2Win == 0) alert("Правильный ответ в этом раунде: " + answer);
-        else if (isUser1Win > 0 & isUser2Win > 0) {
+        if (isUser1Win == 0 && isUser2Win == 0) alert("Правильный ответ в этом раунде: " + answer);
+        else if (isUser1Win > 0 && isUser2Win > 0) {
             alert("Ничья");
             user1WinCount++;
             user2WinCount++;
@@ -80,7 +80,7 @@
     var winner = "первый";
     if (user1WinCount < user2WinCount)
         winner = "второй";
-    if (user1WinCount == 0 & user2WinCount == 0) alert("Вы хоть пытались?");
+    if (user1WinCount == 0 && user2WinCount == 0) alert("Вы хоть пытались?");
     else if (user1WinCount == user2WinCount) alert("Победила дружба");
     else alert("Победил" + winner + "игрок!");
 </script>
