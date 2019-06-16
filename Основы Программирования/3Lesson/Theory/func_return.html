@@ -23,10 +23,23 @@
         return result;
     }
     // факториал 5 равен 1*2*3*4*5
+    // 5! = 4! * 5
+    // 4! = 3! * 4
+    // 3! = 2! * 3
+    // 2! = 1! * 2
+    // 1! = 0! * 1
+    // 0! = 1
+    function recursiveFactorial(n) {
+        if (n == 0)
+            return 1;
+        else
+            return recursiveFactorial(n - 1) * n;
+    }
 
-    var f=factorial(5);
-    var a=max(34,68);
-    var c=max(a,98)+4;
-    var n=getRandomNumber(100);
-    var m=getRandomNumber(4);
+    var rf = recursiveFactorial(4);
+    var f = factorial(5);
+    var a = max(34, 68);
+    var c = max(a, 98) + 4;
+    var n = getRandomNumber(100);
+    var m = getRandomNumber(4);
 </script>
