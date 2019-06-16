@@ -1,0 +1,67 @@
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<script>
+    // Задание a
+    function getArray(n) {
+        var arr = [];
+        for (let index = 0; index < n; index++) {
+            arr.push(index + 1);
+        }
+        return arr;
+    }
+    var numbers = getArray(+prompt("Введите размер массива чисел"));
+    alert("Ваш массив:\n" + numbers);
+    
+    // Задание b
+    function sum(array) {
+        var sum = 0;
+        array.forEach(element => {
+            sum += element;
+        });
+        return sum;
+    }
+    alert("Сумма элементов вашего массива:\n" + sum(numbers));
+    
+    // Задание c
+    function max(array) {
+        var max = array[0];
+        if (array.length > 1) {
+            for (let index = 1; index < array.length; index++) {
+                if (max < array[index]) {
+                    max = array[index];
+                }
+            }
+        }
+        return max;
+    }
+    alert("Максимальное число вашего массива:\n" + max(numbers));
+    
+    // Задание d
+    function min(array) {
+        var min = array[0];
+        if (array.length > 1) {
+            for (let index = 1; index < array.length; index++) {
+                if (min > array[index]) {
+                    min = array[index];
+                }
+            }
+        }
+        return min;
+    }
+    alert("Минимальное число вашего массива:\n" + min(numbers));
+    
+    // Задание f
+    function evenNumbers(array) {
+        var arrayOfEvenNumbers = [];
+        array.forEach(element => {
+            if (element % 2 == 0)
+                arrayOfEvenNumbers.push(element);
+        });
+        return arrayOfEvenNumbers;
+    }
+    var countEven = 0;
+    var even = evenNumbers(numbers);
+    if (even.length > 0)
+        alert("Ваш массив содержит эти чётные числа:\n" + evenNumbers(numbers));
+    else
+        alert("В вашем массиве не было чётных чисел");
+</script>
