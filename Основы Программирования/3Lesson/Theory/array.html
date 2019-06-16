@@ -1,6 +1,28 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <script>
-    var numbers = [];
+
+    function compareAnswers(userAnswer, answer) {
+        if (userAnswer == answer) {
+            alert("Всё верно!");
+        } else {
+            alert("А вот и нет. Правильный ответ " + answer);
+        }
+    }
+
+    function getRandomNumber(max) {
+        return Math.round(Math.random() * max);
+    }
+
+    function generateRandomNumberArray(length) {
+        var arr = [];
+        for (var i = 0; i < length; i++) {
+            var randomNumber = getRandomNumber(100);
+            arr.push(randomNumber);
+        }
+        return arr;
+    }
+
+    var numbers = generateRandomNumberArray(5);
     /*
     numbers.push(42);             // 42          команда добавляет элемент в конец массива
     numbers.push(18);             // 42, 18
@@ -9,32 +31,16 @@
     var m = numbers.pop();
     */
 
-    for (var i = 0; i < 5; i++) {
-        var randomNumber = parseInt(Math.random() * 100);
-        numbers.push(randomNumber);
-    }
-
     alert("Запомните числа и их порядок: " + numbers);
 
     var userAnswer = +prompt("Каким было первое число?");
-    if (userAnswer == numbers[0]) {
-        alert("Всё верно!");
-    } else {
-        alert("А вот и нет. Правильный ответ " + numbers[0]);
-    }
+    compareAnswers(userAnswer, numbers[0]);
 
     userAnswer = +prompt("А последнее?");
-    if (userAnswer == numbers[numbers.length - 1]) {
-        alert("Всё верно!");
-    } else {
-        alert("А вот и нет. Правильный ответ " + numbers[numbers.length - 1]);
-    }
+    compareAnswers(userAnswer, numbers[numbers.length - 1]);
 
-    var n = parseInt(Math.random() * numbers.length);
+
+    var n = getRandomNumber(numbers.length - 1);
     userAnswer = +prompt("А как насчёт числа под номером " + (n + 1) + "?");
-    if (userAnswer == numbers[n]) {
-        alert("Всё верно!");
-    } else {
-        alert("А вот и нет. Правильный ответ " + numbers[n]);
-    }
+    compareAnswers(userAnswer, numbers[n]);
 </script>
