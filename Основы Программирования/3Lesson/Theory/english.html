@@ -1,21 +1,38 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <script>
-    var words = [
+    function askForWords(words) {
+        while (words.length != 0) {
+            var i = parseInt(Math.random() * words.length);
+            var userTranslate = prompt("Как переводится слово: " + words[i][0]);
+            if (userTranslate == words[i][1]) {
+                alert("Правильно!");
+                words.splice(i, 1); // удаляет элементы начиная с указанного индекса в указанном колличестве
+            } else {
+                alert("Правильный ответ: " + words[i][1]);
+            }
+        }
+
+    }
+
+    var easyWords = [
         ["food", "еда"]
         ["bike", "велосипед"]
         ["apple", "яблоко"]
         ["do", "делать"]
         ["mean", "иметь в виду"]
     ];
+    askForWords(easyWords);
 
-    var i = parseInt(Math.random() * words.length);
-    var userTranslate = prompt("Как переводится слово: " + words[i][0]);
-    if (userTranslate == words[i][1]) {
-        alert("Правильно!");
-        words.slice(i, 1); // удаляет элементы начиная с указанного индекса в указанном колличестве
-    } else {
-        alert("Правильный ответ: " + words[i][1]);
-    }
+    alert("Поздравляю, вы запомнили все слова! Переходим на следующий уровень!");
 
-    alert("Поздравляем!");
+    var hardWords = [
+        ["chainsaw", "бензопила"]
+        ["squirrel", "белка"]
+        ["castle", "замок"]
+        ["homeland", "родина"]
+        ["sewerage", "канализация"]
+        ["bottom", "дно"]
+    ];
+
+    askForWords(hardWords);
 </script>
