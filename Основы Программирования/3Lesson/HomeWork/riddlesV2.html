@@ -1,8 +1,9 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <script>
     function checkAnswer(input, answers) {
-        if(input!=null)
-        var inputInLowerCase = input.toLowerCase();
+        var inputInLowerCase = input;
+        if (input != null)
+            inputInLowerCase = input.toLowerCase();
         for (let index = 0; index < answers.length; index++) {
             if (inputInLowerCase == answers[index].toLowerCase())
                 return true;
@@ -19,20 +20,12 @@
         ["В Полотняной стране\nПо реке Простыне\nПлывет пароход\nТо назад, то вперед,\nА за ним такая гладь —\nНи морщинки не видать.", ["Утюг"]],
         ["В брюшке — баня,\nВ носу — решето,\nНос — хоботок,\nНа голове — пупок,\nВсего одна рука\nБез пальчиков,\nИ та — на спине Калачиком.", ["Чайник"]],
         ["Стоит дуб,\nВ нем двенадцать гнезд,\nВ каждом гнезде\nПо четыре яйца,\nВ каждом яйце\nПо семи цыпленков.", ["Год"]],
-        ["Не лает, не кусается, и точно так же называется.", ["@", "Собака"]],
-        ["В Полотняной стране\nПо реке Простыне\nПлывет пароход\nТо назад, то вперед,\nА за ним такая гладь —\nНи морщинки не видать.", ["Утюг"]],
-        ["В брюшке — баня,\nВ носу — решето,\nНос — хоботок,\nНа голове — пупок,\nВсего одна рука\nБез пальчиков,\nИ та — на спине Калачиком.", ["Чайник"]],
-        ["Стоит дуб,\nВ нем двенадцать гнезд,\nВ каждом гнезде\nПо четыре яйца,\nВ каждом яйце\nПо семи цыпленков.", ["Год"]],
-        ["Не лает, не кусается, и точно так же называется.", ["@", "Собака"]],
-        ["В Полотняной стране\nПо реке Простыне\nПлывет пароход\nТо назад, то вперед,\nА за ним такая гладь —\nНи морщинки не видать.", ["Утюг"]],
-        ["В брюшке — баня,\nВ носу — решето,\nНос — хоботок,\nНа голове — пупок,\nВсего одна рука\nБез пальчиков,\nИ та — на спине Калачиком.", ["Чайник"]],
-        ["Стоит дуб,\nВ нем двенадцать гнезд,\nВ каждом гнезде\nПо четыре яйца,\nВ каждом яйце\nПо семи цыпленков.", ["Год"]],
         ["Не лает, не кусается, и точно так же называется.", ["@", "Собака"]]
     ];
     // Загадываю стартовую загадку
     var randomNumber = getRandomNumber(riddles.length - 1);
     var riddle = riddles[randomNumber];
-    if (checkAnswer(prompt("Загадка:\n" + riddle[0]), riddle[1])) {
+    if (checkAnswer(prompt("Загадка:\n\n" + riddle[0]), riddle[1])) {
         alert("Вы угадали!\nИгра окончена.");
     } else {
         alert("Вы не угадали! Теперь вам надо отгадать ещё загадки");
@@ -43,12 +36,12 @@
             // т.к. операция требует одновременного изменения основного массива обходимся без функций
             var numberOfRiddlesInLevel = 0;
             do {
-                if (riddles.length>5) {
+                if (riddles.length > 5) {
                     numberOfRiddlesInLevel = getRandomNumber(5);
                 } else {
-                    numberOfRiddlesInLevel = getRandomNumber(riddles.length - 1);
+                    numberOfRiddlesInLevel = getRandomNumber(riddles.length);
                 }
-            } while (numberOfRiddlesInLevel > riddles.length||numberOfRiddlesInLevel==0);
+            } while (numberOfRiddlesInLevel > riddles.length || numberOfRiddlesInLevel == 0);
             var riddlesInLevel = [];
             while (numberOfRiddlesInLevel > 0) {
                 randomNumber = getRandomNumber(riddles.length - 1);
@@ -60,7 +53,7 @@
 
             var rightAnswersCounter = 0;
             for (let index = 0; index < riddlesInLevel.length; index++) {
-                if (checkAnswer(prompt("Загадка №" + (index + 1) + "/"+riddlesInLevel.length+":\n" + riddlesInLevel[index][0]), riddlesInLevel[index][1]))
+                if (checkAnswer(prompt("Загадка №" + (index + 1) + "/" + riddlesInLevel.length + ":\n\n" + riddlesInLevel[index][0]), riddlesInLevel[index][1]))
                     rightAnswersCounter++;
             }
 
