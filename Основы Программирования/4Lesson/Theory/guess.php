@@ -45,11 +45,7 @@
 
 <body>
     <div class="content">
-        <div class="header">
-            <a href="index.html">Главная</a>
-            <a href="puzzle.html">Загадка</a>
-            <a href="#">Угадайка</a>
-        </div>
+    <?php include "menu.php";?>
         <div class="contentWrap">
             <div class="content">
                 <div class="center">
@@ -65,7 +61,7 @@
         </div>
     </div>
     <div class="footer">
-        Copyright &copy; WolfManR
+        Copyright &copy; <?php echo date("Y");?> WolfManR
     </div>
 
 </body>

@@ -9,11 +9,7 @@
 
 <body>
     <div class="content">
-        <div class="header">
-            <a href="#">Главная</a>
-            <a href="puzzle.html">Загадка</a>
-            <a href="guess.html">Угадайка</a>
-        </div>
+        <?php include "menu.php";?>
 
         <h1>Личный сайт студента GeekBrains</h1>
 
@@ -37,7 +33,7 @@
     </div>
 
     <div class="footer">
-        Copyright &copy; WolfManR
+        Copyright &copy; <?php echo date("Y");?> WolfManR
     </div>
 
 </body>
