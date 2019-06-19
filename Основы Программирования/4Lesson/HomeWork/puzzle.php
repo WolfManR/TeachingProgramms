@@ -18,6 +18,7 @@
                     <h1>Игра в загадки</h1>
                     <div class="box">
                         <?php
+                        // немного раздражает что вернули на стартовую позицию с этим php когда не было функций и массивов
                         if (isset($_GET["userAnswer1"])&& isset($_GET["userAnswer2"])&&isset($_GET["userAnswer3"])&&isset($_GET["userAnswer4"])&& isset($_GET["userAnswer5"])&&isset($_GET["userAnswer6"])) {
                             $userAnswer=$_GET["userAnswer1"];
                             $score=0;
