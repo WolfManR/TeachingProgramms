@@ -18,7 +18,7 @@
                     <h1>Игра в загадки</h1>
                     <div class="box">
                         <?php
-                        if (isset($_GET["userAnswer1"])&& isset($_GET["userAnswer2"])&&isset($_GET["userAnswer3"])) {
+                        if (isset($_GET["userAnswer1"])&& isset($_GET["userAnswer2"])&&isset($_GET["userAnswer3"])&&isset($_GET["userAnswer4"])&& isset($_GET["userAnswer5"])&&isset($_GET["userAnswer6"])) {
                             $userAnswer=$_GET["userAnswer1"];
                             $score=0;
                             if($userAnswer=="сон"||$userAnswer=="сноведение"){
@@ -35,18 +35,41 @@
                                 $score++;
                             }
 
+                            $userAnswer=$_GET["userAnswer4"];
+                            $score=0;
+                            if($userAnswer=="утюг"){
+                                $score++;
+                            }
+
+                            $userAnswer=$_GET["userAnswer5"];
+                            if($userAnswer=="чайник"){
+                                $score++;
+                            }
+
+                            $userAnswer=$_GET["userAnswer6"];
+                            if($userAnswer=="год"){
+                                $score++;
+                            }
                             echo "Вы угадали " . $score . " загадок";
+                            
                         }
                         ?>
                         <form method="GET">
                             <p>Что можно увидеть с закрытыми глазами?</p>
                             <input type="text" name="userAnswer1">
-                            <p>Что можно увидеть с закрытыми глазами?</p>
+                            <p>Какой болезнью никто не болеет на суше?</p>
                             <input type="text" name="userAnswer2">
-                            <p>Что можно увидеть с закрытыми глазами?</p>
+                            <p>Какой конь не ест овса?</p>
                             <input type="text" name="userAnswer3">
                             <br>
-                            <input type="submit" value="Ответить"name>
+                            <p>В Полотняной стране<br>По реке Простыне<br>Плывет пароход<br>То назад, то вперед,<br>А за ним такая гладь —<br>Ни морщинки не видать.</p>
+                            <input type="text" name="userAnswer4">
+                            <p>В брюшке — баня,<br>В носу — решето,<br>Нос — хоботок,<br>На голове — пупок,<br>Всего одна рука<br>Без пальчиков,<br>И та — на спине Калачиком.</p>
+                            <input type="text" name="userAnswer5">
+                            <p>Стоит дуб,<br>В нем двенадцать гнезд,<br>В каждом гнезде<br>По четыре яйца,<br>В каждом яйце<br>По семи цыпленков.</p>
+                            <input type="text" name="userAnswer6">
+                            <br>
+                            <input type="submit" value="Ответить">
                         </form>
                     </div>
                 </div>
