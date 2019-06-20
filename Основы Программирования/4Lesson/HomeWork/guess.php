@@ -51,13 +51,6 @@
                 <div class="center">
                     <h1>Игра Угадайка</h1>
                     <div class="box">
-                        <div class="playersBox">
-                            <p>Колличество игроков</p>
-                            <div class="buttonsBox">
-                                <a href="#" onClick="" id="players1">1</a>
-                                <a href="#" onClick="" id="players2">2</a>
-                            </div>
-                        </div>
                         <p id="info">Угадайте число от 0 до 100</p>
                         <input type="text" id="userAnswer">
                         <br>
