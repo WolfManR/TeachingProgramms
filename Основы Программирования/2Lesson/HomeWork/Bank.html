@@ -1,0 +1,15 @@
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<script>
+    var deposit = +prompt("Укажите размер вклада");
+    var yearPercent = +prompt("Укажите процент начислений, которые будут начисляться ежегодно");
+    var resultMsgBuilderString = "";
+    var yearProfit = 0;
+
+    for (var year = 1; year <= 5; year++) {
+        yearProfit = deposit / 100 * yearPercent;
+        resultMsgBuilderString += year + " год: \nБаланс: " + (deposit += yearProfit).toFixed(2)
+            + " , доход составил: " + yearProfit.toFixed(2) + "\n\n";
+    }
+    
+    alert("Вот прогноз состояния вашего вклада на следующие 5 лет\n" + resultMsgBuilderString);
+</script>

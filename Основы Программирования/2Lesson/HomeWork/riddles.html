@@ -1,0 +1,44 @@
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<script>
+    var riddle1 = ("В Полотняной стране\nПо реке Простыне\nПлывет пароход\nТо назад, то вперед,\nА за ним такая гладь —\nНи морщинки не видать.");
+    var riddle1Answer = ("Утюг");
+
+    var riddle2 = ("В брюшке — баня,\nВ носу — решето,\nНос — хоботок,\nНа голове — пупок,\nВсего одна рука\nБез пальчиков,\nИ та — на спине Калачиком.");
+    var riddle2Answer = ("Чайник");
+
+    var riddle3 = ("Стоит дуб,\nВ нем двенадцать гнезд,\nВ каждом гнезде\nПо четыре яйца,\nВ каждом яйце\nПо семи цыпленков.");
+    var riddle3Answer = ("Год");
+
+    var riddle4 = ("Не лает, не кусается, и точно так же называется.");
+    var riddle4Answer1 = ("@");
+    var riddle4Answer2 = ("Собака");
+
+    var userAnswer = prompt("Загадка:\n" + riddle1);
+    if (userAnswer == riddle1Answer || userAnswer == riddle1Answer.toLowerCase())
+        alert("Вы угадали!\nИгра окончена.");
+    else {
+        alert("Вы не угадали! Теперь вам надо отгадать ещё три загадки");
+
+        var rightAnswersCounter = 0;
+
+        var userAnswer = prompt("Загадка №1:\n" + riddle2);
+        if (userAnswer == riddle2Answer || userAnswer == riddle2Answer.toLowerCase())
+            rightAnswersCounter++;
+        var userAnswer = prompt("Загадка №2:\n" + riddle3);
+        if (userAnswer == riddle3Answer || userAnswer == riddle3Answer.toLowerCase())
+            rightAnswersCounter++;
+        var userAnswer = prompt("Загадка №3:\n" + riddle4);
+        if (userAnswer == riddle4Answer1 || userAnswer == riddle4Answer2 || userAnswer == riddle4Answer2.toLowerCase())
+            rightAnswersCounter++;
+
+        var resultMsg1part = ("Вы ответили правильно на ");
+        if (rightAnswersCounter == 0)
+            alert(resultMsg1part + 0 + " загадок");
+        else if (rightAnswersCounter == 1)
+            alert(resultMsg1part + 1 + " загадку");
+        else
+            alert(resultMsg1part + rightAnswersCounter + " загадки");
+            alert("Игра окончена.");
+    }
+
+</script>
