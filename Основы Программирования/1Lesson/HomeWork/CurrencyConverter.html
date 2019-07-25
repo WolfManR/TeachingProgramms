@@ -1,0 +1,12 @@
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<script>
+    var dollar = +prompt("Введите текущий курс доллара в рублях");
+    var euro = +prompt("Введите текущий курс евро в рублях");
+    var rubleCount = +prompt("Сколько рублей вы хотите конвертировать в доллары и евро?");
+    var dollarResult = rubleCount / dollar;
+    var euroResult = rubleCount / euro;
+    alert(
+        "В долларах это: " + dollarResult.toFixed(2) +
+        "\n"
+        + "В евро это: " + euroResult.toFixed(2));
+</script>
