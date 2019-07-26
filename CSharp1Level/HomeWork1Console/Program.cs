@@ -7,7 +7,7 @@ namespace HomeWork1Console
         {
             var user = new User();
             Console.WriteLine("Вы будете вводить информацию о себе? \n<0 - да\n>0 - нет");
-            if (ReadInt() < 0) FillUserInfo(ref user);
+            if (ReadInt() < 0) user.FillUserInfo();
 
             //Задание 1
             ReadUserInfo(user);
@@ -32,9 +32,9 @@ namespace HomeWork1Console
             if (ReadInt() < 0)
             {
                 Console.WriteLine("первая точка");
-                
+                a.FillPoint();
                 Console.WriteLine("\nвторая точка");
-                
+                b.FillPoint();
             }
 
             DistanceBetweenPoints(a, b);
@@ -51,27 +51,7 @@ namespace HomeWork1Console
             float h = height / 100;
             Console.WriteLine($"ИМТ равен {weight / (h * h)}");
         }
-        static void FillUserInfo(ref User user)
-        {
-            Console.WriteLine("Введите информацию о себе");
-            Console.Write("Ваше имя: ");
-            user.FirstName = Console.ReadLine();
-            Console.Write("Ваша фамилия: ");
-            user.LastName = Console.ReadLine();
-            Console.Write("Ваш возраст: ");
-            user.Age = ReadInt();
-            Console.Write("Ваш рост: ");
-            user.Height = ReadInt();
-            Console.Write("Ваш вес: ");
-            user.Weight = ReadInt();
-        }
-        static void FillPoint(ref Point point)
-        {
-            Console.Write("\nX ");
-            point.X = ReadInt();
-            Console.Write("\nY ");
-            point.Y = ReadInt();
-        }
+        
         static void ReadUserInfo(User user)
         {
             Console.WriteLine("Конкатенация");
@@ -94,11 +74,32 @@ namespace HomeWork1Console
         public int Age { get; set; } = 47;
         public int Height { get; set; } = 1830;
         public int Weight { get; set; } = 102;
+        public void FillUserInfo()
+        {
+            Console.WriteLine("Введите информацию о себе");
+            Console.Write("Ваше имя: ");
+            FirstName = Console.ReadLine();
+            Console.Write("Ваша фамилия: ");
+            LastName = Console.ReadLine();
+            Console.Write("Ваш возраст: ");
+            Age = int.Parse(Console.ReadLine());
+            Console.Write("Ваш рост: ");
+            Height = int.Parse(Console.ReadLine());
+            Console.Write("Ваш вес: ");
+            Weight = int.Parse(Console.ReadLine());
+        }
     }
 
     public struct Point
     {
         public int X { get; set; }
         public int Y { get; set; }
+        public void FillPoint()
+        {
+            Console.Write("\nX ");
+            X = int.Parse(Console.ReadLine());
+            Console.Write("\nY ");
+            Y = int.Parse(Console.ReadLine());
+        }
     }
 }
