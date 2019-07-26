@@ -11,11 +11,14 @@ namespace HomeWork1Console
         static void Main(string[] args)
         {
             var user = new User();
-            FillUserInfo(ref user);
+            Console.WriteLine("Вы будете вводить информацию о себе? \n<0 - да\n>0 - нет");
+            if (int.Parse(Console.ReadLine()) > 0) { }
+                else FillUserInfo(ref user);
+
             //Задание 1
             ReadUserInfo(user);
             //Задание 2
-            Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - себя\n2 - другого человека");
+            Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - себя(если данные не заполнялись будут использованы значения по умолчанию)\n2 - другого человека");
             if(int.Parse(Console.ReadLine()) == 2)
             {
                 Console.Write("укажите рост в см: ");
