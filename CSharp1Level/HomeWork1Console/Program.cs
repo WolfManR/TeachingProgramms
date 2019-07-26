@@ -28,7 +28,17 @@ namespace HomeWork1Console
             {
                 IMT(user.Height, user.Weight);
             }
+            //Задание 3
+            Point a=new Point() {X=4,Y=5 };
+            Point b = new Point() { X = 4, Y = 5 };
+            DistanceBetweenPoints(a, b);
             Console.ReadLine();
+        }
+
+        static void DistanceBetweenPoints(Point first,Point second)
+        {
+            var result = Math.Sqrt(Math.Pow(second.X - first.X, 2) + Math.Pow(second.Y - first.Y, 2));
+            Console.WriteLine($"Расстояние между точками {result:.2f}");
         }
         static void IMT(float height,int weight)
         {
