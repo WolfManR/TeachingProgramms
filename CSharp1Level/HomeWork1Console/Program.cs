@@ -12,10 +12,29 @@ namespace HomeWork1Console
         {
             var user = new User();
             FillUserInfo(ref user);
+            //Задание 1
             ReadUserInfo(user);
+            //Задание 2
+            Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - себя\n2 - другого человека");
+            if(int.Parse(Console.ReadLine()) == 2)
+            {
+                Console.Write("укажите рост в см: ");
+                float h = float.Parse(Console.ReadLine());
+                Console.Write("\nукажите вес в кг: ");
+                int w = int.Parse(Console.ReadLine());
+                IMT(h, w);
+            }
+            else
+            {
+                IMT(user.Height, user.Weight);
+            }
             Console.ReadLine();
         }
-
+        static void IMT(float height,int weight)
+        {
+            float h = height / 100;
+            Console.WriteLine($"ИМТ равен {weight / h * h}");
+        }
         static void FillUserInfo(ref User user)
         {
             Console.WriteLine("Введите информацию о себе");
