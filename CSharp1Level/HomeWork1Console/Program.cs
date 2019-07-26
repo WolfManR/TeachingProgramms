@@ -11,9 +11,16 @@ namespace HomeWork1Console
         static void Main(string[] args)
         {
             var user = new User();
+            FillUserInfo(ref user);
+            ReadUserInfo(user);
+            Console.ReadLine();
+        }
+
+        static void FillUserInfo(ref User user)
+        {
             Console.WriteLine("Введите информацию о себе");
             Console.Write("Ваше имя: ");
-            user.FirstName=Console.ReadLine();
+            user.FirstName = Console.ReadLine();
             Console.Write("Ваша фамилия: ");
             user.LastName = Console.ReadLine();
             Console.Write("Ваш возраст: ");
@@ -22,11 +29,8 @@ namespace HomeWork1Console
             user.Height = int.Parse(Console.ReadLine());
             Console.Write("Ваш вес: ");
             user.Weight = int.Parse(Console.ReadLine());
-            WriteUserInfo(user);
-            Console.ReadLine();
         }
-
-        static void WriteUserInfo(User user)
+        static void ReadUserInfo(User user)
         {
             Console.WriteLine("Конкатенация");
             Console.Write("Это вы: ");
