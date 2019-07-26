@@ -17,7 +17,12 @@ namespace HomeWork1Console
             Console.WriteLine("Конкатенация");
             Console.Write("Это вы: ");
             Console.WriteLine(user.LastName + " " + user.FirstName + " " + user.Age + " лет, вес " + user.Weight + "кг, рост состовляет " + user.Height + "см");
-
+            Console.WriteLine("Форматированный вывод");
+            Console.Write("Это вы: ");
+            Console.WriteLine("{1} {2} {3} лет, вес {4}кг, рост состовляет {5:N0}см",user.LastName,user.FirstName,user.Age,user.Weight,user.Height);
+            Console.WriteLine("Интерполяция");
+            Console.Write("Это вы: ");
+            Console.WriteLine($"{user.LastName} {user.FirstName} {user.Age} лет, вес {user.Weight}кг, рост состовляет {user.Height}см");
         }
     }
 
