@@ -71,4 +71,10 @@ namespace HomeWork1Console
         public int Height { get; set; } = 1830;
         public int Weight { get; set; } = 102;
     }
+
+    public struct Point
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+    }
 }
