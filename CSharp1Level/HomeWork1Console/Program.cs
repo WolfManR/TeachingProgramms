@@ -38,9 +38,35 @@ namespace HomeWork1Console
             }
 
             DistanceBetweenPoints(a, b);
+            //Задание 4
+            int c = 5;
+            int g = 8;
+            Console.WriteLine("Обмен с третьей переменной");
+            Console.WriteLine($"значения переменных до обмена {c} и {g}");
+            TurnVarsWithThirdVar(ref c,ref g);
+            Console.WriteLine($"значения переменных после обмена {c} и {g}");
+            c = 7;
+            g = 42;
+            Console.WriteLine("Обмен без третьей переменной");
+            Console.WriteLine($"значения переменных до обмена {c} и {g}");
+            TurnVarsWithoutThirdVar(ref c, ref g);
+            Console.WriteLine($"значения переменных после обмена {c} и {g}");
             Console.ReadLine();
         }
 
+        static void TurnVarsWithoutThirdVar(ref int a,ref int b)
+        {
+            a = a ^ b;
+            b = a ^ b;
+            a = a ^ b;
+        }
+
+        static void TurnVarsWithThirdVar(ref int a,ref int b)
+        {
+            int c = a;
+            a = b;
+            b = c;
+        }
         static void DistanceBetweenPoints(Point first, Point second)
         {
             var result = Math.Sqrt(Math.Pow(second.X - first.X, 2) + Math.Pow(second.Y - first.Y, 2));
