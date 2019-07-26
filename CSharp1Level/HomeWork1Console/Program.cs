@@ -22,17 +22,18 @@ namespace HomeWork1Console
             user.Height = int.Parse(Console.ReadLine());
             Console.Write("Ваш вес: ");
             user.Weight = int.Parse(Console.ReadLine());
+            WriteUserInfo(user);
             Console.ReadLine();
         }
 
-        void WriteUserInfo(User user)
+        static void WriteUserInfo(User user)
         {
             Console.WriteLine("Конкатенация");
             Console.Write("Это вы: ");
             Console.WriteLine(user.LastName + " " + user.FirstName + " " + user.Age + " лет, вес " + user.Weight + "кг, рост состовляет " + user.Height + "см");
             Console.WriteLine("Форматированный вывод");
             Console.Write("Это вы: ");
-            Console.WriteLine("{1} {2} {3} лет, вес {4}кг, рост состовляет {5:N0}см",user.LastName,user.FirstName,user.Age,user.Weight,user.Height);
+            Console.WriteLine("{0} {1} {2:0 лет}, вес {3}кг, рост состовляет {4:N0}см", user.LastName,user.FirstName,user.Age,user.Weight,user.Height);
             Console.WriteLine("Интерполяция");
             Console.Write("Это вы: ");
             Console.WriteLine($"{user.LastName} {user.FirstName} {user.Age} лет, вес {user.Weight}кг, рост состовляет {user.Height}см");
@@ -41,10 +42,10 @@ namespace HomeWork1Console
 
     public class User
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int Age { get; set; }
-        public int Height { get; set; }
-        public int Weight { get; set; }
+        public string FirstName { get; set; } = "Karl";
+        public string LastName { get; set; } = "Sorze";
+        public int Age { get; set; } = 47;
+        public int Height { get; set; } = 1830;
+        public int Weight { get; set; } = 102;
     }
 }
