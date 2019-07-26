@@ -13,13 +13,13 @@ namespace HomeWork1Console
             var user = new User();
             Console.WriteLine("Вы будете вводить информацию о себе? \n<0 - да\n>0 - нет");
             if (int.Parse(Console.ReadLine()) > 0) { }
-                else FillUserInfo(ref user);
+            else FillUserInfo(ref user);
 
             //Задание 1
             ReadUserInfo(user);
             //Задание 2
             Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - себя(если данные не заполнялись будут использованы значения по умолчанию)\n2 - другого человека");
-            if(int.Parse(Console.ReadLine()) == 2)
+            if (int.Parse(Console.ReadLine()) == 2)
             {
                 Console.Write("укажите рост в см: ");
                 float h = float.Parse(Console.ReadLine());
@@ -32,18 +32,18 @@ namespace HomeWork1Console
                 IMT(user.Height, user.Weight);
             }
             //Задание 3
-            Point a=new Point() {X=184,Y=206 };
+            Point a = new Point() { X = 184, Y = 206 };
             Point b = new Point() { X = 345, Y = 251 };
             DistanceBetweenPoints(a, b);
             Console.ReadLine();
         }
 
-        static void DistanceBetweenPoints(Point first,Point second)
+        static void DistanceBetweenPoints(Point first, Point second)
         {
             var result = Math.Sqrt(Math.Pow(second.X - first.X, 2) + Math.Pow(second.Y - first.Y, 2));
             Console.WriteLine($"Расстояние между точками {result:f2}");
         }
-        static void IMT(float height,int weight)
+        static void IMT(float height, int weight)
         {
             float h = height / 100;
             Console.WriteLine($"ИМТ равен {weight / (h * h)}");
@@ -69,7 +69,7 @@ namespace HomeWork1Console
             Console.WriteLine(user.LastName + " " + user.FirstName + " " + user.Age + " лет, вес " + user.Weight + "кг, рост состовляет " + user.Height + "см");
             Console.WriteLine("Форматированный вывод");
             Console.Write("Это вы: ");
-            Console.WriteLine("{0} {1} {2:0 лет}, вес {3}кг, {4:рост состовляет 0,0}см", user.LastName,user.FirstName,user.Age,user.Weight,user.Height);
+            Console.WriteLine("{0} {1} {2:0 лет}, вес {3}кг, {4:рост состовляет 0,0}см", user.LastName, user.FirstName, user.Age, user.Weight, user.Height);
             Console.WriteLine("Интерполяция");
             Console.Write("Это вы: ");
             Console.WriteLine($"{user.LastName} {user.FirstName} {user.Age} лет, вес {user.Weight}кг, рост состовляет {user.Height}см");
