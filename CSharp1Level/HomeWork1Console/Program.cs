@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace HomeWork1Console
 {
     class Program
@@ -12,19 +7,18 @@ namespace HomeWork1Console
         {
             var user = new User();
             Console.WriteLine("Вы будете вводить информацию о себе? \n<0 - да\n>0 - нет");
-            if (int.Parse(Console.ReadLine()) > 0) { }
-            else FillUserInfo(ref user);
+            if (ReadInt() < 0) FillUserInfo(ref user);
 
             //Задание 1
             ReadUserInfo(user);
             //Задание 2
             Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - себя(если данные не заполнялись будут использованы значения по умолчанию)\n2 - другого человека");
-            if (int.Parse(Console.ReadLine()) == 2)
+            if (ReadInt() == 2)
             {
                 Console.Write("укажите рост в см: ");
                 float h = float.Parse(Console.ReadLine());
                 Console.Write("\nукажите вес в кг: ");
-                int w = int.Parse(Console.ReadLine());
+                int w = ReadInt();
                 IMT(h, w);
             }
             else
@@ -34,6 +28,15 @@ namespace HomeWork1Console
             //Задание 3
             Point a = new Point() { X = 184, Y = 206 };
             Point b = new Point() { X = 345, Y = 251 };
+            Console.WriteLine("Вы будете вводить свои точки координат? \n<0 - да\n>0 - нет");
+            if (ReadInt() < 0)
+            {
+                Console.WriteLine("первая точка");
+                
+                Console.WriteLine("\nвторая точка");
+                
+            }
+
             DistanceBetweenPoints(a, b);
             Console.ReadLine();
         }
@@ -56,11 +59,18 @@ namespace HomeWork1Console
             Console.Write("Ваша фамилия: ");
             user.LastName = Console.ReadLine();
             Console.Write("Ваш возраст: ");
-            user.Age = int.Parse(Console.ReadLine());
+            user.Age = ReadInt();
             Console.Write("Ваш рост: ");
-            user.Height = int.Parse(Console.ReadLine());
+            user.Height = ReadInt();
             Console.Write("Ваш вес: ");
-            user.Weight = int.Parse(Console.ReadLine());
+            user.Weight = ReadInt();
+        }
+        static void FillPoint(ref Point point)
+        {
+            Console.Write("\nX ");
+            point.X = ReadInt();
+            Console.Write("\nY ");
+            point.Y = ReadInt();
         }
         static void ReadUserInfo(User user)
         {
@@ -74,6 +84,7 @@ namespace HomeWork1Console
             Console.Write("Это вы: ");
             Console.WriteLine($"{user.LastName} {user.FirstName} {user.Age} лет, вес {user.Weight}кг, рост состовляет {user.Height}см");
         }
+        static int ReadInt() => int.Parse(Console.ReadLine());
     }
 
     public class User
