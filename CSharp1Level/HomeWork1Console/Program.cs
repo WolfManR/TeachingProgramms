@@ -51,9 +51,27 @@ namespace HomeWork1Console
             Console.WriteLine($"значения переменных до обмена {c} и {g}");
             TurnVarsWithoutThirdVar(ref c, ref g);
             Console.WriteLine($"значения переменных после обмена {c} и {g}");
+            
+            //Задание 5
+            PrintMyInfo("Иван","Бармин","НЕ СКАЖУ!!!");
             Console.ReadLine();
         }
-
+        static void PrintMyInfo(string firstName,string lastName,string city)
+        {
+            int CalcConsoleCenter(string msg)
+            {
+                return Console.BufferWidth / 2 - msg.Length/2;
+            }
+            string str = $"моё имя {firstName}";
+            Console.CursorLeft += CalcConsoleCenter(str); 
+            Console.WriteLine(str);
+            str = $"фамилия {lastName}";
+            Console.CursorLeft += CalcConsoleCenter(str);
+            Console.WriteLine(str);
+            str = $"город проживания {city}";
+            Console.CursorLeft += CalcConsoleCenter(str);
+            Console.WriteLine(str);
+        }
         static void TurnVarsWithoutThirdVar(ref int a,ref int b)
         {
             a = a ^ b;
