@@ -7,7 +7,7 @@ namespace HomeWork1Console
         public User user { get; set; } = new User();
         public void Work()
         {
-            Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - себя(если данные не заполнялись будут использованы значения по умолчанию)\n2 - другого человека");
+            Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - по введённым данным в начале программы\n2 - другого человека");
             if (Helper.ReadInt() == 2)
             {
                 Console.Write("укажите рост в см: ");
