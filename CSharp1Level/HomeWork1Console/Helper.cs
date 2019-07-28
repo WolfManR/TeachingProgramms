@@ -15,20 +15,29 @@ namespace HomeWork1Console
             Console.CursorLeft += CalcConsoleCenter(msg);
             Console.WriteLine(msg);
         }
-
+        public static void PrintColoredMsg(string msg,ConsoleColor BackColor,ConsoleColor ForeColor)
+        {
+            var defaultBack = Console.BackgroundColor;
+            var defaultFore = Console.ForegroundColor;
+            Console.BackgroundColor = BackColor;
+            Console.ForegroundColor = ForeColor;
+            Console.WriteLine($"\n{msg}\n");
+            Console.BackgroundColor = defaultBack;
+            Console.ForegroundColor = defaultFore;
+        }
         public static void TaskTitle(int taskNumber)
         {
-            Console.WriteLine($"\nЗадача {taskNumber}\n");
+            PrintColoredMsg($"\nЗадача {taskNumber}", ConsoleColor.DarkBlue, ConsoleColor.Yellow);
         }
 
         public static void TaskEnded(int taskNumber) //в будущем заменить событием
         {
-            Console.WriteLine($"\nЗадача {taskNumber} завершила свою работу.\nНажмите любую кнопку для продолжения работы основной программы.");
+            PrintColoredMsg($"\nЗадача {taskNumber} завершила свою работу.\nНажмите любую кнопку для продолжения работы основной программы.", ConsoleColor.White, ConsoleColor.Black);
             Console.ReadKey();
         }
         public static void ProgramEnded()
         {
-            Console.WriteLine($"\nПрограмма завершила свою работу.\nНажмите любую кнопку для выхода.");
+            PrintColoredMsg($"\nПрограмма завершила свою работу.\nНажмите любую кнопку для выхода.", ConsoleColor.White, ConsoleColor.Red);
             Console.ReadKey();
         }
         public static void WorkTasks(TaskWork[] tasks)
