@@ -6,13 +6,17 @@ namespace HomeWork1Console
         static void Main(string[] args)
         {
             var user = new User();
-            Console.WriteLine("Вы будете вводить информацию о себе? \n<0 - да\n>0 - нет");
-            if (ReadInt() < 0) user.FillUserInfo();
+            Console.WriteLine("Вы будете вводить информацию о себе? \n<3 - да\n>=3 - нет");
+            if (ReadInt() < 3) user.FillUserInfo();
 
-            //Задание 1
+            Console.WriteLine();
+
+            //                             Задание 1
             ReadUserInfo(user);
 
-            //Задание 2
+            Console.WriteLine();
+
+            //                             Задание 2
             Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - себя(если данные не заполнялись будут использованы значения по умолчанию)\n2 - другого человека");
             if (ReadInt() == 2)
             {
@@ -27,21 +31,24 @@ namespace HomeWork1Console
                 IMT(user.Height, user.Weight);
             }
 
-            //Задание 3
+            Console.WriteLine();
+
+            //                             Задание 3
             Point a = new Point() { X = 184, Y = 206 };
             Point b = new Point() { X = 345, Y = 251 };
-            Console.WriteLine("Вы будете вводить свои точки координат? \n<0 - да\n>0 - нет");
-            if (ReadInt() < 0)
+            Console.WriteLine("Вы будете вводить свои точки координат? \n<3 - да\n>=3 - нет");
+            if (ReadInt() < 3)
             {
                 Console.WriteLine("первая точка");
                 a.FillPoint();
                 Console.WriteLine("\nвторая точка");
                 b.FillPoint();
             }
-
             DistanceBetweenPoints(a, b);
 
-            //Задание 4
+            Console.WriteLine();
+
+            //                             Задание 4
             int c = 5;
             int g = 8;
             Console.WriteLine("Обмен с третьей переменной");
@@ -54,9 +61,12 @@ namespace HomeWork1Console
             Console.WriteLine($"значения переменных до обмена {c} и {g}");
             TurnVarsWithoutThirdVar(ref c, ref g);
             Console.WriteLine($"значения переменных после обмена {c} и {g}");
-            
-            //Задание 5
+
+            Console.WriteLine();
+
+            //                             Задание 5
             PrintMyInfo("Иван","Бармин","НЕ СКАЖУ!!!");
+
             Console.ReadLine();
         }
         static void PrintMyInfo(string firstName,string lastName,string city)
