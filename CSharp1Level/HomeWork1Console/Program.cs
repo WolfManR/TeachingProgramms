@@ -65,15 +65,16 @@ namespace HomeWork1Console
             {
                 return Console.BufferWidth / 2 - msg.Length/2;
             }
-            string str = $"моё имя {firstName}";
-            Console.CursorLeft += CalcConsoleCenter(str); 
-            Console.WriteLine(str);
-            str = $"фамилия {lastName}";
-            Console.CursorLeft += CalcConsoleCenter(str);
-            Console.WriteLine(str);
-            str = $"город проживания {city}";
-            Console.CursorLeft += CalcConsoleCenter(str);
-            Console.WriteLine(str);
+            void WriteMsgInCenter(string prefix,string variable)
+            {
+                string msg = $"{prefix} {variable}";
+                Console.CursorLeft += CalcConsoleCenter(msg);
+                Console.WriteLine(msg);
+            }
+            //Можно ещё уменьшить повторяемость кода с коллекциями, но это уже совсем другая история
+            WriteMsgInCenter("моё имя",firstName);
+            WriteMsgInCenter("фамилия", lastName);
+            WriteMsgInCenter("город проживания", city);
         }
         static void TurnVarsWithoutThirdVar(ref int a,ref int b)
         {
