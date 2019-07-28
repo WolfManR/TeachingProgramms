@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using static HomeWork1Console.Helper;
-
+// Иван Бармин
 namespace HomeWork1Console
 {
     class Program
