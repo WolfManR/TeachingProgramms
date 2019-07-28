@@ -15,6 +15,31 @@ namespace HomeWork1Console
             Console.CursorLeft += CalcConsoleCenter(msg);
             Console.WriteLine(msg);
         }
+
+        public static void TaskTitle(int taskNumber)
+        {
+            Console.WriteLine($"\nЗадача {taskNumber}\n");
+        }
+
+        public static void TaskEnded(int taskNumber) //в будущем заменить событием
+        {
+            Console.WriteLine($"\nЗадача {taskNumber} завершила свою работу.\nНажмите любую кнопку для продолжения работы основной программы.");
+            Console.ReadKey();
+        }
+        public static void ProgramEnded()
+        {
+            Console.WriteLine($"\nПрограмма завершила свою работу.\nНажмите любую кнопку для выхода.");
+            Console.ReadKey();
+        }
+        public static void WorkTasks(TaskWork[] tasks)
+        {
+            for (int i = 0; i < tasks.Length; i++)
+            {
+                TaskTitle(i + 1);
+                tasks[i].Work();
+                TaskEnded(i + 1);
+            }
+        }
     }
     public interface TaskWork
     {

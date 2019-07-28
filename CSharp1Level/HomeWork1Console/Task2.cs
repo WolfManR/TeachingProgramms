@@ -4,7 +4,7 @@ namespace HomeWork1Console
 {
     public class Task2 : TaskWork
     {
-        public User user { get; set; }
+        public User user { get; set; } = new User();
         public void Work()
         {
             Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - себя(если данные не заполнялись будут использованы значения по умолчанию)\n2 - другого человека");

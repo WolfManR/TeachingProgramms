@@ -4,7 +4,7 @@ namespace HomeWork1Console
 {
     public class Task1:TaskWork
     {
-        public User user { get; set; }
+        public User user { get; set; } = new User();
         public void Work()
         {
             WriteInConsoleUserInfo(user);
