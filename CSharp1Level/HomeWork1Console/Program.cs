@@ -11,6 +11,7 @@ namespace HomeWork1Console
 
             //Задание 1
             ReadUserInfo(user);
+
             //Задание 2
             Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - себя(если данные не заполнялись будут использованы значения по умолчанию)\n2 - другого человека");
             if (ReadInt() == 2)
@@ -25,6 +26,7 @@ namespace HomeWork1Console
             {
                 IMT(user.Height, user.Weight);
             }
+
             //Задание 3
             Point a = new Point() { X = 184, Y = 206 };
             Point b = new Point() { X = 345, Y = 251 };
@@ -38,6 +40,7 @@ namespace HomeWork1Console
             }
 
             DistanceBetweenPoints(a, b);
+
             //Задание 4
             int c = 5;
             int g = 8;
