@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HomeWorkLib;
+using HomeWorkLib.ConsoleWork;
 
 namespace HomeWork1Console
 {
-    public class Task3 : TaskWork
+    public class Task3 : ITaskWork
     {
         public void Work()
         {
