@@ -6,6 +6,18 @@ namespace HomeWorkLib.ConsoleWork
     public static class Helper
     {
         public static int ReadInt() => int.Parse(Console.ReadLine());
+        public static bool CheckStringNumber(string number)
+        {
+            char[] charNumbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            bool isNumber = true;
+
+            for (int i = 0; isNumber && i < number.Length; i++)
+                for (int j = 0; isNumber && j < charNumbers.Length; j++)
+                    if (number[i] != charNumbers[j]) isNumber = false;
+            return isNumber;
+        }
+
+        #region Работа с сообщениями в консоли
         public static void WriteMsgInCenter(string prefix, string variable)
         {
             int CalcConsoleCenter(string str)
@@ -41,6 +53,7 @@ namespace HomeWorkLib.ConsoleWork
             PrintColoredMsg($"\nПрограмма завершила свою работу.\nНажмите любую кнопку для выхода.", ConsoleColor.White, ConsoleColor.Red);
             Console.ReadKey();
         }
+        #endregion
         public static void WorkTasks(ITaskWork[] tasks)
         {
             for (int i = 0; i < tasks.Length; i++)
