@@ -7,8 +7,7 @@ namespace HomeWork2Console
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Min(new int[] { 2, 4, 7 }));
-            Console.WriteLine(Min(4, 98, 8));
+            
 
             Console.WriteLine("Введите число положительное целочисленное число любой длины");
             string number = Console.ReadLine();
@@ -48,16 +47,7 @@ namespace HomeWork2Console
             Console.ReadKey();
         }
 
-        static int Min(params int[] numbers)
-        {
-            int min = numbers[0];
-            if (numbers.Length > 1)
-                foreach (var item in numbers)
-                {
-                    if (item < min) min = item;
-                }
-            return min;
-        }
+        
 
         static int NumLength(string number) => number.Length;
 
