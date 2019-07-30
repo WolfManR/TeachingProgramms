@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HomeWorkLib;
 
 namespace HomeWork2Console
 {
-    class Task1
+    public class Task1 : ITaskWork
     {
+        public void Work()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
