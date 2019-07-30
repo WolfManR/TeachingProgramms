@@ -16,6 +16,7 @@ namespace HomeWorkLib.ConsoleWork
                     if (number[i] != charNumbers[j]) isNumber = false;
             return isNumber;
         }
+        public static double IMT(int weight,double height) => weight / (height * height);
 
         #region Работа с сообщениями в консоли
         public static void WriteMsgInCenter(string prefix, string variable)
