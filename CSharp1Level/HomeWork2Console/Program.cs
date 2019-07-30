@@ -1,4 +1,5 @@
 ﻿using System;
+using HomeWorkLib.ConsoleWork;
 
 namespace HomeWork2Console
 {
@@ -6,15 +7,36 @@ namespace HomeWork2Console
     {
         static void Main(string[] args)
         {
-            
+            string selectedMenuMember;
+            do
+            {
+                Menu();
+                selectedMenuMember = Console.ReadLine();
+                switch (selectedMenuMember)
+                {
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "0":
+                        Console.WriteLine("До свидания");
+                        break;
+                    default:
+                        Console.WriteLine("У нас нет задачи с таким номером, проверьте меню и введите команду ещё раз");
+                        break;
+                }
+            } while (selectedMenuMember!="0");
 
-            
 
-           
 
-            
 
-            Console.ReadKey();
+
+
+
+            Helper.ProgramEnded();
         }
 
         
