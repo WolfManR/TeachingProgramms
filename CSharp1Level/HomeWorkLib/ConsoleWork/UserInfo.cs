@@ -1,13 +1,9 @@
 ﻿using System;
-namespace HomeWork1Console
+
+namespace HomeWorkLib
 {
-    public class User
+    public partial class User
     {
-        public string FirstName { get; set; } = "Karl";
-        public string LastName { get; set; } = "Sorze";
-        public int Age { get; set; } = 47;
-        public int Height { get; set; } = 1830;
-        public int Weight { get; set; } = 102;
         public void FillUserInfo()
         {
             Console.WriteLine("Введите информацию о себе");

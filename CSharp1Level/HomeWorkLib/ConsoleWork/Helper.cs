@@ -1,7 +1,8 @@
 ﻿using System;
 
-namespace HomeWork1Console
+namespace HomeWorkLib.ConsoleWork
 {
+    // разделить класс на логические части
     public static class Helper
     {
         public static int ReadInt() => int.Parse(Console.ReadLine());
@@ -15,7 +16,7 @@ namespace HomeWork1Console
             Console.CursorLeft += CalcConsoleCenter(msg);
             Console.WriteLine(msg);
         }
-        public static void PrintColoredMsg(string msg,ConsoleColor BackColor,ConsoleColor ForeColor)
+        public static void PrintColoredMsg(string msg, ConsoleColor BackColor, ConsoleColor ForeColor)
         {
             var defaultBack = Console.BackgroundColor;
             var defaultFore = Console.ForegroundColor;
@@ -40,7 +41,7 @@ namespace HomeWork1Console
             PrintColoredMsg($"\nПрограмма завершила свою работу.\nНажмите любую кнопку для выхода.", ConsoleColor.White, ConsoleColor.Red);
             Console.ReadKey();
         }
-        public static void WorkTasks(TaskWork[] tasks)
+        public static void WorkTasks(ITaskWork[] tasks)
         {
             for (int i = 0; i < tasks.Length; i++)
             {
@@ -49,9 +50,5 @@ namespace HomeWork1Console
                 TaskEnded(i + 1);
             }
         }
-    }
-    public interface TaskWork
-    {
-        void Work();
     }
 }
