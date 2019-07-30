@@ -1,5 +1,4 @@
 ﻿using System;
-using HomeWorkLib.ConsoleWork;
 
 namespace HomeWork2Console
 {
@@ -9,11 +8,7 @@ namespace HomeWork2Console
         {
             
 
-            Console.WriteLine("Введите число положительное целочисленное число любой длины");
-            string number = Console.ReadLine();
-            if (Helper.CheckStringNumber(number))
-                Console.WriteLine("в вашем числе " + NumLength(number) + " цифр");
-            else Console.WriteLine("вы ввели не запрошенное число");
+            
 
             int[] numbers = new int[] { };
             int inputNumber = 1;
@@ -49,7 +44,7 @@ namespace HomeWork2Console
 
         
 
-        static int NumLength(string number) => number.Length;
+        
 
         static bool CheckUser(string login, string pass)
         {
