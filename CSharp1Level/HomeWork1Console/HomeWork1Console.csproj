@@ -55,5 +55,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HomeWorkLib\HomeWorkLib.csproj">
+      <Project>{1f065638-23c8-472e-a811-5cbda749b0c8}</Project>
+      <Name>HomeWorkLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
