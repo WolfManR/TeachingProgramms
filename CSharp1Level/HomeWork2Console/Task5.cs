@@ -15,16 +15,13 @@ namespace HomeWork2Console
 //              30—35                 Ожирение 
 //              35—40                 Ожирение резкое 
 //              40 и более            Очень резкое ожирение
-        const double normalIMT = 18.6;
-
+       
         public Task5()
         {
             TaskNumber = 5;
-            ToDo = "а) Написать программу, которая запрашивает массу и рост человека, " +
-                   "вычисляет его индекс массы и сообщает, " +
-                   "нужно ли человеку похудеть, набрать вес или все в норме;" +
-                   "б) *Рассчитать, на сколько кг похудеть или сколько кг " +
-                   "набрать для нормализации веса.";
+            ToDo = "а) Написать программу, которая запрашивает массу и рост человека, вычисляет его индекс массы " +
+                   "и сообщает, нужно ли человеку похудеть, набрать вес или все в норме;" +
+                   "б) *Рассчитать, на сколько кг похудеть или сколько кг набрать для нормализации веса.";
         }
 
         public override void Work()
@@ -34,6 +31,20 @@ namespace HomeWork2Console
             Console.Write("Пожалуйста введите рост в метрах измеряемого человека ");
             double height=double.Parse(Console.ReadLine());
             double imt = Helper.IMT(weight,height);
+            int WeightToNormal;
+            if (imt >= 18.5 & imt <= 24.99) Console.WriteLine("\nВаш индекс массы тела в норме");
+            else if (imt >= 25)
+            {
+                WeightToNormal = weight - WeightFromIMT(24.99, height);
+                Console.WriteLine($"\nУ вас избыточная масса тела, вам нужно похудеть на {WeightToNormal}кг");
+            }
+            else
+            {
+                WeightToNormal =  WeightFromIMT(18.5, height)-weight;
+                Console.WriteLine($"\nУ вас дефицит массы тела, вам нужно набрать {WeightToNormal}кг");
+            }
         }
+
+        int WeightFromIMT(double IMT,double height) => Convert.ToInt32(IMT*height*height);
     }
 }
