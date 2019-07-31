@@ -26,7 +26,7 @@ namespace HomeWork2Console
                     Console.WriteLine("логин или пароль не верны, попробуйте ещё раз\n");
                     count--;
                 }
-            } while (!isUserExist || count > 0);
+            } while (!isUserExist && count > 0);
             Console.WriteLine("С возвращением, root!");
         }
 
