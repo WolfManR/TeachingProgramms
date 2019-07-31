@@ -7,15 +7,17 @@ namespace HomeWork2Console
     {
         public void Work()
         {
-            int[] numbers = new int[] { };
-            int inputNumber = 1;
             Console.WriteLine("Подсчёт колличества введённых нечётных чисел");
             Console.WriteLine("Вводите числа по запросу, завершающим в цепочке должет быть 0");
+            int inputNumber;
+            int sumNumbers = 0;
             do
             {
                 Console.Write("число: ");
-                Console.ReadLine();
+                inputNumber = int.Parse(Console.ReadLine());
+                if (inputNumber % 2 > 0) sumNumbers += inputNumber;
             } while (inputNumber != 0);
+            Console.WriteLine("сумма нечётных чисел равна " + sumNumbers);
         }
     }
 }
