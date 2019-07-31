@@ -3,7 +3,7 @@ using HomeWorkLib;
 
 namespace HomeWork2Console
 {
-    public class Task6 : HomeWorkTask,ITaskWork
+    public class Task6 : HomeWorkTask
     {
         const int startNumber = 1;
         const int endNumber = 1_000_000_000;

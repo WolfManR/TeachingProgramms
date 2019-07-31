@@ -3,7 +3,7 @@ using HomeWorkLib;
 
 namespace HomeWork2Console
 {
-    public class Task4 : HomeWorkTask,ITaskWork
+    public class Task4 : HomeWorkTask
     {
         const string trueUserLogin = "root";
         const string trueUserPass = "GeekBrains";

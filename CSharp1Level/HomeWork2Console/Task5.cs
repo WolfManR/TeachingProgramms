@@ -4,7 +4,7 @@ using HomeWorkLib.ConsoleWork;
 
 namespace HomeWork2Console
 {
-    public class Task5 : HomeWorkTask,ITaskWork
+    public class Task5 : HomeWorkTask
     {
 //        Индекс массы тела
 //        Соответствие между массой человека и его ростом 

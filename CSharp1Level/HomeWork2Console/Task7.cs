@@ -3,7 +3,7 @@ using HomeWorkLib;
 
 namespace HomeWork2Console
 {
-    public class Task7 : HomeWorkTask,ITaskWork
+    public class Task7 : HomeWorkTask
     {
         public Task7()
         {
