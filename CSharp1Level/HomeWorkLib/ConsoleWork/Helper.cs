@@ -55,7 +55,10 @@ namespace HomeWorkLib.ConsoleWork
         {
             PrintColoredMsg($"\nЗадача {taskNumber}", ConsoleColor.DarkBlue, ConsoleColor.Yellow);
         }
-
+        public static void PrintToDo(string ToDo)
+        {
+            PrintColoredMsg(ToDo + "\n", ConsoleColor.Gray, ConsoleColor.DarkMagenta);
+        }
         public static void TaskEnded(int taskNumber) //в будущем заменить событием
         {
             PrintColoredMsg($"\nЗадача {taskNumber} завершила свою работу.\nНажмите любую кнопку для продолжения работы основной программы.", ConsoleColor.White, ConsoleColor.Black);

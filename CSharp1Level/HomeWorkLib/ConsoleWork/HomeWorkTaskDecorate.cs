@@ -7,7 +7,7 @@ namespace HomeWorkLib
         public void DecorativeWorkInConsole()
         {
             Helper.TaskTitle(TaskNumber);
-            System.Console.WriteLine(ToDo+"\n");
+            Helper.PrintToDo(ToDo);
             Work();
             Helper.TaskEnded(TaskNumber);
         }
