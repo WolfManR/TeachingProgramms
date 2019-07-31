@@ -16,39 +16,25 @@ namespace HomeWork2Console
                 switch (selectedMenuMember)
                 {
                     case "1":
-                        Console.Clear();
-                        task = new Task1();
-                        task.DecorativeWorkInConsole();
+                        TaskWork(new Task1());
                         break;
                     case "2":
-                        Console.Clear();
-                        task = new Task2();
-                        task.DecorativeWorkInConsole();
+                        TaskWork(new Task2());
                         break;
                     case "3":
-                        Console.Clear();
-                        task = new Task3();
-                        task.DecorativeWorkInConsole();
+                        TaskWork(new Task3());
                         break;
                     case "4":
-                        Console.Clear();
-                        task = new Task4();
-                        task.DecorativeWorkInConsole();
+                        TaskWork(new Task4());
                         break;
                     case "5":
-                        Console.Clear();
-                        task = new Task5();
-                        task.DecorativeWorkInConsole();
+                        TaskWork(new Task5());
                         break;
                     case "6":
-                        Console.Clear();
-                        task = new Task6();
-                        task.DecorativeWorkInConsole();
+                        TaskWork(new Task6());
                         break;
                     case "7":
-                        Console.Clear();
-                        task = new Task7();
-                        task.DecorativeWorkInConsole();
+                        TaskWork(new Task7());
                         break;
                     case "0":
                         Console.WriteLine("\nДо свидания");
@@ -59,16 +45,15 @@ namespace HomeWork2Console
                 }
             } while (selectedMenuMember!="0");
 
-
-
-
-
-
-
             Helper.ProgramEnded();
         }
 
-        
+        static void TaskWork(HomeWorkLib.HomeWorkTask taskToWork)
+        {
+            Console.Clear();
+            var task = taskToWork;
+            task.DecorativeWorkInConsole();
+        }
         static void Menu()
         {
             Console.Clear();
