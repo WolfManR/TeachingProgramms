@@ -3,11 +3,21 @@ using HomeWorkLib;
 
 namespace HomeWork2Console
 {
-    public class Task6 : ITaskWork
+    public class Task6 : HomeWorkTask,ITaskWork
     {
         const int startNumber = 1;
         const int endNumber = 1_000_000_000;
-        public void Work()
+
+        public Task6()
+        {
+            TaskNumber = 6;
+            ToDo = "*Написать программу подсчета количества «Хороших» чисел " +
+                   "в диапазоне от 1 до 1 000 000 000. " +
+                   "Хорошим называется число, которое делится на сумму своих цифр. " +
+                   "Реализовать подсчет времени выполнения программы, используя структуру DateTime.";
+        }
+
+        public override void Work()
         {
             string iInString;
             int counter = 0;

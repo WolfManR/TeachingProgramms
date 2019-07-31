@@ -4,7 +4,7 @@ using HomeWorkLib.ConsoleWork;
 
 namespace HomeWork2Console
 {
-    public class Task5 : ITaskWork
+    public class Task5 : HomeWorkTask,ITaskWork
     {
 //        Индекс массы тела
 //        Соответствие между массой человека и его ростом 
@@ -16,7 +16,18 @@ namespace HomeWork2Console
 //              35—40                 Ожирение резкое 
 //              40 и более            Очень резкое ожирение
         const double normalIMT = 18.6;
-        public void Work()
+
+        public Task5()
+        {
+            TaskNumber = 5;
+            ToDo = "а) Написать программу, которая запрашивает массу и рост человека, " +
+                   "вычисляет его индекс массы и сообщает, " +
+                   "нужно ли человеку похудеть, набрать вес или все в норме;" +
+                   "б) *Рассчитать, на сколько кг похудеть или сколько кг " +
+                   "набрать для нормализации веса.";
+        }
+
+        public override void Work()
         {
             Console.Write("Пожалуйста введите вес в кг измеряемого человека ");
             int weight=Helper.ReadInt();

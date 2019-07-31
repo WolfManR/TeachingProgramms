@@ -3,9 +3,16 @@ using HomeWorkLib;
 
 namespace HomeWork2Console
 {
-    public class Task7 : ITaskWork
+    public class Task7 : HomeWorkTask,ITaskWork
     {
-        public void Work()
+        public Task7()
+        {
+            TaskNumber = 7;
+            ToDo = "a) Разработать рекурсивный метод, который выводит на экран числа от a до b (a<b);" +
+                "б) *Разработать рекурсивный метод, который считает сумму чисел от a до b.";
+        }
+
+        public override void Work()
         {
             int a, b;
             do

@@ -2,9 +2,10 @@
 {
     public abstract partial class HomeWorkTask : ITaskWork
     {
-        public string Title { get; }
-        public int TaskNumber { get; }
-        public string ToDo { get; }
+        // узнать как в наследуемом классе изменять значение полей для чтения
+        //public string Title { get; set; }
+        public int TaskNumber { get; set; }
+        public string ToDo { get; set; }
 
         public abstract void Work();
     }

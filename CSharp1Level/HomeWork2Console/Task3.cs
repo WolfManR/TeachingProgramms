@@ -4,9 +4,15 @@ using HomeWorkLib.ConsoleWork;
 
 namespace HomeWork2Console
 {
-    public class Task3 : ITaskWork
+    public class Task3 : HomeWorkTask,ITaskWork
     {
-        public void Work()
+        public Task3()
+        {
+            TaskNumber = 3;
+            ToDo = "С клавиатуры вводятся числа, пока не будет введен 0. Подсчитать сумму всех нечетных положительных чисел.";
+        }
+
+        public override void Work()
         {
             Console.WriteLine("Подсчёт колличества введённых нечётных чисел");
             Console.WriteLine("Вводите числа по запросу, завершающим в цепочке должет быть 0");

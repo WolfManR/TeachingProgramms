@@ -3,11 +3,25 @@ using HomeWorkLib;
 
 namespace HomeWork2Console
 {
-    public class Task4 : ITaskWork
+    public class Task4 : HomeWorkTask,ITaskWork
     {
         const string trueUserLogin = "root";
         const string trueUserPass = "GeekBrains";
-        public void Work()
+
+        public Task4()
+        {
+            TaskNumber = 4;
+            ToDo = "Реализовать метод проверки логина и пароля. " +
+                   "На вход подается логин и пароль. " +
+                   "На выходе истина, если прошел авторизацию, " +
+                   "и ложь, если не прошел (Логин: root, Password: GeekBrains). " +
+                   "Используя метод проверки логина и пароля, написать программу: " +
+                   "пользователь вводит логин и пароль, " +
+                   "программа пропускает его дальше или не пропускает. " +
+                   "С помощью цикла do while ограничить ввод пароля тремя попытками.";
+        }
+
+        public override void Work()
         {
             bool isUserExist = false;
             int count = 3;
