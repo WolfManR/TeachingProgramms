@@ -27,9 +27,9 @@ namespace HomeWork2Console
                 int delNumber = 0;
                 foreach (var item in iInString) delNumber += (int)char.GetNumericValue(item);
                 if (i % delNumber == 0) counter++;
-                if (i % 500000 == 0) Console.WriteLine("Working " + i + "  " + counter);
+                if (i % 1_000_000 == 0) Console.WriteLine("Working... Мы сейчас на числе " + i + ",  хороших чисел сейчас: " + counter);
             }
-            Console.WriteLine("хороших чисел " + counter);
+            Console.WriteLine("\nхороших чисел " + counter);
         }
     }
 }
