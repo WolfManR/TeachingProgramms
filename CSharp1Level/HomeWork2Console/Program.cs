@@ -8,7 +8,6 @@ namespace HomeWork2Console
         static void Main(string[] args)
         {
             string selectedMenuMember;
-            HomeWorkLib.HomeWorkTask task;
             do
             {
                 Menu();
@@ -36,6 +35,10 @@ namespace HomeWork2Console
                     case "7":
                         TaskWork(new Task7());
                         break;
+                    case "8":
+                        Console.Clear();
+                        Flag();
+                        break;
                     case "0":
                         Console.WriteLine("\nДо свидания");
                         break;
@@ -46,6 +49,23 @@ namespace HomeWork2Console
             } while (selectedMenuMember!="0");
 
             Helper.ProgramEnded();
+        }
+
+        static void Flag()
+        {
+            int height = 24;
+            int width = 3 * height;
+            for (int j = 0; j < width; j++)
+            {
+                for (int i = 0; i < height; i++)
+                {
+                    Console.SetCursorPosition(j, i);
+                    Console.BackgroundColor=(i < Convert.ToInt32(height/3)) ? ConsoleColor.White :(i< Convert.ToInt32(height/3)*2) ? ConsoleColor.Blue:ConsoleColor.Red;
+                    Console.WriteLine(" ");
+                }
+            }
+            Console.ReadLine();
+            Console.ResetColor();
         }
 
         static void TaskWork(HomeWorkLib.HomeWorkTask taskToWork)
@@ -64,6 +84,7 @@ namespace HomeWork2Console
             Console.WriteLine("5. Task 5");
             Console.WriteLine("6. Task 6");
             Console.WriteLine("7. Task 7");
+            Console.WriteLine("8. Русский флаг");
             Console.WriteLine("0. Exit");
         }
         
