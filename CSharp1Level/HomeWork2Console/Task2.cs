@@ -15,10 +15,18 @@ namespace HomeWork2Console
         public override void Work()
         {
             Console.WriteLine("Введите число положительное целочисленное число любой длины");
-            string number = Console.ReadLine();
-            if (Helper.CheckStringNumber(number))
-                Console.WriteLine("в вашем числе " + NumLength(number) + " цифр");
-            else Console.WriteLine("вы ввели не запрошенное число");
+            string number;
+            bool isNumber = false;
+            do
+            {
+                number = Console.ReadLine();
+                if (!Helper.CheckStringNumber(number))
+                {
+                    Console.WriteLine("вы ввели не запрошенное число, повторите ввод числа\nоно должно быть \"положительное целочисленное число любой длины\"");
+                }
+                else isNumber = true;
+            }while (!isNumber);
+            Console.WriteLine("в вашем числе " + NumLength(number) + " цифр");
         }
         int NumLength(string number) => number.Length;
     }
