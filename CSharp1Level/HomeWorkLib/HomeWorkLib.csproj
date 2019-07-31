@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleWork\Helper.cs" />
+    <Compile Include="ConsoleWork\HomeWorkTaskDecorate.cs" />
     <Compile Include="ConsoleWork\Point.cs" />
     <Compile Include="ConsoleWork\UserInfo.cs" />
+    <Compile Include="HomeWorkTask.cs" />
     <Compile Include="ITaskWork.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
