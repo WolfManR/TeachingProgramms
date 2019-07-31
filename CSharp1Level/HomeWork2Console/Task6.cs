@@ -21,15 +21,19 @@ namespace HomeWork2Console
         {
             string iInString;
             int counter = 0;
+            var startTime = DateTime.Now;
             for (int i = startNumber; i <= endNumber; i++)
             {
                 iInString = i.ToString();
                 int delNumber = 0;
                 foreach (var item in iInString) delNumber += (int)char.GetNumericValue(item);
                 if (i % delNumber == 0) counter++;
-                if (i % 1_000_000 == 0) Console.WriteLine("Working... Мы сейчас на числе " + i + ",  хороших чисел сейчас: " + counter);
+                if (i % 1_000_000 == 0) Console.WriteLine($"Working... Мы сейчас на числе { i: 0,0} ,  хороших чисел сейчас: {counter:0,0}");
             }
-            Console.WriteLine("\nхороших чисел " + counter);
+            var endTime = DateTime.Now;
+            TimeSpan workTime = endTime - startTime;
+            Console.WriteLine($"\n Процедура заняла: {workTime.Days} дней, {workTime.Hours} часов, {workTime.Minutes} минут и {workTime.Seconds} секунд");
+            Console.WriteLine($"\nхороших чисел {counter:0,0}");
         }
     }
 }
