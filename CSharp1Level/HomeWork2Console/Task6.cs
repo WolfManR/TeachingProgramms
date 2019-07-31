@@ -15,7 +15,7 @@ namespace HomeWork2Console
             {
                 iInString = i.ToString();
                 int delNumber = 0;
-                foreach (var item in iInString) delNumber += int.Parse(item.ToString());
+                foreach (var item in iInString) delNumber += (int)char.GetNumericValue(item);
                 if (i % delNumber == 0) counter++;
                 if (i % 500000 == 0) Console.WriteLine("Working " + i + "  " + counter);
             }
