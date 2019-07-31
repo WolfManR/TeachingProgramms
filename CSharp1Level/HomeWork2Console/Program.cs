@@ -16,38 +16,45 @@ namespace HomeWork2Console
                 switch (selectedMenuMember)
                 {
                     case "1":
+                        Console.Clear();
                         task = new Task1();
                         task.DecorativeWorkInConsole();
                         break;
                     case "2":
+                        Console.Clear();
                         task = new Task2();
                         task.DecorativeWorkInConsole();
                         break;
                     case "3":
+                        Console.Clear();
                         task = new Task3();
                         task.DecorativeWorkInConsole();
                         break;
                     case "4":
+                        Console.Clear();
                         task = new Task4();
                         task.DecorativeWorkInConsole();
                         break;
                     case "5":
+                        Console.Clear();
                         task = new Task5();
                         task.DecorativeWorkInConsole();
                         break;
                     case "6":
+                        Console.Clear();
                         task = new Task6();
                         task.DecorativeWorkInConsole();
                         break;
                     case "7":
+                        Console.Clear();
                         task = new Task7();
                         task.DecorativeWorkInConsole();
                         break;
                     case "0":
-                        Console.WriteLine("До свидания");
+                        Console.WriteLine("\nДо свидания");
                         break;
                     default:
-                        Console.WriteLine("У нас нет задачи с таким номером, проверьте меню и введите команду ещё раз");
+                        Console.WriteLine("\nУ нас нет задачи с таким номером, проверьте меню и введите команду ещё раз");
                         break;
                 }
             } while (selectedMenuMember!="0");
