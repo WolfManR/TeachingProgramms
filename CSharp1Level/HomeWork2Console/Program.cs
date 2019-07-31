@@ -8,6 +8,7 @@ namespace HomeWork2Console
         static void Main(string[] args)
         {
             string selectedMenuMember;
+            HomeWorkLib.HomeWorkTask task;
             do
             {
                 Menu();
@@ -15,12 +16,33 @@ namespace HomeWork2Console
                 switch (selectedMenuMember)
                 {
                     case "1":
+                        task = new Task1();
+                        task.DecorativeWorkInConsole();
+                        break;
                     case "2":
+                        task = new Task2();
+                        task.DecorativeWorkInConsole();
+                        break;
                     case "3":
+                        task = new Task3();
+                        task.DecorativeWorkInConsole();
+                        break;
                     case "4":
+                        task = new Task4();
+                        task.DecorativeWorkInConsole();
+                        break;
                     case "5":
+                        task = new Task5();
+                        task.DecorativeWorkInConsole();
+                        break;
                     case "6":
+                        task = new Task6();
+                        task.DecorativeWorkInConsole();
+                        break;
                     case "7":
+                        task = new Task7();
+                        task.DecorativeWorkInConsole();
+                        break;
                     case "0":
                         Console.WriteLine("До свидания");
                         break;
