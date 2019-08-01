@@ -2,7 +2,7 @@
 
 namespace HomeWork1Console
 {
-    public class Task4 : TaskWork
+    public class Task4 : HomeWorkLib.ITaskWork
     {
         public void Work()
         {

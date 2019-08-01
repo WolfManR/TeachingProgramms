@@ -1,6 +1,9 @@
 using System;
-using static HomeWork1Console.Helper;
+using HomeWorkLib;
+using HomeWorkLib.ConsoleWork;
+
 // Иван Бармин
+
 namespace HomeWork1Console
 {
     class Program
@@ -11,17 +14,17 @@ namespace HomeWork1Console
             
             //                             Задание 1
             Console.WriteLine("Вы будете вводить информацию о себе? \n<2 - да\n>=2 - нет");
-            if (ReadInt() < 2) user.FillUserInfo();
+            if (Helper.ReadInt() < 2) user.FillUserInfo();
 
-            TaskWork[] tasks = {
+            ITaskWork[] tasks = {
                new Task1() { user = user },
                new Task2() { user = user },
                new Task3(),
                new Task4(),
                new Task5()
             };
-            WorkTasks(tasks);
-            ProgramEnded();
+            Helper.WorkTasks(tasks);
+            Helper.ProgramEnded();
         }
         
     }

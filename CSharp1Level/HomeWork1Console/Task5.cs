@@ -1,6 +1,8 @@
-﻿namespace HomeWork1Console
+﻿using HomeWorkLib.ConsoleWork;
+
+namespace HomeWork1Console
 {
-    public class Task5 : TaskWork
+    public class Task5 : HomeWorkLib.ITaskWork
     {
         public void Work()
         {

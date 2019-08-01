@@ -1,10 +1,9 @@
 ﻿using System;
-namespace HomeWork1Console
+
+namespace HomeWorkLib
 {
-    public struct Point
+    public partial struct Point
     {
-        public int X { get; set; }
-        public int Y { get; set; }
         public void FillPoint()
         {
             Console.Write("\nX ");

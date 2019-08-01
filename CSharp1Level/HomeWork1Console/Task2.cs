@@ -1,8 +1,10 @@
 ﻿using System;
+using HomeWorkLib;
+using HomeWorkLib.ConsoleWork;
 
 namespace HomeWork1Console
 {
-    public class Task2 : TaskWork
+    public class Task2 : ITaskWork
     {
         public User user { get; set; } = new User();
         public void Work()
