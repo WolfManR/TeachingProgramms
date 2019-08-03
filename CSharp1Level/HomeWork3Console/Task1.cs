@@ -16,5 +16,53 @@ namespace HomeWork3Console
         {
             throw new NotImplementedException();
         }
+
+        struct ComplexStruct
+        {
+            public double RealPart { get; set; }
+            public double ImaginaryPart { get; set; }
+            public double ImaginaryUnit { get; }
+
+            public ComplexStruct(double realPart,double imaginaryPart)
+            {
+                ImaginaryUnit= Math.Sqrt(-1);
+                RealPart = realPart;
+                ImaginaryPart = imaginaryPart;
+            }
+            public static ComplexStruct operator -(ComplexStruct left, ComplexStruct right)
+            {
+                return new ComplexStruct(left.RealPart-right.RealPart,left.ImaginaryPart-right.ImaginaryPart);
+            }
+        }
+
+        class ComplexClass
+        {
+            public double RealPart { get; set; }
+            public double ImaginaryPart { get; set; }
+            public double ImaginaryUnit { get; }
+
+            public ComplexClass() : this(0, 0)
+            {
+                ImaginaryUnit = Math.Sqrt(-1);
+            }
+            public ComplexClass(double realPart, double imaginaryPart)
+            {
+                ImaginaryUnit = Math.Sqrt(-1);
+                RealPart = realPart;
+                ImaginaryPart = imaginaryPart;
+            }
+            public static ComplexClass operator -(ComplexClass left, ComplexClass right)
+            {
+                return new ComplexClass(left.RealPart - right.RealPart, left.ImaginaryPart - right.ImaginaryPart);
+            }
+            public static ComplexClass operator *(ComplexClass left, ComplexClass right)//(a + bi)(c + di) =(ac - bd) + (bc + ad)i.
+            {
+                return new ComplexClass
+                    (
+                        left.RealPart*right.RealPart - left.ImaginaryPart*right.ImaginaryPart,
+                        left.ImaginaryPart*right.RealPart + left.RealPart*right.ImaginaryPart
+                    );
+            }
+        }
     }
 }
