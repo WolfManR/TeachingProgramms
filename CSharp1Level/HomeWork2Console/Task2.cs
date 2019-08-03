@@ -6,11 +6,12 @@ namespace HomeWork2Console
 {
     public class Task2 : HomeWorkTask
     {
-        public Task2()
-        {
-            TaskNumber = 2;
-            ToDo = "Написать метод подсчета количества цифр числа.";
-        }
+
+        public override string Title => "Колличество цифр в числе";
+
+        public override int TaskNumber => 2;
+
+        public override string ToDo => "Написать метод подсчета количества цифр числа.";
 
         public override void Work()
         {

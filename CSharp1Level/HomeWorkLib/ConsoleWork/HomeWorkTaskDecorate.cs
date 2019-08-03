@@ -1,4 +1,5 @@
-﻿using HomeWorkLib.ConsoleWork;
+﻿using System;
+using HomeWorkLib.ConsoleWork;
 
 namespace HomeWorkLib
 {
@@ -6,6 +7,7 @@ namespace HomeWorkLib
     {
         public void DecorativeWorkInConsole()
         {
+            Console.Clear();
             Helper.TaskTitle(TaskNumber);
             Helper.PrintToDo(ToDo);
             Work();

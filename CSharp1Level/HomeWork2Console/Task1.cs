@@ -5,11 +5,9 @@ namespace HomeWork2Console
 {
     public class Task1 : HomeWorkTask
     {
-        public Task1()
-        {
-            TaskNumber = 1;
-            ToDo = "Написать метод, возвращающий минимальное из трех чисел.";
-        }
+        public override string Title { get; } = "Минимальное число";
+        public override int TaskNumber { get; } = 1;
+        public override string ToDo { get; } = "Написать метод, возвращающий минимальное из трех чисел.";
 
         public override void Work()
         {
