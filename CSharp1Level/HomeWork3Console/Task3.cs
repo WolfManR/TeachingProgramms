@@ -19,7 +19,7 @@ namespace HomeWork3Console
 
         public override void Work()
         {
-            
+
             Fraction first = new Fraction() { Numerator = -2, Denominator = 5 };
             Fraction second = new Fraction() { Numerator = 1, Denominator = 4 };
             int num = 6;
@@ -30,21 +30,21 @@ namespace HomeWork3Console
                 second = GetFractionFromUserInput("Вторая дробь");
                 num = int.Parse(Helper.GetValueInMsgLine("введите целое число для умножения на него первой дроби"));
             }
-            
-            
+
+
             PrintResults(first, second, num);
         }
 
         Fraction GetFractionFromUserInput(string whichFraction)
         {
-            var fraction=new Fraction();
+            var fraction = new Fraction();
             Console.WriteLine(whichFraction);
             fraction.Hole = int.Parse(Helper.GetValueInMsgLine("Введите целое число"));
             fraction.Numerator = int.Parse(Helper.GetValueInMsgLine("Введите числитель"));
             fraction.Denominator = int.Parse(Helper.GetValueInMsgLine("Введите знаменатель"));
             return fraction;
         }
-        void PrintResults(Fraction first,Fraction second, int number)
+        void PrintResults(Fraction first, Fraction second, int number)
         {
             Console.WriteLine();
             Console.WriteLine("сумма " + (first + second).ToString());
@@ -68,9 +68,9 @@ namespace HomeWork3Console
                         denominator = value;
                     else throw new ArgumentException("Знаменатель не может быть равен 0");
                 }
-            } 
+            }
 
-            public static void LeadToACommonDenominator(Fraction left,Fraction right)
+            public static void LeadToACommonDenominator(Fraction left, Fraction right)
             {
                 if (left.Denominator != right.Denominator)
                 {
@@ -84,17 +84,18 @@ namespace HomeWork3Console
             public static void SimplerFraction(ref Fraction fraction)
             {
                 //Убираю десятки
-                while (fraction.Numerator / 10 != 0 & fraction.Denominator / 10 != 0 &fraction.Numerator%10==0&fraction.Denominator%10==0)
+                while (fraction.Numerator / 10 != 0 & fraction.Denominator / 10 != 0 & fraction.Numerator % 10 == 0 & fraction.Denominator % 10 == 0)
                 {
                     fraction.Numerator /= 10;
                     fraction.Denominator /= 10;
                 }
                 //Проверяю делится ли числитель и знаменатель на друг друга
-                if(fraction.Denominator%fraction.Numerator==0)
+                if (fraction.Denominator % fraction.Numerator == 0)
                 {
                     fraction.Denominator /= fraction.Numerator;
                     fraction.Numerator /= fraction.Numerator;
-                }else if (fraction.Numerator % fraction.Denominator == 0)
+                }
+                else if (fraction.Numerator % fraction.Denominator == 0)
                 {
                     fraction.Numerator /= fraction.Denominator;
                     fraction.Denominator /= fraction.Denominator;
@@ -109,24 +110,26 @@ namespace HomeWork3Console
                     }
                 }
                 //Выделяю целое и передаю ему знак дроби
-                if(fraction.Numerator%fraction.Denominator==0)
+                if (fraction.Numerator % fraction.Denominator == 0)
                 {
                     fraction.Hole += fraction.Numerator / fraction.Denominator;
                     fraction.Numerator = 0;
+                    if (fraction.Denominator < 0) fraction.Denominator /= -1;
                 }
                 else
                 {
                     fraction.Hole += fraction.Numerator / fraction.Denominator;
                     var newNumerator = fraction.Numerator % fraction.Denominator;
 
-                    if (newNumerator < 0&fraction.Hole>0)
+                    if (newNumerator < 0 & fraction.Hole != 0)
                     {
                         fraction.Numerator = newNumerator * -1;
-                        fraction.Hole *= -1;
+                        if (fraction.Hole > 0) fraction.Hole *= -1;
+                        if (fraction.Denominator < 0) fraction.Denominator *= -1;
                     }
                     else
                     {
-                        fraction.Numerator= newNumerator;
+                        fraction.Numerator = newNumerator;
                     }
                 }
             }
@@ -141,14 +144,14 @@ namespace HomeWork3Console
             #region Operator's
             public static Fraction operator +(Fraction Left, Fraction Right)
             {
-                var left = new Fraction() { Hole=Left.Hole,Numerator=Left.Numerator,Denominator=Left.Denominator};
+                var left = new Fraction() { Hole = Left.Hole, Numerator = Left.Numerator, Denominator = Left.Denominator };
                 var right = new Fraction() { Hole = Right.Hole, Numerator = Right.Numerator, Denominator = Right.Denominator };
                 left.Numerator += left.Denominator * left.Hole;
                 right.Numerator += right.Denominator * right.Hole;
                 LeadToACommonDenominator(left, right);
-                var result= new Fraction() { Numerator = left.Numerator + right.Numerator, Denominator = left.Denominator };
+                var result = new Fraction() { Numerator = left.Numerator + right.Numerator, Denominator = left.Denominator };
                 SimplerFraction(ref result);
-                return  result;
+                return result;
             }
             public static Fraction operator -(Fraction Left, Fraction Right)
             {
