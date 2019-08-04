@@ -69,6 +69,17 @@ namespace HomeWorkLib.ConsoleWork
             PrintColoredMsg($"\nПрограмма завершила свою работу.\nНажмите любую кнопку для выхода.", ConsoleColor.White, ConsoleColor.Red);
             Console.ReadKey();
         }
+
+        public static string GetValueWithMsgLine(string msg)
+        {
+            Console.WriteLine("\n"+msg);
+            return Console.ReadLine();
+        }
+        public static string GetValueInMsgLine(string msg)
+        {
+            Console.Write("\n"+msg+" ");
+            return Console.ReadLine();
+        }
         #endregion
         public static void WorkTasks(ITaskWork[] tasks)
         {

@@ -1,4 +1,6 @@
-﻿using HomeWorkLib;
+﻿using System;
+using HomeWorkLib;
+using HomeWorkLib.ConsoleWork;
 
 namespace HomeWork3Console
 {
@@ -16,7 +18,17 @@ namespace HomeWork3Console
 
         public override void Work()
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Подсчёт колличества введённых нечётных чисел");
+            Console.WriteLine("Вводите числа по запросу, завершающим в цепочке должет быть 0");
+            int inputNumber;
+            int sumNumbers = 0;
+            do
+            {
+                Console.Write("число: ");
+                int.TryParse(Console.ReadLine(),out inputNumber);
+                if (inputNumber % 2 > 0) sumNumbers += inputNumber;
+            } while (inputNumber != 0);
+            Console.WriteLine("сумма нечётных чисел равна " + sumNumbers);
         }
     }
 }
