@@ -26,9 +26,18 @@ namespace HomeWork3Console
             Console.WriteLine("Вы будете вводить свой вариант дробей? \n<2 - да\n>=2 - нет");
             if (Helper.ReadInt() < 2)
             {
-                first = GetFractionFromUserInput("Первая дробь");
-                second = GetFractionFromUserInput("Вторая дробь");
-                num = int.Parse(Helper.GetValueInMsgLine("введите целое число для умножения на него первой дроби"));
+                try
+                {
+                    first = GetFractionFromUserInput("Первая дробь");
+                    second = GetFractionFromUserInput("Вторая дробь");
+                    num = int.Parse(Helper.GetValueInMsgLine("введите целое число для умножения на него первой дроби"));
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Программа выполнится с уже введёнными данными");
+                }
+                
             }
 
 
