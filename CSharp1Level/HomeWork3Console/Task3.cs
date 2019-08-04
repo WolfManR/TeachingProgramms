@@ -146,7 +146,9 @@ namespace HomeWork3Console
                 left.Numerator += left.Denominator * left.Hole;
                 right.Numerator += right.Denominator * right.Hole;
                 LeadToACommonDenominator(left, right);
-                return new Fraction() { Numerator = left.Numerator + right.Numerator, Denominator = left.Denominator }; ;
+                var result= new Fraction() { Numerator = left.Numerator + right.Numerator, Denominator = left.Denominator };
+                SimplerFraction(ref result);
+                return  result;
             }
             public static Fraction operator -(Fraction Left, Fraction Right)
             {
@@ -155,24 +157,32 @@ namespace HomeWork3Console
                 left.Numerator += left.Denominator * left.Hole;
                 right.Numerator += right.Denominator * right.Hole;
                 LeadToACommonDenominator(left, right);
-                return new Fraction() { Numerator = left.Numerator - right.Numerator, Denominator = left.Denominator }; ;
+                var result = new Fraction() { Numerator = left.Numerator - right.Numerator, Denominator = left.Denominator };
+                SimplerFraction(ref result);
+                return result;
             }
             public static Fraction operator *(Fraction left, Fraction right)
             {
                 left.Numerator += left.Denominator * left.Hole;
                 right.Numerator += right.Denominator * right.Hole;
-                return new Fraction() { Numerator = left.Numerator * right.Numerator, Denominator = left.Denominator * right.Denominator }; ;
+                var result = new Fraction() { Numerator = left.Numerator * right.Numerator, Denominator = left.Denominator * right.Denominator };
+                SimplerFraction(ref result);
+                return result;
             }
             public static Fraction operator *(Fraction left, int number)
             {
                 left.Numerator += left.Denominator * left.Hole;
-                return new Fraction() { Numerator = left.Numerator * number, Denominator = left.Denominator };
+                var result = new Fraction() { Numerator = left.Numerator * number, Denominator = left.Denominator };
+                SimplerFraction(ref result);
+                return result;
             }
             public static Fraction operator /(Fraction left, Fraction right)
             {
                 left.Numerator += left.Denominator * left.Hole;
                 right.Numerator += right.Denominator * right.Hole;
-                return new Fraction() { Numerator = left.Numerator * right.Denominator, Denominator = left.Denominator * right.Numerator };
+                var result = new Fraction() { Numerator = left.Numerator * right.Denominator, Denominator = left.Denominator * right.Numerator };
+                SimplerFraction(ref result);
+                return result;
             }
             #endregion
         }
