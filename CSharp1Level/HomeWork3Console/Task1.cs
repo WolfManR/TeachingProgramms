@@ -38,7 +38,6 @@ namespace HomeWork3Console
                 return (ImaginaryPart < 0) ? $"{RealPart}{ImaginaryPart}i" : $"{RealPart}+{ImaginaryPart}i";
             }
         }
-
         class ComplexClass
         {
             public double RealPart { get; set; }
