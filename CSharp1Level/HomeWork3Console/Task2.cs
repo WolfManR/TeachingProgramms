@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using HomeWorkLib;
 using HomeWorkLib.ConsoleWork;
 
@@ -20,14 +21,40 @@ namespace HomeWork3Console
         {
             Console.WriteLine("Подсчёт колличества введённых нечётных чисел");
             Console.WriteLine("Вводите числа по запросу, завершающим в цепочке должет быть 0");
+            try
+            {
+                List<int> OddNumbers = GetOddNumbers(out int sumNumbers);
+                Console.WriteLine("сумма нечётных чисел равна " + sumNumbers);
+                Console.WriteLine("Введённые нечётные числа");
+                foreach (int OddNumber in OddNumbers)
+                {
+                    Console.Write(OddNumber + " ");
+                }
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public List<int> GetOddNumbers(out int sum)
+        {
+            List<int> OddNumbers = new List<int>();
             int inputNumber;
-            int sumNumbers = 0;
+            sum = 0;
             do
             {
-                int.TryParse(Helper.GetValueInMsgLine("число:"),out inputNumber);
-                if (inputNumber % 2 > 0) sumNumbers += inputNumber;
+                if (int.TryParse(Helper.GetValueInMsgLine("число:"), out inputNumber))
+                {
+                    if (inputNumber % 2 > 0)
+                    {
+                        OddNumbers.Add(inputNumber);
+                        sum += inputNumber;
+                    }
+                }
+                else throw new FormatException("Надо было вводить целые числа");
             } while (inputNumber != 0);
-            Console.WriteLine("сумма нечётных чисел равна " + sumNumbers);
+            return OddNumbers;
         }
     }
 }
