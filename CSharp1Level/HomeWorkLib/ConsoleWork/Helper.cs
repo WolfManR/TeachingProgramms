@@ -72,12 +72,12 @@ namespace HomeWorkLib.ConsoleWork
 
         public static string GetValueAfterMsgLine(string msg)
         {
-            Console.WriteLine("\n"+msg);
+            Console.WriteLine(msg);
             return Console.ReadLine();
         }
         public static string GetValueInMsgLine(string msg)
         {
-            Console.Write("\n"+msg+" ");
+            Console.Write(msg+" ");
             return Console.ReadLine();
         }
         #endregion
