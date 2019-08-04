@@ -37,41 +37,13 @@ namespace HomeWork3Console
                 }
             } 
 
-            static void LeadToACommonDenominator(ref Fraction left,ref Fraction right)
+            public static void LeadToACommonDenominator(ref Fraction left,ref Fraction right)
             {
                 left.Numerator *= right.Denominator;
                 int temp = left.Denominator;
                 left.Denominator *= right.Denominator;
                 right.Numerator *= temp;
                 right.Denominator *= temp;
-            }
-
-            public override string ToString()
-            {
-                return (Hole==0)?$"{Numerator}/{Denominator}":$"{Hole} {Numerator}/{Denominator}";
-            }
-
-            public static Fraction operator +(Fraction left, Fraction right)
-            {
-                LeadToACommonDenominator(ref left, ref right);
-                return new Fraction() {Numerator=left.Numerator+right.Numerator,Denominator=left.Denominator};
-            }
-            public static Fraction operator -(Fraction left, Fraction right)
-            {
-                LeadToACommonDenominator(ref left, ref right);
-                return new Fraction() { Numerator = left.Numerator - right.Numerator, Denominator = left.Denominator };
-            }
-            public static Fraction operator *(Fraction left, Fraction right)
-            {
-                return new Fraction() { Numerator = left.Numerator * right.Numerator, Denominator = left.Denominator * right.Denominator};
-            }
-            public static Fraction operator *(Fraction left, int number)
-            {
-                return new Fraction() { Numerator = left.Numerator * number, Denominator = left.Denominator };
-            }
-            public static Fraction operator /(Fraction left, Fraction right)
-            {
-                return new Fraction() { Numerator = left.Numerator * right.Denominator, Denominator = left.Denominator * right.Numerator };
             }
             public static void SimplerFraction(ref Fraction fraction)
             {
@@ -86,6 +58,38 @@ namespace HomeWork3Console
                     fraction.Numerator %= fraction.Denominator;
                 }
             }
+
+            #region Object override's
+            public override string ToString()
+            {
+                return (Hole == 0) ? $"{Numerator}/{Denominator}" : $"{Hole} {Numerator}/{Denominator}";
+            }
+            #endregion
+
+            #region Operator's
+            public static Fraction operator +(Fraction left, Fraction right)
+            {
+                LeadToACommonDenominator(ref left, ref right);
+                return new Fraction() { Numerator = left.Numerator + right.Numerator, Denominator = left.Denominator };
+            }
+            public static Fraction operator -(Fraction left, Fraction right)
+            {
+                LeadToACommonDenominator(ref left, ref right);
+                return new Fraction() { Numerator = left.Numerator - right.Numerator, Denominator = left.Denominator };
+            }
+            public static Fraction operator *(Fraction left, Fraction right)
+            {
+                return new Fraction() { Numerator = left.Numerator * right.Numerator, Denominator = left.Denominator * right.Denominator };
+            }
+            public static Fraction operator *(Fraction left, int number)
+            {
+                return new Fraction() { Numerator = left.Numerator * number, Denominator = left.Denominator };
+            }
+            public static Fraction operator /(Fraction left, Fraction right)
+            {
+                return new Fraction() { Numerator = left.Numerator * right.Denominator, Denominator = left.Denominator * right.Numerator };
+            }
+            #endregion
         }
     }
 }
