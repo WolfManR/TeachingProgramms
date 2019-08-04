@@ -24,8 +24,7 @@ namespace HomeWork3Console
             int sumNumbers = 0;
             do
             {
-                Console.Write("число: ");
-                int.TryParse(Console.ReadLine(),out inputNumber);
+                int.TryParse(Helper.GetValueInMsgLine("число:"),out inputNumber);
                 if (inputNumber % 2 > 0) sumNumbers += inputNumber;
             } while (inputNumber != 0);
             Console.WriteLine("сумма нечётных чисел равна " + sumNumbers);

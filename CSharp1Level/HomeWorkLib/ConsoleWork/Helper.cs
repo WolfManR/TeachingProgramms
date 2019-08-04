@@ -70,7 +70,7 @@ namespace HomeWorkLib.ConsoleWork
             Console.ReadKey();
         }
 
-        public static string GetValueWithMsgLine(string msg)
+        public static string GetValueAfterMsgLine(string msg)
         {
             Console.WriteLine("\n"+msg);
             return Console.ReadLine();
