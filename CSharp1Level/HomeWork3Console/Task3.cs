@@ -69,24 +69,33 @@ namespace HomeWork3Console
             #region Operator's
             public static Fraction operator +(Fraction left, Fraction right)
             {
+                left.Numerator += left.Denominator * left.Hole;
+                right.Numerator += right.Denominator * right.Hole;
                 LeadToACommonDenominator(ref left, ref right);
                 return new Fraction() { Numerator = left.Numerator + right.Numerator, Denominator = left.Denominator };
             }
             public static Fraction operator -(Fraction left, Fraction right)
             {
+                left.Numerator += left.Denominator * left.Hole;
+                right.Numerator += right.Denominator * right.Hole;
                 LeadToACommonDenominator(ref left, ref right);
                 return new Fraction() { Numerator = left.Numerator - right.Numerator, Denominator = left.Denominator };
             }
             public static Fraction operator *(Fraction left, Fraction right)
             {
+                left.Numerator += left.Denominator * left.Hole;
+                right.Numerator += right.Denominator * right.Hole;
                 return new Fraction() { Numerator = left.Numerator * right.Numerator, Denominator = left.Denominator * right.Denominator };
             }
             public static Fraction operator *(Fraction left, int number)
             {
+                left.Numerator += left.Denominator * left.Hole;
                 return new Fraction() { Numerator = left.Numerator * number, Denominator = left.Denominator };
             }
             public static Fraction operator /(Fraction left, Fraction right)
             {
+                left.Numerator += left.Denominator * left.Hole;
+                right.Numerator += right.Denominator * right.Hole;
                 return new Fraction() { Numerator = left.Numerator * right.Denominator, Denominator = left.Denominator * right.Numerator };
             }
             #endregion
