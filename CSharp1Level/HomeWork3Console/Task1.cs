@@ -14,7 +14,15 @@ namespace HomeWork3Console
 
         public override void Work()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Работа структуры");
+            var first=new ComplexStruct(-4,5.6);
+            var second = new ComplexStruct(8, 12.82);
+            Console.WriteLine($"вычитание структур\n{first.ToString()} - {second.ToString()} = "+(first-second).ToString());
+            Console.WriteLine("Работа класса");
+            var third = new ComplexClass(-12, 2.6);
+            var fourth = new ComplexClass(9, -3.82);
+            Console.WriteLine($"вычитание классов\n{third.ToString()} - {fourth.ToString()} = " + (third - fourth).ToString());
+            Console.WriteLine($"произведение классов\n{third.ToString()} * {fourth.ToString()} = " + (third * fourth).ToString());
         }
 
         struct ComplexStruct
