@@ -1,7 +1,7 @@
 ﻿using System;
 using HomeWorkLib;
 using HomeWorkLib.ConsoleWork;
-
+// Иван Бармин
 namespace HomeWork3Console
 {
     class Program
