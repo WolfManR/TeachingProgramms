@@ -33,6 +33,10 @@ namespace HomeWork3Console
             {
                 return new ComplexStruct(left.RealPart - right.RealPart, left.ImaginaryPart - right.ImaginaryPart);
             }
+            public override string ToString()
+            {
+                return (ImaginaryPart < 0) ? $"{RealPart}{ImaginaryPart}i" : $"{RealPart}+{ImaginaryPart}i";
+            }
         }
 
         class ComplexClass
@@ -59,6 +63,11 @@ namespace HomeWork3Console
                         left.RealPart * right.RealPart - left.ImaginaryPart * right.ImaginaryPart,
                         left.ImaginaryPart * right.RealPart + left.RealPart * right.ImaginaryPart
                     );
+            }
+
+            public override string ToString()
+            {
+                return (ImaginaryPart<0)?$"{RealPart}{ImaginaryPart}i":$"{RealPart}+{ImaginaryPart}i";
             }
         }
     }
