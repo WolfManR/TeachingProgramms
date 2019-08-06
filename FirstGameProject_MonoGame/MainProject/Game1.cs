@@ -11,7 +11,6 @@ namespace MainProject
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D background;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -27,8 +26,8 @@ namespace MainProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            graphics.PreferredBackBufferWidth=1460;
-            graphics.PreferredBackBufferHeight=840;
+            graphics.PreferredBackBufferWidth=1600;
+            graphics.PreferredBackBufferHeight=900;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             base.Initialize();
@@ -42,7 +41,7 @@ namespace MainProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>("BackGround1");
+            SplashScreen.BackGround = Content.Load<Texture2D>("BackGround1");
             // TODO: use this.Content to load your game content here
         }
 
@@ -66,7 +65,7 @@ namespace MainProject
                 Exit();
 
             // TODO: Add your update logic here
-
+            SplashScreen.Update();
             base.Update(gameTime);
         }
 
@@ -78,7 +77,7 @@ namespace MainProject
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            spriteBatch.Draw(background, new Rectangle(0, 0, 1460, 840), Color.White);
+            SplashScreen.Draw(spriteBatch);
             spriteBatch.End();
             // TODO: Add your drawing code here
 
