@@ -42,6 +42,7 @@ namespace MainProject
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SplashScreen.BackGround = Content.Load<Texture2D>("BackGround1");
+            SplashScreen.Font = Content.Load<SpriteFont>("SplashFont");
             // TODO: use this.Content to load your game content here
         }
 
