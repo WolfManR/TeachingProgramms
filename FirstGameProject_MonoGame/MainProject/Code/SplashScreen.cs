@@ -8,10 +8,13 @@ namespace MainProject
         public static Texture2D BackGround { get; set; }
         static int timeCounter = 0;
         static Color color;
+        public static SpriteFont Font { get; set; }
+        static Vector2 TextPosition = new Vector2(200, 300);
 
         public static void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(BackGround, Vector2.Zero, color);
+            spriteBatch.Draw(BackGround, Vector2.Zero, Color.White);
+            spriteBatch.DrawString(Font, "Астероиды", TextPosition, color);
         }
 
         public static void Update()
