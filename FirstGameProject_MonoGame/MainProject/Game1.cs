@@ -7,10 +7,21 @@ namespace MainProject
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
+    enum State
+    {
+        SplashScreen,
+        Game,
+        Pause,
+        Final
+    }
+
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        State state = State.SplashScreen;
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
