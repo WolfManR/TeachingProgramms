@@ -73,11 +73,26 @@ namespace MainProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            switch (state)
+            {
+                case State.SplashScreen:
+                    SplashScreen.Update();
+                    if (Keyboard.GetState().IsKeyDown(Keys.Space)) state = State.Game;
+                    break;
+                case State.Game:
+                    if (Keyboard.GetState().IsKeyDown(Keys.Escape)) state = State.SplashScreen;
+                    break;
+                case State.Pause:
+                    break;
+                case State.Final:
+                    break;
+                default:
+                    break;
+            }
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
 
             // TODO: Add your update logic here
-            SplashScreen.Update();
+            
             base.Update(gameTime);
         }
 
@@ -89,7 +104,21 @@ namespace MainProject
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            SplashScreen.Draw(spriteBatch);
+            switch (state)
+            {
+                case State.SplashScreen:
+                    SplashScreen.Draw(spriteBatch);
+                    break;
+                case State.Game:
+
+                    break;
+                case State.Pause:
+                    break;
+                case State.Final:
+                    break;
+                default:
+                    break;
+            }
             spriteBatch.End();
             // TODO: Add your drawing code here
 
