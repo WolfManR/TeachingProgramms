@@ -10,6 +10,7 @@ namespace MainProject
         public static Random rnd = new Random();
         public static SpriteBatch SpriteBatch { get; set; }
         static Star[] stars;
+        public static StarShip StarShip { get; set; }
         public static int GetIntRnd(int min, int max) => rnd.Next(min, max);
         public static void Init(SpriteBatch spriteBatch,int width,int height)
         {
@@ -21,6 +22,7 @@ namespace MainProject
             {
                 stars[i] = new Star(new Vector2(-rnd.Next(1, 10), 0));
             }
+            StarShip = new StarShip(new Vector2(0, Height / 2 - 27));
         }
         public static void Draw()
         {
@@ -28,6 +30,7 @@ namespace MainProject
             {
                 star.Draw();
             }
+            StarShip.Draw();
         }
         public static void Update()
         {

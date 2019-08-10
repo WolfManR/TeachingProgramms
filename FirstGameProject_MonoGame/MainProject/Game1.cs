@@ -56,6 +56,7 @@ namespace MainProject
             SplashScreen.Font = Content.Load<SpriteFont>("SplashFont");
             Asteroids.Init(spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             Star.Texture2D = Content.Load<Texture2D>("star");
+            StarShip.Texture2D = Content.Load<Texture2D>("ship");
             // TODO: use this.Content to load your game content here
         }
 
@@ -75,15 +76,20 @@ namespace MainProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            KeyboardState keyboardState = Keyboard.GetState();
             switch (state)
             {
                 case State.SplashScreen:
                     SplashScreen.Update();
-                    if (Keyboard.GetState().IsKeyDown(Keys.Space)) state = State.Game;
+                    if (keyboardState.IsKeyDown(Keys.Space)) state = State.Game;
                     break;
                 case State.Game:
                     Asteroids.Update();
-                    if (Keyboard.GetState().IsKeyDown(Keys.Escape)) state = State.SplashScreen;
+                    if (keyboardState.IsKeyDown(Keys.Tab)) state = State.SplashScreen;
+                    if (keyboardState.IsKeyDown(Keys.Up)) Asteroids.StarShip.Up();
+                    if (keyboardState.IsKeyDown(Keys.Down)) Asteroids.StarShip.Down();
+                    if (keyboardState.IsKeyDown(Keys.Left)) Asteroids.StarShip.Left();
+                    if (keyboardState.IsKeyDown(Keys.Right)) Asteroids.StarShip.Right();
                     break;
                 case State.Pause:
                     break;
@@ -92,7 +98,7 @@ namespace MainProject
                 default:
                     break;
             }
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.Escape)) Exit();
 
             // TODO: Add your update logic here
             
