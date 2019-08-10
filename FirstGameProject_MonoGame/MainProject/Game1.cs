@@ -54,6 +54,8 @@ namespace MainProject
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SplashScreen.BackGround = Content.Load<Texture2D>("BackGround1");
             SplashScreen.Font = Content.Load<SpriteFont>("SplashFont");
+            Asteroids.Init(spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            Star.Texture2D = Content.Load<Texture2D>("star");
             // TODO: use this.Content to load your game content here
         }
 
@@ -80,6 +82,7 @@ namespace MainProject
                     if (Keyboard.GetState().IsKeyDown(Keys.Space)) state = State.Game;
                     break;
                 case State.Game:
+                    Asteroids.Update();
                     if (Keyboard.GetState().IsKeyDown(Keys.Escape)) state = State.SplashScreen;
                     break;
                 case State.Pause:
@@ -102,7 +105,7 @@ namespace MainProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
             switch (state)
             {
@@ -110,7 +113,7 @@ namespace MainProject
                     SplashScreen.Draw(spriteBatch);
                     break;
                 case State.Game:
-
+                    Asteroids.Draw();
                     break;
                 case State.Pause:
                     break;

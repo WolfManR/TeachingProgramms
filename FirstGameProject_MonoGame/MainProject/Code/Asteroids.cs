@@ -4,7 +4,7 @@ using System;
 
 namespace MainProject
 {
-    public class Asteroids
+    public static class Asteroids
     {
         public static int Width, Height;
         public static Random rnd = new Random();
@@ -15,7 +15,7 @@ namespace MainProject
         {
             Width = width;
             Height = height;
-            SpriteBatch = SpriteBatch;
+            SpriteBatch = spriteBatch;
             stars = new Star[50];
             for (int i = 0; i < stars.Length; i++)
             {
