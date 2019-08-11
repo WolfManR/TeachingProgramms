@@ -4,7 +4,7 @@ using System;
 
 namespace MainProject
 {
-    public static class Asteroids
+    public static class GameScene
     {
         public static int Width, Height;
         public static Random rnd = new Random();

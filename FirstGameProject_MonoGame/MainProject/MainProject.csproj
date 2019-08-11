@@ -41,7 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Code\Asteroids.cs" />
+    <Compile Include="Code\GameScene.cs" />
     <Compile Include="Code\SplashScreen.cs" />
     <Compile Include="Code\Star.cs" />
     <Compile Include="Code\StarShip.cs" />

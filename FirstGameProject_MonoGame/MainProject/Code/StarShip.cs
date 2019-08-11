@@ -23,7 +23,7 @@ namespace MainProject
 
         public void Down()
         {
-            if (Pos.Y < Asteroids.Height - Texture2D.Height) Pos.Y += speed;
+            if (Pos.Y < GameScene.Height - Texture2D.Height) Pos.Y += speed;
         }
 
 
@@ -34,10 +34,10 @@ namespace MainProject
 
         public void Right()
         {
-            if (Pos.X < Asteroids.Width - Texture2D.Width) Pos.X += speed;
+            if (Pos.X < GameScene.Width - Texture2D.Width) Pos.X += speed;
         }
 
-        public void Draw() => Asteroids.SpriteBatch.Draw(Texture2D, Pos, color);
+        public void Draw() => GameScene.SpriteBatch.Draw(Texture2D, Pos, color);
     }
 
 }

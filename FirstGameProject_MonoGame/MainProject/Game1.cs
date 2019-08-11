@@ -54,7 +54,7 @@ namespace MainProject
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SplashScreen.BackGround = Content.Load<Texture2D>("BackGround1");
             SplashScreen.Font = Content.Load<SpriteFont>("SplashFont");
-            Asteroids.Init(spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            GameScene.Init(spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             Star.Texture2D = Content.Load<Texture2D>("star");
             StarShip.Texture2D = Content.Load<Texture2D>("ship");
             // TODO: use this.Content to load your game content here
@@ -84,12 +84,12 @@ namespace MainProject
                     if (keyboardState.IsKeyDown(Keys.Space)) state = State.Game;
                     break;
                 case State.Game:
-                    Asteroids.Update();
+                    GameScene.Update();
                     if (keyboardState.IsKeyDown(Keys.Tab)) state = State.SplashScreen;
-                    if (keyboardState.IsKeyDown(Keys.Up)) Asteroids.StarShip.Up();
-                    if (keyboardState.IsKeyDown(Keys.Down)) Asteroids.StarShip.Down();
-                    if (keyboardState.IsKeyDown(Keys.Left)) Asteroids.StarShip.Left();
-                    if (keyboardState.IsKeyDown(Keys.Right)) Asteroids.StarShip.Right();
+                    if (keyboardState.IsKeyDown(Keys.Up)) GameScene.StarShip.Up();
+                    if (keyboardState.IsKeyDown(Keys.Down)) GameScene.StarShip.Down();
+                    if (keyboardState.IsKeyDown(Keys.Left)) GameScene.StarShip.Left();
+                    if (keyboardState.IsKeyDown(Keys.Right)) GameScene.StarShip.Right();
                     break;
                 case State.Pause:
                     break;
@@ -119,7 +119,7 @@ namespace MainProject
                     SplashScreen.Draw(spriteBatch);
                     break;
                 case State.Game:
-                    Asteroids.Draw();
+                    GameScene.Draw();
                     break;
                 case State.Pause:
                     break;

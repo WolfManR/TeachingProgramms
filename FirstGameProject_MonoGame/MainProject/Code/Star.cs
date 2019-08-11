@@ -36,18 +36,18 @@ namespace MainProject
         {
             Pos = new Vector2
                 (
-                Asteroids.GetIntRnd(Asteroids.Width, Asteroids.Width + 300),
-                Asteroids.GetIntRnd(0, Asteroids.Height)
+                GameScene.GetIntRnd(GameScene.Width, GameScene.Width + 300),
+                GameScene.GetIntRnd(0, GameScene.Height)
                 );
             color = Color.FromNonPremultiplied
                 (
-                Asteroids.GetIntRnd(0, 256),
-                Asteroids.GetIntRnd(0, 256),
-                Asteroids.GetIntRnd(0, 256),
-                Asteroids.GetIntRnd(0, 256)
+                GameScene.GetIntRnd(0, 256),
+                GameScene.GetIntRnd(0, 256),
+                GameScene.GetIntRnd(0, 256),
+                GameScene.GetIntRnd(0, 256)
                 );
         }
 
-        public void Draw() => Asteroids.SpriteBatch.Draw(Texture2D, Pos, color);
+        public void Draw() => GameScene.SpriteBatch.Draw(Texture2D, Pos, color);
     }
 }
