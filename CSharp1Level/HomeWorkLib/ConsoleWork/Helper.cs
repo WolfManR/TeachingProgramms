@@ -51,19 +51,7 @@ namespace HomeWorkLib.ConsoleWork
             Console.BackgroundColor = defaultBack;
             Console.ForegroundColor = defaultFore;
         }
-        public static void TaskTitle(int taskNumber)
-        {
-            PrintColoredMsg($"\nЗадача {taskNumber}", ConsoleColor.DarkBlue, ConsoleColor.Yellow);
-        }
-        public static void PrintToDo(string ToDo)
-        {
-            PrintColoredMsg(ToDo + "\n", ConsoleColor.Gray, ConsoleColor.DarkMagenta);
-        }
-        public static void TaskEnded(int taskNumber) //в будущем заменить событием
-        {
-            PrintColoredMsg($"\nЗадача {taskNumber} завершила свою работу.\nНажмите любую кнопку для продолжения работы основной программы.", ConsoleColor.White, ConsoleColor.Black);
-            Console.ReadKey();
-        }
+        
         public static void ProgramEnded()
         {
             PrintColoredMsg($"\nПрограмма завершила свою работу.\nНажмите любую кнопку для выхода.", ConsoleColor.White, ConsoleColor.Red);
@@ -85,9 +73,7 @@ namespace HomeWorkLib.ConsoleWork
         {
             for (int i = 0; i < tasks.Length; i++)
             {
-                TaskTitle(i + 1);
                 tasks[i].Work();
-                TaskEnded(i + 1);
             }
         }
     }
