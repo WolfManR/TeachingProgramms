@@ -6,11 +6,12 @@ namespace HomeWork2Console
 {
     public class Task3 : HomeWorkTask
     {
-        public Task3()
-        {
-            TaskNumber = 3;
-            ToDo = "С клавиатуры вводятся числа, пока не будет введен 0.\nПодсчитать сумму всех нечетных положительных чисел.";
-        }
+
+        public override string Title => "Сумма нечётных чисел";
+
+        public override int TaskNumber => 3;
+
+        public override string ToDo => "С клавиатуры вводятся числа, пока не будет введен 0.\nПодсчитать сумму всех нечетных положительных чисел.";
 
         public override void Work()
         {

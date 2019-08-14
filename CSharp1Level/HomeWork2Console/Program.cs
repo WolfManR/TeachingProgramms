@@ -1,4 +1,5 @@
 ﻿using System;
+using HomeWorkLib;
 using HomeWorkLib.ConsoleWork;
 
 // Иван Бармин
@@ -9,33 +10,34 @@ namespace HomeWork2Console
     {
         static void Main(string[] args)
         {
+            HomeWorkTask[] tasks={new Task1(),new Task2(),new Task3(),new Task4(),new Task5(),new Task6(),new Task7()};
             string selectedMenuMember;
             do
             {
-                Menu();
+                Menu(tasks);
                 selectedMenuMember = Console.ReadLine();
                 switch (selectedMenuMember)
                 {
                     case "1":
-                        TaskWork(new Task1());
+                        tasks[0].DecorativeWorkInConsole();
                         break;
                     case "2":
-                        TaskWork(new Task2());
+                        tasks[1].DecorativeWorkInConsole();
                         break;
                     case "3":
-                        TaskWork(new Task3());
+                        tasks[2].DecorativeWorkInConsole();
                         break;
                     case "4":
-                        TaskWork(new Task4());
+                        tasks[3].DecorativeWorkInConsole();
                         break;
                     case "5":
-                        TaskWork(new Task5());
+                        tasks[4].DecorativeWorkInConsole();
                         break;
                     case "6":
-                        TaskWork(new Task6());
+                        tasks[5].DecorativeWorkInConsole();
                         break;
                     case "7":
-                        TaskWork(new Task7());
+                        tasks[6].DecorativeWorkInConsole();
                         break;
                     case "8":
                         Console.Clear();
@@ -70,23 +72,16 @@ namespace HomeWork2Console
             Console.ResetColor();
         }
 
-        static void TaskWork(HomeWorkLib.HomeWorkTask taskToWork)
+        static void Menu(HomeWorkTask[] tasks)
         {
             Console.Clear();
-            var task = taskToWork;
-            task.DecorativeWorkInConsole();
-        }
-        static void Menu()
-        {
-            Console.Clear();
-            Console.WriteLine("1. Task 1");
-            Console.WriteLine("2. Task 2");
-            Console.WriteLine("3. Task 3");
-            Console.WriteLine("4. Task 4");
-            Console.WriteLine("5. Task 5");
-            Console.WriteLine("6. Task 6");
-            Console.WriteLine("7. Task 7");
-            Console.WriteLine("8. Русский флаг");
+            int lastTaskNumber=0;
+            foreach (var task in tasks)
+            {
+                Console.WriteLine($"{task.TaskNumber}. {task.Title}");
+                lastTaskNumber=task.TaskNumber;
+            }
+            Console.WriteLine($"{lastTaskNumber+1}. Русский флаг");
             Console.WriteLine("0. Exit");
         }
         

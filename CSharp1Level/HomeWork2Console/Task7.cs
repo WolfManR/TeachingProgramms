@@ -5,12 +5,12 @@ namespace HomeWork2Console
 {
     public class Task7 : HomeWorkTask
     {
-        public Task7()
-        {
-            TaskNumber = 7;
-            ToDo = "a) Разработать рекурсивный метод, который выводит на экран числа от a до b (a<b);" +
-                   "\nб) *Разработать рекурсивный метод, который считает сумму чисел от a до b.";
-        }
+        public override string Title => "Рекурсия";
+
+        public override int TaskNumber => 7;
+
+        public override string ToDo => "a) Разработать рекурсивный метод, который выводит на экран числа от a до b (a<b);" +
+                                       "\nб) *Разработать рекурсивный метод, который считает сумму чисел от a до b.";
 
         public override void Work()
         {
