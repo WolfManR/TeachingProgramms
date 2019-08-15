@@ -15,5 +15,16 @@ namespace HomeWork4Console
         {
             throw new System.NotImplementedException();
         }
+
+        public struct Account
+        {
+            public string Login { get; set; }
+            public string Password { get; set; }
+            public Account(string login,string pass)
+            {
+                Login = login;
+                Password = pass;
+            }
+        }
     }
 }
