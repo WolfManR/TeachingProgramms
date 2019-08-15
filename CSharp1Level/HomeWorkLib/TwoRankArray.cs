@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HomeWorkLib
 {
-    class TwoRankArray
+    public class TwoRankArray
     {
         int[,] array;
         public int DimensionSize { get; }
