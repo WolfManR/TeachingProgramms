@@ -27,6 +27,7 @@ namespace HomeWork4Console
             foreach (var item in Numbers) if (item == 0) defaultCount++;
             if (defaultCount==Numbers.Length)
             {
+                Console.WriteLine("Массив пуст, мы заполним его за вас");
                 Random rand = new Random();
                 for (int i = 0; i < Numbers.Length; i++) Numbers[i] = rand.Next(-10_000, 10_000);
             }
