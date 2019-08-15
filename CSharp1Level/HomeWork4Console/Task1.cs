@@ -23,8 +23,13 @@ namespace HomeWork4Console
         }
         public override void Work()
         {
-            Random rand = new Random();
-            for (int i = 0; i < Numbers.Length; i++) Numbers[i] = rand.Next(-10_000, 10_000);
+            int defaultCount = 0;
+            foreach (var item in Numbers) if (item == 0) defaultCount++;
+            if (defaultCount==Numbers.Length)
+            {
+                Random rand = new Random();
+                for (int i = 0; i < Numbers.Length; i++) Numbers[i] = rand.Next(-10_000, 10_000);
+            }
 
             int oldNumber = Numbers[0], newNumber = 0, counter = 0;
             for (int i = 1; i < Numbers.Length; i++)

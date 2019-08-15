@@ -1,4 +1,5 @@
 ﻿using HomeWorkLib;
+using HomeWorkLib.ConsoleWork;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +19,8 @@ namespace HomeWork4Console
 
         public override void Work()
         {
-            throw new System.NotImplementedException();
+            string filename=Helper.GetValueInMsgLine("Укажите имя файла в каталоге исполняемого файла приложения");
+            StaticClass.Task1Work(StaticClass.ReadArrayFromTextFile(filename));
         }
 
         public static class StaticClass
@@ -31,20 +33,25 @@ namespace HomeWork4Console
 
             public static int[] ReadArrayFromTextFile(string filename)
             {
-                int[] arr;
-                StreamReader sr = new StreamReader(filename);
                 List<int> list = new List<int>();
-                for (int i = 0; sr.EndOfStream; i++)
+                try
                 {
-                    list.Add(int.Parse(sr.ReadLine()));
+                    StreamReader sr = new StreamReader(filename + ".txt");
+
+                    for (int i = 0; !sr.EndOfStream; i++)
+                    {
+                        list.Add(int.Parse(sr.ReadLine()));
+                    }
+                    sr?.Close();
                 }
-                sr?.Close();
-                arr = new int[list.Count];
-                for (int i = 0; i < arr.Length; i++)
+                catch (Exception)
                 {
-                    arr[i] = list[i];
+                    Console.WriteLine("Что-то пошло не так");
+                    throw;
                 }
-                return arr;
+                
+                
+                return list.ToArray();
 
             }
         }
