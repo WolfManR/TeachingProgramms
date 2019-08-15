@@ -23,27 +23,31 @@ namespace HomeWork4Console
         }
         public override void Work()
         {
-            int defaultCount = 0;
-            foreach (var item in Numbers) if (item == 0) defaultCount++;
-            if (defaultCount==Numbers.Length)
+            if (Numbers.Length != 0)
             {
-                Console.WriteLine("Массив пуст, мы заполним его за вас");
-                Random rand = new Random();
-                for (int i = 0; i < Numbers.Length; i++) Numbers[i] = rand.Next(-10_000, 10_000);
-            }
+                int defaultCount = 0;
+                foreach (var item in Numbers) if (item == 0) defaultCount++;
+                if (defaultCount == Numbers.Length)
+                {
+                    Console.WriteLine("Массив пуст, мы заполним его за вас");
+                    Random rand = new Random();
+                    for (int i = 0; i < Numbers.Length; i++) Numbers[i] = rand.Next(-10_000, 10_000);
+                }
 
-            int oldNumber = Numbers[0], newNumber = 0, counter = 0;
-            for (int i = 1; i < Numbers.Length; i++)
-            {
-                newNumber = Numbers[i];
-                if ((oldNumber % 3 == 0 & newNumber % 3 != 0) || (oldNumber % 3 != 0 & newNumber % 3 == 0)) counter++;
-                oldNumber = newNumber;
-            }
+                int oldNumber = Numbers[0], newNumber = 0, counter = 0;
+                for (int i = 1; i < Numbers.Length; i++)
+                {
+                    newNumber = Numbers[i];
+                    if ((oldNumber % 3 == 0 & newNumber % 3 != 0) || (oldNumber % 3 != 0 & newNumber % 3 == 0)) counter++;
+                    oldNumber = newNumber;
+                }
 
-            Console.WriteLine("Массив состоит из чисел:");
-            foreach (var item in Numbers) Console.Write(item + " ");
-            Console.WriteLine("\n");
-            Console.WriteLine("Количество пар чисел "+counter);
+                Console.WriteLine("Массив состоит из чисел:");
+                foreach (var item in Numbers) Console.Write(item + " ");
+                Console.WriteLine("\n");
+                Console.WriteLine("Количество пар чисел " + counter);
+            }
+            else throw new Exception("Переданный массив не должен быть пустым");
         }
     }
 }

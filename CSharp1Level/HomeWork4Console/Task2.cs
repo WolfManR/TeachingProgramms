@@ -28,7 +28,14 @@ namespace HomeWork4Console
             public static void Task1Work(int[] array)
             {
                 Task1 task = new Task1(array);
-                task.Work();
+                try
+                {
+                    task.Work();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }                
             }
 
             public static int[] ReadArrayFromTextFile(string filename)
@@ -44,15 +51,16 @@ namespace HomeWork4Console
                     }
                     sr?.Close();
                 }
+                catch (FileNotFoundException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
                 catch (Exception)
                 {
                     Console.WriteLine("Что-то пошло не так");
                     throw;
                 }
-                
-                
                 return list.ToArray();
-
             }
         }
     }
