@@ -26,21 +26,21 @@ namespace HomeWork4Console
                 int.Parse(Helper.GetValueInMsgLine("Укажите число с которого начнётся заполнение массива")),
                 int.Parse(Helper.GetValueInMsgLine("Укажите шаг заполнения")));
 
-            Console.WriteLine("\nМассив \n"+one.ToString());
+            Console.WriteLine("\nМассив \n" + one.ToString());
 
-            Console.WriteLine("\nСумма элементов массива "+one.Sum);
+            Console.WriteLine("\nСумма элементов массива " + one.Sum);
 
             int[] inverse = one.Inverse();
             Console.WriteLine("\nИнверсированный массив");
-            foreach (var item in inverse) Console.Write(item+" ");
+            foreach (var item in inverse) Console.Write(item + " ");
 
-            int number=int.Parse(Helper.GetValueInMsgLine("\n\nУкажите число на которое будут умножены значения массива"));
+            int number = int.Parse(Helper.GetValueInMsgLine("\n\nУкажите число на которое будут умножены значения массива"));
             one.Multi(number);
-            Console.WriteLine($"\nМассив после умножения на {number}\n"+one.ToString());
+            Console.WriteLine($"\nМассив после умножения на {number}\n" + one.ToString());
 
 
             Console.WriteLine("\nСоздаём новый массив со случайными числами для демонстрации остальных методов задачи");
-            one = new OneRankArray(20);
+            one = new OneRankArray(100);
             Console.WriteLine("\nНовый массив\n"+one.ToString()+"\n");
             Console.WriteLine("\nКолличество максимальных элементов "+one.MaxCount);
 

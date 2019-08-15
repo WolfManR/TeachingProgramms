@@ -41,7 +41,7 @@ namespace HomeWorkLib
         {
             array = new int[size];
             Random rand = new Random();
-            for (int i = 0; i < Length; i++) array[i] = rand.Next(-10_000, 10_000);
+            for (int i = 0; i < Length; i++) array[i] = rand.Next(15, 40);
         }
 
         public int[] Inverse()
