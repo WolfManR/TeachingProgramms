@@ -1,4 +1,5 @@
 ﻿using HomeWorkLib;
+using HomeWorkLib.ConsoleWork;
 using System;
 
 namespace HomeWork4Console
@@ -20,8 +21,27 @@ namespace HomeWork4Console
 
         public override void Work()
         {
-            OneRankArray one = new OneRankArray(20,2,82);
-            Console.WriteLine();
+            OneRankArray one = new OneRankArray(
+                uint.Parse(Helper.GetValueInMsgLine("Укажите размер массива")),
+                int.Parse(Helper.GetValueInMsgLine("Укажите число с которого начнётся заполнение массива")),
+                int.Parse(Helper.GetValueInMsgLine("Укажите шаг заполнения")));
+
+            Console.WriteLine("\nМассив \n"+one.ToString());
+
+            Console.WriteLine("\nСумма элементов массива "+one.Sum);
+
+            int[] inverse = one.Inverse();
+            Console.WriteLine("\nИнверсированный массив");
+            foreach (var item in inverse) Console.Write(item+" ");
+
+            int number=int.Parse(Helper.GetValueInMsgLine("\nУкажите число на которое будут умножены значения массива"));
+            one.Multi(number);
+            Console.WriteLine($"\nМассив после умножения на {number}\n"+one.ToString());
+
+            Console.WriteLine("\nКолличество максимальных элементов "+one.MaxCount);
+
+            Console.WriteLine("\nЧастота вхождения элементов в массиве");
+            foreach (var item in one.CountSameElements()) Console.WriteLine("элемент: "+item.Key+" повторяется: "+item.Value);
         }
 
         
