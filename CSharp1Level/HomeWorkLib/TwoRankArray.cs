@@ -9,10 +9,8 @@ namespace HomeWorkLib
     class TwoRankArray
     {
         int[,] array;
-
         public int DimensionSize { get; }
 
-        
         public int this[int index1, int index2] { get => array[index1, index2]; set => array[index1, index2] = value; }
         public int Min
         {
@@ -32,6 +30,17 @@ namespace HomeWorkLib
                 return max;
             }
         }
+
+        public TwoRankArray(uint size,int minValue,int maxValue)
+        {
+            array = new int[size, size];
+            DimensionSize = Convert.ToInt32(size);
+            Random rand = new Random();
+            for (int i = 0; i < array.Rank; i++)
+                for (int j = 0; j < DimensionSize; j++)
+                    array[i, j] = rand.Next(minValue,maxValue);
+        }
+
         public void MaxIndex(out (int index1,int index2) index)
         {
             index = (0, 0);
@@ -44,16 +53,6 @@ namespace HomeWorkLib
                         index = (i, j);
                     }
         }
-        public TwoRankArray(uint size,int minValue,int maxValue)
-        {
-            array = new int[size, size];
-            DimensionSize = Convert.ToInt32(size);
-            Random rand = new Random();
-            for (int i = 0; i < array.Rank; i++)
-                for (int j = 0; j < DimensionSize; j++)
-                    array[i, j] = rand.Next(minValue,maxValue);
-        }
-
         public int GetSum()
         {
             int sum = 0;
