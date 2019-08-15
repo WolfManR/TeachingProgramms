@@ -18,7 +18,22 @@ namespace HomeWork4Console
 
         public override void Work()
         {
-            throw new NotImplementedException();
+            int[] numbers = new int[20];
+            Random rand = new Random();
+            for (int i = 0; i < numbers.Length; i++) numbers[i] = rand.Next(-10_000, 10_000);
+
+            int oldNumber = numbers[0], newNumber = 0, counter = 0;
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                newNumber = numbers[i];
+                if ((oldNumber % 3 == 0 & newNumber % 3 != 0) || (oldNumber % 3 != 0 & newNumber % 3 == 0)) counter++;
+                oldNumber = newNumber;
+            }
+
+            Console.WriteLine("Массив состоит из чисел:");
+            foreach (var item in numbers) Console.Write(item + " ");
+            Console.WriteLine("\n");
+            Console.WriteLine("Количество пар чисел "+counter);
         }
     }
 }
