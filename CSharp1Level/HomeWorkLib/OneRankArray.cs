@@ -59,5 +59,12 @@ namespace HomeWorkLib
             }
             return result;
         }
+
+        public override string ToString()
+        {
+            string result="";
+            foreach (var item in array) result += item + " ";
+            return result;
+        }
     }
 }
