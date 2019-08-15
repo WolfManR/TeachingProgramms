@@ -17,5 +17,14 @@ namespace HomeWork4Console
         {
             throw new System.NotImplementedException();
         }
+
+        public static class StaticClass
+        {
+            public static void Task1Work(int[] array)
+            {
+                Task1 task = new Task1(array);
+                task.Work();
+            }
+        }
     }
 }
