@@ -10,7 +10,7 @@ namespace HomeWorkLib
     {
         int[,] array;
 
-        public int Length => array.Length;
+        public int DimensionSize { get; }
 
         public int GetSum()
         {
@@ -18,26 +18,28 @@ namespace HomeWorkLib
             foreach (var item in array) sum += item;
             return sum;
         }
-        public int this[int index1,int index2] { get => array[index1,index2]; set => array[index1,index2] = value; }
+        public int this[int index1, int index2] { get => array[index1, index2]; set => array[index1, index2] = value; }
         public int Max
         {
             get
             {
-                int max = array[0,0];
-                for (int i = 1; i < Length; i++) if (array[i] > max) max = array[i];
-                foreach (var item in array) if (item == max) count++;
-                return count;
+                int max = array[0, 0];
+                for (int i = 0; i < array.Rank; i++)
+                    for (int j = 1; j < DimensionSize; j++)
+                        if (array[i, j] > max) max = array[i, j];
+
+                return max;
             }
         }
 
-        public TwoRankArray(uint size, int minValue, int step)
+        public TwoRankArray(uint size)
         {
-            array = new int[size];
-            for (int j = 0, i = minValue; j < Length; j++, i += step) array[j] = i;
+            array = new int[size, size];
+            DimensionSize = Convert.ToInt32(size);
         }
 
-        
-        
+
+
         public override string ToString()
         {
             string result = "";

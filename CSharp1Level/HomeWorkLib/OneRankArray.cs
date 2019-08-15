@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace HomeWorkLib
 {
@@ -34,6 +35,13 @@ namespace HomeWorkLib
         {
             array = new int[size];
             for (int j = 0, i = minValue; j < Length; j++, i += step) array[j] = i;
+        }
+
+        public OneRankArray(uint size)
+        {
+            array = new int[size];
+            Random rand = new Random();
+            for (int i = 0; i < Length; i++) array[i] = rand.Next(-10_000, 10_000);
         }
 
         public int[] Inverse()

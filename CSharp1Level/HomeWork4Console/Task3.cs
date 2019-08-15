@@ -34,10 +34,14 @@ namespace HomeWork4Console
             Console.WriteLine("\nИнверсированный массив");
             foreach (var item in inverse) Console.Write(item+" ");
 
-            int number=int.Parse(Helper.GetValueInMsgLine("\nУкажите число на которое будут умножены значения массива"));
+            int number=int.Parse(Helper.GetValueInMsgLine("\n\nУкажите число на которое будут умножены значения массива"));
             one.Multi(number);
             Console.WriteLine($"\nМассив после умножения на {number}\n"+one.ToString());
 
+
+            Console.WriteLine("\nСоздаём новый массив со случайными числами для демонстрации остальных методов задачи");
+            one = new OneRankArray(20);
+            Console.WriteLine("\nНовый массив\n"+one.ToString()+"\n");
             Console.WriteLine("\nКолличество максимальных элементов "+one.MaxCount);
 
             Console.WriteLine("\nЧастота вхождения элементов в массиве");
