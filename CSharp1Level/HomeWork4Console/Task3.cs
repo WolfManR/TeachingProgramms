@@ -1,5 +1,5 @@
 ﻿using HomeWorkLib;
-using System.Collections.Generic;
+using System;
 
 namespace HomeWork4Console
 {
@@ -20,7 +20,8 @@ namespace HomeWork4Console
 
         public override void Work()
         {
-            throw new System.NotImplementedException();
+            OneRankArray one = new OneRankArray(20,2,82);
+            Console.WriteLine();
         }
 
         
