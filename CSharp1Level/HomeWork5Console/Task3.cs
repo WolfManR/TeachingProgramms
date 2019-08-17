@@ -4,11 +4,15 @@ namespace HomeWork5Console
 {
     internal class Task3 : HomeWorkTask
     {
-        public override string Title => throw new System.NotImplementedException();
+        public override string Title => "Строки перевёртыши";
 
-        public override int TaskNumber => throw new System.NotImplementedException();
+        public override int TaskNumber => 3;
 
-        public override string ToDo => throw new System.NotImplementedException();
+        public override string ToDo => "*Для двух строк написать метод, определяющий, является ли одна строка перестановкой другой. " +
+                                       "\nРегистр можно не учитывать:" +
+                                       "\nа) с использованием методов C#;" +
+                                       "\nб) *разработав собственный алгоритм." +
+                                       "\nНапример: badc являются перестановкой abcd.";
 
         public override void Work()
         {
