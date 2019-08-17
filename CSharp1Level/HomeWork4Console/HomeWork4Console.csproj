@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1F065638-23C8-472E-A811-5CBDA749B0C8}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HomeWorkLib</RootNamespace>
-    <AssemblyName>HomeWorkLib</AssemblyName>
+    <ProjectGuid>{20A56E7E-6612-434D-BB08-B6D823E0E315}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>HomeWork4Console</RootNamespace>
+    <AssemblyName>HomeWork4Console</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,17 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleWork\Helper.cs" />
-    <Compile Include="ConsoleWork\HomeWorkTaskDecorate.cs" />
-    <Compile Include="ConsoleWork\Point.cs" />
-    <Compile Include="ConsoleWork\UserInfo.cs" />
-    <Compile Include="HomeWorkTask.cs" />
-    <Compile Include="ITaskWork.cs" />
-    <Compile Include="OneRankArray.cs" />
-    <Compile Include="Point.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TwoRankArray.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Task1.cs" />
+    <Compile Include="Task2.cs" />
+    <Compile Include="Task3.cs" />
+    <Compile Include="Task4.cs" />
+    <Compile Include="Task5.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HomeWorkLib\HomeWorkLib.csproj">
+      <Project>{1F065638-23C8-472E-A811-5CBDA749B0C8}</Project>
+      <Name>HomeWorkLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
