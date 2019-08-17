@@ -1,4 +1,6 @@
 ﻿using HomeWorkLib;
+using System;
+using System.Collections.Generic;
 
 namespace HomeWork5Console
 {
@@ -18,6 +20,33 @@ namespace HomeWork5Console
         public override void Work()
         {
             throw new System.NotImplementedException();
+        }
+
+        public class Message
+        {
+            public static string[] PrintWordsWithOnlyNSymbols(string msg,int maxLength)
+            {
+                if (maxLength < 2) throw new Exception("Длинна слова не должна быть меньше 2");
+                List<string> list = new List<string>();
+                string[] words = msg.Split(new char[] { ' ',',','.','?','"','!','(',')','{','}','[',']'},StringSplitOptions.RemoveEmptyEntries);
+                foreach (var item in words) if (item.Length <= maxLength & list.Contains(item)) list.Add(item);
+                return list.ToArray();
+            }
+
+            public static void DeleteWordsWithSymbolOnEnd(string msg,char EndSymbol)
+            {
+
+            }
+
+            public static void FindLongestWord(string msg)
+            {
+
+            }
+
+            public static void NewStringWithLongestWords(string msg)
+            {
+
+            }
         }
     }
 }
