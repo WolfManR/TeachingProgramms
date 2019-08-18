@@ -1,7 +1,10 @@
 ﻿using HomeWorkLib;
+using HomeWorkLib.ConsoleWork;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace HomeWork5Console
 {
@@ -20,27 +23,65 @@ namespace HomeWork5Console
 
         public override void Work()
         {
-            throw new System.NotImplementedException();
+            string msg;
+            StreamReader sr = new StreamReader("Msg.txt");
+            msg = sr.ReadToEnd();
+            sr.Close();
+            int countWords = 0;
+            Console.WriteLine("Слова содержащие n букв");
+            foreach (var item in Message.PrintWordsWithOnlyNSymbols(msg, int.Parse(Helper.GetValueInMsgLine("колличество букв: ")))) Console.WriteLine(item);
+            Console.WriteLine();
+
+            try
+            {
+                Console.Write("Строка после удаления слов ");
+                Console.WriteLine(Message.DeleteWordsWithSymbolOnEnd(msg, char.Parse(Helper.GetValueInMsgLine(",содержащих символ: ")), out countWords));
+                Console.WriteLine("колличество удалённых слов: " + countWords);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("\nВы должны были ввести символ");
+            }
+            
+            Console.WriteLine("\n\nПервое самое длинное слово \n"+Message.FindLongestWord(msg)+"\n");
+
+            Console.WriteLine("Строка из самых длинных слов");
+            Console.WriteLine(Message.NewStringWithLongestWords(msg));
         }
 
         public static class Message
         {
-            static string[] SplitMsg(string msg)=> msg.Split(new char[] { ' ', ',', '.', '?', '"', '!', '(', ')', '{', '}', '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
+            static string[] SplitMsg(string msg)
+            {
+                //Regex regex = new Regex(@"[^A-Za-zА-Яа-я0-9]");
+                //return regex.Split(msg);
+                return msg.Split(new char[] { ' ', ',', '.', '?', '"', '!', '(', ')', '{', '}', '[', ']', '-', '_', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            }
             public static string[] PrintWordsWithOnlyNSymbols(string msg,int maxLength)
             {
                 if (maxLength < 2) throw new Exception("Длинна слова не должна быть меньше 2");
                 List<string> list = new List<string>();
                 string[] words = SplitMsg(msg);
-                foreach (var item in words) if (item.Length <= maxLength & !list.Contains(item)) list.Add(item);
+                foreach (var item in words) if (item.Length <= maxLength&item.Length >= 2 & !list.Contains(item)) list.Add(item);
                 return list.ToArray();
             }
 
-            public static string[] DeleteWordsWithSymbolOnEnd(string msg,char EndSymbol)
+            public static string DeleteWordsWithSymbolOnEnd(string msg,char EndSymbol,out int count)
             {
+                count = 0;
                 string[] words = SplitMsg(msg);
                 List<string> list = new List<string>();
-                foreach (var item in words) if (item[item.Length - 1] != EndSymbol) list.Add(item);
-                return list.ToArray();
+                foreach (var item in words) if (item.Length>=2&&(item[item.Length - 1] == EndSymbol & !list.Contains(item))) list.Add(item);
+                list.Sort((item1, item2) => (item1.Length < item2.Length) ? 1 : (item1.Length > item2.Length) ? -1 : 0);
+                foreach (var item in list)
+                {
+                    while (msg.Contains(item))
+                    {
+                        msg=msg.Remove(msg.IndexOf(item), item.Length);
+                        count++;
+                    }
+                }
+                return msg;
             }
 
             public static string FindLongestWord(string msg)
