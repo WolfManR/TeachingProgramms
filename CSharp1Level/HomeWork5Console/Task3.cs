@@ -1,4 +1,6 @@
 ﻿using HomeWorkLib;
+using HomeWorkLib.ConsoleWork;
+using System.Collections.Generic;
 
 namespace HomeWork5Console
 {
@@ -16,13 +18,38 @@ namespace HomeWork5Console
 
         public override void Work()
         {
-            throw new System.NotImplementedException();
+            System.Console.WriteLine((isRearrangement(Helper.GetValueInMsgLine("первая строка "),Helper.GetValueInMsgLine("вторая строка ")))?"являются анаграммой друг друга":"не являются анаграммой друг друга");
         }
 
-        public bool isRearrangement(string first,string second)
+        public bool isRearrangement(string first, string second)
         {
-            if (first.Length == second.Length) second = "";
-            
+            first = first.ToLower();
+            second = second.ToLower();
+            if (first != second)
+            {
+                Dictionary<char, int> firstChars = getChars(first);
+                Dictionary<char, int> secondChars = getChars(second);
+                Dictionary<char, int> getChars(string str)
+                {
+                    Dictionary<char, int> result = new Dictionary<char, int>();
+                    for (int i = 0; i < str.Length; i++)
+                    {
+                        if (result.ContainsKey(str[i])) result[str[i]]++;
+                        else result.Add(str[i], 1);
+                    }
+                    return result;
+                }
+                int counter = 0;
+                if (firstChars.Count == secondChars.Count)
+                {
+                    foreach (var item in firstChars)
+                        if (!secondChars.ContainsKey(item.Key)) return false;
+                        else if (secondChars[item.Key] != item.Value) return false;
+                        else counter++;
+                    if (counter == secondChars.Count) return true;
+                }
+                else return false;
+            }
             return false;
         }
     }
