@@ -22,20 +22,24 @@ namespace HomeWork5Console
             throw new System.NotImplementedException();
         }
 
-        public class Message
+        public static class Message
         {
+            static string[] SplitMsg(string msg)=> msg.Split(new char[] { ' ', ',', '.', '?', '"', '!', '(', ')', '{', '}', '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
             public static string[] PrintWordsWithOnlyNSymbols(string msg,int maxLength)
             {
                 if (maxLength < 2) throw new Exception("Длинна слова не должна быть меньше 2");
                 List<string> list = new List<string>();
-                string[] words = msg.Split(new char[] { ' ',',','.','?','"','!','(',')','{','}','[',']'},StringSplitOptions.RemoveEmptyEntries);
+                string[] words = SplitMsg(msg);
                 foreach (var item in words) if (item.Length <= maxLength & list.Contains(item)) list.Add(item);
                 return list.ToArray();
             }
 
-            public static void DeleteWordsWithSymbolOnEnd(string msg,char EndSymbol)
+            public static string DeleteWordsWithSymbolOnEnd(string msg,char EndSymbol)
             {
-
+                string[] words = SplitMsg(msg);
+                List<string> list = new List<string>();
+                foreach (var item in words) if (item[item.Length - 1] != EndSymbol) list.Add(item);
+                return list.ToArray().ToString();
             }
 
             public static void FindLongestWord(string msg)
