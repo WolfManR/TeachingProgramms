@@ -34,8 +34,8 @@ namespace HomeWork5Console
 
             try
             {
-                Console.Write("Строка после удаления слов ");
-                Console.WriteLine(Message.DeleteWordsWithSymbolOnEnd(msg, char.Parse(Helper.GetValueInMsgLine(",содержащих символ: ")), out countWords));
+                Console.Write("Строка после удаления слов");
+                Console.WriteLine(Message.DeleteWordsWithSymbolOnEnd(msg, char.Parse(Helper.GetValueInMsgLine(", содержащих символ: ")), out countWords));
                 Console.WriteLine("колличество удалённых слов: " + countWords);
             }
             catch (Exception)
@@ -53,9 +53,12 @@ namespace HomeWork5Console
         {
             static string[] SplitMsg(string msg)
             {
-                //Regex regex = new Regex(@"[^A-Za-zА-Яа-я0-9]");
-                //return regex.Split(msg);
-                return msg.Split(new char[] { ' ', ',', '.', '?', '"', '!', '(', ')', '{', '}', '[', ']', '-', '_', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                StringBuilder builder = new StringBuilder(msg);
+                for (int i = 0; i < builder.Length;)
+                    if (char.IsPunctuation(builder[i])) builder.Remove(i, 1);
+                    else ++i;
+                msg = builder.ToString();
+                return msg.Split(new char[] { ' ','\r','\n' }, StringSplitOptions.RemoveEmptyEntries);
             }
             public static string[] PrintWordsWithOnlyNSymbols(string msg,int maxLength)
             {

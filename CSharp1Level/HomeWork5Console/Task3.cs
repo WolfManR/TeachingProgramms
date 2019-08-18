@@ -18,5 +18,12 @@ namespace HomeWork5Console
         {
             throw new System.NotImplementedException();
         }
+
+        public bool isRearrangement(string first,string second)
+        {
+            if (first.Length == second.Length) second = "";
+            
+            return false;
+        }
     }
 }
