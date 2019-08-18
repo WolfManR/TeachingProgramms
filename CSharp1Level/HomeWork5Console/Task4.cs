@@ -1,5 +1,9 @@
 ﻿using HomeWorkLib;
+using HomeWorkLib.ConsoleWork;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace HomeWork5Console
 {
@@ -30,6 +34,14 @@ namespace HomeWork5Console
             public int Second { get; }
             public int Third { get; }
             public float AverageMark { get; }
+            public Rating(int mark1, int mark2, int mark3)
+            {
+                if (mark1 < 1 || mark1 > 5 || mark2 < 1 || mark2 > 5 || mark3 < 1 || mark3 > 5) throw new Exception("Неверные оценки");
+                First = mark1;
+                Second = mark2;
+                Third = mark3;
+                AverageMark = (First + Second + Third) / 3.0f;
+            }
             public Rating(string[] ratings)
             {
                 int[] marks = new int[3];
@@ -47,10 +59,7 @@ namespace HomeWork5Console
                 AverageMark = (First + Second + Third) / 3.0f;
             }
 
-            public override string ToString()
-            {
-                return $"{First} {Second} {Third}";
-            }
+            public override string ToString()=> $"{First} {Second} {Third}";
         }
         public class Student
         {
@@ -76,6 +85,12 @@ namespace HomeWork5Console
                 }
             }
             public Rating Ratings { get; set; }
+            public Student(string _lastName, string _firstName, int mark1, int mark2, int mark3)
+            {
+                LastName = _lastName;
+                FirstName = _firstName;
+                Ratings = new Rating(mark1, mark2, mark3);
+            }
             public Student(string student)
             {
                 string[] Info = student.Split(new char[] { ' ' });
@@ -85,14 +100,99 @@ namespace HomeWork5Console
                 Ratings = new Rating(new string[] { Info[2], Info[3], Info[4] });
             }
 
-            public override string ToString()
-            {
-                return $"{LastName} {FirstName} {Ratings.ToString()}";
-            }
+            public override string ToString()=> $"{LastName} {FirstName} {Ratings.ToString()}";
+
+            public override bool Equals(object obj) => obj?.ToString() == ToString();
+
+            public override int GetHashCode() => this.ToString().GetHashCode();
         }
         public override void Work()
         {
-            throw new System.NotImplementedException();
+            string filename = "Students";
+            if (Helper.GetValueInMsgLine("Создать новый файл студентов? ").Length >4 ) WriteToFile(filename, 50);
+            List<Student> students = ReadFromFile(filename);
+            List<Student> worsts = new List<Student>();
+            List<Student> sameWorsts = new List<Student>();
+            float[] worstMarks = { 5, 5, 5 };
+
+            foreach (var item in students)
+                if (item.Ratings.AverageMark < worstMarks[2])
+                {
+                    if (item.Ratings.AverageMark < worstMarks[1])
+                    {
+                        if (item.Ratings.AverageMark < worstMarks[0]) worstMarks[0] = item.Ratings.AverageMark;
+                        else worstMarks[1] = item.Ratings.AverageMark;
+                    }
+                    else worstMarks[2] = item.Ratings.AverageMark;
+                }
+
+            foreach (var item in students)
+            {
+                if (worsts.Count == 3) break;
+                for (int i = 0; i < worstMarks.Length; i++)
+                    if (worstMarks[i] == item.Ratings.AverageMark)
+                    {
+                        worsts.Add(item);
+                        break;
+                    }
+            }
+
+            foreach (var item in students)
+                if (!worsts.Contains(item))
+                    for (int i = 0; i < worsts.Count; i++)
+                        if (worsts[i].Ratings.AverageMark == item.Ratings.AverageMark)
+                        {
+                            sameWorsts.Add(item);
+                            break;
+                        }
+
+            Console.WriteLine("\nТрое худших учеников\n");
+            foreach (var item in worsts) Console.WriteLine(item.ToString());
+            Console.WriteLine("\nОстальные худших учеников\n");
+            foreach (var item in sameWorsts) Console.WriteLine(item.ToString());
+        }
+
+        // однако ж интересно почему возвращает одинаковые предшедстующим строки
+        string GenerateString(int charNumbers)
+        {
+            string chars = "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ";
+            string lowerChars = chars.ToLower();
+            Random r = new Random();
+            StringBuilder result = new StringBuilder(chars[r.Next(chars.Length)].ToString());
+
+            for (int i = 1; i < charNumbers; i++) result.Append(lowerChars[r.Next(lowerChars.Length)]);
+            return result.ToString();
+        }
+
+        void WriteToFile(string filename, int stringCounts)
+        {
+            Random r = new Random();
+            Student student;
+            StreamWriter sw = new StreamWriter(filename + ".txt");
+            for (int i = 0; i < stringCounts; i++)
+            {
+                student = new Student(
+                    GenerateString(20),
+                    GenerateString(15),
+                    r.Next(1, 6),
+                    r.Next(1, 6),
+                    r.Next(1, 6)
+                    );
+                sw.WriteLine(student.ToString());
+            }
+            sw.Close();
+        }
+        List<Student> ReadFromFile(string filename)
+        {
+            Random r = new Random();
+            List<Student> list = new List<Student>();
+            StreamReader sr = new StreamReader(filename + ".txt");
+            for (int i = 0; !sr.EndOfStream; i++)
+            {
+                list.Add(new Student(sr.ReadLine()));
+            }
+            sr?.Close();
+            return list;
         }
     }
 }
