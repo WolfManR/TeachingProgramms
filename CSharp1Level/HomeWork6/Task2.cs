@@ -15,8 +15,8 @@ namespace HomeWork6
                                        "\nб) Используйте массив(или список) делегатов, в котором хранятся различные функции." +
                                        "\nв) *Переделайте функцию Load, чтобы она возвращала массив считанных значений. Пусть она возвращает минимум через параметр.";
         public static double F(double x) => x * x - 50 * x + 10;
-
-        public static void SaveFunc(string fileName, double a, double b, double h)
+        public delegate double Function(double x);
+        public static void SaveFunc(string fileName, double a, double b, double h,Function F)
         {
             FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
             BinaryWriter bw = new BinaryWriter(fs);
@@ -48,7 +48,8 @@ namespace HomeWork6
 
         public override void Work()
         {
-            SaveFunc("data.bin", -100, 100, 0.5);
+            Function f = F;
+            SaveFunc("data.bin", -100, 100, 0.5,f);
             Console.WriteLine(Load("data.bin"));
         }
     }

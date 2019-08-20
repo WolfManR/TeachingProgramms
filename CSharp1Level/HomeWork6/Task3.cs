@@ -55,11 +55,6 @@ namespace HomeWork6
             return 0;
         }
 
-        static bool IsAgeBigger18(Student student)
-        {
-            return student.age > 18;
-        }
-
         static int CountStudents(List<Student> students, Is IS)
         {
             int count = 0;
@@ -105,11 +100,7 @@ namespace HomeWork6
             Console.WriteLine("Всего студентов:" + list.Count);
             Console.WriteLine("Магистров:{0}", magistr);
             Console.WriteLine("Бакалавров:{0}", bakalav);
-            Console.WriteLine("Кол-во студентов старше 18", CountStudents(list, delegate (Student s)
-            {
-                return s.age > 18;
-            }));
-            Console.WriteLine("Кол-во студентов старше 18", CountStudents(list, IsAgeBigger18));
+            Console.WriteLine("Кол-во студентов старше 18", CountStudents(list, s=> s.age > 18));
             Console.WriteLine(DateTime.Now - dt);
         }
     }
