@@ -14,16 +14,16 @@ namespace HomeWork6
                                        "\nа) Сделайте меню с различными функциями и предоставьте пользователю выбор, для какой функции и на каком отрезке находить минимум." +
                                        "\nб) Используйте массив(или список) делегатов, в котором хранятся различные функции." +
                                        "\nв) *Переделайте функцию Load, чтобы она возвращала массив считанных значений. Пусть она возвращает минимум через параметр.";
-        public static double F(double x) => x * x - 50 * x + 10;
+        
         public delegate double Function(double x);
-        public static void SaveFunc(string fileName, double a, double b, double h,Function F)
+        public static void SaveFunc(string fileName, double a, double b, double h,Function func)
         {
             FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
             BinaryWriter bw = new BinaryWriter(fs);
             double x = a;
             while (x <= b)
             {
-                bw.Write(F(x));
+                bw.Write(func(x));
                 x += h;// x=x+h;
             }
             bw.Close();
@@ -45,7 +45,7 @@ namespace HomeWork6
             fs.Close();
             return min;
         }
-
+        public static double F(double x) => x * x - 50 * x + 10;
         public override void Work()
         {
             Function f = F;
