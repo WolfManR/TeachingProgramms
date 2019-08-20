@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWork4Console", "HomeWor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWork5Console", "HomeWork5Console\HomeWork5Console.csproj", "{D2E324C9-13E1-4518-99C8-6FCAD949BDE8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleProjects", "ConsoleProjects", "{048FC018-58D4-4883-91D0-CE6EFB5EC0B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E4C0F11D-7619-4508-9B63-067716122AFC} = {048FC018-58D4-4883-91D0-CE6EFB5EC0B4}
+		{06781E56-DA0D-4ABA-BB49-4FC152F063A3} = {048FC018-58D4-4883-91D0-CE6EFB5EC0B4}
+		{5A660A48-54BB-465F-8C61-C83589983D0D} = {048FC018-58D4-4883-91D0-CE6EFB5EC0B4}
+		{20A56E7E-6612-434D-BB08-B6D823E0E315} = {048FC018-58D4-4883-91D0-CE6EFB5EC0B4}
+		{D2E324C9-13E1-4518-99C8-6FCAD949BDE8} = {048FC018-58D4-4883-91D0-CE6EFB5EC0B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB143B4F-BC1C-4E5D-869C-D5AEBA31E577}
