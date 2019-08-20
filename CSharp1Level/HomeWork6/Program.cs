@@ -26,12 +26,6 @@ namespace HomeWork6
                     case "3":
                         tasks[2].DecorativeWork();
                         break;
-                    case "4":
-                        tasks[3].DecorativeWork();
-                        break;
-                    case "5":
-                        tasks[4].DecorativeWork();
-                        break;
                     case "0":
                         Console.WriteLine("\nДо свидания");
                         break;
