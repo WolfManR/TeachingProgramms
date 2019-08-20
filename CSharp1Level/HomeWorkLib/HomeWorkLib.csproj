@@ -43,9 +43,11 @@
   <ItemGroup>
     <Compile Include="ConsoleWork\Helper.cs" />
     <Compile Include="ConsoleWork\HomeWorkTaskDecorate.cs" />
+    <Compile Include="ConsoleWork\HWConsole.cs" />
     <Compile Include="ConsoleWork\Point.cs" />
     <Compile Include="ConsoleWork\UserInfo.cs" />
     <Compile Include="HomeWorkTask.cs" />
+    <Compile Include="IHWTask.cs" />
     <Compile Include="ITaskWork.cs" />
     <Compile Include="OneRankArray.cs" />
     <Compile Include="Point.cs" />
