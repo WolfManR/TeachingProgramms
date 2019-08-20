@@ -1,4 +1,4 @@
-﻿using HomeWorkLib.ConsoleWork;
+﻿using HWConsoleLibrary;
 
 namespace HomeWork1
 {
@@ -11,9 +11,9 @@ namespace HomeWork1
         void PrintMyInfo(string firstName, string lastName, string city)
         {
             //Можно ещё уменьшить повторяемость кода с коллекциями, но это уже совсем другая история
-            Helper.WriteMsgInCenter("моё имя", firstName);
-            Helper.WriteMsgInCenter("фамилия", lastName);
-            Helper.WriteMsgInCenter("город проживания", city);
+            ConsoleMsg.WriteMsgInCenter("моё имя", firstName);
+            ConsoleMsg.WriteMsgInCenter("фамилия", lastName);
+            ConsoleMsg.WriteMsgInCenter("город проживания", city);
         }
     }
 }

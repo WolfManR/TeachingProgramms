@@ -1,6 +1,6 @@
 ﻿using System;
 using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 
 namespace HomeWork3
 {
@@ -24,13 +24,13 @@ namespace HomeWork3
             Fraction second = new Fraction() { Numerator = 1, Denominator = 4 };
             int num = 6;
             Console.WriteLine("Вы будете вводить свой вариант дробей? \n<2 - да\n>=2 - нет");
-            if (Helper.ReadInt() < 2)
+            if (Converters.ReadInt() < 2)
             {
                 try
                 {
                     first = GetFractionFromUserInput("Первая дробь");
                     second = GetFractionFromUserInput("Вторая дробь");
-                    num = int.Parse(Helper.GetValueInMsgLine("введите целое число для умножения на него первой дроби"));
+                    num = int.Parse(ConsoleMsg.GetValueInMsgLine("введите целое число для умножения на него первой дроби"));
                 }
                 catch (ArgumentException e)
                 {
@@ -48,9 +48,9 @@ namespace HomeWork3
         {
             var fraction = new Fraction();
             Console.WriteLine(whichFraction);
-            fraction.Hole = int.Parse(Helper.GetValueInMsgLine("Введите целое число"));
-            fraction.Numerator = int.Parse(Helper.GetValueInMsgLine("Введите числитель"));
-            fraction.Denominator = int.Parse(Helper.GetValueInMsgLine("Введите знаменатель"));
+            fraction.Hole = int.Parse(ConsoleMsg.GetValueInMsgLine("Введите целое число"));
+            fraction.Numerator = int.Parse(ConsoleMsg.GetValueInMsgLine("Введите числитель"));
+            fraction.Denominator = int.Parse(ConsoleMsg.GetValueInMsgLine("Введите знаменатель"));
             return fraction;
         }
         void PrintResults(Fraction first, Fraction second, int number)
@@ -144,10 +144,7 @@ namespace HomeWork3
             }
 
             #region Object override's
-            public override string ToString()
-            {
-                return (Hole == 0) ? $"{Numerator}/{Denominator}" : $"{Hole} {Numerator}/{Denominator}";
-            }
+            public override string ToString()=>(Hole == 0) ? $"{Numerator}/{Denominator}" : $"{Hole} {Numerator}/{Denominator}";
             #endregion
 
             #region Operator's

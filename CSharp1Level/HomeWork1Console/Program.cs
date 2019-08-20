@@ -1,6 +1,7 @@
 using System;
 using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
+using HWConsoleLibrary.Extensions;
 
 // Иван Бармин
 
@@ -14,7 +15,7 @@ namespace HomeWork1
             
             //                             Задание 1
             Console.WriteLine("Вы будете вводить информацию о себе? \n<2 - да\n>=2 - нет");
-            if (Helper.ReadInt() < 2) user.FillUserInfo();
+            if (Converters.ReadInt() < 2) user.FillUserInfo();
 
             ITaskWork[] tasks = {
                new Task1() { user = user },
@@ -24,7 +25,7 @@ namespace HomeWork1
                new Task5()
             };
             Helper.WorkTasks(tasks);
-            Helper.ProgramEnded();
+            ConsoleMsg.ProgramEnded();
         }
         
     }

@@ -46,7 +46,7 @@
     <Compile Include="HelpMethods\ConsoleMsg.cs" />
     <Compile Include="HelpMethods\Converters.cs" />
     <Compile Include="HelpMethods\Helper.cs" />
-    <Compile Include="HWConsole.cs" />
+    <Compile Include="Extensions\HWConsole.cs" />
     <Compile Include="Arrays\OneRankArray.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Arrays\TwoRankArray.cs" />

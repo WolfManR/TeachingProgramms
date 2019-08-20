@@ -1,5 +1,5 @@
 ﻿using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 using System.Collections.Generic;
 
 namespace HomeWork5
@@ -18,7 +18,7 @@ namespace HomeWork5
 
         public override void Work()
         {
-            System.Console.WriteLine((isRearrangement(Helper.GetValueInMsgLine("первая строка "),Helper.GetValueInMsgLine("вторая строка ")))?"являются анаграммой друг друга":"не являются анаграммой друг друга");
+            System.Console.WriteLine((isRearrangement(ConsoleMsg.GetValueInMsgLine("первая строка "),ConsoleMsg.GetValueInMsgLine("вторая строка ")))?"являются анаграммой друг друга":"не являются анаграммой друг друга");
         }
 
         public bool isRearrangement(string first, string second)

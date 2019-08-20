@@ -1,5 +1,5 @@
 ﻿using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -109,7 +109,7 @@ namespace HomeWork5
         public override void Work()
         {
             string filename = "Students";
-            if (Helper.GetValueInMsgLine("Создать новый файл студентов? ").Length >4 ) WriteToFile(filename, 50);
+            if (ConsoleMsg.GetValueInMsgLine("Создать новый файл студентов? ").Length >4 ) WriteToFile(filename, 50);
             List<Student> students = ReadFromFile(filename);
             List<Student> worsts = new List<Student>();
             List<Student> sameWorsts = new List<Student>();

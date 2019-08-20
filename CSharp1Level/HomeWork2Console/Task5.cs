@@ -1,6 +1,6 @@
 ﻿using System;
 using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 
 namespace HomeWork2
 {
@@ -27,7 +27,7 @@ namespace HomeWork2
         public override void Work()
         {
             Console.Write("Пожалуйста введите вес в кг измеряемого человека ");
-            int weight=Helper.ReadInt();
+            int weight=Converters.ReadInt();
             Console.Write("Пожалуйста введите рост в метрах измеряемого человека ");
             double height=double.Parse(Console.ReadLine());
             double imt = Helper.IMT(weight,height);

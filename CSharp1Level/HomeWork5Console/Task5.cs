@@ -1,5 +1,5 @@
 ﻿using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,7 +49,7 @@ namespace HomeWork5
             Console.WriteLine();
             int counter = 0;
             for (int i = 0; i < riddlesToAnswer.Count; i++)
-                if (((int.Parse(Helper.GetValueAfterMsgLine($"Вопрос {i}\n{riddlesToAnswer[i].Question}")) < 2) ? "да" : "нет") == riddlesToAnswer[i].Answer) counter++;
+                if (((int.Parse(ConsoleMsg.GetValueAfterMsgLine($"Вопрос {i}\n{riddlesToAnswer[i].Question}")) < 2) ? "да" : "нет") == riddlesToAnswer[i].Answer) counter++;
             Console.WriteLine($"\n\nВы ответили правильно {counter} раз и заработали {counter*2} баллов из 10") ;
         }
 

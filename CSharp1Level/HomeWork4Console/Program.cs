@@ -1,5 +1,6 @@
 ﻿using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
+using HWConsoleLibrary.Extensions;
 using System;
 // Иван Бармин
 namespace HomeWork4
@@ -17,19 +18,19 @@ namespace HomeWork4
                 switch (selectedMenuMember)
                 {
                     case "1":
-                        tasks[0].DecorativeWorkInConsole();
+                        tasks[0].DecorativeWork();
                         break;
                     case "2":
-                        tasks[1].DecorativeWorkInConsole();
+                        tasks[1].DecorativeWork();
                         break;
                     case "3":
-                        tasks[2].DecorativeWorkInConsole();
+                        tasks[2].DecorativeWork();
                         break;
                     case "4":
-                        tasks[3].DecorativeWorkInConsole();
+                        tasks[3].DecorativeWork();
                         break;
                     case "5":
-                        tasks[4].DecorativeWorkInConsole();
+                        tasks[4].DecorativeWork();
                         break;
                     case "0":
                         Console.WriteLine("\nДо свидания");
@@ -40,7 +41,7 @@ namespace HomeWork4
                 }
             } while (selectedMenuMember != "0");
 
-            Helper.ProgramEnded();
+            ConsoleMsg.ProgramEnded();
         }
         static void Menu(HomeWorkTask[] tasks)
         {

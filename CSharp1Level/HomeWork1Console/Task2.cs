@@ -1,6 +1,6 @@
 ﻿using System;
 using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 
 namespace HomeWork1
 {
@@ -10,12 +10,12 @@ namespace HomeWork1
         public void Work()
         {
             Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - по введённым данным в начале программы\n2 - другого человека");
-            if (Helper.ReadInt() == 2)
+            if (Converters.ReadInt() == 2)
             {
                 Console.Write("укажите рост в см: ");
                 float h = float.Parse(Console.ReadLine());
                 Console.Write("\nукажите вес в кг: ");
-                int w = Helper.ReadInt();
+                int w = Converters.ReadInt();
                 IMT(h, w);
             }
             else

@@ -1,5 +1,5 @@
 ﻿using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 using System;
 using System.Text.RegularExpressions;
 
@@ -23,9 +23,9 @@ namespace HomeWork5
             bool isCorrect=false;
             do
             {
-                login = Helper.GetValueAfterMsgLine("Придумайте логин, по следующему правилу:" +
+                login = ConsoleMsg.GetValueAfterMsgLine("Придумайте логин, по следующему правилу:" +
                                                     "\nлогин должен содержать от 2 до 10 символов латинского алфавита или цифр, при этом цифра не может быть первой");
-                Choice choice = (int.Parse(Helper.GetValueInMsgLine("Введите для проверки:" +
+                Choice choice = (int.Parse(ConsoleMsg.GetValueInMsgLine("Введите для проверки:" +
                                                             "\n  <2 для использования регулярного выражения," +
                                                             "\n  >=2 без регулярного выражения\n")) < 2) ? Choice.withRegex : Choice.withoutRegex;
                 try
@@ -42,7 +42,7 @@ namespace HomeWork5
                 }
                 catch (Exception e)
                 {
-                    Helper.PrintColoredMsg(e.Message,ConsoleColor.Black,ConsoleColor.Red);
+                    ConsoleMsg.PrintColoredMsg(e.Message,ConsoleColor.Black,ConsoleColor.Red);
                 }
             } while (!isCorrect);
             Console.WriteLine("\nВы ввели корректный логин");

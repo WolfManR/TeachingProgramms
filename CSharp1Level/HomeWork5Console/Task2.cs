@@ -1,10 +1,9 @@
 ﻿using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace HomeWork5
 {
@@ -29,13 +28,13 @@ namespace HomeWork5
             sr.Close();
             int countWords = 0;
             Console.WriteLine("Слова содержащие n букв");
-            foreach (var item in Message.PrintWordsWithOnlyNSymbols(msg, int.Parse(Helper.GetValueInMsgLine("колличество букв: ")))) Console.WriteLine(item);
+            foreach (var item in Message.PrintWordsWithOnlyNSymbols(msg, int.Parse(ConsoleMsg.GetValueInMsgLine("колличество букв: ")))) Console.WriteLine(item);
             Console.WriteLine();
 
             try
             {
                 Console.Write("Строка после удаления слов");
-                Console.WriteLine(Message.DeleteWordsWithSymbolOnEnd(msg, char.Parse(Helper.GetValueInMsgLine(", содержащих символ: ")), out countWords));
+                Console.WriteLine(Message.DeleteWordsWithSymbolOnEnd(msg, char.Parse(ConsoleMsg.GetValueInMsgLine(", содержащих символ: ")), out countWords));
                 Console.WriteLine("колличество удалённых слов: " + countWords);
             }
             catch (Exception)

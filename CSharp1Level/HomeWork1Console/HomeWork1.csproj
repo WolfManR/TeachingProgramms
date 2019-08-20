@@ -59,6 +59,10 @@
       <Project>{1f065638-23c8-472e-a811-5cbda749b0c8}</Project>
       <Name>HomeWorkLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HWConsoleLibrary\HWConsoleLibrary.csproj">
+      <Project>{50801184-E2BF-4260-9C46-4F3DB9ADF211}</Project>
+      <Name>HWConsoleLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System;
 using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 
 namespace HomeWork2
 {

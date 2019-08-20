@@ -1,5 +1,6 @@
 ﻿using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
+using HWConsoleLibrary.Arrays;
 using System;
 
 namespace HomeWork4
@@ -26,7 +27,7 @@ namespace HomeWork4
             Console.WriteLine("Массив\n"+two.ToString());
 
             Console.WriteLine("\nСумма всех элементов массива "+two.GetSum());
-            int borderValue = int.Parse(Helper.GetValueAfterMsgLine("\nВведите число нижнюю границу чисел входящих в сумму"));
+            int borderValue = int.Parse(ConsoleMsg.GetValueAfterMsgLine("\nВведите число нижнюю границу чисел входящих в сумму"));
             Console.WriteLine("\nСумма всех элементов массива выше заданного "+two.GetSum(borderValue));
 
             Console.WriteLine("\nНаименьшее число в массиве "+two.Min);
@@ -35,11 +36,11 @@ namespace HomeWork4
             two.MaxIndex(out maxIndex);
             Console.WriteLine("Максимальное число массива по его индексу "+two[maxIndex.index1,maxIndex.index2]);
 
-            string filename = Helper.GetValueInMsgLine("\nПробуем записать сгенерированный массив в файл, укажите имя файла");
+            string filename = ConsoleMsg.GetValueInMsgLine("\nПробуем записать сгенерированный массив в файл, укажите имя файла");
             two = new TwoRankArray(20, 5, 15);
             two.WriteToFile(filename);
 
-            filename = Helper.GetValueInMsgLine("\nПробуем получить массив из файла, укажите имя файла");
+            filename = ConsoleMsg.GetValueInMsgLine("\nПробуем получить массив из файла, укажите имя файла");
             two = new TwoRankArray(filename);
             Console.WriteLine("Массив\n" + two.ToString());
         }
