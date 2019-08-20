@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace HomeWork5Console
+namespace HomeWork5
 {
     internal class Task2 : HomeWorkTask
     {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace HomeWork4Console
+namespace HomeWork4
 {
     public class Task2 : HomeWorkTask
     {

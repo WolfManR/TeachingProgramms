@@ -4,7 +4,7 @@ using HomeWorkLib.ConsoleWork;
 
 // Иван Бармин
 
-namespace HomeWork2Console
+namespace HomeWork2
 {
     class Program
     {

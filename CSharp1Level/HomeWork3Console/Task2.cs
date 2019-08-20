@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using HomeWorkLib;
 using HomeWorkLib.ConsoleWork;
 
-namespace HomeWork3Console
+namespace HomeWork3
 {
     public class Task2 : HomeWorkTask
     {

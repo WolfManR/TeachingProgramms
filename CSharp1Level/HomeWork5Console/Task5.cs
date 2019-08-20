@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace HomeWork5Console
+namespace HomeWork5
 {
     internal class Task5 : HomeWorkTask
     {

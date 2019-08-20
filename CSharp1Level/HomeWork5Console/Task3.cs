@@ -2,7 +2,7 @@
 using HomeWorkLib.ConsoleWork;
 using System.Collections.Generic;
 
-namespace HomeWork5Console
+namespace HomeWork5
 {
     internal class Task3 : HomeWorkTask
     {

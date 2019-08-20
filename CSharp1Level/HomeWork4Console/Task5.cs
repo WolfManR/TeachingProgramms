@@ -2,7 +2,7 @@
 using HomeWorkLib.ConsoleWork;
 using System;
 
-namespace HomeWork4Console
+namespace HomeWork4
 {
     public class Task5 : HomeWorkTask
     {

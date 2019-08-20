@@ -3,7 +3,7 @@ using HomeWorkLib.ConsoleWork;
 using System;
 using System.Text.RegularExpressions;
 
-namespace HomeWork5Console
+namespace HomeWork5
 {
     internal class Task1 : HomeWorkTask
     {

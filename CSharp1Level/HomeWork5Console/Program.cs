@@ -2,7 +2,7 @@
 using HomeWorkLib.ConsoleWork;
 using System;
 //Иван Бармин
-namespace HomeWork5Console
+namespace HomeWork5
 {
     class Program
     {

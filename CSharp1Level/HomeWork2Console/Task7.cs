@@ -1,7 +1,7 @@
 ﻿using System;
 using HomeWorkLib;
 
-namespace HomeWork2Console
+namespace HomeWork2
 {
     public class Task7 : HomeWorkTask
     {
