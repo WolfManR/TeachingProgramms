@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HomeWorkLib
+namespace HWConsoleLibrary.Arrays
 {
     public class TwoRankArray
     {
@@ -32,26 +29,26 @@ namespace HomeWorkLib
             }
         }
 
-        public TwoRankArray(uint columns,int minValue,int maxValue)
+        public TwoRankArray(uint columns, int minValue, int maxValue)
         {
             array = new int[2, columns];
             Columns = Convert.ToInt32(columns);
             Random rand = new Random();
             for (int i = 0; i < 2; i++)
                 for (int j = 0; j < columns; j++)
-                    array[i, j] = rand.Next(minValue,maxValue);
+                    array[i, j] = rand.Next(minValue, maxValue);
         }
         public TwoRankArray(string filename)
         {
-            array = ReadFromFile(filename,out Columns);
+            array = ReadFromFile(filename, out Columns);
         }
-        public void MaxIndex(out (int index1,int index2) index)
+        public void MaxIndex(out (int index1, int index2) index)
         {
             index = (0, 0);
             int max = array[0, 0];
-            for (int i = 0; i <2; i++)
+            for (int i = 0; i < 2; i++)
                 for (int j = 0; j < Columns; j++)
-                    if (array[i,j] > max)
+                    if (array[i, j] > max)
                     {
                         max = array[i, j];
                         index = (i, j);
@@ -70,7 +67,7 @@ namespace HomeWorkLib
             {
                 Console.WriteLine(e.Message);
             }
-            catch(PathTooLongException e)
+            catch (PathTooLongException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -79,9 +76,9 @@ namespace HomeWorkLib
                 Console.WriteLine("Что-то пошло не так");
             }
         }
-        public int[,] ReadFromFile(string filename,out int columns)
+        public int[,] ReadFromFile(string filename, out int columns)
         {
-            columns= 0;
+            columns = 0;
             List<int> firstDimention = new List<int>();
             List<int> secondDimention = new List<int>();
             try
@@ -102,7 +99,7 @@ namespace HomeWorkLib
             {
                 Console.WriteLine("Что-то пошло не так");
             }
-            
+
             int[,] arr = new int[2, columns];
             for (int j = 0; j < columns; j++) arr[0, j] = firstDimention[j];
             for (int j = 0; j < columns; j++) arr[1, j] = secondDimention[j];

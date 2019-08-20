@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HomeWorkLib
+namespace HWConsoleLibrary.Arrays
 {
     public class OneRankArray
     {
@@ -70,7 +70,7 @@ namespace HomeWorkLib
 
         public override string ToString()
         {
-            string result="";
+            string result = "";
             foreach (var item in array) result += item + " ";
             return result;
         }
