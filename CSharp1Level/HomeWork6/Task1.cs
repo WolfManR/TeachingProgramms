@@ -57,14 +57,14 @@ namespace HomeWork6
             Func<double,double,double> function;
 
             Console.WriteLine("Демонстрация взаимодействия делегата и функции с уравнением a*x^2");
-            double n = int.Parse("Введите значение переменной a");
-            double q = int.Parse("Введите значение переменной x");
+            double n = Converters.ReadInt("Введите значение переменной a");
+            double q = Converters.ReadInt("Введите значение переменной x");
             function = (c, d) => c * Math.Pow(d, 2);
             Console.WriteLine($"рельтат уравнения: {function?.Invoke(n, q)}");
 
             Console.WriteLine("Демонстрация взаимодействия делегата и функции с уравнением a*sin(x)");
-            n = int.Parse("Введите значение переменной a");
-            q = int.Parse("Введите значение переменной x");
+            n = Converters.ReadInt("Введите значение переменной a");
+            q = Converters.ReadInt("Введите значение переменной x");
             function = (c, d) => c * Math.Sin(d);
             Console.WriteLine($"рельтат уравнения: {function?.Invoke(n, q)}");
         }
