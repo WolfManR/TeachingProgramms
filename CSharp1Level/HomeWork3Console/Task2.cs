@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 
-namespace HomeWork3Console
+namespace HomeWork3
 {
     public class Task2 : HomeWorkTask
     {
@@ -44,7 +44,7 @@ namespace HomeWork3Console
             sum = 0;
             do
             {
-                if (int.TryParse(Helper.GetValueInMsgLine("число:"), out inputNumber))
+                if (int.TryParse(ConsoleMsg.GetValueInMsgLine("число:"), out inputNumber))
                 {
                     if (inputNumber % 2 > 0)
                     {

@@ -1,8 +1,9 @@
 ﻿using System;
 using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
+using HWConsoleLibrary.Extensions;
 // Иван Бармин
-namespace HomeWork3Console
+namespace HomeWork3
 {
     class Program
     {
@@ -17,13 +18,13 @@ namespace HomeWork3Console
                 switch (selectedMenuMember)
                 {
                     case "1":
-                        tasks[0].DecorativeWorkInConsole();
+                        tasks[0].DecorativeWork();
                         break;
                     case "2":
-                        tasks[1].DecorativeWorkInConsole();
+                        tasks[1].DecorativeWork();
                         break;
                     case "3":
-                        tasks[2].DecorativeWorkInConsole();
+                        tasks[2].DecorativeWork();
                         break;
                     case "0":
                         Console.WriteLine("\nДо свидания");
@@ -34,7 +35,7 @@ namespace HomeWork3Console
                 }
             } while (selectedMenuMember != "0");
 
-            Helper.ProgramEnded();
+            ConsoleMsg.ProgramEnded();
         }
         static void Menu(HomeWorkTask[] tasks)
         {

@@ -1,8 +1,9 @@
 ﻿using System;
 using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
+using HWConsoleLibrary.Extensions;
 
-namespace HomeWork1Console
+namespace HomeWork1
 {
     public class Task3 : ITaskWork
     {
@@ -11,7 +12,7 @@ namespace HomeWork1Console
             Point a = new Point() { X = 184, Y = 206 };
             Point b = new Point() { X = 345, Y = 251 };
             Console.WriteLine("Вы будете вводить свои точки координат? \n<2 - да\n>=2 - нет");
-            if (Helper.ReadInt() < 2)
+            if (Converters.ReadInt() < 2)
             {
                 Console.WriteLine("первая точка");
                 a.FillPoint();

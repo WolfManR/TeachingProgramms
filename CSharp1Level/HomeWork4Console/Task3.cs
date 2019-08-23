@@ -1,8 +1,9 @@
 ﻿using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
+using HWConsoleLibrary.Arrays;
 using System;
 
-namespace HomeWork4Console
+namespace HomeWork4
 {
     public class Task3 : HomeWorkTask
     {
@@ -22,9 +23,9 @@ namespace HomeWork4Console
         public override void Work()
         {
             OneRankArray one = new OneRankArray(
-                uint.Parse(Helper.GetValueInMsgLine("Укажите размер массива")),
-                int.Parse(Helper.GetValueInMsgLine("Укажите число с которого начнётся заполнение массива")),
-                int.Parse(Helper.GetValueInMsgLine("Укажите шаг заполнения")));
+                uint.Parse(ConsoleMsg.GetValueInMsgLine("Укажите размер массива")),
+                int.Parse(ConsoleMsg.GetValueInMsgLine("Укажите число с которого начнётся заполнение массива")),
+                int.Parse(ConsoleMsg.GetValueInMsgLine("Укажите шаг заполнения")));
 
             Console.WriteLine("\nМассив \n" + one.ToString());
 
@@ -34,7 +35,7 @@ namespace HomeWork4Console
             Console.WriteLine("\nИнверсированный массив");
             foreach (var item in inverse) Console.Write(item + " ");
 
-            int number = int.Parse(Helper.GetValueInMsgLine("\n\nУкажите число на которое будут умножены значения массива"));
+            int number = int.Parse(ConsoleMsg.GetValueInMsgLine("\n\nУкажите число на которое будут умножены значения массива"));
             one.Multi(number);
             Console.WriteLine($"\nМассив после умножения на {number}\n" + one.ToString());
 

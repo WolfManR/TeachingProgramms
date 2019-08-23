@@ -1,8 +1,8 @@
 ﻿using System;
 using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 
-namespace HomeWork2Console
+namespace HomeWork2
 {
     public class Task2 : HomeWorkTask
     {

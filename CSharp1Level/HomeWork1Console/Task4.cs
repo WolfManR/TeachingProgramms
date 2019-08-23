@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HomeWork1Console
+namespace HomeWork1
 {
     public class Task4 : HomeWorkLib.ITaskWork
     {

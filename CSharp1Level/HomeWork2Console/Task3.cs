@@ -1,8 +1,8 @@
 ﻿using System;
 using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 
-namespace HomeWork2Console
+namespace HomeWork2
 {
     public class Task3 : HomeWorkTask
     {
@@ -22,7 +22,7 @@ namespace HomeWork2Console
             do
             {
                 Console.Write("число: ");
-                inputNumber = Helper.ReadInt();
+                inputNumber = Converters.ReadInt();
                 if (inputNumber % 2 > 0) sumNumbers += inputNumber;
             } while (inputNumber != 0);
             Console.WriteLine("сумма нечётных чисел равна " + sumNumbers);

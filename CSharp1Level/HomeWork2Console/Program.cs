@@ -1,10 +1,11 @@
 ﻿using System;
 using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
+using HWConsoleLibrary.Extensions;
 
 // Иван Бармин
 
-namespace HomeWork2Console
+namespace HomeWork2
 {
     class Program
     {
@@ -19,25 +20,25 @@ namespace HomeWork2Console
                 switch (selectedMenuMember)
                 {
                     case "1":
-                        tasks[0].DecorativeWorkInConsole();
+                        tasks[0].DecorativeWork();
                         break;
                     case "2":
-                        tasks[1].DecorativeWorkInConsole();
+                        tasks[1].DecorativeWork();
                         break;
                     case "3":
-                        tasks[2].DecorativeWorkInConsole();
+                        tasks[2].DecorativeWork();
                         break;
                     case "4":
-                        tasks[3].DecorativeWorkInConsole();
+                        tasks[3].DecorativeWork();
                         break;
                     case "5":
-                        tasks[4].DecorativeWorkInConsole();
+                        tasks[4].DecorativeWork();
                         break;
                     case "6":
-                        tasks[5].DecorativeWorkInConsole();
+                        tasks[5].DecorativeWork();
                         break;
                     case "7":
-                        tasks[6].DecorativeWorkInConsole();
+                        tasks[6].DecorativeWork();
                         break;
                     case "8":
                         Console.Clear();
@@ -52,7 +53,7 @@ namespace HomeWork2Console
                 }
             } while (selectedMenuMember!="0");
 
-            Helper.ProgramEnded();
+            ConsoleMsg.ProgramEnded();
         }
 
         static void Flag()

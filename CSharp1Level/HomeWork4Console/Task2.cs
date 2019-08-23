@@ -1,10 +1,10 @@
 ﻿using HomeWorkLib;
-using HomeWorkLib.ConsoleWork;
+using HWConsoleLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace HomeWork4Console
+namespace HomeWork4
 {
     public class Task2 : HomeWorkTask
     {
@@ -19,7 +19,7 @@ namespace HomeWork4Console
 
         public override void Work()
         {
-            string filename=Helper.GetValueInMsgLine("Укажите имя файла в каталоге исполняемого файла приложения");
+            string filename=ConsoleMsg.GetValueInMsgLine("Укажите имя файла в каталоге исполняемого файла приложения");
             StaticClass.Task1Work(StaticClass.ReadArrayFromTextFile(filename));
         }
 
