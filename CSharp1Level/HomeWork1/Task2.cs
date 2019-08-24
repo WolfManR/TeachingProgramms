@@ -6,7 +6,7 @@ namespace HomeWork1
 {
     public class Task2 : IHWTaskWork
     {
-        public User user { get; set; } = new User();
+        public User User { get; set; } = new User();
         public void Work()
         {
             Console.WriteLine("Вы хотите узнать индекс массы тела:\n1 - по введённым данным в начале программы\n2 - другого человека");
@@ -20,7 +20,7 @@ namespace HomeWork1
             }
             else
             {
-                IMT(user.Height, user.Weight);
+                IMT(User.Height, User.Weight);
             }
         }
         void IMT(float height, int weight)

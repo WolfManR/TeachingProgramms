@@ -18,8 +18,8 @@ namespace HomeWork1
             if (Converters.ReadInt() < 2) user.FillUserInfo();
 
             IHWTaskWork[] tasks = {
-               new Task1() { user = user },
-               new Task2() { user = user },
+               new Task1() { User = user },
+               new Task2() { User = user },
                new Task3(),
                new Task4(),
                new Task5()

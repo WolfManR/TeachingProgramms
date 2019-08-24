@@ -5,10 +5,10 @@ namespace HomeWork1
 {
     public class Task1:IHWTaskWork
     {
-        public User user { get; set; } = new User();
+        public User User { get; set; } = new User();
         public void Work()
         {
-            WriteInConsoleUserInfo(user);
+            WriteInConsoleUserInfo(User);
         }
 
         void WriteInConsoleUserInfo(User user)
