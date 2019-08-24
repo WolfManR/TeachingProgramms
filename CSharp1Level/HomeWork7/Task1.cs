@@ -15,9 +15,7 @@ namespace HomeWork7
     {
         public MainForm Main { get; set; }
         public string Title => "Удвоитель";
-
         public int TaskNumber => 1;
-
         public string ToDo => "а) Добавить в программу «Удвоитель» подсчет количества отданных команд." +
                               "\nб) Добавить меню и команду «Играть». При нажатии появляется сообщение, какое число должен получить игрок." +
                               "\nИгрок должен постараться получить это число за минимальное количество ходов." +
@@ -29,15 +27,15 @@ namespace HomeWork7
             tlTpHelp.SetToolTip(btnHelp, ToDo);
         }
 
-        private void BtnAppExit_Click(object sender, EventArgs e)
-        {
-            Main.Close();
-        }
 
         private void BtnBackToMain_Click(object sender, EventArgs e)
         {
             Main.Show();
             this.Close();
+        }
+        private void BtnAppExit_Click(object sender, EventArgs e)
+        {
+            Main.Close();
         }
     }
 }
