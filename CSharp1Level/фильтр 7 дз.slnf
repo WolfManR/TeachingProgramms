@@ -2,13 +2,7 @@
   "solution": {
     "path": "CSharp1Level.sln",
     "projects": [
-      "HWConsoleLibrary\\HWConsoleLibrary.csproj",
-      "HomeWork1\\HomeWork1.csproj",
-      "HomeWork2\\HomeWork2.csproj",
-      "HomeWork3\\HomeWork3.csproj",
-      "HomeWork4\\HomeWork4.csproj",
-      "HomeWork5\\HomeWork5.csproj",
-      "HomeWork6\\HomeWork6.csproj",
+      "HomeWork7\\HomeWork7.csproj",
       "HomeWorkLib\\HomeWorkLib.csproj"
     ]
   }
