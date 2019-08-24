@@ -1,6 +1,6 @@
 ﻿namespace HomeWorkLib
 {
-    public interface ITaskWork
+    public interface IHWTaskWork
     {
         void Work();
     }

@@ -1,6 +1,6 @@
 ﻿namespace HomeWorkLib
 {
-    public interface IHWTask:ITaskWork
+    public interface IHWTaskData
     {
         string Title { get; }
         int TaskNumber { get; }

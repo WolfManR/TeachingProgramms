@@ -19,7 +19,9 @@ namespace HomeWork7
 
         private void btnUdvoitel_Click(object sender, EventArgs e)
         {
-            
+            var task1 = new Task1();
+            task1.Show();
+            Hide();
         }
         private void BtnCheckNumber_Click(object sender, EventArgs e)
         {

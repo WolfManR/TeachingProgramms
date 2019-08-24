@@ -4,7 +4,7 @@ using HWConsoleLibrary;
 
 namespace HomeWork1
 {
-    public class Task2 : ITaskWork
+    public class Task2 : IHWTaskWork
     {
         public User user { get; set; } = new User();
         public void Work()

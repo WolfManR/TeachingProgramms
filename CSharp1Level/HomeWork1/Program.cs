@@ -17,7 +17,7 @@ namespace HomeWork1
             Console.WriteLine("Вы будете вводить информацию о себе? \n<2 - да\n>=2 - нет");
             if (Converters.ReadInt() < 2) user.FillUserInfo();
 
-            ITaskWork[] tasks = {
+            IHWTaskWork[] tasks = {
                new Task1() { user = user },
                new Task2() { user = user },
                new Task3(),
