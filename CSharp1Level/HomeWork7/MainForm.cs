@@ -26,7 +26,10 @@ namespace HomeWork7
         }
         private void BtnCheckNumber_Click(object sender, EventArgs e)
         {
-
+            var task2 = new Task2();
+            task2.Main = this;
+            task2.Show();
+            Hide();
         }
 
         private void BtnExit_Click(object sender, EventArgs e)
