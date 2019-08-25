@@ -37,10 +37,10 @@ namespace HomeWork7.Code
             switch (state)
             {
                 case GameState.Win:
-                    Won?.Invoke(this, new GameStateEventArgs($"Вы выйграли\nВы сделали ходов {playerSteps}"));
+                    Won?.Invoke(this, new GameStateEventArgs($"Вы выйграли\nВы сделали ходов {playerSteps} из {stepsToFinish}"));
                     return;
                 case GameState.Loose:
-                    Lost?.Invoke(this, new GameStateEventArgs($"Вы проиграли\nВы сделали ходов {playerSteps}"));
+                    Lost?.Invoke(this, new GameStateEventArgs($"Вы проиграли\nВы сделали ходов {playerSteps} из {stepsToFinish}"));
                     return;
                 case GameState.Play:
                     return;
