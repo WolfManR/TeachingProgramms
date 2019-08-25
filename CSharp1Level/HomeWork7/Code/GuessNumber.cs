@@ -14,8 +14,9 @@ namespace HomeWork7.Code
         int playersSteps = 0;
         public int TryesLeft { get => tryes - playersSteps; }
 
-        public event EventHandler<GameStateEventArgs> Winned;
-        public event EventHandler<GameStateEventArgs> Loosed;
+        public event EventHandler<GameStateEventArgs> Won;
+        public event EventHandler<GameStateEventArgs> Lost;
+        public event EventHandler<GameStateEventArgs> HowClose;
         public GuessNumber()
         {
 
@@ -32,9 +33,14 @@ namespace HomeWork7.Code
 
         public void CheckNumber(int number)
         {
-            if (number != this.number & tryes>playersSteps) return;
-            else if (number != this.number & tryes <= playersSteps) Loosed?.Invoke(this, new GameStateEventArgs($"Вы проиграли!"));
-            else Winned?.Invoke(this, new GameStateEventArgs($"Вы выйграли!"));
+            playersSteps++;
+            if (number != this.number & tryes > playersSteps)
+            {
+                if (number > this.number) HowClose?.Invoke(this, new GameStateEventArgs($"Ваше число больше загаданного"));
+                else HowClose?.Invoke(this, new GameStateEventArgs($"Ваше число меньше загаданного"));
+            }
+            else if (number != this.number & tryes <= playersSteps) Lost?.Invoke(this, new GameStateEventArgs($"Вы проиграли!\nЗагаданное число было {this.number}"));
+            else Won?.Invoke(this, new GameStateEventArgs($"Вы выйграли!"));
         }
     }
 }

@@ -23,8 +23,8 @@ namespace HomeWork7.Code
         public int Number { get; private set; }
         public int StepsToFinish { get => stepsToFinish - playerSteps; }
 
-        public event EventHandler<GameStateEventArgs> Wined;
-        public event EventHandler<GameStateEventArgs> Loosed;
+        public event EventHandler<GameStateEventArgs> Won;
+        public event EventHandler<GameStateEventArgs> Lost;
 
         public Udvoitel()
         {
@@ -37,10 +37,10 @@ namespace HomeWork7.Code
             switch (state)
             {
                 case GameState.Win:
-                    Wined?.Invoke(this, new GameStateEventArgs($"Вы выйграли\nВы сделали ходов {playerSteps}"));
+                    Won?.Invoke(this, new GameStateEventArgs($"Вы выйграли\nВы сделали ходов {playerSteps}"));
                     return;
                 case GameState.Loose:
-                    Loosed?.Invoke(this, new GameStateEventArgs($"Вы проиграли\nВы сделали ходов {playerSteps}"));
+                    Lost?.Invoke(this, new GameStateEventArgs($"Вы проиграли\nВы сделали ходов {playerSteps}"));
                     return;
                 case GameState.Play:
                     return;

@@ -37,15 +37,16 @@
             this.tlTpHelp = new System.Windows.Forms.ToolTip(this.components);
             this.lblTitleTryes = new System.Windows.Forms.Label();
             this.lblTitleNumber = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblStepsToFinish = new System.Windows.Forms.Label();
+            this.gbTryes = new System.Windows.Forms.GroupBox();
+            this.lblTryes = new System.Windows.Forms.Label();
             this.tbAnswer = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbGuessNumber = new System.Windows.Forms.GroupBox();
             this.btnNewGame = new System.Windows.Forms.Button();
             this.btnAnswer = new System.Windows.Forms.Button();
+            this.lblHowClose = new System.Windows.Forms.Label();
             this.pHeader.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbTryes.SuspendLayout();
+            this.gbGuessNumber.SuspendLayout();
             this.SuspendLayout();
             // 
             // pHeader
@@ -133,27 +134,27 @@
             this.lblTitleNumber.TabIndex = 0;
             this.lblTitleNumber.Text = "Число";
             // 
-            // groupBox1
+            // gbTryes
             // 
-            this.groupBox1.Controls.Add(this.lblStepsToFinish);
-            this.groupBox1.Controls.Add(this.lblTitleTryes);
-            this.groupBox1.Location = new System.Drawing.Point(264, 136);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(171, 41);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
+            this.gbTryes.Controls.Add(this.lblTryes);
+            this.gbTryes.Controls.Add(this.lblTitleTryes);
+            this.gbTryes.Location = new System.Drawing.Point(264, 136);
+            this.gbTryes.Name = "gbTryes";
+            this.gbTryes.Size = new System.Drawing.Size(171, 41);
+            this.gbTryes.TabIndex = 3;
+            this.gbTryes.TabStop = false;
             // 
-            // lblStepsToFinish
+            // lblTryes
             // 
-            this.lblStepsToFinish.AutoSize = true;
-            this.lblStepsToFinish.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
-            this.lblStepsToFinish.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblStepsToFinish.Location = new System.Drawing.Point(123, 9);
-            this.lblStepsToFinish.Name = "lblStepsToFinish";
-            this.lblStepsToFinish.Size = new System.Drawing.Size(27, 29);
-            this.lblStepsToFinish.TabIndex = 0;
-            this.lblStepsToFinish.Text = "0";
-            this.lblStepsToFinish.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTryes.AutoSize = true;
+            this.lblTryes.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.lblTryes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblTryes.Location = new System.Drawing.Point(123, 9);
+            this.lblTryes.Name = "lblTryes";
+            this.lblTryes.Size = new System.Drawing.Size(27, 29);
+            this.lblTryes.TabIndex = 0;
+            this.lblTryes.Text = "0";
+            this.lblTryes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tbAnswer
             // 
@@ -163,15 +164,15 @@
             this.tbAnswer.Size = new System.Drawing.Size(89, 41);
             this.tbAnswer.TabIndex = 4;
             // 
-            // groupBox2
+            // gbGuessNumber
             // 
-            this.groupBox2.Controls.Add(this.tbAnswer);
-            this.groupBox2.Controls.Add(this.lblTitleNumber);
-            this.groupBox2.Location = new System.Drawing.Point(246, 199);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(207, 60);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
+            this.gbGuessNumber.Controls.Add(this.tbAnswer);
+            this.gbGuessNumber.Controls.Add(this.lblTitleNumber);
+            this.gbGuessNumber.Location = new System.Drawing.Point(246, 256);
+            this.gbGuessNumber.Name = "gbGuessNumber";
+            this.gbGuessNumber.Size = new System.Drawing.Size(207, 60);
+            this.gbGuessNumber.TabIndex = 3;
+            this.gbGuessNumber.TabStop = false;
             // 
             // btnNewGame
             // 
@@ -182,16 +183,30 @@
             this.btnNewGame.TabIndex = 5;
             this.btnNewGame.Text = "Новая игра";
             this.btnNewGame.UseVisualStyleBackColor = true;
+            this.btnNewGame.Click += new System.EventHandler(this.BtnNewGame_Click);
             // 
             // btnAnswer
             // 
             this.btnAnswer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnAnswer.Location = new System.Drawing.Point(279, 265);
+            this.btnAnswer.Location = new System.Drawing.Point(279, 322);
             this.btnAnswer.Name = "btnAnswer";
             this.btnAnswer.Size = new System.Drawing.Size(140, 31);
             this.btnAnswer.TabIndex = 5;
             this.btnAnswer.Text = "Ответить";
             this.btnAnswer.UseVisualStyleBackColor = true;
+            this.btnAnswer.Click += new System.EventHandler(this.BtnAnswer_Click);
+            // 
+            // lblHowClose
+            // 
+            this.lblHowClose.AutoSize = true;
+            this.lblHowClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.25F);
+            this.lblHowClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblHowClose.Location = new System.Drawing.Point(102, 202);
+            this.lblHowClose.Name = "lblHowClose";
+            this.lblHowClose.Size = new System.Drawing.Size(495, 36);
+            this.lblHowClose.TabIndex = 0;
+            this.lblHowClose.Text = "Ваше число больше загаданного";
+            this.lblHowClose.UseWaitCursor = true;
             // 
             // Task2
             // 
@@ -199,9 +214,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 450);
             this.Controls.Add(this.btnAnswer);
+            this.Controls.Add(this.lblHowClose);
             this.Controls.Add(this.btnNewGame);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbGuessNumber);
+            this.Controls.Add(this.gbTryes);
             this.Controls.Add(this.pHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Task2";
@@ -209,11 +225,12 @@
             this.Text = "Task2";
             this.pHeader.ResumeLayout(false);
             this.pHeader.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbTryes.ResumeLayout(false);
+            this.gbTryes.PerformLayout();
+            this.gbGuessNumber.ResumeLayout(false);
+            this.gbGuessNumber.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -227,11 +244,12 @@
         private System.Windows.Forms.ToolTip tlTpHelp;
         private System.Windows.Forms.Label lblTitleTryes;
         private System.Windows.Forms.Label lblTitleNumber;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label lblStepsToFinish;
+        private System.Windows.Forms.GroupBox gbTryes;
+        private System.Windows.Forms.Label lblTryes;
         private System.Windows.Forms.TextBox tbAnswer;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbGuessNumber;
         private System.Windows.Forms.Button btnNewGame;
         private System.Windows.Forms.Button btnAnswer;
+        private System.Windows.Forms.Label lblHowClose;
     }
 }

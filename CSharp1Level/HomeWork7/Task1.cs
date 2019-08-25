@@ -29,12 +29,12 @@ namespace HomeWork7
             tlTpHelp.SetToolTip(btnHelp, ToDo);
             Game = new Udvoitel();
             NewGame();
-            Game.Wined += (sender, e) => 
+            Game.Won += (sender, e) => 
             {
                 SwitchOffGameBtns();
                 MessageBox.Show(e.msg);
             };
-            Game.Loosed += (sender, e) =>
+            Game.Lost += (sender, e) =>
             {
                 SwitchOffGameBtns();
                 MessageBox.Show(e.msg);
