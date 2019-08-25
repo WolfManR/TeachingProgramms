@@ -39,14 +39,18 @@
             this.btnMulti = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnNewGame = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblTitleNow = new System.Windows.Forms.Label();
+            this.lblTitleNeed = new System.Windows.Forms.Label();
             this.lblNumber = new System.Windows.Forms.Label();
             this.lblCurrent = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.gbGame = new System.Windows.Forms.GroupBox();
+            this.LblTitleStepsToFinish = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblStepsToFinish = new System.Windows.Forms.Label();
             this.pHeader.SuspendLayout();
             this.gbGame.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -156,27 +160,27 @@
             this.btnNewGame.UseVisualStyleBackColor = true;
             this.btnNewGame.Click += new System.EventHandler(this.BtnNewGame_Click);
             // 
-            // label1
+            // lblTitleNow
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(20, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 29);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Текущее";
+            this.lblTitleNow.AutoSize = true;
+            this.lblTitleNow.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.lblTitleNow.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblTitleNow.Location = new System.Drawing.Point(20, 60);
+            this.lblTitleNow.Name = "lblTitleNow";
+            this.lblTitleNow.Size = new System.Drawing.Size(117, 29);
+            this.lblTitleNow.TabIndex = 0;
+            this.lblTitleNow.Text = "Текущее";
             // 
-            // label2
+            // lblTitleNeed
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
-            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(20, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(152, 29);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Загаданное";
+            this.lblTitleNeed.AutoSize = true;
+            this.lblTitleNeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.lblTitleNeed.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblTitleNeed.Location = new System.Drawing.Point(20, 16);
+            this.lblTitleNeed.Name = "lblTitleNeed";
+            this.lblTitleNeed.Size = new System.Drawing.Size(152, 29);
+            this.lblTitleNeed.TabIndex = 0;
+            this.lblTitleNeed.Text = "Загаданное";
             // 
             // lblNumber
             // 
@@ -212,27 +216,61 @@
             this.btnBack.TabIndex = 1;
             this.btnBack.Text = "Отмена";
             this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.BtnBackToMain_Click);
+            this.btnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // gbGame
             // 
-            this.gbGame.Controls.Add(this.label1);
+            this.gbGame.Controls.Add(this.lblTitleNow);
             this.gbGame.Controls.Add(this.btnAdd);
             this.gbGame.Controls.Add(this.btnMulti);
             this.gbGame.Controls.Add(this.lblCurrent);
-            this.gbGame.Controls.Add(this.label2);
+            this.gbGame.Controls.Add(this.lblTitleNeed);
             this.gbGame.Controls.Add(this.lblNumber);
-            this.gbGame.Location = new System.Drawing.Point(219, 172);
+            this.gbGame.Location = new System.Drawing.Point(233, 192);
             this.gbGame.Name = "gbGame";
             this.gbGame.Size = new System.Drawing.Size(237, 157);
             this.gbGame.TabIndex = 2;
             this.gbGame.TabStop = false;
+            // 
+            // LblTitleStepsToFinish
+            // 
+            this.LblTitleStepsToFinish.AutoSize = true;
+            this.LblTitleStepsToFinish.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.LblTitleStepsToFinish.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.LblTitleStepsToFinish.Location = new System.Drawing.Point(6, 9);
+            this.LblTitleStepsToFinish.Name = "LblTitleStepsToFinish";
+            this.LblTitleStepsToFinish.Size = new System.Drawing.Size(86, 29);
+            this.LblTitleStepsToFinish.TabIndex = 0;
+            this.LblTitleStepsToFinish.Text = "Ходов";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.LblTitleStepsToFinish);
+            this.groupBox1.Controls.Add(this.lblStepsToFinish);
+            this.groupBox1.Location = new System.Drawing.Point(277, 145);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(171, 41);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            // 
+            // lblStepsToFinish
+            // 
+            this.lblStepsToFinish.AutoSize = true;
+            this.lblStepsToFinish.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.lblStepsToFinish.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblStepsToFinish.Location = new System.Drawing.Point(123, 9);
+            this.lblStepsToFinish.Name = "lblStepsToFinish";
+            this.lblStepsToFinish.Size = new System.Drawing.Size(27, 29);
+            this.lblStepsToFinish.TabIndex = 0;
+            this.lblStepsToFinish.Text = "0";
+            this.lblStepsToFinish.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Task1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 450);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbGame);
             this.Controls.Add(this.pHeader);
             this.Controls.Add(this.btnBack);
@@ -246,6 +284,8 @@
             this.pHeader.PerformLayout();
             this.gbGame.ResumeLayout(false);
             this.gbGame.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -262,11 +302,14 @@
         private System.Windows.Forms.Button btnMulti;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnNewGame;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblTitleNow;
+        private System.Windows.Forms.Label lblTitleNeed;
         private System.Windows.Forms.Label lblNumber;
         private System.Windows.Forms.Label lblCurrent;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.GroupBox gbGame;
+        private System.Windows.Forms.Label LblTitleStepsToFinish;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblStepsToFinish;
     }
 }
