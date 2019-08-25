@@ -35,7 +35,17 @@
             this.btnBackToMain = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.tlTpHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.lblTitleTryes = new System.Windows.Forms.Label();
+            this.lblTitleNumber = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblStepsToFinish = new System.Windows.Forms.Label();
+            this.tbAnswer = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnNewGame = new System.Windows.Forms.Button();
+            this.btnAnswer = new System.Windows.Forms.Button();
             this.pHeader.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pHeader
@@ -101,11 +111,97 @@
             this.tlTpHelp.IsBalloon = true;
             this.tlTpHelp.ReshowDelay = 100;
             // 
+            // lblTitleTryes
+            // 
+            this.lblTitleTryes.AutoSize = true;
+            this.lblTitleTryes.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.lblTitleTryes.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblTitleTryes.Location = new System.Drawing.Point(2, 9);
+            this.lblTitleTryes.Name = "lblTitleTryes";
+            this.lblTitleTryes.Size = new System.Drawing.Size(115, 29);
+            this.lblTitleTryes.TabIndex = 0;
+            this.lblTitleTryes.Text = "Попыток";
+            // 
+            // lblTitleNumber
+            // 
+            this.lblTitleNumber.AutoSize = true;
+            this.lblTitleNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.25F);
+            this.lblTitleNumber.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblTitleNumber.Location = new System.Drawing.Point(6, 16);
+            this.lblTitleNumber.Name = "lblTitleNumber";
+            this.lblTitleNumber.Size = new System.Drawing.Size(106, 36);
+            this.lblTitleNumber.TabIndex = 0;
+            this.lblTitleNumber.Text = "Число";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblStepsToFinish);
+            this.groupBox1.Controls.Add(this.lblTitleTryes);
+            this.groupBox1.Location = new System.Drawing.Point(264, 136);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(171, 41);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            // 
+            // lblStepsToFinish
+            // 
+            this.lblStepsToFinish.AutoSize = true;
+            this.lblStepsToFinish.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.lblStepsToFinish.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblStepsToFinish.Location = new System.Drawing.Point(123, 9);
+            this.lblStepsToFinish.Name = "lblStepsToFinish";
+            this.lblStepsToFinish.Size = new System.Drawing.Size(27, 29);
+            this.lblStepsToFinish.TabIndex = 0;
+            this.lblStepsToFinish.Text = "0";
+            this.lblStepsToFinish.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tbAnswer
+            // 
+            this.tbAnswer.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.25F);
+            this.tbAnswer.Location = new System.Drawing.Point(114, 13);
+            this.tbAnswer.Name = "tbAnswer";
+            this.tbAnswer.Size = new System.Drawing.Size(89, 41);
+            this.tbAnswer.TabIndex = 4;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tbAnswer);
+            this.groupBox2.Controls.Add(this.lblTitleNumber);
+            this.groupBox2.Location = new System.Drawing.Point(246, 199);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(207, 60);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            // 
+            // btnNewGame
+            // 
+            this.btnNewGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.btnNewGame.Location = new System.Drawing.Point(279, 99);
+            this.btnNewGame.Name = "btnNewGame";
+            this.btnNewGame.Size = new System.Drawing.Size(140, 31);
+            this.btnNewGame.TabIndex = 5;
+            this.btnNewGame.Text = "Новая игра";
+            this.btnNewGame.UseVisualStyleBackColor = true;
+            // 
+            // btnAnswer
+            // 
+            this.btnAnswer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.btnAnswer.Location = new System.Drawing.Point(279, 265);
+            this.btnAnswer.Name = "btnAnswer";
+            this.btnAnswer.Size = new System.Drawing.Size(140, 31);
+            this.btnAnswer.TabIndex = 5;
+            this.btnAnswer.Text = "Ответить";
+            this.btnAnswer.UseVisualStyleBackColor = true;
+            // 
             // Task2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 450);
+            this.Controls.Add(this.btnAnswer);
+            this.Controls.Add(this.btnNewGame);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Task2";
@@ -113,6 +209,10 @@
             this.Text = "Task2";
             this.pHeader.ResumeLayout(false);
             this.pHeader.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -125,5 +225,13 @@
         private System.Windows.Forms.Button btnBackToMain;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.ToolTip tlTpHelp;
+        private System.Windows.Forms.Label lblTitleTryes;
+        private System.Windows.Forms.Label lblTitleNumber;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblStepsToFinish;
+        private System.Windows.Forms.TextBox tbAnswer;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnNewGame;
+        private System.Windows.Forms.Button btnAnswer;
     }
 }
