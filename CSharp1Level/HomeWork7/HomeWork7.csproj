@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\GameState.cs" />
+    <Compile Include="Code\GameStateEventArgs.cs" />
     <Compile Include="Code\Udvoitel.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
