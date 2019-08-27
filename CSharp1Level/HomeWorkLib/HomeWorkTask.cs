@@ -1,6 +1,6 @@
 ﻿namespace HomeWorkLib
 {
-    public abstract class HomeWorkTask : IHWTask
+    public abstract class HomeWorkTask : IHWTaskData,IHWTaskWork
     {
         public abstract string Title { get; }
         public abstract int TaskNumber { get; }

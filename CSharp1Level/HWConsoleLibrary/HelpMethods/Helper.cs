@@ -25,7 +25,7 @@ namespace HWConsoleLibrary
         }
         public static double IMT(int weight, double height) => weight / (height * height);
 
-        public static void WorkTasks(ITaskWork[] tasks)
+        public static void WorkTasks(IHWTaskWork[] tasks)
         {
             for (int i = 0; i < tasks.Length; i++) tasks[i].Work();
         }

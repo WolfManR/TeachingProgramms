@@ -42,8 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HomeWorkTask.cs" />
-    <Compile Include="IHWTask.cs" />
-    <Compile Include="ITaskWork.cs" />
+    <Compile Include="IHWTaskData.cs" />
+    <Compile Include="IHWTaskWork.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />

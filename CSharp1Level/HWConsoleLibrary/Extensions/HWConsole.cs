@@ -8,7 +8,7 @@ namespace HWConsoleLibrary.Extensions
         public delegate void ConsoleColoredMsg(string msg, ConsoleColor BackColor, ConsoleColor ForeColor);
         static ConsoleColoredMsg Del;
 
-        public static void DecorativeWork(this IHWTask task)
+        public static void DecorativeWork(this HomeWorkTask task)
         {
             Console.Clear();
             Del = new ConsoleColoredMsg(ConsoleMsg.PrintColoredMsg);

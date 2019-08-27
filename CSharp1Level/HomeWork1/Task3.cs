@@ -5,7 +5,7 @@ using HWConsoleLibrary.Extensions;
 
 namespace HomeWork1
 {
-    public class Task3 : ITaskWork
+    public class Task3 : IHWTaskWork
     {
         public void Work()
         {
