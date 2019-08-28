@@ -24,7 +24,7 @@ namespace HomeWork8.Code
         public List<Question> List => list;
         public int Count{get=> list.Count; }
 
-        static public event ChangedName changeName;
+        public static event ChangedName changeName;
 
         //Индексатор - свойство для доступа к закрытому объекту
         public Question this[int index]
