@@ -30,7 +30,6 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnHelp = new System.Windows.Forms.Button();
             this.btnBackToMain = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnLoadCSV = new System.Windows.Forms.Button();
@@ -42,7 +41,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Silver;
             this.panel1.Controls.Add(this.lblTitle);
-            this.panel1.Controls.Add(this.btnHelp);
             this.panel1.Controls.Add(this.btnBackToMain);
             this.panel1.Controls.Add(this.btnExit);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -61,17 +59,6 @@
             this.lblTitle.Size = new System.Drawing.Size(255, 53);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Конвёртер";
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnHelp.Location = new System.Drawing.Point(493, 3);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(31, 32);
-            this.btnHelp.TabIndex = 0;
-            this.btnHelp.Text = "?";
-            this.btnHelp.UseVisualStyleBackColor = true;
             // 
             // btnBackToMain
             // 
@@ -140,7 +127,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Button btnBackToMain;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnLoadCSV;

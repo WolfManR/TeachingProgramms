@@ -31,7 +31,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnBackToMain = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnHelp = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.lblTrueAnswer = new System.Windows.Forms.Label();
@@ -40,9 +39,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbQuestion = new System.Windows.Forms.TextBox();
-            this.lblTrueAnswers = new System.Windows.Forms.Label();
             this.lblQuestions = new System.Windows.Forms.Label();
+            this.lblTrueAnswers = new System.Windows.Forms.Label();
+            this.tbQuestion = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +51,6 @@
             this.panel1.BackColor = System.Drawing.Color.Silver;
             this.panel1.Controls.Add(this.btnBackToMain);
             this.panel1.Controls.Add(this.lblTitle);
-            this.panel1.Controls.Add(this.btnHelp);
             this.panel1.Controls.Add(this.btnExit);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -82,17 +80,6 @@
             this.lblTitle.Size = new System.Drawing.Size(326, 53);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Верю не верю";
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnHelp.Location = new System.Drawing.Point(590, 3);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(31, 32);
-            this.btnHelp.TabIndex = 0;
-            this.btnHelp.Text = "?";
-            this.btnHelp.UseVisualStyleBackColor = true;
             // 
             // btnExit
             // 
@@ -183,15 +170,16 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             // 
-            // tbQuestion
+            // lblQuestions
             // 
-            this.tbQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.tbQuestion.Location = new System.Drawing.Point(12, 102);
-            this.tbQuestion.Multiline = true;
-            this.tbQuestion.Name = "tbQuestion";
-            this.tbQuestion.ReadOnly = true;
-            this.tbQuestion.Size = new System.Drawing.Size(438, 70);
-            this.tbQuestion.TabIndex = 11;
+            this.lblQuestions.AutoSize = true;
+            this.lblQuestions.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.lblQuestions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblQuestions.Location = new System.Drawing.Point(124, 11);
+            this.lblQuestions.Name = "lblQuestions";
+            this.lblQuestions.Size = new System.Drawing.Size(24, 26);
+            this.lblQuestions.TabIndex = 8;
+            this.lblQuestions.Text = "0";
             // 
             // lblTrueAnswers
             // 
@@ -204,16 +192,15 @@
             this.lblTrueAnswers.TabIndex = 9;
             this.lblTrueAnswers.Text = "0";
             // 
-            // lblQuestions
+            // tbQuestion
             // 
-            this.lblQuestions.AutoSize = true;
-            this.lblQuestions.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.lblQuestions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblQuestions.Location = new System.Drawing.Point(124, 11);
-            this.lblQuestions.Name = "lblQuestions";
-            this.lblQuestions.Size = new System.Drawing.Size(24, 26);
-            this.lblQuestions.TabIndex = 8;
-            this.lblQuestions.Text = "0";
+            this.tbQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.tbQuestion.Location = new System.Drawing.Point(12, 102);
+            this.tbQuestion.Multiline = true;
+            this.tbQuestion.Name = "tbQuestion";
+            this.tbQuestion.ReadOnly = true;
+            this.tbQuestion.Size = new System.Drawing.Size(438, 70);
+            this.tbQuestion.TabIndex = 11;
             // 
             // GameForm
             // 
@@ -245,7 +232,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnBackToMain;
         private System.Windows.Forms.Label label3;

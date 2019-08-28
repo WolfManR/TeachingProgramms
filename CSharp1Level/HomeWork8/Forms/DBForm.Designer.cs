@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnHelp = new System.Windows.Forms.Button();
             this.btnBackToMain = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.tbQuestion = new System.Windows.Forms.TextBox();
@@ -40,12 +39,12 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslFileName = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chbAnswer = new System.Windows.Forms.CheckBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
             this.nudDBElementIndex = new System.Windows.Forms.NumericUpDown();
-            this.chbAnswer = new System.Windows.Forms.CheckBox();
             this.ttFileName = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -57,7 +56,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Silver;
             this.panel1.Controls.Add(this.lblTitle);
-            this.panel1.Controls.Add(this.btnHelp);
             this.panel1.Controls.Add(this.btnBackToMain);
             this.panel1.Controls.Add(this.btnExit);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -76,17 +74,6 @@
             this.lblTitle.Size = new System.Drawing.Size(301, 53);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "База данных";
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnHelp.Location = new System.Drawing.Point(549, 3);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(31, 32);
-            this.btnHelp.TabIndex = 0;
-            this.btnHelp.Text = "?";
-            this.btnHelp.UseVisualStyleBackColor = true;
             // 
             // btnBackToMain
             // 
@@ -166,6 +153,17 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             // 
+            // chbAnswer
+            // 
+            this.chbAnswer.AutoSize = true;
+            this.chbAnswer.Location = new System.Drawing.Point(537, 27);
+            this.chbAnswer.Name = "chbAnswer";
+            this.chbAnswer.Size = new System.Drawing.Size(43, 17);
+            this.chbAnswer.TabIndex = 5;
+            this.chbAnswer.Text = "нет";
+            this.chbAnswer.UseVisualStyleBackColor = true;
+            this.chbAnswer.CheckedChanged += new System.EventHandler(this.ChbAnswer_CheckedChanged);
+            // 
             // btnAdd
             // 
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -229,17 +227,6 @@
             this.nudDBElementIndex.TabIndex = 10;
             this.nudDBElementIndex.ValueChanged += new System.EventHandler(this.NudDBElementIndex_ValueChanged);
             // 
-            // chbAnswer
-            // 
-            this.chbAnswer.AutoSize = true;
-            this.chbAnswer.Location = new System.Drawing.Point(537, 27);
-            this.chbAnswer.Name = "chbAnswer";
-            this.chbAnswer.Size = new System.Drawing.Size(43, 17);
-            this.chbAnswer.TabIndex = 5;
-            this.chbAnswer.Text = "нет";
-            this.chbAnswer.UseVisualStyleBackColor = true;
-            this.chbAnswer.CheckedChanged += new System.EventHandler(this.ChbAnswer_CheckedChanged);
-            // 
             // DBForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,7 +260,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnBackToMain;
         private System.Windows.Forms.TextBox tbQuestion;
