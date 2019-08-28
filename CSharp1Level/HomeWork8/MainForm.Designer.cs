@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.btnGame = new System.Windows.Forms.Button();
             this.btnDB = new System.Windows.Forms.Button();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
+            this.btnConvert = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +47,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(469, 78);
             this.panel1.TabIndex = 0;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 34.25F);
+            this.lblTitle.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblTitle.Location = new System.Drawing.Point(65, 13);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(333, 53);
+            this.lblTitle.TabIndex = 1;
+            this.lblTitle.Text = "Верю не Верю";
             // 
             // btnGame
             // 
@@ -70,17 +82,6 @@
             this.btnDB.Text = "БД";
             this.btnDB.UseVisualStyleBackColor = true;
             this.btnDB.Click += new System.EventHandler(this.BtnDB_Click);
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 34.25F);
-            this.lblTitle.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblTitle.Location = new System.Drawing.Point(65, 13);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(333, 53);
-            this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "Верю не Верю";
             // 
             // btnExit
             // 
@@ -107,12 +108,24 @@
             this.btnAbout.UseVisualStyleBackColor = true;
             this.btnAbout.Click += new System.EventHandler(this.BtnAbout_Click);
             // 
+            // btnConvert
+            // 
+            this.btnConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConvert.Location = new System.Drawing.Point(361, 146);
+            this.btnConvert.Name = "btnConvert";
+            this.btnConvert.Size = new System.Drawing.Size(85, 23);
+            this.btnConvert.TabIndex = 2;
+            this.btnConvert.Text = "Конвертер";
+            this.btnConvert.UseVisualStyleBackColor = true;
+            this.btnConvert.Click += new System.EventHandler(this.BtnConvert_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.ClientSize = new System.Drawing.Size(469, 208);
+            this.Controls.Add(this.btnConvert);
             this.Controls.Add(this.btnDB);
             this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.btnExit);
@@ -136,6 +149,7 @@
         private System.Windows.Forms.Button btnDB;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnAbout;
+        private System.Windows.Forms.Button btnConvert;
     }
 }
 

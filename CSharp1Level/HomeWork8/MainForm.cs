@@ -41,5 +41,12 @@ namespace HomeWork8
             db.Show();
             Hide();
         }
+
+        private void BtnConvert_Click(object sender, EventArgs e)
+        {
+            var conv = new Converter { Main = this };
+            conv.Show();
+            Hide();
+        }
     }
 }
