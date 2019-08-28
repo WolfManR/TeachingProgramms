@@ -18,6 +18,11 @@ namespace HomeWork8
 
         private void BtnGame_Click(object sender, EventArgs e)
         {
+            if (Program.DataBase == null)
+            {
+                MessageBox.Show("сначала необходимо загрузить базу данных с вопросами");
+                return;
+            }
             var game = new GameForm { Main = this };
             game.Show();
             Hide();

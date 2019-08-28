@@ -23,6 +23,7 @@ namespace HomeWork8.Forms
         private void BtnBackToMain_Click(object sender, EventArgs e)
         {
             Main.Show();
+            Program.DataBase = database;
             Close();
         }
 

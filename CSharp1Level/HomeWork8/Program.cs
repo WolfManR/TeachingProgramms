@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HomeWork8.Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace HomeWork8
 {
     static class Program
     {
+        static public BelieveOrNotBelieve DataBase { get; set; }
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
