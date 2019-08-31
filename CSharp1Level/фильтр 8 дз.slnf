@@ -1,0 +1,9 @@
+{
+  "solution": {
+    "path": "CSharp1Level.sln",
+    "projects": [
+      "HomeWork8\\HomeWork8.csproj",
+      "HomeWorkLib\\HomeWorkLib.csproj"
+    ]
+  }
+}
