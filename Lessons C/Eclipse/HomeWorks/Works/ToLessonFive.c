@@ -41,7 +41,7 @@ int LessonFive_main() {
 	printf("\n\n2:\n\n");
 	printf("Give me any integer, between 0 and 100, inclusive: ");
 	int num;
-	scanf_s("%d", &num);
+	scanf("%d", &num);
 	if (num >= 0 && num <= 100) printf("your number in the specified range");
 	else printf("your number not in the specified range");
 
@@ -54,7 +54,7 @@ int LessonFive_main() {
 	for (int i = 0; i < 10; i++)
 	{
 		printf("%d: ", i + 1);
-		scanf_s("%lf", &summar);
+		scanf("%lf", &summar);
 		avr += summar;
 	}
 	printf("\nAverage is %.2lf\n", avr /= 10);
@@ -63,7 +63,7 @@ int LessonFive_main() {
 	printf("\n\n4:\n\n");
 	printf("enter number of lines: ");
 	int lines = 0;
-	scanf_s("%d", &lines);
+	scanf("%d", &lines);
 	printf("this is you triangle:\n");
 
 	for (int i = 0; i < lines; i++) {

@@ -69,7 +69,7 @@ int main() {
 
 		printf("\n");
 		printf("Number: ");
-		scanf_s("%d", &lesson);
+		scanf("%d", &lesson);
 		printf("\n");
 
 		switch (lesson)

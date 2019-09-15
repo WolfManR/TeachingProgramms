@@ -1,8 +1,13 @@
 #include <stdio.h>
-
+int LessonFive_main();
+int LessonTen_main();
+int LessonFourteen_main();
 int main() {
 	printf("type \"q\", if you wan exit: ");
-	while ( getch()!= 'q') {
+	char quit=' ';
+	scanf("%c",&quit);
+	/*
+	while ( quit!= 'q') {
 		int lesson;
 		printf("\n\nChoose on which lesson you wan check homework work\nLessons:\n");
 		printf("1 : Five\n");
@@ -11,7 +16,7 @@ int main() {
 
 		printf("\n");
 		printf("Number: ");
-		scanf_s("%d", &lesson);
+		scanf("%d", &lesson);
 		printf("\n");
 		switch (lesson)
 		{
@@ -33,8 +38,9 @@ int main() {
 		}
 
 		printf("\ntype \"q\", if you wan exit: ");
+		quit=getchar();
 	}
-
+*/
 
 	return 0;
 }

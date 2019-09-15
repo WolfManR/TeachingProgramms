@@ -13,14 +13,14 @@ int FourAndFive_main() {
 	int input;
 	do {
 		printf("enter the divider for 100(remember, that you cannot divide by zero)\n");
-		scanf_s("%d", &input);
+		scanf("%d", &input);
 	} while (input == 0);
 	printf("100 / %d = %d\n", input, 100 / input);
 	printf("and the reminder will be %d,by the way \n", 100 % input);
 
 	int number = 71;
 	printf("input a number");
-	scanf_s("%d", &number);
+	scanf("%d", &number);
 	int d = 0, i = 1;
 	while (i <= number) {
 		if (number % i++ == 0) d++;

@@ -4,17 +4,17 @@ int calc() {
 	printf("Enter first operator: ");
 	scanf_s("%f", &first);
 	printf("\nenter  1 for+\n       2 for -\n       * for -\n       4 for /\n");
-	scanf_s("%d", &operator);
+	scanf("%d", &operator);
 
 	if (operator == 4) {
 		do {
 			printf("\nenter second operand: ");
-			scanf_s("%f", &second);
+			scanf("%f", &second);
 		} while (second == 0);
 	}
 	else {
 		printf("\nenter second operand: ");
-		scanf_s("%f", &second);
+		scanf("%f", &second);
 	}
 	float result;
 	char operatorSign;
