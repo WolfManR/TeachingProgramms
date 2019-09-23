@@ -3,10 +3,11 @@ int LessonFive_main();
 int LessonTen_main();
 int LessonFourteen_main();
 int main() {
+	setvbuf(stdout, NULL, _IONBF, 0);
 	printf("type \"q\", if you wan exit: ");
 	char quit=' ';
 	scanf("%c",&quit);
-	/*
+
 	while ( quit!= 'q') {
 		int lesson;
 		printf("\n\nChoose on which lesson you wan check homework work\nLessons:\n");
@@ -38,9 +39,11 @@ int main() {
 		}
 
 		printf("\ntype \"q\", if you wan exit: ");
-		quit=getchar();
+		setbuf(stdout, NULL);
+		setbuf(stdin, NULL);
+		scanf("%c",&quit);
 	}
-*/
+
 
 	return 0;
 }

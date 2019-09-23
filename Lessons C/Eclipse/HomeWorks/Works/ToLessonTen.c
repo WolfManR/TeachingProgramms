@@ -36,23 +36,26 @@
 #include <math.h>
 #include <stdio.h>
 
-int calculateSquareEquality(int a, int b, int c, float* x1, float* x2) {
-	int d = b * b - 4 * a * c;
-	if (d < 0) return -1;
-	else if (d == 0) {
-		*x1 = *x2 = (float)(-b / (2 * a));
+int calculateSquareEquation(int a, int b, int c, float* x1, float* x2) {
+	double D = b * b - 4 * a * c;
+	if(a==0){
+		*x1 = -c / b;
+		return 0;
+	}
+	if (D < 0) return -1;
+	else if (D == 0) {
+		*x1 = *x2 = -b / (2 * a);
 		return 0;
 	}
 	else
 	{
-		*x1 = (-b + (float)sqrt(d)) / (2 * a);
-		*x2 = (-b - (float)sqrt(d)) / (2 * a);
+		*x1 = (-b + sqrt(D)) / (2 * a);
+		*x2 = (-b - sqrt(D)) / (2 * a);
 		return 1;
 	}
 }
 
-int checkArray(int* arr, int length, int* changed) {
-	int result = 0;
+int OddDoubler(int* arr, int length) {
 	for (int i = 0; i < length; i++)
 	{
 		if (arr[i] % 2 != 0) {
@@ -60,19 +63,24 @@ int checkArray(int* arr, int length, int* changed) {
 				if (arr[k] % 2 != 0)
 					arr[k] *= 2;
 
-			*changed = 1;
-			result = 1;
-			break;
+			return 1;
 		}
 	}
-	if (*changed != 1) * changed = 0;
-	return result;
+	return 0;
 }
 
 void intToShortArray(unsigned int* array) {
 	unsigned short* arr = array;
 	printf("this is array after ");
 	for (int i = 0; i < 20; i++) printf("%d ", *(arr + i));
+}
+
+void InputArray(int *array, int length){
+	printf("enter array\n");
+		for (int i = 0; i < length; i++) {
+			printf("n.%d is ", i);
+			scanf("%d", array + i);
+		}
 }
 
 int LessonTen_main() {
@@ -82,13 +90,18 @@ int LessonTen_main() {
 	int a, b, c;
 	float x1, x2;
 	printf("Enter numbers in square equality ax^2+bx+c=0, like a b c\n");
-	scanf("%d %d %d", &a, &b, &c);
+	printf("\nenter a: ");
+	scanf("%d",&a);
+	printf("\nenter b: ");
+	scanf("%d",&b);
+	printf("\nenter c: ");
+	scanf("%d",&c);
 	if (a == 0) printf("x = %f",(float)(-c/b));
 	else {
-		switch (calculateSquareEquality(a, b, c, &x1, &x2))
+		switch (calculateSquareEquation(a, b, c, &x1, &x2))
 		{
 		case -1:
-			printf("d < 0  x1 = %f, x2 = %f", x1, x2);
+			printf("d < 0");
 			break;
 		case 0:
 			printf("d = 0  x1 = %5.2f, x2 = %5.2f", x1, x2);
@@ -115,7 +128,7 @@ int LessonTen_main() {
 	printf("\n");
 
 	int change = 0;
-	checkArray(&array, 5, &change);
+	OddDoubler(array, 5);
 	if (change == 1) {
 		printf("changed array is: ");
 		for (int i = 0; i < 5; i++) printf("%d ", array[i]);
