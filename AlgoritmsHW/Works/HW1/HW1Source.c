@@ -29,7 +29,11 @@ typedef struct{
 	char ToDo[400];
 	int Number;
 }Task;
+
 void TaskMenu();
+
+int Task1_main();
+
 int HW1_main(){
 	setvbuf(stdout, NULL, _IONBF, 0);
 	Task tasks[8];
@@ -64,6 +68,7 @@ int HW1_main(){
 	scanf("%d",&userInput);
 	switch(userInput){
 	case 1:
+		Task1_main();
 		break;
 	default:
 		printf("Something go wrong\n");
