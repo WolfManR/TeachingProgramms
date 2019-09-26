@@ -36,7 +36,8 @@ void Task1_main();
 void Task3_main();
 void Task4_main();
 void Task6_main();
-
+void Task7_main();
+void Task9_main();
 int HW1_main(){
 	//setvbuf(stdout, NULL, _IONBF, 0);
 	Task tasks[8];
@@ -81,6 +82,12 @@ int HW1_main(){
 		break;
 	case 6:
 		Task6_main();
+		break;
+	case 7:
+		Task7_main();
+		break;
+	case 9:
+		Task9_main();
 		break;
 	default:
 		printf("Something go wrong\n");
