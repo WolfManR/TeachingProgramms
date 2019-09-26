@@ -14,9 +14,9 @@ void Task9_main(){
 	printf("делимое число: ");
 	scanf("%d",&n);
 	do{
-		printf("\nделитель: ");
-		scanf("%d",k);
-		if(k==0)printf("нельзя делить на 0");
+		printf("делитель: ");
+		scanf("%d",&k);
+		if(k==0)printf("нельзя делить на 0\n");
 	}while(k==0);
 
 	int result=0;
