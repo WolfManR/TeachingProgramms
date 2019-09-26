@@ -22,7 +22,7 @@ void swapNotWithThird(int* first, int* second) {
 	*first ^= *second;
 }
 
-int Task3_main() {
+void Task3_main() {
 	int x,y;
 	printf("Введите значение первой переменной: ");
 	scanf("%d",&x);
@@ -45,6 +45,4 @@ int Task3_main() {
 		printf("Something go wrong");
 		break;
 	}
-
-	return 0;
 }

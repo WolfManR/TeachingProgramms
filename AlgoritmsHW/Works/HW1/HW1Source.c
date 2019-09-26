@@ -32,11 +32,13 @@ typedef struct{
 
 void TaskMenu();
 
-int Task1_main();
-int Task3_main();
+void Task1_main();
+void Task3_main();
+void Task4_main();
+void Task6_main();
 
 int HW1_main(){
-	setvbuf(stdout, NULL, _IONBF, 0);
+	//setvbuf(stdout, NULL, _IONBF, 0);
 	Task tasks[8];
 
 	tasks[0].Number=1;
@@ -73,6 +75,12 @@ int HW1_main(){
 		break;
 	case 3:
 		Task3_main();
+		break;
+	case 4:
+		Task4_main();
+		break;
+	case 6:
+		Task6_main();
 		break;
 	default:
 		printf("Something go wrong\n");
