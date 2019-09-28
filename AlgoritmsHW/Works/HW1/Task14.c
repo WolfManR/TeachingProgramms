@@ -12,4 +12,6 @@
 
 void Task14_main(){
 	const int max = 1000000;
+	int n,sqrNum,count,temp;
+	for(n=0;n<=max;)
 }
