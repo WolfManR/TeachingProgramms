@@ -54,7 +54,7 @@ namespace GameProject
             objs = new GameObject[30];
             for (int i = 0; i < objs.Length / 2; i++)
                 objs[i] = new GameObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20));
-            Star.Image = Image.FromFile("Images\\square.png");
+            Star.Image = Image.FromFile(@"Assets/star.png");
             for (int i = 15; i < objs.Length; i++)
                 objs[i] = new Star(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20));
         }
