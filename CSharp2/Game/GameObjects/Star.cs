@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace GameProject.GameObjects
 {
@@ -25,7 +20,7 @@ namespace GameProject.GameObjects
 
         public override void Update()
         {
-            pos.X = pos.X + dir.X;
+            pos.X += dir.X;
             if (pos.X < 0) dir.X = Game.Width + 20;
         }
 
