@@ -67,7 +67,7 @@
     <Compile Include="GameObjects\Star.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GameEngine\SplashScreen.cs" />
+    <Compile Include="Asteroids\SplashScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,4 +1,5 @@
-﻿using GameProject.Asteroids.GameLevels;
+﻿using GameProject.Asteroids;
+using GameProject.Asteroids.GameLevels;
 using GameProject.GameEngine;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,7 +15,7 @@ namespace GameProject
         public static int Height { get; set; }
 
         public static Timer timer;
-
+        public static Scene Scene { get; set; }
         static Game()
         {
         }
@@ -32,22 +33,19 @@ namespace GameProject
             // Связываем буфер в памяти с графическим объектом.
             // для того, чтобы рисовать в буфере
             buffer = context.Allocate(g, new Rectangle(0, 0, Width, Height));
+            SplashScreen.Init(form);
 
-            Scene scene = null;
             timer = new Timer { Interval = 100 };
-            timer.Tick += (sender,e) =>
+            timer.Tick += (sender, e) =>
             {
-                scene.Draw();
-                scene.Update();
+                Scene.Draw();
+                Scene.Update();
             };
+        }
 
-
-
-            scene = new Level1();
-
-
-
-            scene.Load();
+        public static void Play()
+        {
+            Scene.Load();
             timer.Start();
         }
 
