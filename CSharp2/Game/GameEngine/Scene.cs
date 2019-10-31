@@ -18,7 +18,6 @@ namespace GameProject.GameEngine
         public abstract void Load();
         public virtual void Draw()
         {
-            // Проверяем вывод графики
             Game.buffer.Graphics.Clear(Color.Black);
             foreach (GameObject obj in Objects)
                 obj.Draw();
