@@ -9,7 +9,7 @@ namespace ProjectWorkersLibrary
         public double? MonthySalary { get; set; }
         public override double AverageMonthySalary()
         {
-            return MonthySalary??throw new Exception("Нет оплаты!");
+            return MonthySalary??throw new ArgumentNullException("Нет оплаты!");
         }
     }
 }

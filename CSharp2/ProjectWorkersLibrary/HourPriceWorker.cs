@@ -10,7 +10,7 @@ namespace ProjectWorkersLibrary
         public double? WorkDays { get; set; }
         public override double AverageMonthySalary()
         {
-            return (WorkDays ?? throw new Exception("Not Work"))* 8 * (HourlyRate ?? throw new Exception("Salary not set"));
+            return (WorkDays ?? throw new ArgumentNullException("Not Work"))* 8 * (HourlyRate ?? throw new ArgumentNullException("Salary not set"));
         }
     }
 }
