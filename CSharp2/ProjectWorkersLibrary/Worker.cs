@@ -12,7 +12,8 @@ namespace ProjectWorkersLibrary
      * г) *Создать класс, содержащий массив сотрудников, и реализовать возможность вывода данных с использованием foreach.
      */
 
-    class Worker
+    public abstract class Worker:Person
     {
+        public abstract double AverageMonthySalary();
     }
 }
