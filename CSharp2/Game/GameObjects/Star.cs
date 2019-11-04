@@ -21,7 +21,7 @@ namespace GameProject.GameObjects
         public override void Update()
         {
             pos.X += dir.X;
-            if (pos.X < 0) dir.X = Game.Width + 20;
+            if (pos.X < 0) pos.X = Game.Width + 20;
         }
 
         public override void Draw()

@@ -16,13 +16,12 @@ namespace GameProject
             form.Show();
             form.FormClosing += Form_FormClosing;
             Game.Init(form);
-            Application.Run();
+            Application.Run(form);
         }
 
         private static void Form_FormClosing(object sender, FormClosingEventArgs e)
         {
             Game.timer.Stop();
-            Application.Exit();
         }
     }
 }
