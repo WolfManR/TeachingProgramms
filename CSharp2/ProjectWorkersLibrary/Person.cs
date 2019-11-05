@@ -9,9 +9,20 @@ namespace ProjectWorkersLibrary
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public int CompareTo(object obj)
+        int IComparable.CompareTo(object obj)
         {
-            return LastName.CompareTo(obj);
+            if (obj is Person person)
+            {
+                int result = LastName.CompareTo(person.LastName);
+                if (result != 0) return result;
+                else
+                {
+                    result = FirstName.CompareTo(person.FirstName);
+                    return result;
+                }
+
+            }
+            else throw new ArgumentException("Parameter is not a Person!");
         }
     }
 }
