@@ -22,5 +22,7 @@ namespace ProjectWorkersLibrary
             }
             else throw new ArgumentException("Parameter is not a Person!");
         }
+
+        public override string ToString() => $"{LastName} {FirstName}";
     }
 }

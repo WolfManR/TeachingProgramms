@@ -6,7 +6,7 @@ namespace ProjectWorkersLibrary
     public class Workers:IEnumerable
     {
         Worker[] workers;
-        public Workers(Worker[] workers)
+        public Workers(params Worker[] workers)
         {
             this.workers = workers ?? throw new ArgumentNullException(nameof(workers));
         }
