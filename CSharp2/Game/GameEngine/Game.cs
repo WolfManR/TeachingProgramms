@@ -1,6 +1,6 @@
 ﻿using GameProject.Asteroids;
-using GameProject.Asteroids.GameLevels;
 using GameProject.GameEngine;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -22,6 +22,7 @@ namespace GameProject
 
         public static void Init(Form form)
         {
+            if (form.Width > 1000 || form.Height > 1000 || form.Width < 0 || form.Height < 0) throw new ArgumentOutOfRangeException("Width or Heigth <0 or >1000");
             // Графическое устройство для вывода графики            
             Graphics g;
             // предоставляет доступ к главному буферу графического контекста для текущего приложения

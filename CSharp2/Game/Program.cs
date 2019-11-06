@@ -19,11 +19,19 @@ namespace GameProject
     {
         static void Main(string[] args)
         {
-            Form form = new Form{ Width = 800, Height = 600 };
-            form.Show();
-            form.FormClosing += Form_FormClosing;
-            Game.Init(form);
-            Application.Run(form);
+            try
+            {
+                Form form = new Form { Width = 800, Height = 600 };
+                form.Show();
+                form.FormClosing += Form_FormClosing;
+                Game.Init(form);
+                Application.Run(form);
+            }
+            catch (System.Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
         }
 
         private static void Form_FormClosing(object sender, FormClosingEventArgs e)
