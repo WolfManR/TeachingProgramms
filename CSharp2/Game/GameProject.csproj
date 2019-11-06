@@ -64,13 +64,17 @@
   <ItemGroup>
     <Compile Include="Asteroids\GameLevels\Level1.cs" />
     <Compile Include="Asteroids\GameObjects\Bullet.cs" />
+    <Compile Include="Asteroids\IResetPos.cs" />
     <Compile Include="GameEngine\Game.cs" />
-    <Compile Include="GameEngine\ICollision.cs" />
+    <Compile Include="GameEngine\InGameObjects\GameObjectException.cs" />
+    <Compile Include="GameEngine\InGameObjects\ICollision.cs" />
     <Compile Include="GameEngine\IGameEngineObject.cs" />
+    <Compile Include="GameEngine\InGameObjects\Player.cs" />
     <Compile Include="GameEngine\Scene.cs" />
     <Compile Include="Asteroids\GameObjects\Asteroid.cs" />
-    <Compile Include="GameEngine\GameObject.cs" />
+    <Compile Include="GameEngine\InGameObjects\GameObject.cs" />
     <Compile Include="Asteroids\GameObjects\Star.cs" />
+    <Compile Include="GameEngine\InGameObjects\Weapon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Asteroids\SplashScreen.cs" />
