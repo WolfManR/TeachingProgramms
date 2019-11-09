@@ -38,14 +38,17 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameEngine\Game.cs" />
-    <Compile Include="GameEngine\IGameEngineObject.cs" />
-    <Compile Include="GameEngine\InGameObjects\GameObject.cs" />
-    <Compile Include="GameEngine\InGameObjects\GameObjectException.cs" />
-    <Compile Include="GameEngine\InGameObjects\ICollision.cs" />
-    <Compile Include="GameEngine\InGameObjects\Player.cs" />
-    <Compile Include="GameEngine\InGameObjects\Weapon.cs" />
-    <Compile Include="GameEngine\Scene.cs" />
+    <Compile Include="Archetipes\RectangleCollision.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Interfaces\IGameEngineObject.cs" />
+    <Compile Include="Archetipes\GameObject.cs" />
+    <Compile Include="Exceptions\GameObjectException.cs" />
+    <Compile Include="Interfaces\ICollisionObject.cs" />
+    <Compile Include="Interfaces\ICollision.cs" />
+    <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="Interfaces\ISharedGameObjectData.cs" />
+    <Compile Include="Scene.cs" />
+    <Compile Include="Timer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

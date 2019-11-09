@@ -1,29 +1,33 @@
-﻿using GameProject.Asteroids.GameObjects;
-using GameProject.GameEngine;
+﻿using GameEngineLibraryProject;
+using GameEngineLibraryProject.Archetipes;
+using GameProject.Asteroids.GameObjects;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
 namespace GameProject.Asteroids.GameLevels
 {
-    public class Level1 : Scene
+    public class Level1 : GameScene
     {
         readonly Random r = new Random();
         public override void Load()
         {
-            Objects = new List<GameObject>();
+            BackGroundObjects = new List<GameObject>();
             CollisionsObjects = new List<GameObject>();
             GenerateBackground();
             GenerateCollisionObjects();
-            GeneratePlayer();
+            PlayerStartPosition = new List<Point>
+            {
+                new Point(0, Game.Height / 2)
+            };
 
         }
-
+        
         void GenerateBackground()
         {
             Star.Image = Image.FromFile(@"Assets/star.png");
             for (int i = 0; i < 400; i++)
-                Objects.Add(new Star(new Point(r.Next(40,Game.Width),r.Next(0,Game.Height)), new Point(-(15 - r.Next(2,8)), 0), new Size(Star.Image.Width, Star.Image.Height)));
+                BackGroundObjects.Add(new Star(new Point(r.Next(40,Game.Width),r.Next(0,Game.Height)), new Point(-(15 - r.Next(2,8)), 0), new Size(Star.Image.Width, Star.Image.Height)));
         }
 
         void GenerateCollisionObjects()
@@ -38,17 +42,6 @@ namespace GameProject.Asteroids.GameLevels
                 CollisionsObjects.Add(asteroid);
 
             }
-
-        }
-
-        void GeneratePlayer()
-        {
-            Image image = Image.FromFile(@"Assets/ship.png");
-            Player = new Player(new Point(0, Game.Height / 2), new Point(), new Size(image.Width, image.Height))
-            {
-                Image = image
-            };
-            Player.Weapon = new Weapon(new Bullet(Player.WeaponPos, new Point(10, 0), new Size(4, 2)));
         }
     }
 }

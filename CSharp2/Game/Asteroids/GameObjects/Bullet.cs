@@ -1,43 +1,34 @@
-﻿using System.Drawing;
-using GameProject.GameEngine;
+﻿using GameEngineLibraryProject;
+using GameEngineLibraryProject.Archetipes;
+using System.Drawing;
 
 namespace GameProject.Asteroids.GameObjects
 {
-    class Bullet : GameObject, ICollision,IResetPos
+    public class Bullet : BaseGameObject, ICollision, IResetPos
     {
-        private Rectangle collisionRect;
+        readonly int speed;
+        public Player Player { get; set; }
+        public ICollisionObject CollisionObject { get; }
 
-        public Rectangle CollisionRect => collisionRect; 
-        public Bullet() : this(new Point(), new Point(), new Size(4, 2))
+        public Bullet(Point pos,int speed,Player player):this(pos,new Point(speed,0),new Size(4, 2))
         {
-
+            this.Player = player;
+            this.speed = speed;
         }
         public Bullet(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
-            collisionRect = new Rectangle(pos, size);
+            this.CollisionObject = new RectangleCollision(this);
+            this.speed = dir.X;
         }
 
-        public bool Collision(ICollision obj)
-        {
-            bool check = obj.CollisionRect.IntersectsWith(this.CollisionRect);
-            if (check) 
-            { 
-                ResetPos();
-                (obj as IResetPos).ResetPos();
-            }
-            return check;
-        }
         public override void Draw()
         {
             Game.buffer.Graphics.DrawRectangle(Pens.Red, pos.X, pos.Y, size.Width, size.Height);
         }
         public override void Update()
         {
-            pos.X += dir.X;
-            if (pos.X > Game.Width) dir.X = 0;
-            collisionRect.Location = pos;
+            if (pos.X < Game.Width + size.Width) pos.X += speed;
         }
-
         public void ResetPos()
         {
             pos.X = 0;

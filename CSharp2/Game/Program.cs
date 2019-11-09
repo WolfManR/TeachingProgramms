@@ -1,10 +1,11 @@
 ﻿using System.Windows.Forms;
-
+using GameEngineLibraryProject;
+using GameProject.Asteroids;
 /* 1 HW
- * 1. Добавить свои объекты в иерархию объектов, чтобы получился красивый задний фон, похожий на полёт в звёздном пространстве.
- * 2. *Заменить кружочки картинками, используя метод DrawImage.
- * 3. *Разработать собственный класс заставка SplashScreen, аналогичный классу Game в котором создайте собственную иерархию объектов и задайте их движение. Предусмотреть кнопки - Начало игры, Рекорды, Выход. Добавить на заставку имя автора.
- */
+* 1. Добавить свои объекты в иерархию объектов, чтобы получился красивый задний фон, похожий на полёт в звёздном пространстве.
+* 2. *Заменить кружочки картинками, используя метод DrawImage.
+* 3. *Разработать собственный класс заставка SplashScreen, аналогичный классу Game в котором создайте собственную иерархию объектов и задайте их движение. Предусмотреть кнопки - Начало игры, Рекорды, Выход. Добавить на заставку имя автора.
+*/
 
 
 /* 2 HW
@@ -19,24 +20,26 @@ namespace GameProject
     {
         static void Main(string[] args)
         {
-            try
-            {
+            //try
+            //{
                 Form form = new Form { Width = 800, Height = 600 };
                 form.Show();
                 form.FormClosing += Form_FormClosing;
-                Game.Init(form);
+                Game.Init(form.CreateGraphics(),form.Width,form.Height);
+                MainGame.Init("Player1");               //Получить ответ из DialogResult
+                SplashScreen.Init(form);
                 Application.Run(form);
-            }
-            catch (System.Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
+            //}
+            //catch (System.Exception e)
+            //{
+            //    MessageBox.Show(e.Message);
+            //}
             
         }
 
         private static void Form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Game.timer.Stop();
+            Game.Timer.Stop();
         }
     }
 }

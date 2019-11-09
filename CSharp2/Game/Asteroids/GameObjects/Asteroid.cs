@@ -1,20 +1,19 @@
-﻿using System.Drawing;
-using GameProject.GameEngine;
+﻿using GameEngineLibraryProject;
+using GameEngineLibraryProject.Archetipes;
+using System.Drawing;
 
 namespace GameProject.Asteroids.GameObjects
 {
-    class Asteroid : GameObject, ICollision,IResetPos
+    public class Asteroid : BaseGameObject, ICollision, IResetPos
     {
-        private Rectangle collisionRect;
-
         public Image Image { get; set; }
-        public Rectangle CollisionRect => collisionRect;
+        public ICollisionObject CollisionObject { get; }
+
         public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
-            collisionRect = new Rectangle(pos, size);
+            CollisionObject = new RectangleCollision(this);
         }
 
-        public bool Collision(ICollision obj)=>obj.CollisionRect.IntersectsWith(this.CollisionRect);
         public override void Draw()
         {
             Game.buffer.Graphics.DrawImage(Image, pos);
@@ -23,9 +22,7 @@ namespace GameProject.Asteroids.GameObjects
         {
             pos.X += dir.X;
             if (pos.X < 0) pos.X = Game.Width + 20;
-            collisionRect.Location = pos;
         }
-
         public void ResetPos()
         {
             pos.X = Game.Width;

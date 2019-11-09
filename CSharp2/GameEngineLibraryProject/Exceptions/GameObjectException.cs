@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameProject.GameEngine.InGameObjects
+namespace GameEngineLibraryProject.Exceptions
 {
     public class GameObjectException : ApplicationException
     {

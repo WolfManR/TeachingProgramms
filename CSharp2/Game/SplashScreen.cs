@@ -1,4 +1,5 @@
-﻿using GameProject.Asteroids.GameLevels;
+﻿using GameEngineLibraryProject;
+using GameProject.Asteroids.GameLevels;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -21,10 +22,9 @@ namespace GameProject.Asteroids
             play.Location = new Point(form.Width - play.Width - 30, form.Height - 200);
             play.Click += (sender, e) =>
             {
-                Game.Scene = new Level1();
                 form.Controls.Clear();
                 form.BackgroundImage = null;
-                Game.Play();
+                MainGame.Start();
             };
 
             Button records = new Button()

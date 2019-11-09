@@ -62,14 +62,19 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asteroids\GameLevels\GameScene.cs" />
     <Compile Include="Asteroids\GameLevels\Level1.cs" />
+    <Compile Include="Asteroids\GameObjects\BaseGameObject.cs" />
     <Compile Include="Asteroids\GameObjects\Bullet.cs" />
+    <Compile Include="Asteroids\GameObjects\Player.cs" />
+    <Compile Include="Asteroids\GameObjects\Ship.cs" />
     <Compile Include="Asteroids\IResetPos.cs" />
     <Compile Include="Asteroids\GameObjects\Asteroid.cs" />
     <Compile Include="Asteroids\GameObjects\Star.cs" />
+    <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Asteroids\SplashScreen.cs" />
+    <Compile Include="SplashScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -109,6 +114,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\GameEngineLibraryProject\GameEngineLibraryProject.csproj">
+      <Project>{17e4c867-0427-41f7-b951-41e13615d0c7}</Project>
+      <Name>GameEngineLibraryProject</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
