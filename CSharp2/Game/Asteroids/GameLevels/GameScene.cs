@@ -30,8 +30,12 @@ namespace GameProject.Asteroids.GameLevels
             foreach (GameObject obj in BackGroundObjects) obj.Draw();
             foreach (GameObject obj in CollisionsObjects) obj.Draw();
             Player.ControlledObject.Draw();
-            if(Bullets!= null) foreach (Bullet obj in Bullets) obj.Draw();
+            Game.buffer.Graphics.DrawString($"Record: {Player.Record}", new Font(FontFamily.GenericSansSerif, 20, FontStyle.Underline), Brushes.White, 200, 10);
+            Game.buffer.Graphics.DrawString($"Health: {(Player.ControlledObject as IDamagedObject).Health}", new Font(FontFamily.GenericSansSerif, 20, FontStyle.Underline), Brushes.White, 10, 10);
+            if (Bullets!= null) foreach (Bullet obj in Bullets) obj.Draw();
             Game.buffer.Render();
+
+            Program.Log?.Invoke(this, "Drawn");
         }
 
         public override void Update()
@@ -40,21 +44,45 @@ namespace GameProject.Asteroids.GameLevels
             foreach (GameObject obj in CollisionsObjects)
             {
                 obj.Update();
-                if (Bullets != null)
+                switch (obj)
                 {
-                    foreach (var bullet in Bullets)
-                    {
-                        if (bullet.CollisionObject.Collision(obj as ICollision))
+                    case IDamagedObject d:
+                        if (Bullets != null)
                         {
-                            System.Media.SystemSounds.Hand.Play();
-                            bullet.Player.AddRecord(1);
-                            bullet.ResetPos();
-                            (obj as IResetPos)?.ResetPos();
+                            List<Bullet> destroyedBullets = new List<Bullet>();
+                            foreach (var bullet in Bullets)
+                            {
+                                if ((bullet.CollisionObject as ICollisionObject).Collision(d as ICollision))
+                                {
+                                    System.Media.SystemSounds.Hand.Play();
+                                    if (bullet.IsDestroyed) destroyedBullets.Add(bullet);
+                                }
+                            }
+                            if (destroyedBullets != null) foreach (var bullet in destroyedBullets) Bullets.Remove(bullet);
                         }
-                        bullet.Update();
-                    }
+                        if (((Player.ControlledObject as ICollision).CollisionObject as ICollisionObject).Collision(obj as ICollision))
+                        {
+                            System.Media.SystemSounds.Question.Play();
+                        }
+                        break;
+                    case IBonusObject b:
+                        if (((Player.ControlledObject as ICollision).CollisionObject as ICollisionObject).Collision(b as ICollision))
+                        {
+                            System.Media.SystemSounds.Beep.Play();
+                        }
+                        break;
+                    default:
+                        break;
                 }
+                
+                
             }
+            foreach (var item in Bullets)
+            {
+                item.Update();
+            }
+
+            Program.Log?.Invoke(this, "Updated");
         }
     }
 }

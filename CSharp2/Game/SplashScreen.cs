@@ -1,5 +1,6 @@
 ﻿using GameEngineLibraryProject;
 using GameProject.Asteroids.GameLevels;
+using GameProject.Asteroids.GameObjects;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -24,7 +25,10 @@ namespace GameProject.Asteroids
             {
                 form.Controls.Clear();
                 form.BackgroundImage = null;
+                form.KeyDown += Form_ShootKeyDown;
+                form.KeyDown += Form_MoveKeyDown;
                 MainGame.Start();
+                Program.Log?.Invoke(null, "SplashScreen Button: play - pressed");
             };
 
             Button records = new Button()
@@ -42,10 +46,28 @@ namespace GameProject.Asteroids
                 Height = 30
             };
             exit.Location = new Point(records.Location.X, records.Location.Y + records.Height + 10);
-            exit.Click += (sender, e) => form.Close();
+            exit.Click += (sender, e) =>
+            {
+                Program.Log?.Invoke(null, "SplashScreen Button: exit - pressed");
+                form.Close();
+            };
 
             Button[] menu = { play, records, exit };
             form.Controls.AddRange(menu);
+
+
+        }
+
+
+
+        private static void Form_ShootKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey) MainGame.State.CurrentScene.Bullets.Add((MainGame.State.Player1.ControlledObject as Ship).Shoot());
+        }
+        private static void Form_MoveKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up) (MainGame.State.Player1.ControlledObject as Ship).MoveUp();
+            if (e.KeyCode == Keys.Down) (MainGame.State.Player1.ControlledObject as Ship).MoveDown();
         }
     }
 }

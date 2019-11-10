@@ -1,11 +1,15 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace GameEngineLibraryProject.Archetipes
 {
     public class RectangleCollision : ICollisionObject
     {
         private Rectangle collisionRect;
-        public Rectangle CollisionRect => collisionRect;
+
+        public event EventHandler<object> Intersected;
+
+        public object CollisionObj => collisionRect;
         public ISharedGameObjectData Parent { get; set; }
 
         public RectangleCollision(ISharedGameObjectData parent)
@@ -15,13 +19,16 @@ namespace GameEngineLibraryProject.Archetipes
         }
         public bool Collision(ICollision obj)
         {
-            if (Parent.Pos != collisionRect.Location) CollisionRectPosUpdate(Parent.Pos);
-            return (obj.CollisionObject as RectangleCollision).CollisionRect.IntersectsWith(this.CollisionRect);
+            CollisionPosUpdate(Parent.Pos);
+            obj.CollisionObject.CollisionPosUpdate(obj.CollisionObject.Parent.Pos);
+            bool check = ((Rectangle)obj.CollisionObject.CollisionObj).IntersectsWith((Rectangle)CollisionObj);
+            if (check) Intersected?.Invoke(Parent, obj);
+            return check;
         }
 
-        void CollisionRectPosUpdate(Point newPos)
+        public void CollisionPosUpdate(object newPos)
         {
-            if (collisionRect != null) collisionRect.Location = newPos;
+            collisionRect.Location = (Point)newPos;
         }
     }
 }

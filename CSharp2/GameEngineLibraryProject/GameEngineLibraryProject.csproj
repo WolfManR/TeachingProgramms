@@ -38,6 +38,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Archetipes\LightWeightRectangleCollision.cs" />
     <Compile Include="Archetipes\RectangleCollision.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Interfaces\IGameEngineObject.cs" />
@@ -45,6 +46,7 @@
     <Compile Include="Exceptions\GameObjectException.cs" />
     <Compile Include="Interfaces\ICollisionObject.cs" />
     <Compile Include="Interfaces\ICollision.cs" />
+    <Compile Include="Interfaces\ILightWeightCollisionObject.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\ISharedGameObjectData.cs" />
     <Compile Include="Scene.cs" />
