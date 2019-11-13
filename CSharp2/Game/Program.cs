@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using GameEngineLibraryProject;
 using GameProject.Asteroids;
-
+using System.IO;
 namespace GameProject
 {
     public delegate void Log(object sender, string msg);
@@ -12,6 +12,8 @@ namespace GameProject
         static void Main(string[] args)
         {
             Log = new Log(ConsoleWork.Message);
+            ConsoleWork.OpenStream();
+            Log += ConsoleWork.SaveLogToFile;
             Log?.Invoke(null, "GameProject Work Started");
             try
             {
@@ -42,6 +44,8 @@ namespace GameProject
         {
             Game.Timer.Stop();
             Log?.Invoke(null, "Form Closing");
+            Log -= ConsoleWork.SaveLogToFile;                 //интересный баг если не убрать, подскажите почему
+            ConsoleWork.CloseStream();
         }
     }
     
@@ -51,10 +55,36 @@ namespace GameProject
         {
             Console.WriteLine($"{sender?.GetType().Name} {msg}");
         }
+        static StreamWriter sw;
 
+        public static void OpenStream()
+        {
+            try
+            {
+                sw = new StreamWriter("Log.txt");
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("can't open stream");
+            }
+        }
+
+        public static void CloseStream()
+        {
+            sw?.Close();
+        }
         public static void SaveLogToFile(object sender, string msg)
         {
-
+            //try
+            //{
+                sw?.WriteLine($"{sender?.GetType().Name} {msg}");
+            //}
+            //catch (Exception)
+            //{
+            //    throw new Exception("cant wright in stream");
+            //}
+            
         }
     }
 }

@@ -12,7 +12,7 @@ namespace GameProject.Asteroids.GameObjects
         public int Health { get; private set; }
         public int Damage { get; }
         public int BaseHealth { get; }
-        public bool IsDestroyed { get; } = false;
+        public bool IsDestroyed { get; private set; } = false;
 
         public Asteroid(Point pos, Point dir, Size size, int recordPoints, int health, int damage) : base(pos, dir, size)
         {
@@ -51,8 +51,9 @@ namespace GameProject.Asteroids.GameObjects
             else
             {
                 (obj as Player)?.RecordUp(RecordPoints);
-                Health = BaseHealth;
-                ResetPos();
+                //Health = BaseHealth;
+                //ResetPos();
+                IsDestroyed = true;
             }
 
             Program.Log?.Invoke(this, $"Damaged by {obj.GetType().Name} on {value} points");
