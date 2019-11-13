@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F649AD6F-E2E3-4C63-8E9A-EAAEF91644B1}</ProjectGuid>
+    <ProjectGuid>{56CB919E-5975-45BC-A960-EFE4D875CFD4}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Lesson3Project</RootNamespace>
-    <AssemblyName>Lesson3Project</AssemblyName>
+    <RootNamespace>OtherHWTasks</RootNamespace>
+    <AssemblyName>OtherHWTasks</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -38,11 +38,19 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HW2_ProjectWorkerTest.cs" />
+    <Compile Include="HW3_Lesson3Project.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectWorkersLibrary\ProjectWorkersLibrary.csproj">
+      <Project>{B85897E5-3B54-4715-81E6-AA3043B262D0}</Project>
+      <Name>ProjectWorkersLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Lesson3Project
+namespace OtherHWTasks
 {
-    class Program
+    public static class HW3_Lesson3Project
     {
-        static void Main(string[] args)
+        public static void Work()
         {
             Source s = new Source();
             Observer1 o1 = new Observer1();
@@ -22,9 +18,8 @@ namespace Lesson3Project
         }
     }
 
-
     public delegate void MyDelegate(object o);
-    public delegate void NewDelegate<in T> (T o);
+    public delegate void NewDelegate<in T>(T o);
     class Source
     {
         public event NewDelegate<object> Run;
