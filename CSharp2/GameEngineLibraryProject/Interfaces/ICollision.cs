@@ -2,6 +2,6 @@
 {
     public interface ICollision
     {
-        ICollisionObject CollisionObject { get; }
+        ILightWeightCollisionObject CollisionObject { get; }
     }
 }

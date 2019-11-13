@@ -1,10 +1,10 @@
-﻿using System.Drawing;
+﻿using System;
 
 namespace GameEngineLibraryProject
 {
-    public interface ICollisionObject
+    public interface ICollisionObject:ILightWeightCollisionObject
     {
-        ISharedGameObjectData Parent { get; set; }
+        event EventHandler<object> Intersected;
         bool Collision(ICollision obj);
     }
 }

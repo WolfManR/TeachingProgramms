@@ -66,11 +66,15 @@
     <Compile Include="Asteroids\GameLevels\Level1.cs" />
     <Compile Include="Asteroids\GameObjects\BaseGameObject.cs" />
     <Compile Include="Asteroids\GameObjects\Bullet.cs" />
+    <Compile Include="Asteroids\GameObjects\Heal.cs" />
     <Compile Include="Asteroids\GameObjects\Player.cs" />
     <Compile Include="Asteroids\GameObjects\Ship.cs" />
+    <Compile Include="Asteroids\IBonusObject.cs" />
+    <Compile Include="Asteroids\IEnemyDestroyed.cs" />
     <Compile Include="Asteroids\IResetPos.cs" />
     <Compile Include="Asteroids\GameObjects\Asteroid.cs" />
     <Compile Include="Asteroids\GameObjects\Star.cs" />
+    <Compile Include="IDamagedObject.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,6 +109,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\BackGround2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Heal.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\ship.png">

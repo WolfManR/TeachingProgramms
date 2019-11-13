@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{17E4C867-0427-41F7-B951-41E13615D0C7}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GameEngineLibraryProject</RootNamespace>
-    <AssemblyName>GameEngineLibraryProject</AssemblyName>
+    <ProjectGuid>{F649AD6F-E2E3-4C63-8E9A-EAAEF91644B1}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Lesson3Project</RootNamespace>
+    <AssemblyName>Lesson3Project</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,25 +35,14 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Archetipes\LightWeightRectangleCollision.cs" />
-    <Compile Include="Archetipes\RectangleCollision.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="Interfaces\IGameEngineObject.cs" />
-    <Compile Include="Archetipes\GameObject.cs" />
-    <Compile Include="Exceptions\GameObjectException.cs" />
-    <Compile Include="Interfaces\ICollisionObject.cs" />
-    <Compile Include="Interfaces\ICollision.cs" />
-    <Compile Include="Interfaces\ILightWeightCollisionObject.cs" />
-    <Compile Include="Interfaces\IPlayer.cs" />
-    <Compile Include="Interfaces\ISharedGameObjectData.cs" />
-    <Compile Include="Scene.cs" />
-    <Compile Include="Timer.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
