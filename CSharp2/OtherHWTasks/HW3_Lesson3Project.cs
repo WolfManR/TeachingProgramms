@@ -2,9 +2,9 @@
 
 namespace OtherHWTasks
 {
-    public static class HW3_Lesson3Project
+    public class HW3_Lesson3Project:ITaskWork
     {
-        public static void Work()
+        public void Work()
         {
             Source s = new Source();
             Observer1 o1 = new Observer1();

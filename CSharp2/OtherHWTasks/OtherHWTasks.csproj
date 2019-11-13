@@ -40,6 +40,9 @@
   <ItemGroup>
     <Compile Include="HW2_ProjectWorkerTest.cs" />
     <Compile Include="HW3_Lesson3Project.cs" />
+    <Compile Include="HW4_Task2.cs" />
+    <Compile Include="HW4_Task3.cs" />
+    <Compile Include="ITaskWork.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

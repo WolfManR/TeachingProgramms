@@ -3,9 +3,9 @@ using System;
 
 namespace OtherHWTasks
 {
-    class HW2_ProjectWorkerTest
+    public class HW2_ProjectWorkerTest:ITaskWork
     {
-        public static void Work()
+        public void Work()
         {
             try
             {
