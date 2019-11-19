@@ -5,6 +5,8 @@ namespace OtherHWTasks
 {
     public class HW2_ProjectWorkerTest:ITaskWork
     {
+        public string Title => "Project Worker Test";
+
         public void Work()
         {
             try
