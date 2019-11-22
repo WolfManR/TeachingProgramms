@@ -1,0 +1,175 @@
+﻿<Window x:Class="ProjectForDepartaments.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectForDepartaments"
+        mc:Ignorable="d"
+        Title="Organization" MinHeight="300" Height="350" MinWidth="500" Width="600">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="ListViewItem">
+                <Setter Property="Padding" Value="2"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Padding" Value="2"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+            <Style TargetType="Button" x:Key="ButtonBaseStyle">
+                <Setter Property="Width" Value="30"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Padding" Value="2"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+            <Style TargetType="Button" BasedOn="{StaticResource ButtonBaseStyle}">
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            </Style>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="32"/>
+        </Grid.RowDefinitions>
+        <Label Content="{Binding Name}" FontSize="32" FontWeight="DemiBold" Background="LightGray"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Background="#FFEAEAEA">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Departments" FontSize="24" Margin="10 0 0 0"/>
+                    <Button Grid.Column="1" Name="btnDepartAdd" Command="{Binding Path=AddDepartmentCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvDepartment, Path=ItemsSource}">&#xE710;</Button>
+                </Grid>
+                <ListView Name="lvDepartment" ItemsSource="{Binding Organization.Departments}" SelectedItem="{Binding SelectedDepartment}" Grid.Row="1" BorderThickness="0 2 0 0" SelectionMode="Single">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="1" Name="gDepartElementBtns" Visibility="{Binding Path=IsSelected, Converter={StaticResource BoolToVis}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                        <Button Name="btnDepartRemove" Click="btnDepartRemove_Click" Height="30">&#xE738;</Button>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="8"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="8"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding Name}"/>
+                                    <Label Grid.Column="2" Content="{Binding Employees.Count}"/>
+                                    <Label Grid.Column="4" FontFamily="Segoe MDL2 Assets" HorizontalContentAlignment="Right" Foreground="Green" FontWeight="Black" FontSize="12">&#xE72A;</Label>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <Border Grid.Column="1" Margin="5,15,24,0" BorderThickness="1" BorderBrush="Gray" DataContext="{Binding SelectedDepartment}">
+                <Grid Grid.IsSharedSizeScope="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Background="#FFEAEAEA">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Employees" FontSize="24" Margin="10 0 0 0"/>
+                        <Button Grid.Column="1" Name="btnEmployeesAdd" Command="{Binding Path=AddEmployeeCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvEmployees, Path=ItemsSource}">&#xE710;</Button>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="2,2,2,1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="FirstNameSize"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition SharedSizeGroup="LastNameSize"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="First Name" FontSize="20"/>
+                        <Label Grid.Column="2" Content="Last Name" FontSize="20"/>
+                    </Grid>
+                    <ListView Name="lvEmployees" ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" Grid.Row="2" BorderThickness="0 2 0 0" SelectionMode="Single" SelectionChanged="lvEmployees_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="1" Name="gEmployeesBtns" Visibility="{Binding Path=IsSelected, Converter={StaticResource BoolToVis}}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition MaxHeight="30"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Button Name="btnEmplRemove" Height="30" Click="btnEmplRemove_Click">&#xE738;</Button>
+                                            <Button Name="btnSwitchDepExp" Width="auto" Grid.Column="1" Grid.RowSpan="2" Click="btnSwitchDepExp_Click">
+                                                <Expander BorderThickness="0">
+                                                    <Expander.Header>
+                                                        <Label FontFamily="Segoe MDL2 Assets">&#xE8AB;</Label>
+                                                    </Expander.Header>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <ComboBox Width="auto" FontFamily="Segoe UI" SelectedIndex="0">
+                                                            <ComboBoxItem Content="Some Department"/>
+                                                            <ComboBoxItem Content="Other Department"/>
+                                                        </ComboBox>
+                                                        <Button Name="btnEmplSwitchDepart">&#xE8AB;</Button>
+                                                    </StackPanel>
+                                                </Expander>
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition SharedSizeGroup="FirstNameSize"/>
+                                            <ColumnDefinition Width="8"/>
+                                            <ColumnDefinition SharedSizeGroup="LastNameSize"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="{Binding FirstName}"/>
+                                        <Label Grid.Column="2" Content="{Binding LastName}"/>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Grid>
+</Window>

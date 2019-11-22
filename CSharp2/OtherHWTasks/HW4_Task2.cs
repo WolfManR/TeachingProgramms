@@ -6,6 +6,8 @@ namespace OtherHWTasks
 {
     public class HW4_Task2 : ITaskWork
     {
+        public string Title => "Frequency Array";
+
         public void Work()
         {
             List<int> list = new List<int>() { 3,4,5,6,2,2,3,4,6,7,1,5,7,5,8 };

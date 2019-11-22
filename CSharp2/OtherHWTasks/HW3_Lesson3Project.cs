@@ -4,6 +4,8 @@ namespace OtherHWTasks
 {
     public class HW3_Lesson3Project:ITaskWork
     {
+        public string Title => "Lesson 3 Project - Rework";
+
         public void Work()
         {
             Source s = new Source();

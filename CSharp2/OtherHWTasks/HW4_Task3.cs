@@ -8,6 +8,8 @@ namespace OtherHWTasks
 {
     public class HW4_Task3 : ITaskWork
     {
+        public string Title => "Order By - Rework";
+
         public void Work()
         {
             Dictionary<string, int> dict = new Dictionary<string, int>()
