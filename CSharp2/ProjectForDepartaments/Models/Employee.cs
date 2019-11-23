@@ -6,24 +6,61 @@ namespace ProjectForDepartaments.Models
 {
     public class Employee : INotifyPropertyChanged
     {
-        private bool isSelected = false;
+        private Organization organization;
+        private Department department;
+        private string lastName;
+        private string firstName;
 
-        public string LastName { get; private set; }
-        public string FirstName { get; private set; }
-        public bool IsSelected
+        public string LastName
         {
-            get => isSelected; 
+            get => lastName;
             set
             {
-                if (isSelected == value) return;
-                isSelected = value;
+                if (lastName == value) return;
+                lastName = value;
                 OnPropertyChanged();
             }
         }
-        public Employee(string lastName, string firstName)
+        public string FirstName
+        {
+            get => firstName;
+            set
+            {
+                if (firstName == value) return;
+                firstName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Organization Organization
+        {
+            get => organization;
+            set
+            {
+                if (organization == value) return;
+                organization = value;
+                OnPropertyChanged();
+            }
+        }
+        public Department Department
+        {
+            get => department;
+            set
+            {
+                if (department == value) return;
+                department = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Employee() : this(null, null) { }
+        public Employee(string firstName, string lastName) : this(firstName, lastName, null, null) { }
+        public Employee(string lastName, string firstName, Department department, Organization organization)
         {
             LastName = lastName;
             FirstName = firstName;
+            Department = department;
+            Organization = organization;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

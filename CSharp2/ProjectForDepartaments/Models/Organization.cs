@@ -11,14 +11,5 @@ namespace ProjectForDepartaments.Models
             Name = name;
             Departments = new ObservableCollection<Department>();
         }
-
-
-        //[Obsolete("Name of Method must change in future")]
-        //public static void SwitchDepartment(Department from, Department to, Employee employee)
-        //{
-        //    var worker = from.RemoveEmployee(employee);
-        //    to.AddEmployee(worker);
-        //}
-
     }
 }

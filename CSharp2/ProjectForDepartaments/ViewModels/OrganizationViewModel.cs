@@ -15,18 +15,16 @@ namespace ProjectForDepartaments.ViewModels
             private set
             {
                 if (name == value) return;
-                    name = value;
-                    OnPropertyChanged();
+                name = value;
+                OnPropertyChanged();
             }
         }
         public Department SelectedDepartment
         {
-            get => selectedDepartment; 
+            get => selectedDepartment;
             set
             {
                 if (selectedDepartment == value) return;
-                if(selectedDepartment!=null)selectedDepartment.IsSelected = false;
-                if(value!=null)value.IsSelected = true;
                 selectedDepartment = value;
                 OnPropertyChanged();
             }
@@ -38,20 +36,18 @@ namespace ProjectForDepartaments.ViewModels
             Organization = organization;
         }
 
+        [System.Obsolete("Work of Method will be changed in future!")]
+        public static void SwitchDepartment(Department from, Department to, Employee employee)
+        {
+            from.Employees.Remove(employee);
+            to.Employees.Add(employee);
+            employee.Department = to;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-
-
-        
-
-        //[Obsolete("Name of Method must change in future")]
-        //public static void SwitchDepartment(Department from, Department to, Employee employee)
-        //{
-        //    var worker = from.RemoveEmployee(employee);
-        //    to.AddEmployee(worker);
-        //}
     }
 }

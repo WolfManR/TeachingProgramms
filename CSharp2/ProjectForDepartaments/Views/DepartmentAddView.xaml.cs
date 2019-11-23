@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using ProjectForDepartaments.Models;
+using System.Windows;
 
 namespace ProjectForDepartaments.Views
 {
@@ -7,15 +8,16 @@ namespace ProjectForDepartaments.Views
     /// </summary>
     public partial class DepartmentAddView : Window
     {
-        public string DepartmentName { get; set; }
-        public DepartmentAddView()
+        public Department Department { get; set; }
+        public DepartmentAddView(Organization organization)
         {
             InitializeComponent();
+            Department = new Department() { Organization = organization };
+            this.DataContext = Department;
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            DepartmentName = tbResult.Text;
             this.DialogResult = true;
             this.Close();
         }

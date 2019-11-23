@@ -11,9 +11,9 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="auto">
             <Label Content="Department Name"/>
-            <TextBox Name="tbResult" Margin="10,2"/>
+            <TextBox Name="tbResult" Text="{Binding Name,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="10,2"/>
         </StackPanel>
         <Grid Grid.Row="1" Grid.IsSharedSizeScope="True">
             <Grid.ColumnDefinitions>

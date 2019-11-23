@@ -1,6 +1,4 @@
 ﻿using ProjectForDepartaments.Models;
-using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace ProjectForDepartaments.Commands
@@ -9,23 +7,23 @@ namespace ProjectForDepartaments.Commands
     {
         public override bool CanExecute(object parameter)
         {
-            return parameter != null && parameter is ObservableCollection<Department>;
+            return parameter != null && parameter is Organization;
         }
 
         public override void Execute(object parameter)
         {
-            if(parameter is ObservableCollection<Department> Depart)
+            if (parameter is Organization organization)
             {
-                var AddView = new Views.DepartmentAddView();
+                var AddView = new Views.DepartmentAddView(organization);
                 switch (AddView.ShowDialog())
                 {
-                    case true when !String.IsNullOrEmpty(AddView.DepartmentName):
-                        Depart?.Add(new Department(AddView.DepartmentName));
+                    case true when (AddView.Department != null):
+                        organization.Departments?.Add(AddView.Department);
                         break;
                     default:
                         break;
                 }
-                
+
             }
         }
     }
