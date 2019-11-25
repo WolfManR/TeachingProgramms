@@ -18,7 +18,7 @@ namespace ProjectForDepartaments
         public ICommand AddDepartmentCmd => addDepartmentCmd ?? (addDepartmentCmd = new AddDepartmentCommand());
         public ICommand AddEmployeeCmd => addEmployeeCmd ?? (addEmployeeCmd = new AddEmployeeCommand());
 
-        public OrganizationViewModel MainOrganization { get; set; }
+        public OrganizationViewModel MainOrganization { get; set; } = new OrganizationViewModel();
         public MainWindow()
         {
             InitializeComponent();
@@ -49,8 +49,7 @@ namespace ProjectForDepartaments
             dp2.Employees = dp2Employees;
             organization.Departments.Add(dp1);
             organization.Departments.Add(dp2);
-            MainOrganization = new ViewModels.OrganizationViewModel(organization);
-            DataContext = MainOrganization;
+            MainOrganization.Organization = organization;
         }
 
         private void btnDepartRemove_Click(object sender, RoutedEventArgs e)

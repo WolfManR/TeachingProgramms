@@ -6,19 +6,9 @@ namespace ProjectForDepartaments.ViewModels
 {
     public class OrganizationViewModel : INotifyPropertyChanged
     {
-        private string name;
         private Department selectedDepartment;
+        private Organization organization;
 
-        public string Name
-        {
-            get => name;
-            private set
-            {
-                if (name == value) return;
-                name = value;
-                OnPropertyChanged();
-            }
-        }
         public Department SelectedDepartment
         {
             get => selectedDepartment;
@@ -29,10 +19,20 @@ namespace ProjectForDepartaments.ViewModels
                 OnPropertyChanged();
             }
         }
-        public Organization Organization { get; private set; }
+        public Organization Organization
+        {
+            get => organization; 
+            set
+            {
+                if (organization == value) return;
+                organization = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public OrganizationViewModel() : this(null) { }
         public OrganizationViewModel(Organization organization)
         {
-            Name = organization.Name;
             Organization = organization;
         }
 
