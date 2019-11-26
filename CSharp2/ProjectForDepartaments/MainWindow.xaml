@@ -5,29 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectForDepartaments"
         mc:Ignorable="d"
-        Title="Organization" MinHeight="300" Height="350" MinWidth="500" Width="600">
+        Loaded="Window_Loaded"
+        Title="Organization" MinHeight="300" Height="500" MinWidth="500" Width="1000"
+        DataContext="{Binding MainOrganization,RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.Resources>
-            <Style TargetType="ListViewItem">
-                <Setter Property="Padding" Value="2"/>
-                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            </Style>
-            <Style TargetType="Label">
-                <Setter Property="Padding" Value="2"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="FontSize" Value="18"/>
-            </Style>
-            <Style TargetType="Button" x:Key="ButtonBaseStyle">
-                <Setter Property="Width" Value="30"/>
-                <Setter Property="FontSize" Value="14"/>
-                <Setter Property="Padding" Value="2"/>
-                <Setter Property="BorderThickness" Value="0"/>
-            </Style>
-            <Style TargetType="Button" BasedOn="{StaticResource ButtonBaseStyle}">
-                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-            </Style>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="Resources/Styles/OrganizationViewStyles.xaml"/>
 
-            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+                    <ResourceDictionary>
+
+
+                    </ResourceDictionary>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+
+
         </Grid.Resources>
 
         <Grid.RowDefinitions>
@@ -35,7 +29,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
-        <Label Content="{Binding Name}" FontSize="32" FontWeight="DemiBold" Background="LightGray"/>
+        <Label Content="{Binding Organization.Name}" FontSize="32" FontWeight="DemiBold" Background="LightGray"/>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -43,19 +37,25 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <!--#region Departments View-->
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+
+                <!--#region Department View Header-->
                 <Grid Background="#FFEAEAEA">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Departments" FontSize="24" Margin="10 0 0 0"/>
-                    <Button Grid.Column="1" Name="btnDepartAdd" Command="{Binding Path=AddDepartmentCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvDepartment, Path=ItemsSource}">&#xE710;</Button>
+                    <Button Grid.Column="1" Name="btnDepartAdd" Command="{Binding Path=AddDepartmentCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvDepartment, Path=DataContext.Organization}">&#xE710;</Button>
                 </Grid>
+                <!--#endregion-->
+
+                <!--#region  Departments-->
                 <ListView Name="lvDepartment" ItemsSource="{Binding Organization.Departments}" SelectedItem="{Binding SelectedDepartment}" Grid.Row="1" BorderThickness="0 2 0 0" SelectionMode="Single">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -64,7 +64,9 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="1" Name="gDepartElementBtns" Visibility="{Binding Path=IsSelected, Converter={StaticResource BoolToVis}}">
+
+                                <!--#region Department Sub Controls-->
+                                <Grid Name="DepartmentSubControl" Grid.Row="1" Visibility="Collapsed">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="auto"/>
@@ -73,6 +75,9 @@
                                         <Button Name="btnDepartRemove" Click="btnDepartRemove_Click" Height="30">&#xE738;</Button>
                                     </StackPanel>
                                 </Grid>
+                                <!--#endregion-->
+
+                                <!--#region Department Data View-->
                                 <Grid Grid.Row="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -85,12 +90,43 @@
                                     <Label Grid.Column="2" Content="{Binding Employees.Count}"/>
                                     <Label Grid.Column="4" FontFamily="Segoe MDL2 Assets" HorizontalContentAlignment="Right" Foreground="Green" FontWeight="Black" FontSize="12">&#xE72A;</Label>
                                 </Grid>
+                                <!--#endregion-->
+
                             </Grid>
+
+                            <DataTemplate.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="DepartmentSubControl" Property="Visibility" Value="Collapsed"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="DepartmentSubControl" Property="Visibility" Value="Visible"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="DepartmentSubControl" Property="Visibility" Value="Visible"/>
+                                </MultiDataTrigger>
+                            </DataTemplate.Triggers>
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </Grid>
+                <!--#endregion-->
 
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region Employees View -->
             <Border Grid.Column="1" Margin="5,15,24,0" BorderThickness="1" BorderBrush="Gray" DataContext="{Binding SelectedDepartment}">
                 <Grid Grid.IsSharedSizeScope="True">
                     <Grid.RowDefinitions>
@@ -98,14 +134,19 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+
+                    <!--#region Employees View Header-->
                     <Grid Background="#FFEAEAEA">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Employees" FontSize="24" Margin="10 0 0 0"/>
-                        <Button Grid.Column="1" Name="btnEmployeesAdd" Command="{Binding Path=AddEmployeeCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvEmployees, Path=ItemsSource}">&#xE710;</Button>
+                        <Button Grid.Column="1" Name="btnEmployeesAdd" Command="{Binding Path=AddEmployeeCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvEmployees, Path=DataContext}">&#xE710;</Button>
                     </Grid>
+                    <!--#endregion-->
+
+                    <!--#region Employees Header-->
                     <Grid Grid.Row="1" Margin="2,2,2,1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition SharedSizeGroup="FirstNameSize"/>
@@ -115,21 +156,28 @@
                         <Label Content="First Name" FontSize="20"/>
                         <Label Grid.Column="2" Content="Last Name" FontSize="20"/>
                     </Grid>
-                    <ListView Name="lvEmployees" ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" Grid.Row="2" BorderThickness="0 2 0 0" SelectionMode="Single" SelectionChanged="lvEmployees_SelectionChanged">
+                    <!--#endregion-->
+
+                    <!--#region  Employees-->
+                    <ListView Name="lvEmployees" ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" Grid.Row="2" BorderThickness="0 2 0 0" SelectionMode="Single">
                         <ListView.ItemTemplate>
                             <DataTemplate>
+
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <Grid Grid.Row="1" Name="gEmployeesBtns" Visibility="{Binding Path=IsSelected, Converter={StaticResource BoolToVis}}">
+                                    <!--#region Employee Sub Controls-->
+                                    <Grid Name="EmployeeSubControl" Grid.Row="1" Visibility="Collapsed">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
+
                                         <Grid Grid.Column="1">
                                             <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30"/>
                                                 <ColumnDefinition Width="30"/>
                                                 <ColumnDefinition Width="auto"/>
                                             </Grid.ColumnDefinitions>
@@ -137,23 +185,33 @@
                                                 <RowDefinition MaxHeight="30"/>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
+
                                             <Button Name="btnEmplRemove" Height="30" Click="btnEmplRemove_Click">&#xE738;</Button>
-                                            <Button Name="btnSwitchDepExp" Width="auto" Grid.Column="1" Grid.RowSpan="2" Click="btnSwitchDepExp_Click">
+                                            <Button Grid.Column="1" Name="btnEmplEdit" Height="30" >&#xE70F;</Button>
+                                            <Button Width="auto" Grid.Column="2" Grid.RowSpan="2">
                                                 <Expander BorderThickness="0">
                                                     <Expander.Header>
                                                         <Label FontFamily="Segoe MDL2 Assets">&#xE8AB;</Label>
                                                     </Expander.Header>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <ComboBox Width="auto" FontFamily="Segoe UI" SelectedIndex="0">
-                                                            <ComboBoxItem Content="Some Department"/>
-                                                            <ComboBoxItem Content="Other Department"/>
+                                                        <ComboBox ItemsSource="{Binding Organization.Departments}" SelectedItem="{Binding Department,Mode=OneTime}" Width="auto" FontFamily="Segoe UI" SelectedIndex="0">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Label Content="{Binding Name}"/>
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
                                                         </ComboBox>
-                                                        <Button Name="btnEmplSwitchDepart">&#xE8AB;</Button>
+                                                        <Button Name="btnEmplSwitchDepart" Click="btnEmplSwitchDepart_Click">&#xE8AB;</Button>
                                                     </StackPanel>
                                                 </Expander>
                                             </Button>
+
                                         </Grid>
+
                                     </Grid>
+                                    <!--#endregion-->
+
+                                    <!--#region  Employee Data View-->
                                     <Grid Grid.Row="0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition SharedSizeGroup="FirstNameSize"/>
@@ -163,13 +221,234 @@
                                         <Label Content="{Binding FirstName}"/>
                                         <Label Grid.Column="2" Content="{Binding LastName}"/>
                                     </Grid>
+                                    <!--#endregion-->
+
                                 </Grid>
+
+                                <DataTemplate.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter TargetName="EmployeeSubControl" Property="Visibility" Value="Collapsed"/>
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter TargetName="EmployeeSubControl" Property="Visibility" Value="Visible"/>
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter TargetName="EmployeeSubControl" Property="Visibility" Value="Visible"/>
+                                    </MultiDataTrigger>
+                                </DataTemplate.Triggers>
+
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <!--#endregion-->
+
                 </Grid>
             </Border>
-
+            <!--#endregion-->
         </Grid>
+
+        <!--#region Edit Panel-->                               <!--Work In Progress--><!--
+        <Grid Background="LightGray" Grid.RowSpan="3">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Background="White" Width="400" Height="auto">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                --><!--#region EditPanel Base Control Bar--><!--
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Title" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1">
+                        &#xE711;
+                        <Button.Triggers>
+                            <EventTrigger >
+
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </Grid>
+                --><!--#endregion-->
+
+                <!--#region ContentPresenter--><!--
+                <Grid Grid.Row="1">
+
+                    --><!--#region Employee Edit-->
+
+                    <!--<Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        --><!--#region FIO--><!--
+                        <Grid Margin="10 2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <Label Content="LastName" FontSize="14"/>
+                                <TextBox Text="Lork" FontSize="20" BorderThickness="0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <Label Content="FirstName" FontSize="14"/>
+                                <TextBox Text="Emily" FontSize="20" BorderThickness="0"/>
+                            </StackPanel>
+                        </Grid>
+                        --><!--#endregion-->
+                        <!--#region  Department Switch--><!--
+                        <Grid Margin="10 2" Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Department" FontSize="14"/>
+                            <Grid Grid.Row="1" Height="32">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox/>
+                                <Button Grid.Column="1" Margin="10 0"/>
+                            </Grid>
+                        </Grid>
+                        --><!--#endregion-->
+                        <!--#region Conrols--><!--
+                        <Grid Grid.Row="3" Margin="0,15,0,8" Height="32">
+                            <Grid.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="FontFamily" Value="Segoe UI"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Ok"/>
+                            <Button Grid.Column="1" FontFamily="Segoe UI" Content="Fire"/>
+                        </Grid>
+                        --><!--#endregion--><!--
+                    </Grid>-->
+
+                    <!--#endregion-->
+
+                    <!--#region Department Edit-->
+                    
+                    <!--<Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        --><!--#region MainData--><!--
+                        <StackPanel>
+                            <Label Content="Name" FontSize="14"/>
+                            <TextBox Text="C# Programmers" FontSize="20" BorderThickness="0"/>
+                        </StackPanel>
+                        --><!--#endregion-->
+                        <!--#region Controls--><!--
+                        <Grid Grid.Row="1" Margin="0,15,0,8" Height="32" Visibility="Visible">
+                            <Grid.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="FontFamily" Value="Segoe UI"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Ok"/>
+                            <Button Content="Remove" Grid.Column="1"/>
+                        </Grid>
+                        --><!--#endregion-->
+                        <!--#region Employees Redefine Jobs--><!--
+                        <Border Grid.Row="1" Margin="10,6" BorderThickness="2" BorderBrush="LightGray" Visibility="Collapsed">
+                            <Grid>
+                                <Grid.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                                    </Style>
+                                </Grid.Resources>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="Redefine Jobs for Employees" HorizontalAlignment="Center"/>
+                                <ListView Grid.Row="1" BorderThickness="0,2,0,0">
+                                    <ListViewItem>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <Label Content="Last Name" FontSize="14"/>
+                                                <TextBox Text="Lork" FontSize="20" BorderThickness="0"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1">
+                                                <Label Content="First Name" FontSize="14"/>
+                                                <TextBox Text="Emily" FontSize="20" BorderThickness="0"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2">
+                                                <Label Content="Department" FontSize="14"/>
+                                                <ComboBox/>
+                                            </StackPanel>
+                                            <Button Margin="4,2" Grid.Column="3" FontSize="18" Padding="10" Width="auto" Content="Fire"/>
+                                        </Grid>
+                                    </ListViewItem>
+                                </ListView>
+                                <Grid Margin="0,15,0,8" Grid.Row="2" Height="32">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="Ok"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        --><!--#endregion--><!--
+                    </Grid>-->
+                    
+                    <!--#endregion-->
+
+                    <!--#region Organization Edit-->
+                    <!--#endregion--><!--
+
+                </Grid>
+                --><!--#endregion--><!--
+
+
+
+            </Grid>
+        </Grid>
+        --><!--#endregion-->
+        
     </Grid>
 </Window>

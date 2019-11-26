@@ -6,36 +6,42 @@ namespace ProjectForDepartaments.ViewModels
 {
     public class OrganizationViewModel : INotifyPropertyChanged
     {
-        private string name;
         private Department selectedDepartment;
+        private Organization organization;
 
-        public string Name
-        {
-            get => name;
-            private set
-            {
-                if (name == value) return;
-                    name = value;
-                    OnPropertyChanged();
-            }
-        }
         public Department SelectedDepartment
         {
-            get => selectedDepartment; 
+            get => selectedDepartment;
             set
             {
                 if (selectedDepartment == value) return;
-                if(selectedDepartment!=null)selectedDepartment.IsSelected = false;
-                if(value!=null)value.IsSelected = true;
                 selectedDepartment = value;
                 OnPropertyChanged();
             }
         }
-        public Organization Organization { get; private set; }
+        public Organization Organization
+        {
+            get => organization; 
+            set
+            {
+                if (organization == value) return;
+                organization = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public OrganizationViewModel() : this(null) { }
         public OrganizationViewModel(Organization organization)
         {
-            Name = organization.Name;
             Organization = organization;
+        }
+
+        [System.Obsolete("Work of Method will be changed in future!")]
+        public static void SwitchDepartment(Department from, Department to, Employee employee)
+        {
+            from.Employees.Remove(employee);
+            to.Employees.Add(employee);
+            employee.Department = to;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -43,15 +49,5 @@ namespace ProjectForDepartaments.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-
-
-        
-
-        //[Obsolete("Name of Method must change in future")]
-        //public static void SwitchDepartment(Department from, Department to, Employee employee)
-        //{
-        //    var worker = from.RemoveEmployee(employee);
-        //    to.AddEmployee(worker);
-        //}
     }
 }

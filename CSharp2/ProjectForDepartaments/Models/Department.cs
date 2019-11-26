@@ -1,27 +1,43 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace ProjectForDepartaments.Models
 {
-    public class Department:INotifyPropertyChanged
+    public class Department : INotifyPropertyChanged
     {
-        private bool isSelected;
+        private Organization organization;
+        private string name;
+
         public ObservableCollection<Employee> Employees { get; set; }
-        public string Name { get; private set; }
-        public bool IsSelected
+        public string Name
         {
-            get => isSelected; 
+            get => name;
             set
             {
-                if (isSelected == value) return;
-                isSelected = value;
+                if (name == value) return;
+                name = value;
                 OnPropertyChanged();
             }
         }
-        public Department(string name)
+        public Organization Organization
+        {
+            get => organization;
+            set
+            {
+                if (organization == value) return;
+                organization = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Department() : this(null) { }
+        public Department(string name) : this(name, null) { }
+        public Department(string name, Organization organization)
         {
             Name = name;
+            Organization = organization;
             Employees = new ObservableCollection<Employee>();
         }
 
@@ -29,6 +45,21 @@ namespace ProjectForDepartaments.Models
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Department department &&
+                   EqualityComparer<ObservableCollection<Employee>>.Default.Equals(Employees, department.Employees) &&
+                   Name == department.Name;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -716137428;
+            hashCode = hashCode * -1521134295 + EqualityComparer<ObservableCollection<Employee>>.Default.GetHashCode(Employees);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            return hashCode;
         }
     }
 }
