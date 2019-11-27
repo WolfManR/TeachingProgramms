@@ -1,4 +1,5 @@
-﻿using OrganizationEF.Models;
+﻿using OrganizationEF.EF;
+using OrganizationEF.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
