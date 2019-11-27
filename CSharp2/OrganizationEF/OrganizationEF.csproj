@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repos\BaseRepo.cs" />
     <Compile Include="Repos\IRepo.cs" />
   </ItemGroup>
   <ItemGroup>
