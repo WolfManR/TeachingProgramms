@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectForDepartaments.Views"
         mc:Ignorable="d"
-        Title="EmployeeAddView" Height="200" Width="250">
+        Title="EmployeeAddView" Height="170" Width="250">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Width="200" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+        <StackPanel Width="200" Height="auto" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Employee" HorizontalAlignment="Center"/>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -29,21 +29,14 @@
                 <TextBox Grid.Row="1" Grid.Column="1" Name="tbLastName" Text="{Binding LastName,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="10,2"/>
             </Grid>
         </StackPanel>
-        <Grid Grid.Row="1" Grid.IsSharedSizeScope="True">
+        <Grid Grid.Row="1" Grid.IsSharedSizeScope="True" Margin="40,15,40,10" Height="20">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
                 <ColumnDefinition SharedSizeGroup="One" Width="60"/>
                 <ColumnDefinition/>
                 <ColumnDefinition SharedSizeGroup="One"/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Button Name="btnOk" Content="Ok" Grid.Column="1" Grid.Row="1" Click="btnOk_Click"/>
-            <Button Name="btnCancel" Content="Cancel" Grid.Column="3" Grid.Row="1" Click="btnCancel_Click"/>
+            <Button Name="btnOk" Content="Ok" Click="btnOk_Click"/>
+            <Button Name="btnCancel" Content="Cancel" Grid.Column="2" Click="btnCancel_Click"/>
         </Grid>
     </Grid>
 </Window>

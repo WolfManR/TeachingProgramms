@@ -1,4 +1,4 @@
-﻿using ProjectForDepartaments.Models;
+﻿using OrganizationEF.Models;
 using System.Windows;
 
 namespace ProjectForDepartaments.Views
@@ -8,11 +8,10 @@ namespace ProjectForDepartaments.Views
     /// </summary>
     public partial class DepartmentAddView : Window
     {
-        public Department Department { get; set; }
-        public DepartmentAddView(Organization organization)
+        public Department Department { get; set; } = new Department();
+        public DepartmentAddView()
         {
             InitializeComponent();
-            Department = new Department() { Organization = organization };
             this.DataContext = Department;
         }
 

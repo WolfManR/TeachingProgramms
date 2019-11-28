@@ -1,5 +1,5 @@
-﻿using ProjectForDepartaments.Commands;
-using ProjectForDepartaments.Models;
+﻿using OrganizationEF.Models;
+using ProjectForDepartaments.Commands;
 using ProjectForDepartaments.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,11 +13,6 @@ namespace ProjectForDepartaments
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ICommand addDepartmentCmd = null;
-        private ICommand addEmployeeCmd = null;
-        public ICommand AddDepartmentCmd => addDepartmentCmd ?? (addDepartmentCmd = new AddDepartmentCommand());
-        public ICommand AddEmployeeCmd => addEmployeeCmd ?? (addEmployeeCmd = new AddEmployeeCommand());
-
         public OrganizationViewModel MainOrganization { get; set; } = new OrganizationViewModel();
         public MainWindow()
         {
@@ -55,13 +50,13 @@ namespace ProjectForDepartaments
         private void btnDepartRemove_Click(object sender, RoutedEventArgs e)
         {
             if (((Button)sender).DataContext is Department dep)
-                MainOrganization.Organization.Departments.Remove(dep);
+                MainOrganization.Departments.Remove(dep);
         }
         private void btnEmplRemove_Click(object sender, RoutedEventArgs e)
         {
             var b = (Button)sender;
             if (b.DataContext is Employee empl)
-                (lvEmployees.DataContext as Department).Employees.Remove(empl);
+                MainOrganization.Employees.Remove(empl);
         }
 
         private void btnEmplSwitchDepart_Click(object sender, RoutedEventArgs e)

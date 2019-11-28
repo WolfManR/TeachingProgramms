@@ -29,7 +29,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
-        <Label Content="{Binding Organization.Name}" FontSize="32" FontWeight="DemiBold" Background="LightGray"/>
+        <Label Content="{Binding OrganizationName}" FontSize="32" FontWeight="DemiBold" Background="LightGray"/>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -51,12 +51,12 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Departments" FontSize="24" Margin="10 0 0 0"/>
-                    <Button Grid.Column="1" Name="btnDepartAdd" Command="{Binding Path=AddDepartmentCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvDepartment, Path=DataContext.Organization}">&#xE710;</Button>
+                    <Button Grid.Column="1" Name="btnDepartAdd" Command="{Binding Path=DataContext.AddDepartmentCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvDepartment, Path=DataContext}">&#xE710;</Button>
                 </Grid>
                 <!--#endregion-->
 
                 <!--#region  Departments-->
-                <ListView Name="lvDepartment" ItemsSource="{Binding Organization.Departments}" SelectedItem="{Binding SelectedDepartment}" Grid.Row="1" BorderThickness="0 2 0 0" SelectionMode="Single">
+                <ListView Name="lvDepartment" ItemsSource="{Binding Departments}" SelectedItem="{Binding SelectedDepartment}" Grid.Row="1" BorderThickness="0 2 0 0" SelectionMode="Single">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -88,7 +88,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Label Content="{Binding Name}"/>
                                     <Label Grid.Column="2" Content="{Binding Employees.Count}"/>
-                                    <Label Grid.Column="4" FontFamily="Segoe MDL2 Assets" HorizontalContentAlignment="Right" Foreground="Green" FontWeight="Black" FontSize="12">&#xE72A;</Label>
+                                    <Label Name="GreenArrow" Grid.Column="4" FontFamily="Segoe MDL2 Assets" HorizontalContentAlignment="Right" Foreground="Green" FontWeight="Black" FontSize="12" Visibility="Hidden">&#xE72A;</Label>
                                 </Grid>
                                 <!--#endregion-->
 
@@ -116,6 +116,12 @@
                                     </MultiDataTrigger.Conditions>
                                     <Setter TargetName="DepartmentSubControl" Property="Visibility" Value="Visible"/>
                                 </MultiDataTrigger>
+                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                    <Setter TargetName="GreenArrow" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                    <Setter TargetName="GreenArrow" Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
                             </DataTemplate.Triggers>
 
                         </DataTemplate>
@@ -142,7 +148,7 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Employees" FontSize="24" Margin="10 0 0 0"/>
-                        <Button Grid.Column="1" Name="btnEmployeesAdd" Command="{Binding Path=AddEmployeeCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvEmployees, Path=DataContext}">&#xE710;</Button>
+                        <Button Grid.Column="1" Name="btnEmployeesAdd" Command="{Binding Path=DataContext.AddEmployeeCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvEmployees, Path=DataContext}">&#xE710;</Button>
                     </Grid>
                     <!--#endregion-->
 
@@ -168,6 +174,7 @@
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
+                                    
                                     <!--#region Employee Sub Controls-->
                                     <Grid Name="EmployeeSubControl" Grid.Row="1" Visibility="Collapsed">
                                         <Grid.ColumnDefinitions>
@@ -194,13 +201,7 @@
                                                         <Label FontFamily="Segoe MDL2 Assets">&#xE8AB;</Label>
                                                     </Expander.Header>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <ComboBox ItemsSource="{Binding Organization.Departments}" SelectedItem="{Binding Department,Mode=OneTime}" Width="auto" FontFamily="Segoe UI" SelectedIndex="0">
-                                                            <ComboBox.ItemTemplate>
-                                                                <DataTemplate>
-                                                                    <Label Content="{Binding Name}"/>
-                                                                </DataTemplate>
-                                                            </ComboBox.ItemTemplate>
-                                                        </ComboBox>
+                                                        <ComboBox ItemsSource="{Binding Departments}" SelectedItem="{Binding Department,Mode=OneTime}" Width="auto" FontFamily="Segoe UI" SelectedIndex="0" DisplayMemberPath="Name"/>
                                                         <Button Name="btnEmplSwitchDepart" Click="btnEmplSwitchDepart_Click">&#xE8AB;</Button>
                                                     </StackPanel>
                                                 </Expander>

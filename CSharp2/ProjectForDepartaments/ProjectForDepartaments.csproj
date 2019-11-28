@@ -80,10 +80,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\AddDepartmentCommand.cs" />
-    <Compile Include="Commands\AddEmployeeCommand.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
-    <Compile Include="Commands\RemoveDepartmentCommand.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Commands\RelayCommandT.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
     <Compile Include="Views\DepartmentAddView.xaml.cs">
       <DependentUpon>DepartmentAddView.xaml</DependentUpon>
