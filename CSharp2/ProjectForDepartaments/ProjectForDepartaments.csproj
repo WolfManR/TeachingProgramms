@@ -146,7 +146,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\OrganizationEF\OrganizationEF.csproj">
+      <Project>{dc5d35ac-b735-4adc-ae75-c9d0da4f1944}</Project>
+      <Name>OrganizationEF</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>

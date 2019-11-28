@@ -1,4 +1,11 @@
-﻿using ProjectForDepartaments.Models;
+﻿
+using OrganizationEF.Models;
+using OrganizationEF.Repos;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -7,7 +14,6 @@ namespace ProjectForDepartaments.ViewModels
     public class OrganizationViewModel : INotifyPropertyChanged
     {
         private Department selectedDepartment;
-        private Organization organization;
 
         public Department SelectedDepartment
         {
@@ -19,21 +25,46 @@ namespace ProjectForDepartaments.ViewModels
                 OnPropertyChanged();
             }
         }
-        public Organization Organization
+
+        DepartmentRepo departRepo = new DepartmentRepo();
+        EmployeeRepo EmployeeRepo = new EmployeeRepo();
+
+        public IList<Department> Departments { get; set; }
+        public IList<Employee> Employees { get; set; }
+
+        public OrganizationViewModel()
         {
-            get => organization; 
-            set
-            {
-                if (organization == value) return;
-                organization = value;
-                OnPropertyChanged();
-            }
+            var departments = new ObservableCollection<Department>(departRepo.GetAll());
+            departments.CollectionChanged += Departments_CollectionChanged;
+            Departments = departments;
         }
 
-        public OrganizationViewModel() : this(null) { }
-        public OrganizationViewModel(Organization organization)
+        private void Departments_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Organization = organization;
+            var action = e.Action;
+            switch (action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (Department item in e.NewItems)
+                    {
+                        departRepo.Add(item);
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (Department item in e.OldItems)
+                    {
+                        departRepo.Delete(item);
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    break;
+                default:
+                    break;
+            }
         }
 
         [System.Obsolete("Work of Method will be changed in future!")]
