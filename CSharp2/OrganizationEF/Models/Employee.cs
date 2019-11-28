@@ -11,7 +11,7 @@ namespace OrganizationEF.Models
         [StringLength(50)]
         public string LastName { get; set; }
         [NotMapped]
-        public string FullName => FirstName + "" + LastName;
+        public string FullName => FirstName + " " + LastName;
         public int? DepartmentId { get; set; }
         [ForeignKey(nameof(DepartmentId))]
         public virtual Department Department { get; set; }
