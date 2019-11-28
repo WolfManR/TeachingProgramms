@@ -7,7 +7,7 @@ namespace OrganizationEF.EF
 {
     public partial class GBOrganizationEntities: DbContext
     {
-        public GBOrganizationEntities() : base("name=GBOrganizationConnection")
+        public GBOrganizationEntities() : base("name=InAppFile")
         {
             var context = (this as IObjectContextAdapter).ObjectContext;
             context.ObjectMaterialized += OnObjectMaterialized;
