@@ -8,10 +8,11 @@ namespace ProjectForDepartaments.Views
     /// </summary>
     public partial class EmployeeAddView : Window
     {
-        public Employee Employee { get; set; } = new Employee();
-        public EmployeeAddView()
+        public Employee Employee { get; set; }
+        public EmployeeAddView(Department depart)
         {
             InitializeComponent();
+            Employee = new Employee() { Department = depart,DepartmentId=depart.Id };
             this.DataContext = Employee;
         }
 

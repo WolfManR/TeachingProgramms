@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectForDepartaments"
         mc:Ignorable="d"
-        Loaded="Window_Loaded"
         Title="Organization" MinHeight="300" Height="500" MinWidth="500" Width="1000"
         DataContext="{Binding MainOrganization,RelativeSource={RelativeSource Self}}">
     <Grid>
@@ -15,7 +14,7 @@
                     <ResourceDictionary Source="Resources/Styles/OrganizationViewStyles.xaml"/>
 
                     <ResourceDictionary>
-
+                        
 
                     </ResourceDictionary>
                 </ResourceDictionary.MergedDictionaries>
@@ -56,7 +55,7 @@
                 <!--#endregion-->
 
                 <!--#region  Departments-->
-                <ListView Name="lvDepartment" ItemsSource="{Binding Departments}" SelectedItem="{Binding SelectedDepartment}" Grid.Row="1" BorderThickness="0 2 0 0" SelectionMode="Single">
+                <ListView Name="lvDepartment" ItemsSource="{Binding Departments}" SelectedItem="{Binding SelectedDepartment}" Grid.Row="1" BorderThickness="0 2 0 0" SelectionMode="Single" SelectionChanged="lvDepartment_SelectionChanged">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -133,7 +132,7 @@
             <!--#endregion-->
 
             <!--#region Employees View -->
-            <Border Grid.Column="1" Margin="5,15,24,0" BorderThickness="1" BorderBrush="Gray" DataContext="{Binding SelectedDepartment}">
+            <Border Name="bEmployees" Grid.Column="1" Margin="5,46,10,0" BorderThickness="1" BorderBrush="Gray" Visibility="Hidden">
                 <Grid Grid.IsSharedSizeScope="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -148,7 +147,7 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Employees" FontSize="24" Margin="10 0 0 0"/>
-                        <Button Grid.Column="1" Name="btnEmployeesAdd" Command="{Binding Path=DataContext.AddEmployeeCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvEmployees, Path=DataContext}">&#xE710;</Button>
+                        <Button Grid.Column="1" Name="btnEmployeesAdd" Command="{Binding Path=DataContext.AddEmployeeCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvDepartment,Path=SelectedItem}">&#xE710;</Button>
                     </Grid>
                     <!--#endregion-->
 
@@ -258,6 +257,7 @@
                 </Grid>
             </Border>
             <!--#endregion-->
+            
         </Grid>
 
         <!--#region Edit Panel-->                               <!--Work In Progress--><!--
@@ -275,23 +275,16 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Title" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Button Grid.Column="1">
-                        &#xE711;
-                        <Button.Triggers>
-                            <EventTrigger >
-
-                            </EventTrigger>
-                        </Button.Triggers>
-                    </Button>
+                    <Button Grid.Column="1">&#xE711;</Button>
                 </Grid>
                 --><!--#endregion-->
 
                 <!--#region ContentPresenter--><!--
                 <Grid Grid.Row="1">
 
-                    --><!--#region Employee Edit-->
+                    --><!--#region Employee Edit--><!--
 
-                    <!--<Grid>
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="8"/>
@@ -315,6 +308,7 @@
                             </StackPanel>
                         </Grid>
                         --><!--#endregion-->
+                        
                         <!--#region  Department Switch--><!--
                         <Grid Margin="10 2" Grid.Row="2">
                             <Grid.RowDefinitions>
@@ -332,6 +326,7 @@
                             </Grid>
                         </Grid>
                         --><!--#endregion-->
+                        
                         <!--#region Conrols--><!--
                         <Grid Grid.Row="3" Margin="0,15,0,8" Height="32">
                             <Grid.Resources>
@@ -350,23 +345,26 @@
                             <Button Grid.Column="1" FontFamily="Segoe UI" Content="Fire"/>
                         </Grid>
                         --><!--#endregion--><!--
-                    </Grid>-->
+                        
+                    </Grid>
 
-                    <!--#endregion-->
+                    --><!--#endregion-->
 
-                    <!--#region Department Edit-->
+                    <!--#region Department Edit--><!--
                     
-                    <!--<Grid>
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
+                        
                         --><!--#region MainData--><!--
                         <StackPanel>
                             <Label Content="Name" FontSize="14"/>
                             <TextBox Text="C# Programmers" FontSize="20" BorderThickness="0"/>
                         </StackPanel>
                         --><!--#endregion-->
+                        
                         <!--#region Controls--><!--
                         <Grid Grid.Row="1" Margin="0,15,0,8" Height="32" Visibility="Visible">
                             <Grid.Resources>
@@ -385,6 +383,7 @@
                             <Button Content="Remove" Grid.Column="1"/>
                         </Grid>
                         --><!--#endregion-->
+                        
                         <!--#region Employees Redefine Jobs--><!--
                         <Border Grid.Row="1" Margin="10,6" BorderThickness="2" BorderBrush="LightGray" Visibility="Collapsed">
                             <Grid>
@@ -435,12 +434,10 @@
                             </Grid>
                         </Border>
                         --><!--#endregion--><!--
-                    </Grid>-->
+                        
+                    </Grid>
                     
-                    <!--#endregion-->
-
-                    <!--#region Organization Edit-->
-                    <!--#endregion--><!--
+                    --><!--#endregion--><!--
 
                 </Grid>
                 --><!--#endregion--><!--
@@ -450,6 +447,5 @@
             </Grid>
         </Grid>
         --><!--#endregion-->
-        
     </Grid>
 </Window>

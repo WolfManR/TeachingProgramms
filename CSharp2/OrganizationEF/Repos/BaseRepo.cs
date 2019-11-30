@@ -14,9 +14,14 @@ namespace OrganizationEF.Repos
         private readonly GBOrganizationEntities _db;
         protected GBOrganizationEntities Context => _db;
 
-        public BaseRepo()
+        //public BaseRepo()
+        //{
+        //    _db = new GBOrganizationEntities();
+        //    _table = _db.Set<T>();
+        //}
+        public BaseRepo(GBOrganizationEntities context)
         {
-            _db = new GBOrganizationEntities();
+            _db = context;
             _table = _db.Set<T>();
         }
 

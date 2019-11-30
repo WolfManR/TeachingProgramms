@@ -13,38 +13,11 @@ namespace ProjectForDepartaments
     /// </summary>
     public partial class MainWindow : Window
     {
-        public OrganizationViewModel MainOrganization { get; set; } = new OrganizationViewModel();
+        public OrganizationViewModel MainOrganization { get; set; }
         public MainWindow()
         {
+            MainOrganization = new OrganizationViewModel(this);
             InitializeComponent();
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //var organization = new Organization("GeekBrains")
-            //{
-            //    Departments = new System.Collections.ObjectModel.ObservableCollection<Department>()
-            //};
-            //var dp1 = new Department("C# Programmers");
-            //var dp1Employees = new System.Collections.ObjectModel.ObservableCollection<Employee>()
-            //{
-            //                new Employee("Lork", "Emily"){ Department=dp1,Organization=organization },
-            //                new Employee("Lork", "Emily"){ Department=dp1,Organization=organization },
-            //                new Employee("Lork", "Emily"){ Department=dp1,Organization=organization },
-            //                new Employee("Lork", "Emily"){ Department=dp1,Organization=organization }
-            //            };
-            //dp1.Employees = dp1Employees;
-            //var dp2 = new Department("Java Programmers");
-            //var dp2Employees = new System.Collections.ObjectModel.ObservableCollection<Employee>()
-            //            {
-            //                new Employee("Karat", "Zone"){ Department=dp2,Organization=organization },
-            //                new Employee("Karat", "Zone"){ Department=dp2,Organization=organization },
-            //                new Employee("Karat", "Zone"){ Department=dp2,Organization=organization },
-            //                new Employee("Karat", "Zone"){ Department=dp2,Organization=organization }
-            //            };
-            //dp2.Employees = dp2Employees;
-            //organization.Departments.Add(dp1);
-            //organization.Departments.Add(dp2);
-            //MainOrganization.Organization = organization;
         }
 
         private void btnDepartRemove_Click(object sender, RoutedEventArgs e)
@@ -74,6 +47,12 @@ namespace ProjectForDepartaments
             }
             Employee empl = button.DataContext as Employee;
             if (selectedDep != null && empl.Department != selectedDep) OrganizationViewModel.SwitchDepartment(empl.Department, selectedDep, empl);
+        }
+
+        private void lvDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ListView).SelectedItem is Department) bEmployees.Visibility = Visibility.Visible;
+            else bEmployees.Visibility = Visibility.Hidden;
         }
     }
 
