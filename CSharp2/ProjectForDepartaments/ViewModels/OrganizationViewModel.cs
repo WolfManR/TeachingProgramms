@@ -14,6 +14,7 @@ namespace ProjectForDepartaments.ViewModels
 {
     public class OrganizationViewModel : INotifyPropertyChanged
     {
+        private readonly Window view;
         static readonly GBOrganizationEntities context = new GBOrganizationEntities();
         readonly DepartmentRepo departRepo = new DepartmentRepo(context);
         readonly EmployeeRepo employeeRepo = new EmployeeRepo(context);
@@ -21,7 +22,9 @@ namespace ProjectForDepartaments.ViewModels
         private Department selectedDepartment;
         private RelayCommand addDepartmentCmd = null;
         private RelayCommand<Department> addEmployeeCmd = null;
-        private Window view;
+        private RelayCommand<Department> removeDepartmentCmd = null;
+        private RelayCommand<Employee> removeEmployeeCmd = null;
+        private RelayCommand<object> swapDepartmentCmd = null;
 
         public RelayCommand AddDepartmentCmd => addDepartmentCmd ?? (addDepartmentCmd = new RelayCommand(() =>
          {
@@ -31,13 +34,22 @@ namespace ProjectForDepartaments.ViewModels
              {
                  case true when (AddView.Department != null):
                      //add error "that item exist"
+                     departRepo.Add(AddView.Department);
                      Departments.Add(AddView.Department);
+                     Departments.Clear();
+                     var departments = departRepo.GetAll();
+                     departments.ForEach(x => Departments.Add(x));
                      break;
                  default:
                      break;
              }
              view.IsEnabled = true;
          }));
+        public RelayCommand<Department> RemoveDepartmentCmd => removeDepartmentCmd ?? (removeDepartmentCmd = new RelayCommand<Department>(
+            (parameter) => {
+                Departments.Remove(parameter);
+            },
+            param => param != null && param is Department));
         public RelayCommand<Department> AddEmployeeCmd => addEmployeeCmd ?? (addEmployeeCmd = new RelayCommand<Department>(
             (parameter) => {
                 var AddView = new Views.EmployeeAddView(parameter);
@@ -50,13 +62,47 @@ namespace ProjectForDepartaments.ViewModels
                         Employees.Clear();
                         var list = (from x in employeeRepo.GetAll() where x.DepartmentId == parameter.Id select x).ToList();
                         list.ForEach(x => Employees.Add(x));
+                        selectedDepartment.IsChanged = true;
+                        selectedDepartment.IsChanged = false;
                         break;
                     default:
                         break;
                 }
                 view.IsEnabled = true;
             },
-            param => param != null && param is Department)); 
+            param => param != null && param is Department));
+        public RelayCommand<Employee> RemoveEmployeeCmd => removeEmployeeCmd ?? (removeEmployeeCmd = new RelayCommand<Employee>(
+            (parameter) => {
+                employeeRepo.Delete(parameter);
+                Employees.Remove(parameter);
+                selectedDepartment.IsChanged = true;
+                selectedDepartment.IsChanged = false;
+            },
+            param => param != null && param is Employee));
+        public RelayCommand<object> SwapDepartmentCmd => swapDepartmentCmd ?? (swapDepartmentCmd = new RelayCommand<object>(
+            (param) =>
+            {
+                var array = (object[])param;
+                Department to = array[0] as Department;
+                Employee empl = array[1] as Employee;
+                empl.Department = to;
+                empl.DepartmentId = to.Id;
+                employeeRepo.Save(empl);
+
+                Employees.Remove(empl);
+                selectedDepartment.IsChanged = true;
+                selectedDepartment.IsChanged = false;
+                to.IsChanged = true;
+                to.IsChanged = false;
+            },
+            (param) =>
+                param != null && 
+                param is object[] array &&
+                array.Length == 2 &&
+                array[0] is Department dep && dep!=SelectedDepartment && 
+                array[1] is Employee
+            ));
+
         public Department SelectedDepartment
         {
             get => selectedDepartment;
@@ -84,19 +130,21 @@ namespace ProjectForDepartaments.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        public IList<Department> Departments { get; set; }
-        public IList<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
         public string OrganizationName { get; set; } = "GeekBrains";
+
+        public IList<Department> Departments { get; set; } = new ObservableCollection<Department>();
+        public IList<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
+
 
         public OrganizationViewModel(Window view)
         {
             this.view = view;
-            var departments = new ObservableCollection<Department>(departRepo.GetAll());
-            departments.CollectionChanged += Departments_CollectionChanged;
-            Departments = departments;
+            var departments = departRepo.GetAll();
+            departments.ForEach(x=>Departments.Add(x));
+            (Departments as ObservableCollection<Department>).CollectionChanged += Departments_CollectionChanged;
             (Employees as ObservableCollection<Employee>).CollectionChanged += Employees_CollectionChanged;
         }
+
 
         private void Departments_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -104,10 +152,6 @@ namespace ProjectForDepartaments.ViewModels
             switch (action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    foreach (Department item in e.NewItems)
-                    {
-                        departRepo.Add(item);
-                    }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (Department item in e.OldItems)
@@ -125,23 +169,17 @@ namespace ProjectForDepartaments.ViewModels
                     break;
             }
         }
-
         private void Employees_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             var action = e.Action;
             switch (action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    selectedDepartment.IsChanged = true;
-                    selectedDepartment.IsChanged = false;
+                    
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    foreach (Employee item in e.OldItems)
-                    {
-                        employeeRepo.Delete(item);
-                    }
-                    selectedDepartment.IsChanged = true;
-                    selectedDepartment.IsChanged = false;
+                    //selectedDepartment.IsChanged = true;
+                    //selectedDepartment.IsChanged = false;
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     break;
@@ -154,13 +192,6 @@ namespace ProjectForDepartaments.ViewModels
             }
         }
 
-        [System.Obsolete("Work of Method will be changed in future!")]
-        public static void SwitchDepartment(Department from, Department to, Employee employee)
-        {
-            from.Employees.Remove(employee);
-            to.Employees.Add(employee);
-            employee.Department = to;
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")

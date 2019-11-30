@@ -4,6 +4,10 @@
     <Style TargetType="ListViewItem">
         <Setter Property="Padding" Value="2"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="WhiteSmoke"/>
+        <Setter Property="Margin" Value="0,1"/>
+        <Setter Property="Background" Value="AntiqueWhite"/>
     </Style>
     <Style TargetType="Label">
         <Setter Property="Padding" Value="2"/>

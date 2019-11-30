@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectForDepartaments"
+        xmlns:converters="clr-namespace:ProjectForDepartaments.Converters"
         mc:Ignorable="d"
         Title="Organization" MinHeight="300" Height="500" MinWidth="500" Width="1000"
         DataContext="{Binding MainOrganization,RelativeSource={RelativeSource Self}}">
@@ -14,7 +15,7 @@
                     <ResourceDictionary Source="Resources/Styles/OrganizationViewStyles.xaml"/>
 
                     <ResourceDictionary>
-                        
+                        <converters:DepEmplToObjectConverter x:Key="DepEmplConv"/>
 
                     </ResourceDictionary>
                 </ResourceDictionary.MergedDictionaries>
@@ -50,7 +51,7 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Departments" FontSize="24" Margin="10 0 0 0"/>
-                    <Button Grid.Column="1" Name="btnDepartAdd" Command="{Binding Path=DataContext.AddDepartmentCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvDepartment, Path=DataContext}">&#xE710;</Button>
+                    <Button Grid.Column="1" Name="btnDepartAdd" Command="{Binding Path=DataContext.AddDepartmentCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvDepartment, Path=DataContext}" ToolTip="Add Department">&#xE710;</Button>
                 </Grid>
                 <!--#endregion-->
 
@@ -71,7 +72,7 @@
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                        <Button Name="btnDepartRemove" Click="btnDepartRemove_Click" Height="30">&#xE738;</Button>
+                                        <Button Name="btnDepartRemove" Height="30"  Command="{Binding Path=DataContext.RemoveDepartmentCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=DataContext}" ToolTip="Dismiss">&#xE738;</Button>
                                     </StackPanel>
                                 </Grid>
                                 <!--#endregion-->
@@ -147,7 +148,7 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Employees" FontSize="24" Margin="10 0 0 0"/>
-                        <Button Grid.Column="1" Name="btnEmployeesAdd" Command="{Binding Path=DataContext.AddEmployeeCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvDepartment,Path=SelectedItem}">&#xE710;</Button>
+                        <Button Grid.Column="1" Name="btnEmployeesAdd" Command="{Binding Path=DataContext.AddEmployeeCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvDepartment,Path=SelectedItem}" ToolTip="Add Employee to this Department">&#xE710;</Button>
                     </Grid>
                     <!--#endregion-->
 
@@ -192,20 +193,27 @@
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
 
-                                            <Button Name="btnEmplRemove" Height="30" Click="btnEmplRemove_Click">&#xE738;</Button>
-                                            <Button Grid.Column="1" Name="btnEmplEdit" Height="30" >&#xE70F;</Button>
-                                            <Button Width="auto" Grid.Column="2" Grid.RowSpan="2">
+                                            <Button Name="btnEmplRemove" Height="30" Command="{Binding Path=DataContext.RemoveEmployeeCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=DataContext}" ToolTip="Fire">&#xE738;</Button>
+                                            <Button Grid.Column="1" Name="btnEmplEdit" Height="30" ToolTip="Edit">&#xE70F;</Button>
+                                            <Button x:Name="cSwapDep" Width="auto" Grid.Column="2" Grid.RowSpan="2" Visibility="Collapsed" ToolTip="Swap Department">
                                                 <Expander BorderThickness="0">
-                                                    <Expander.Header>
-                                                        <Label FontFamily="Segoe MDL2 Assets">&#xE8AB;</Label>
-                                                    </Expander.Header>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <ComboBox ItemsSource="{Binding Departments}" SelectedItem="{Binding Department,Mode=OneTime}" Width="auto" FontFamily="Segoe UI" SelectedIndex="0" DisplayMemberPath="Name"/>
-                                                        <Button Name="btnEmplSwitchDepart" Click="btnEmplSwitchDepart_Click">&#xE8AB;</Button>
-                                                    </StackPanel>
-                                                </Expander>
+                                                <Expander.Header>
+                                                    <Label FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Height="24">&#xE8AB;</Label>
+                                                </Expander.Header>
+                                                <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                                    <ComboBox Name="cbSwapDep" ItemsSource="{Binding DataContext.Departments,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" SelectedItem="{Binding DataContext.SelectedDepartment,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}},Mode=OneTime}" Width="auto" FontFamily="Segoe UI" SelectedIndex="0" DisplayMemberPath="Name"/>
+                                                    <Button Name="btnEmplSwitchDepart" Command="{Binding DataContext.SwapDepartmentCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" ToolTip="Swap">
+                                                        <Button.CommandParameter>
+                                                            <MultiBinding Converter="{StaticResource DepEmplConv}">
+                                                                <Binding ElementName="cbSwapDep" Path="SelectedItem"/>
+                                                                <Binding RelativeSource="{RelativeSource Self}" Path="DataContext"/>
+                                                            </MultiBinding>
+                                                        </Button.CommandParameter>
+                                                        &#xE8AB;
+                                                    </Button>
+                                                </StackPanel>
+                                            </Expander>
                                             </Button>
-
                                         </Grid>
 
                                     </Grid>
@@ -232,6 +240,7 @@
                                             <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
                                         </MultiDataTrigger.Conditions>
                                         <Setter TargetName="EmployeeSubControl" Property="Visibility" Value="Collapsed"/>
+                                        <Setter TargetName="cSwapDep" Property="Visibility" Value="Collapsed"/>
                                     </MultiDataTrigger>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
@@ -239,6 +248,7 @@
                                             <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
                                         </MultiDataTrigger.Conditions>
                                         <Setter TargetName="EmployeeSubControl" Property="Visibility" Value="Visible"/>
+                                        <Setter TargetName="cSwapDep" Property="Visibility" Value="Collapsed"/>
                                     </MultiDataTrigger>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
@@ -247,6 +257,10 @@
                                         </MultiDataTrigger.Conditions>
                                         <Setter TargetName="EmployeeSubControl" Property="Visibility" Value="Visible"/>
                                     </MultiDataTrigger>
+                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                        <Setter TargetName="EmployeeSubControl" Property="Visibility" Value="Visible"/>
+                                        <Setter TargetName="cSwapDep" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
                                 </DataTemplate.Triggers>
 
                             </DataTemplate>
