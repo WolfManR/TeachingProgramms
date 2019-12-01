@@ -21,8 +21,10 @@ namespace ProjectForDepartaments.ViewModels
         private Employee selectedEmployee;
         private Department selectedDepartment;
         private RelayCommand addDepartmentCmd = null;
-        private RelayCommand<Department> addEmployeeCmd = null;
+        private RelayCommand<Department> addNewEmployeeCmd = null;
+        private RelayCommand<Employee> addNotHiredEmployeeCmd = null;
         private RelayCommand<Department> removeDepartmentCmd = null;
+        private RelayCommand<Employee> fireEmployeeCmd = null;
         private RelayCommand<Employee> removeEmployeeCmd = null;
         private RelayCommand<object> swapDepartmentCmd = null;
 
@@ -34,7 +36,15 @@ namespace ProjectForDepartaments.ViewModels
              {
                  case true when (AddView.Department != null):
                      //add error "that item exist"
-                     departRepo.Add(AddView.Department);
+                     try
+                     {
+                         departRepo.Add(AddView.Department);
+                     }
+                     catch (System.Exception ex)
+                     {
+                         MessageBox.Show($"Something Bad Happend\n{ex.Message}");
+                     }
+                     
                      Departments.Add(AddView.Department);
                      Departments.Clear();
                      var departments = departRepo.GetAll();
@@ -48,9 +58,10 @@ namespace ProjectForDepartaments.ViewModels
         public RelayCommand<Department> RemoveDepartmentCmd => removeDepartmentCmd ?? (removeDepartmentCmd = new RelayCommand<Department>(
             (parameter) => {
                 Departments.Remove(parameter);
+                UpdateEmployeeCollection(NotHired, null);
             },
             param => param != null && param is Department));
-        public RelayCommand<Department> AddEmployeeCmd => addEmployeeCmd ?? (addEmployeeCmd = new RelayCommand<Department>(
+        public RelayCommand<Department> AddNewEmployeeCmd => addNewEmployeeCmd ?? (addNewEmployeeCmd = new RelayCommand<Department>(
             (parameter) => {
                 var AddView = new Views.EmployeeAddView(parameter);
                 view.IsEnabled = false;
@@ -58,10 +69,16 @@ namespace ProjectForDepartaments.ViewModels
                 {
                     case true when AddView.Employee != null:
                         //add error "that item exist"
-                        employeeRepo.Add(AddView.Employee);
-                        Employees.Clear();
-                        var list = (from x in employeeRepo.GetAll() where x.DepartmentId == parameter.Id select x).ToList();
-                        list.ForEach(x => Employees.Add(x));
+                        try
+                        {
+                            employeeRepo.Add(AddView.Employee);
+                        }
+                        catch (System.Exception ex)
+                        {
+                            MessageBox.Show($"Something Bad Happend\n{ex.Message}");
+                        }
+                        
+                        UpdateEmployeeCollection(Employees, parameter.Id);
                         selectedDepartment.IsChanged = true;
                         selectedDepartment.IsChanged = false;
                         break;
@@ -71,12 +88,57 @@ namespace ProjectForDepartaments.ViewModels
                 view.IsEnabled = true;
             },
             param => param != null && param is Department));
-        public RelayCommand<Employee> RemoveEmployeeCmd => removeEmployeeCmd ?? (removeEmployeeCmd = new RelayCommand<Employee>(
+        public RelayCommand<Employee> AddNotHiredEmployeeCmd => addNotHiredEmployeeCmd ?? (addNotHiredEmployeeCmd = new RelayCommand<Employee>(
+            (param) =>
+            {
+                Employee empl = param as Employee;
+                NotHired.Remove(empl);
+                empl.Department = selectedDepartment;
+                empl.DepartmentId = selectedDepartment.Id;
+                try
+                {
+                    employeeRepo.Save(empl);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show($"Something Bad Happend\n{ex.Message}");
+                }
+
+                UpdateEmployeeCollection(Employees, selectedDepartment.Id);
+                
+                selectedDepartment.IsChanged = true;
+                selectedDepartment.IsChanged = false;
+            },
+            (param) => param != null && param is Employee && selectedDepartment!=null
+            ));
+        public RelayCommand<Employee> FireEmployeeCmd => fireEmployeeCmd ?? (fireEmployeeCmd = new RelayCommand<Employee>(
             (parameter) => {
-                employeeRepo.Delete(parameter);
+                try
+                {
+                    employeeRepo.Delete(parameter);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show($"Something Bad Happend\n{ex.Message}");
+                }
+                
                 Employees.Remove(parameter);
                 selectedDepartment.IsChanged = true;
                 selectedDepartment.IsChanged = false;
+            },
+            param => param != null && param is Employee));
+        public RelayCommand<Employee> RemoveEmployeeCmd => removeEmployeeCmd ?? (removeEmployeeCmd = new RelayCommand<Employee>(
+            (parameter) => {
+                try
+                {
+                    employeeRepo.Delete(parameter);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show($"Something Bad Happend\n{ex.Message}");
+                }
+                
+                NotHired.Remove(parameter);
             },
             param => param != null && param is Employee));
         public RelayCommand<object> SwapDepartmentCmd => swapDepartmentCmd ?? (swapDepartmentCmd = new RelayCommand<object>(
@@ -87,9 +149,17 @@ namespace ProjectForDepartaments.ViewModels
                 Employee empl = array[1] as Employee;
                 empl.Department = to;
                 empl.DepartmentId = to.Id;
-                employeeRepo.Save(empl);
+                try
+                {
+                    employeeRepo.Save(empl);
 
-                Employees.Remove(empl);
+                    Employees.Remove(empl);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show($"Something Bad Happend\n{ex.Message}");
+                }
+                
                 selectedDepartment.IsChanged = true;
                 selectedDepartment.IsChanged = false;
                 to.IsChanged = true;
@@ -134,13 +204,15 @@ namespace ProjectForDepartaments.ViewModels
 
         public IList<Department> Departments { get; set; } = new ObservableCollection<Department>();
         public IList<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
-
+        public IList<Employee> NotHired { get; set; } = new ObservableCollection<Employee>();
 
         public OrganizationViewModel(Window view)
         {
             this.view = view;
             var departments = departRepo.GetAll();
             departments.ForEach(x=>Departments.Add(x));
+            var list = (from x in employeeRepo.GetAll() where x.DepartmentId == null select x).ToList();
+            list.ForEach(x => NotHired.Add(x));
             (Departments as ObservableCollection<Department>).CollectionChanged += Departments_CollectionChanged;
             (Employees as ObservableCollection<Employee>).CollectionChanged += Employees_CollectionChanged;
         }
@@ -192,6 +264,12 @@ namespace ProjectForDepartaments.ViewModels
             }
         }
 
+        void UpdateEmployeeCollection<T>(IList<T> collection,int? departmentId) where T: Employee
+        {
+            collection.Clear();
+            var list = (from x in employeeRepo.GetAll() where x.DepartmentId == departmentId select x).ToList();
+            list.ForEach(x => collection.Add((T)x));
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")

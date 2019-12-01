@@ -1,9 +1,7 @@
 ﻿using OrganizationEF.Models;
-using ProjectForDepartaments.Commands;
 using ProjectForDepartaments.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 
 namespace ProjectForDepartaments
@@ -24,6 +22,30 @@ namespace ProjectForDepartaments
         {
             if ((sender as ListView).SelectedItem is Department) bEmployees.Visibility = Visibility.Visible;
             else bEmployees.Visibility = Visibility.Hidden;
+        }
+
+        private void btnShowNotHiredList_Click(object sender, RoutedEventArgs e)
+        {
+            btnHideNotHiredList.Visibility = Visibility.Visible;
+            btnShowNotHiredList.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnHideNotHiredList_Click(object sender, RoutedEventArgs e)
+        {
+            btnHideNotHiredList.Visibility = Visibility.Collapsed;
+            btnShowNotHiredList.Visibility = Visibility.Visible;
+        }
+
+        private void btnShowEmployeesAdd_Click(object sender, RoutedEventArgs e)
+        {
+            btnShowEmployeesAdd.Visibility = Visibility.Collapsed;
+            btnHideEmployeesAdd.Visibility = Visibility.Visible;
+        }
+
+        private void btnHideEmployeesAdd_Click(object sender, RoutedEventArgs e)
+        {
+            btnShowEmployeesAdd.Visibility = Visibility.Visible;
+            btnHideEmployeesAdd.Visibility = Visibility.Collapsed;
         }
     }
 

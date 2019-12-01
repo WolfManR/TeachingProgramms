@@ -84,6 +84,7 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\RelayCommandT.cs" />
     <Compile Include="Converters\DepEmplToObjectConverter.cs" />
+    <Compile Include="Converters\ObjToBoolConverter.cs" />
     <Compile Include="ViewModels\OrganizationViewModel.cs" />
     <Compile Include="Views\DepartmentAddView.xaml.cs">
       <DependentUpon>DepartmentAddView.xaml</DependentUpon>
