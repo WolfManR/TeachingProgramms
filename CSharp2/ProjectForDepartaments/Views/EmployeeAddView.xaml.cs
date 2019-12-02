@@ -1,4 +1,4 @@
-﻿using ProjectForDepartaments.Models;
+﻿using OrganizationEF.Models;
 using System.Windows;
 
 namespace ProjectForDepartaments.Views
@@ -9,10 +9,10 @@ namespace ProjectForDepartaments.Views
     public partial class EmployeeAddView : Window
     {
         public Employee Employee { get; set; }
-        public EmployeeAddView(Department department)
+        public EmployeeAddView(Department depart)
         {
             InitializeComponent();
-            Employee = new Employee() { Department = department, Organization = department.Organization };
+            Employee = new Employee() { Department = depart,DepartmentId=depart.Id };
             this.DataContext = Employee;
         }
 

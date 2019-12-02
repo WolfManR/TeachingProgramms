@@ -1,9 +1,7 @@
-﻿using ProjectForDepartaments.Commands;
-using ProjectForDepartaments.Models;
+﻿using OrganizationEF.Models;
 using ProjectForDepartaments.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 
 namespace ProjectForDepartaments
@@ -13,72 +11,41 @@ namespace ProjectForDepartaments
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ICommand addDepartmentCmd = null;
-        private ICommand addEmployeeCmd = null;
-        public ICommand AddDepartmentCmd => addDepartmentCmd ?? (addDepartmentCmd = new AddDepartmentCommand());
-        public ICommand AddEmployeeCmd => addEmployeeCmd ?? (addEmployeeCmd = new AddEmployeeCommand());
-
-        public OrganizationViewModel MainOrganization { get; set; } = new OrganizationViewModel();
+        public OrganizationViewModel MainOrganization { get; set; }
         public MainWindow()
         {
+            MainOrganization = new OrganizationViewModel(this);
             InitializeComponent();
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+
+        private void lvDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var organization = new Organization("GeekBrains")
-            {
-                Departments = new System.Collections.ObjectModel.ObservableCollection<Department>()
-            };
-            var dp1 = new Department("C# Programmers");
-            var dp1Employees = new System.Collections.ObjectModel.ObservableCollection<Employee>()
-            {
-                            new Employee("Lork", "Emily"){ Department=dp1,Organization=organization },
-                            new Employee("Lork", "Emily"){ Department=dp1,Organization=organization },
-                            new Employee("Lork", "Emily"){ Department=dp1,Organization=organization },
-                            new Employee("Lork", "Emily"){ Department=dp1,Organization=organization }
-                        };
-            dp1.Employees = dp1Employees;
-            var dp2 = new Department("Java Programmers");
-            var dp2Employees = new System.Collections.ObjectModel.ObservableCollection<Employee>()
-                        {
-                            new Employee("Karat", "Zone"){ Department=dp2,Organization=organization },
-                            new Employee("Karat", "Zone"){ Department=dp2,Organization=organization },
-                            new Employee("Karat", "Zone"){ Department=dp2,Organization=organization },
-                            new Employee("Karat", "Zone"){ Department=dp2,Organization=organization }
-                        };
-            dp2.Employees = dp2Employees;
-            organization.Departments.Add(dp1);
-            organization.Departments.Add(dp2);
-            MainOrganization.Organization = organization;
+            if ((sender as ListView).SelectedItem is Department) bEmployees.Visibility = Visibility.Visible;
+            else bEmployees.Visibility = Visibility.Hidden;
         }
 
-        private void btnDepartRemove_Click(object sender, RoutedEventArgs e)
+        private void btnShowNotHiredList_Click(object sender, RoutedEventArgs e)
         {
-            if (((Button)sender).DataContext is Department dep)
-                MainOrganization.Organization.Departments.Remove(dep);
-        }
-        private void btnEmplRemove_Click(object sender, RoutedEventArgs e)
-        {
-            var b = (Button)sender;
-            if (b.DataContext is Employee empl)
-                (lvEmployees.DataContext as Department).Employees.Remove(empl);
+            btnHideNotHiredList.Visibility = Visibility.Visible;
+            btnShowNotHiredList.Visibility = Visibility.Collapsed;
         }
 
-        private void btnEmplSwitchDepart_Click(object sender, RoutedEventArgs e)
+        private void btnHideNotHiredList_Click(object sender, RoutedEventArgs e)
         {
-            var button = (ContentControl)sender;
-            Department selectedDep = null;
-            var parentStackPanelChildrens = ((Panel)button.Parent).Children;
-            foreach (var item in parentStackPanelChildrens)
-            {
-                if (item is ComboBox combo)
-                {
-                    selectedDep = combo.SelectedItem as Department;
-                    break;
-                }
-            }
-            Employee empl = button.DataContext as Employee;
-            if (selectedDep != null && empl.Department != selectedDep) OrganizationViewModel.SwitchDepartment(empl.Department, selectedDep, empl);
+            btnHideNotHiredList.Visibility = Visibility.Collapsed;
+            btnShowNotHiredList.Visibility = Visibility.Visible;
+        }
+
+        private void btnShowEmployeesAdd_Click(object sender, RoutedEventArgs e)
+        {
+            btnShowEmployeesAdd.Visibility = Visibility.Collapsed;
+            btnHideEmployeesAdd.Visibility = Visibility.Visible;
+        }
+
+        private void btnHideEmployeesAdd_Click(object sender, RoutedEventArgs e)
+        {
+            btnShowEmployeesAdd.Visibility = Visibility.Visible;
+            btnHideEmployeesAdd.Visibility = Visibility.Collapsed;
         }
     }
 
