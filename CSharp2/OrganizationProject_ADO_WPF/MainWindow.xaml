@@ -7,6 +7,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Departments}" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="auto"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="auto"/>
+                <DataGridTextColumn Binding="{Binding Employees.Count}" Header="Employees" Width="auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Employees}" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="auto"/>
+                <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" Width="auto"/>
+                <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" Width="auto"/>
+                <DataGridTextColumn Binding="{Binding DepartmentId}" Header="Department Id" Width="auto"/>
+                <DataGridTextColumn Binding="{Binding Department.Name}" Header="Department" Width="auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

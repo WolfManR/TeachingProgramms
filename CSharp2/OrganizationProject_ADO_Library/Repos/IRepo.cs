@@ -6,7 +6,7 @@ namespace OrganizationProject_ADO_Library.Repos
 {
     public interface IRepo
     {
-        ADOBase context { get; set; }
+        ADOBase Context { get; set; }
         SqlCommand SelectAllCommand { get; set; }
         SqlCommand SelectOneById { get; set; }
         SqlCommand UpdateCommand { get; set; }
