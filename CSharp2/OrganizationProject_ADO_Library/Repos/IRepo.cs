@@ -1,5 +1,4 @@
 ﻿using OrganizationProject_ADO_Library.ADO;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace OrganizationProject_ADO_Library.Repos
@@ -12,11 +11,6 @@ namespace OrganizationProject_ADO_Library.Repos
         SqlCommand UpdateCommand { get; set; }
         SqlCommand InsertCommand { get; set; }
         SqlCommand DeleteCommand { get; set; }
-
-        void GetAll(DataTable table);
-        void GetOneById(int id);
-        void Insert(DataTable table);
-        void Update(DataTable table);
-        void Delete(DataTable table);
+        void Init();
     }
 }
