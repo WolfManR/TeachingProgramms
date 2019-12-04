@@ -20,10 +20,10 @@ namespace OrganizationProject_ADO_Library.Repos
 
         public virtual void Init()
         {
-            Context.Adapter.SelectCommand = SelectAllCommand ?? SelectOneById??throw new ArgumentNullException("there no one Select Command");
-            Context.Adapter.InsertCommand = InsertCommand?? throw new ArgumentNullException("there no Insert Command");
-            Context.Adapter.UpdateCommand = UpdateCommand?? throw new ArgumentNullException("there no Update Command");
-            Context.Adapter.DeleteCommand = DeleteCommand?? throw new ArgumentNullException("there no Delete Command");
+            Context.Adapter.SelectCommand = SelectAllCommand ?? throw new ArgumentNullException("there no one Select Command");
+            Context.Adapter.InsertCommand = InsertCommand ?? throw new ArgumentNullException("there no Insert Command");
+            Context.Adapter.UpdateCommand = UpdateCommand ?? throw new ArgumentNullException("there no Update Command");
+            Context.Adapter.DeleteCommand = DeleteCommand ?? throw new ArgumentNullException("there no Delete Command");
         }
     }
 }
