@@ -12,6 +12,9 @@ namespace OrganizationProject_ADO_WPF
         public MainWindow()
         {
             InitializeComponent();
+            
         }
+
+        
     }
 }

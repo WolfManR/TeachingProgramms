@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="OrganizationProject_ADO_WCF.DBAccess" CodeBehind="DBAccess.svc.cs" %>

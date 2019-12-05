@@ -11,23 +11,5 @@ namespace OrganizationProject_ADO_Library.ADO
             Connection = new SqlConnection(connectionString);
             Adapter = adapter;
         }
-
-        public void SetSelectCommand(SqlCommand command)
-        {
-            Adapter.SelectCommand = command;
-        }
-        public void SetInsertCommand(SqlCommand command)
-        {
-            Adapter.InsertCommand = command;
-        }
-        public void SetUpdateCommand(SqlCommand command)
-        {
-            Adapter.UpdateCommand = command;
-        }
-        public void SetDeleteCommand(SqlCommand command)
-        {
-            Adapter.DeleteCommand = command;
-        }
-
     }
 }
