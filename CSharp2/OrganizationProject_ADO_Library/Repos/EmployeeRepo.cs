@@ -8,7 +8,7 @@ namespace OrganizationProject_ADO_Library.Repos
     {
         public EmployeeRepo(ADOBase context) : base(context)
         {
-            SelectAllCommand = new SqlCommand("Select Employee.Id,Employee.FirstName,Employee.LastName,Departments.Name From Employees Inner Join Departments On DepartmentId = Departments.Id", context.Connection);
+            SelectAllCommand = new SqlCommand("Select Employees.Id,Employees.FirstName,Employees.LastName,Departments.Name From Employees Left Join Departments On DepartmentId = Departments.Id", context.Connection);
 
             InsertCommand = new SqlCommand("Insert Into Employees (FirstName,LastName,DepartmentId) Values (@FirstName,@LastName,(Select Id From Departments Where Name = @Name)); Set @Id = @@IDENTITY;", context.Connection);
             InsertCommand.Parameters.Add("@FirstName", SqlDbType.NVarChar, 50, "FirstName");

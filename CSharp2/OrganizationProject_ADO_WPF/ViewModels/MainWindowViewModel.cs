@@ -19,6 +19,8 @@ namespace OrganizationProject_ADO_WPF.ViewModels
         {
             departmentRepo.Init();
             Context.Adapter.Fill(Departments);
+            employeeRepo.Init();
+            Context.Adapter.Fill(Employees);
         }
     }
 }
