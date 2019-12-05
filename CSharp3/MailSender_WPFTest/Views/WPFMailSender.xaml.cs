@@ -45,7 +45,7 @@ namespace MailSender_WPFTest.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(Errors.CantSendMail + ex.ToString());
+                new ErrorMessageView(Errors.CantSendMail+"\n" + ex.ToString()) { Owner=this, Title="Error"}.ShowDialog();
             }
 
             new SendEndWindow() { Owner = this }.ShowDialog();

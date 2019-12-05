@@ -59,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\ErrorMessageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SendEndWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -75,6 +79,9 @@
     <Compile Include="Models\SenderSettings.cs" />
     <Compile Include="Resources\Text\Errors.cs" />
     <Compile Include="Resources\Text\Texts.cs" />
+    <Compile Include="Views\ErrorMessageView.xaml.cs">
+      <DependentUpon>ErrorMessageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SendEndWindow.xaml.cs">
       <DependentUpon>SendEndWindow.xaml</DependentUpon>
     </Compile>
