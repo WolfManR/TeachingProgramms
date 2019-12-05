@@ -39,8 +39,16 @@ namespace MailSender_WPFTest.Views
                   25,
                   new List<string> { Texts.ToGmailEmail, Texts.ToYandexEmail }
                 );
-            sendService.SendMail(Texts.MailTitle, Texts.MailLetter);
-            new SendEndWindow().ShowDialog();
+            try
+            {
+                sendService.SendMail(Texts.MailTitle, Texts.MailLetter);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Errors.CantSendMail + ex.ToString());
+            }
+
+            new SendEndWindow() { Owner = this }.ShowDialog();
         }
     }
 }

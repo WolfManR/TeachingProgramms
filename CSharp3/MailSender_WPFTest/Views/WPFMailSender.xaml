@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender_WPFTest.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="WPFMailSender" Height="450" Width="800">
     <Grid>
         <Button Name="btnSendEmail" Content="Отправить email" HorizontalAlignment="Left" Margin="240,193,0,0" VerticalAlignment="Top" Width="124" Click="btnSendEmail_Click"/>
         <PasswordBox Name="passwordBox" HorizontalAlignment="Left" Margin="240,170,0,0" VerticalAlignment="Top" Width="124" PasswordChar="*"/>
