@@ -59,7 +59,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="WPFMailSender.xaml">
+    <Page Include="Views\SendEndWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WPFMailSender.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -67,7 +71,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="WPFMailSender.xaml.cs">
+    <Compile Include="Models\EmailSendServiceClass.cs" />
+    <Compile Include="Models\SenderSettings.cs" />
+    <Compile Include="Resources\Text\Errors.cs" />
+    <Compile Include="Resources\Text\Texts.cs" />
+    <Compile Include="Views\SendEndWindow.xaml.cs">
+      <DependentUpon>SendEndWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WPFMailSender.xaml.cs">
       <DependentUpon>WPFMailSender.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
