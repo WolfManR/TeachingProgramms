@@ -15,6 +15,37 @@
         </Grid.RowDefinitions>
 
         <!--#region Send Settings Panel -->
+
+        <!--#region SMTP Settings Panel -->
+        <Border Panel.ZIndex="1" Padding="8,0,8,4" Background="White" BorderThickness="3" BorderBrush="LightBlue" Grid.RowSpan="2" Width="170" VerticalAlignment="Top" Visibility="Collapsed">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="SMTP" FontSize="20"/>
+                <StackPanel Grid.Row="1">
+                    
+                    <StackPanel>
+                        <Label Content="Host"/>
+                        <TextBox/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        
+                        <StackPanel>
+                            <Label Content="Port"/>
+                            <TextBox MaxLength="6" Width="60" MaxLines="1"/>
+                        </StackPanel>
+                        
+                        <CheckBox Content="SSL" VerticalAlignment="Bottom" Margin="10,2,4,8"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <!--#endregion-->
+
+        <!--#region Send Panel -->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -37,7 +68,7 @@
                         <Button Grid.Column="1" FontFamily="Segoe MDL2 Assets" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">&#xE713;</Button>
                     </Grid>
                    
-                    <TextBox Name="SenderEmail" Text="{Binding Email,Mode=OneWayToSource}"/>
+                    <TextBox Name="SenderEmail" Text="{Binding Email,Mode=OneTime}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1">
                     <Label Content="Password"/>
@@ -74,7 +105,10 @@
                 <!--#endregion-->
         </Grid>
         <!--#endregion-->
+            
         </Grid>
+        <!--#endregion-->
+        
         <!--#endregion-->
 
         <!--#region Mail Panel -->
