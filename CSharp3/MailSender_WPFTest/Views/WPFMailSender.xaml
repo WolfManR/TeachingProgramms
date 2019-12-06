@@ -93,13 +93,13 @@
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Title" FontSize="22" Margin="4,0,8,0" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1"/>
+                <TextBox Name="tbTitle" Grid.Column="1"/>
                 <Button Grid.Column="2" Name="btnSendEmail" Click="btnSendEmail_Click" FontSize="28" FontFamily="Segoe MDL2 Assets">&#xE724;</Button>
             </Grid>
             <!--#endregion-->
 
             <!--#region Letter Panel -->
-            <TextBox Grid.Row="2" Margin="4,0"/>
+            <TextBox Name="tbLetter" Grid.Row="2" Margin="4,0"/>
             <!--#endregion-->
 
         </Grid>

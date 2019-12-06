@@ -43,7 +43,7 @@ namespace MailSender_WPFTest.Views
                 );
             try
             {
-                sendService.SendMail(Texts.MailTitle, Texts.MailLetter);
+                sendService.SendMail(tbTitle.Text, tbLetter.Text);
             }
             catch (Exception ex)
             {
