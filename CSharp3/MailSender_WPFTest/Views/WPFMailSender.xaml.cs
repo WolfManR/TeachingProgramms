@@ -1,5 +1,6 @@
 ﻿using MailSender_WPFTest.Models;
 using MailSender_WPFTest.Resources.Text;
+using MailSender_WPFTest.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace MailSender_WPFTest.Views
     /// </summary>
     public partial class WPFMailSender : Window
     {
+        public WPFMailSenderViewModel ViewModel { get; set; } = new WPFMailSenderViewModel();
         public WPFMailSender()
         {
             InitializeComponent();
@@ -31,13 +33,13 @@ namespace MailSender_WPFTest.Views
 
         private void btnSendEmail_Click(object sender, RoutedEventArgs e)
         {
-            EmailSendServiceClass sendService = new EmailSendServiceClass
+            MailSendService sendService = new MailSendService
                 (
-                  Texts.senderEmail,
+                  SenderEmail.Text,
                   passwordBox.Password,
-                  Texts.smptHostYandex,
-                  25,
-                  new List<string> { Texts.ToGmailEmail, Texts.ToYandexEmail }
+                  Texts.smptGmailHost,
+                  Texts.smptGmailPort,
+                  new List<string> { Texts.ToMyGmailEmail, Texts.ToMyMailEmail }
                 );
             try
             {

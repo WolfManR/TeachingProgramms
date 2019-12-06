@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender_WPFTest.Views"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self},Path=ViewModel}"
         Title="WPFMailSender" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -21,7 +22,7 @@
             </Grid.ColumnDefinitions>
         
         <!--#region Sender Panel -->
-        <Grid VerticalAlignment="Top" Margin="5,8,10,0">
+        <Grid VerticalAlignment="Top" Margin="5,8,10,0" DataContext="{Binding SenderSettings}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -36,7 +37,7 @@
                         <Button Grid.Column="1" FontFamily="Segoe MDL2 Assets" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">&#xE713;</Button>
                     </Grid>
                    
-                    <TextBox Name="SenderEmail"/>
+                    <TextBox Name="SenderEmail" Text="{Binding Email,Mode=OneWayToSource}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1">
                     <Label Content="Password"/>

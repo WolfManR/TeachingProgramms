@@ -75,10 +75,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\EmailSendServiceClass.cs" />
+    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Commands\RelayCommandT.cs" />
+    <Compile Include="Models\MailSendService.cs" />
     <Compile Include="Models\SenderSettings.cs" />
     <Compile Include="Resources\Text\Errors.cs" />
     <Compile Include="Resources\Text\Texts.cs" />
+    <Compile Include="ViewModels\WPFMailSenderViewModel.cs" />
     <Compile Include="Views\ErrorMessageView.xaml.cs">
       <DependentUpon>ErrorMessageView.xaml</DependentUpon>
     </Compile>
