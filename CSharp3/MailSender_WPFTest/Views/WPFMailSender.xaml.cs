@@ -52,5 +52,11 @@ namespace MailSender_WPFTest.Views
 
             new SendEndWindow() { Owner = this }.ShowDialog();
         }
+
+        private void btnSMTPSettings_Click(object sender, RoutedEventArgs e)
+        {
+            SMTP.IsOpen = !SMTP.IsOpen;
+        }
+
     }
 }
