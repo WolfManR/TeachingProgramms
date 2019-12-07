@@ -2,7 +2,7 @@
 
 namespace MailSender_WPFTest.Commands
 {
-    public class RelayCommand<T> : RelayCommand
+    public class RelayCommand<T> : BaseCommand
     {
         private readonly Action<T> _execute;
         private readonly Func<T, bool> _canExecute;
@@ -14,7 +14,7 @@ namespace MailSender_WPFTest.Commands
             _canExecute = canExecute;
         }
 
-        public override bool CanExecute(object parameter) => _canExecute == null || _canExecute((T)parameter);
-        public override void Execute(object parameter) { _execute((T)parameter); }
+        public override bool CanExecute(object parameter) => _canExecute == null || _canExecute.Invoke((T)parameter);
+        public override void Execute(object parameter) { _execute.Invoke((T)parameter); }
     }
 }
