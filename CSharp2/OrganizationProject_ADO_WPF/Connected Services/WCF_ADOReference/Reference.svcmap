@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9646ebb9-e99b-4d61-bf02-d33e67b6689a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:65312/DBAccess.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DBAccess.xsd" MetadataType="Schema" ID="ca947f17-7d74-47a5-ae15-a887b899290e" SourceId="1" SourceUrl="http://localhost:65312/DBAccess.svc?xsd=xsd1" />
+    <MetadataFile FileName="DBAccess1.xsd" MetadataType="Schema" ID="2cdbeed3-024d-41c0-b387-dc99b39238db" SourceId="1" SourceUrl="http://localhost:65312/DBAccess.svc?xsd=xsd3" />
+    <MetadataFile FileName="DBAccess2.xsd" MetadataType="Schema" ID="d5002743-c643-4e44-805c-1241a5e50a58" SourceId="1" SourceUrl="http://localhost:65312/DBAccess.svc?xsd=xsd0" />
+    <MetadataFile FileName="DBAccess3.xsd" MetadataType="Schema" ID="259f5411-9984-4628-a6e7-9309f9f3de85" SourceId="1" SourceUrl="http://localhost:65312/DBAccess.svc?xsd=xsd2" />
+    <MetadataFile FileName="DBAccess.wsdl" MetadataType="Wsdl" ID="dcedb3ca-5806-421b-8eeb-594611701a3a" SourceId="1" SourceUrl="http://localhost:65312/DBAccess.svc?wsdl" />
+    <MetadataFile FileName="DBAccess.disco" MetadataType="Disco" ID="2d2b7f3a-a37e-45bb-839f-a93e8e58ff09" SourceId="1" SourceUrl="http://localhost:65312/DBAccess.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,28 @@
+﻿<Window x:Class="ProjectForDepartaments.Views.DepartmentAddView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectForDepartaments.Views"
+        mc:Ignorable="d"
+        Title="DepartmentAddView" Height="150" Width="250">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto" Height="auto">
+            <Label Content="Department Name"/>
+            <TextBox Name="tbResult" Text="{Binding Name,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="10,2"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.IsSharedSizeScope="True" Height="20" Margin="40,15,40,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition SharedSizeGroup="One" Width="60"/>
+                <ColumnDefinition/>
+                <ColumnDefinition SharedSizeGroup="One"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btnOk" Content="Ok" Click="btnOk_Click"/>
+            <Button Name="btnCancel" Content="Cancel" Grid.Column="2" Click="btnCancel_Click"/>
+        </Grid>
+    </Grid>
+</Window>
