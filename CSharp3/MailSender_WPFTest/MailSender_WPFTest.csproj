@@ -82,6 +82,7 @@
     <Compile Include="Models\SenderSettings.cs" />
     <Compile Include="Resources\Text\Errors.cs" />
     <Compile Include="Resources\Text\Texts.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WPFMailSenderViewModel.cs" />
     <Compile Include="Views\ErrorMessageView.xaml.cs">
       <DependentUpon>ErrorMessageView.xaml</DependentUpon>
