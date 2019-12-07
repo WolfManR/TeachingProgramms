@@ -4,29 +4,11 @@ namespace OrganizationProject_ADO_Library.ADO
 {
     public class ADOBase
     {
-        public SqlConnection Connection { get; }
-        public SqlDataAdapter Adapter { get; }
-        public ADOBase(string connectionString, SqlDataAdapter adapter)
+        public SqlConnection Connection { get; set; }
+        public SqlDataAdapter Adapter { get; set; } = new SqlDataAdapter();
+        public ADOBase(string connectionString)
         {
             Connection = new SqlConnection(connectionString);
-            Adapter = adapter;
-        }
-
-        public void SetSelectCommand(SqlCommand command)
-        {
-            Adapter.SelectCommand = command;
-        }
-        public void SetInsertCommand(SqlCommand command)
-        {
-            Adapter.InsertCommand = command;
-        }
-        public void SetUpdateCommand(SqlCommand command)
-        {
-            Adapter.UpdateCommand = command;
-        }
-        public void SetDeleteCommand(SqlCommand command)
-        {
-            Adapter.DeleteCommand = command;
         }
 
     }
