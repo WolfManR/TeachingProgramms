@@ -7,143 +7,198 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self},Path=ViewModel}"
         Title="WPFMailSender" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="20" />
-        </Grid.RowDefinitions>
 
-        <!--#region Send Settings Panel -->
 
-        <!--#region SMTP Settings Panel -->
-        <Popup Name="SMTP" AllowsTransparency="True" PlacementTarget="{Binding ElementName=btnSMTPSettings}" Placement="Right" HorizontalOffset="4" PopupAnimation="Scroll" StaysOpen="False">
-            <Border Padding="8,0,8,4" Background="White" BorderThickness="2" BorderBrush="{StaticResource NormalBorderBrush}" CornerRadius="2">
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="SMTP" FontSize="20"/>
-                    <StackPanel Grid.Row="1">
-
-                        <StackPanel>
-                            <Label Content="Host"/>
-                            <TextBox/>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="1" Orientation="Horizontal">
-
-                            <StackPanel>
-                                <Label Content="Port"/>
-                                <TextBox MaxLength="6" Width="60" MaxLines="1"/>
-                            </StackPanel>
-
-                            <CheckBox Content="SSL" VerticalAlignment="Bottom" Margin="10,2,4,8"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
-            </Border>
-        </Popup>
+    <TabControl>
         
-        <!--#endregion-->
-
-        <!--#region Send Panel -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-
-            <!--#region Sender Panel -->
-            <Grid VerticalAlignment="Top" Margin="5,8,10,0" DataContext="{Binding SenderSettings}">
+        <TabItem Header="Mail">
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
-                <StackPanel>
+
+                <!--#region Send Settings Panel -->
+
+                <!--#region SMTP Settings Panel -->
+                <Popup Name="SMTP" AllowsTransparency="True" PlacementTarget="{Binding ElementName=btnSMTPSettings}" Placement="Right" HorizontalOffset="4" PopupAnimation="Scroll" StaysOpen="False">
+                    <Border Padding="8,0,8,4" Background="White" BorderThickness="2" BorderBrush="{StaticResource NormalBorderBrush}" CornerRadius="2">
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="SMTP" FontSize="20"/>
+                            <StackPanel Grid.Row="1">
+
+                                <StackPanel>
+                                    <Label Content="Host"/>
+                                    <TextBox/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+
+                                    <StackPanel>
+                                        <Label Content="Port"/>
+                                        <TextBox MaxLength="6" Width="60" MaxLines="1"/>
+                                    </StackPanel>
+
+                                    <CheckBox Content="SSL" VerticalAlignment="Bottom" Margin="10,2,4,8"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Popup>
+
+                <!--#endregion-->
+
+                <!--#region Send Panel -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--#region Sender Panel -->
+                    <Grid VerticalAlignment="Top" Margin="5,8,10,0" DataContext="{Binding SenderSettings}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Email"/>
+                                <Button x:Name="btnSMTPSettings" Grid.Column="1" FontFamily="Segoe MDL2 Assets" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="btnSMTPSettings_Click">&#xE713;</Button>
+                            </Grid>
+
+                            <TextBox Name="SenderEmail" Text="{Binding Email,Mode=OneTime}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1">
+                            <Label Content="Password"/>
+                            <PasswordBox Name="passwordBox" PasswordChar="*"/>
+                        </StackPanel>
+                    </Grid>
+                    <!--#endregion-->
+
+                    
+
+                </Grid>
+                <!--#endregion-->
+
+                <!--#endregion-->
+
+                <!--#region Mail Panel -->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32" />
+                        <RowDefinition Height="28" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--#region Title Panel -->
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Email"/>
-                        <Button x:Name="btnSMTPSettings" Grid.Column="1" FontFamily="Segoe MDL2 Assets" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="btnSMTPSettings_Click">&#xE713;</Button>
+                        <Label Content="Title" FontSize="22" Margin="4,0,8,0" VerticalAlignment="Center"/>
+                        <TextBox Name="tbTitle" Grid.Column="1"/>
+                        <Button Grid.Column="2" Name="btnSendEmail" Click="btnSendEmail_Click" FontSize="28" FontFamily="Segoe MDL2 Assets">&#xE724;</Button>
                     </Grid>
+                    <!--#endregion-->
 
-                    <TextBox Name="SenderEmail" Text="{Binding Email,Mode=OneTime}"/>
-                </StackPanel>
-                <StackPanel Grid.Row="1">
-                    <Label Content="Password"/>
-                    <PasswordBox Name="passwordBox" PasswordChar="*"/>
-                </StackPanel>
+                    <!--#region Letter Panel -->
+                    <TextBox Name="tbLetter" Grid.Row="2" Margin="4,0"/>
+                    <!--#endregion-->
+
+
+
+                </Grid>
+
+                <!--#endregion-->
+
+
             </Grid>
-            <!--#endregion-->
-
-            <!--#region Addressee Panel -->
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition x:Name="FullAddresseListColumn" Width="auto"/>
-                </Grid.ColumnDefinitions>
-
-                <!--#region Addressee List -->
-                <ListView>
-
-                </ListView>
-                <!--#endregion-->
-
-                <!--#region control panel -->
-                <StackPanel Grid.Column="1" Margin="3,10">
-
-                </StackPanel>
-                <!--#endregion-->
-
-                <!--#region Full List Addressee -->
-                <ListView Grid.Column="2" Visibility="Collapsed">
-
-                </ListView>
-                <!--#endregion-->
-            </Grid>
-            <!--#endregion-->
-
-        </Grid>
-        <!--#endregion-->
-
-        <!--#endregion-->
-
-        <!--#region Mail Panel -->
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="32" />
-                <RowDefinition Height="28" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <!--#region Title Panel -->
+        </TabItem>
+        
+        <TabItem Header="Scheduler">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Title" FontSize="22" Margin="4,0,8,0" VerticalAlignment="Center"/>
-                <TextBox Name="tbTitle" Grid.Column="1"/>
-                <Button Grid.Column="2" Name="btnSendEmail" Click="btnSendEmail_Click" FontSize="28" FontFamily="Segoe MDL2 Assets">&#xE724;</Button>
+            </Grid>
+        </TabItem>
+        
+        <TabItem Header="Detination">
+            <!--#region Addressee Panel -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--#region Add New Panel -->
+                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200">
+                    <StackPanel>
+                        <Label Content="Name"/>
+                        <TextBox/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Email"/>
+                        <TextBox/>
+                    </StackPanel>
+                </StackPanel>
+                <!--#endregion-->
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition x:Name="FullAddresseListColumn"/>
+                    </Grid.ColumnDefinitions>
+
+
+
+                    <!--#region Addressee List -->
+                    <ListView Name="lvSelectedEmailsList">
+
+                    </ListView>
+                    <!--#endregion-->
+
+                    <!--#region control panel -->
+                    <StackPanel Grid.Column="1" Margin="3,10">
+                        <Button FontFamily="Segoe MDL2 Assets">&#xE973;</Button>
+                        <Button FontFamily="Segoe MDL2 Assets">&#xE974;</Button>
+                    </StackPanel>
+                    <!--#endregion-->
+
+                    <!--#region Full List Addressee -->
+                    <ListView Name="lvFullEmailsList" Grid.Column="2" ItemsSource="{Binding DB.Emails}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Email}"/>
+                                    <Label Content="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <!--#endregion-->
+                </Grid>
             </Grid>
             <!--#endregion-->
+        </TabItem>
+    </TabControl>
 
-            <!--#region Letter Panel -->
-            <TextBox Name="tbLetter" Grid.Row="2" Margin="4,0"/>
-            <!--#endregion-->
-            
-            
-            
-        </Grid>
-
-        <!--#endregion-->
-
-
-    </Grid>
 </Window>
