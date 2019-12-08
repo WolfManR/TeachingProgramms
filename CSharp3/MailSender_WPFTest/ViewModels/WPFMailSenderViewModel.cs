@@ -13,7 +13,7 @@ namespace MailSender_WPFTest.ViewModels
             ));
 
         public SenderSettings SenderSettings { get; set; }
-
         public MailSendService SendService { get; set; }
+        public DBclass DB { get; set; } = new DBclass();
     }
 }
