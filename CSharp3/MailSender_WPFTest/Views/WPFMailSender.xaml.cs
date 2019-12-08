@@ -38,8 +38,7 @@ namespace MailSender_WPFTest.Views
                   SenderEmail.Text,
                   passwordBox.Password,
                   Texts.smptGmailHost,
-                  Texts.smptGmailPort,
-                  new List<string> { Texts.ToMyGmailEmail, Texts.ToMyMailEmail }
+                  Texts.smptGmailPort
                 );
             try
             {
