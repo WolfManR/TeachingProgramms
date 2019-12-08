@@ -20,9 +20,6 @@ namespace MailSender_WPFTest.ViewModels
         public RelayCommand<object> SendMailCmd => sendMailCmd ?? (sendMailCmd = new RelayCommand<object>(
             (param) => {
                 var bindings = (object[])param;
-                SendService.SenderEmail = (string)bindings[0];
-                // InTime Solution find way to do it correct
-                SendService.SenderPassword = ((System.Windows.Controls.PasswordBox)bindings[1]).Password;
                 SendService.SMTPHost = (string)bindings[2];
                 SendService.SMTPPort = int.Parse(bindings[3].ToString());
                 SendService.EnableSSL = (bool)bindings[4];
@@ -33,7 +30,8 @@ namespace MailSender_WPFTest.ViewModels
                 }
                 try
                 {
-                    SendService.SendMail((string)bindings[5], (string)bindings[6], emails);
+                    // Find way to take Password correctly
+                    SendService.SendMail((string)bindings[0], ((System.Windows.Controls.PasswordBox)bindings[1]).Password, (string)bindings[5], (string)bindings[6], emails);
                 }
                 catch (Exception ex)
                 {

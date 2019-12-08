@@ -6,28 +6,19 @@ namespace MailSender_WPFTest.Models
 {
     public class MailSendService
     {
-        public string SenderEmail { get; set; }
-        public string SenderPassword { get; set; }
         public string SMTPHost { get; set; }
         public int SMTPPort { get; set; }
         public bool EnableSSL { get; set; } = true;
         public bool IsBodyHTML { get; set; } = false;
 
         public MailSendService() { }
-        public MailSendService(string senderEmail, string senderPassword, string smtpHost, int smtpPort)
-        {
-            SenderEmail = senderEmail;
-            SenderPassword = senderPassword;
-            SMTPHost = smtpHost;
-            SMTPPort = smtpPort;
-        }
 
         // изменить на async
-        public void SendMail(string title, string letter, params string[] emailsToSend)
+        public void SendMail(string senderEmail, string senderPassword, string title, string letter, params string[] emailsToSend)
         {
             foreach (string mail in emailsToSend)
             {
-                using (MailMessage mm = new MailMessage(SenderEmail, mail))
+                using (MailMessage mm = new MailMessage(senderEmail, mail))
                 {
                     mm.Subject = title;
                     mm.Body = letter;
@@ -37,7 +28,7 @@ namespace MailSender_WPFTest.Models
                     {
 
                         sc.EnableSsl = EnableSSL;
-                        sc.Credentials = new NetworkCredential(SenderEmail, SenderPassword);
+                        sc.Credentials = new NetworkCredential(senderEmail, senderPassword);
                         try
                         {
                             sc.Send(mm);
