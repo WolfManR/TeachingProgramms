@@ -13,6 +13,7 @@ namespace MailSender_WPFTest.Models
         public bool EnableSSL { get; set; } = true;
         public bool IsBodyHTML { get; set; } = false;
 
+        public MailSendService() { }
         public MailSendService(string senderEmail, string senderPassword, string smtpHost, int smtpPort)
         {
             SenderEmail = senderEmail;
@@ -50,9 +51,8 @@ namespace MailSender_WPFTest.Models
             }
         }
 
-        public void SendMail(MailMessage letter, SmtpClient client, params string[] emailsToSend)
+        public static void SendMail(MailMessage letter, SmtpClient client, params string[] emailsToSend)
         {
-
             using (letter)
             {
                 foreach (var item in emailsToSend)
