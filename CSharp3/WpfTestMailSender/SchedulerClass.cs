@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EmailSendDLL;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
@@ -49,7 +51,9 @@ namespace WpfTestMailSender
         {
             if (dtSend.ToShortTimeString() == DateTime.Now.ToShortTimeString())
             {
-                emailSender.SendMails(emails);
+                List<string> list = new List<string>();
+                emails.ToList().ForEach(x => list.Add(x.Value));
+                emailSender.SendMails(list);
                 timer.Stop();
                 MessageBox.Show("Письма отправлены.");
             }

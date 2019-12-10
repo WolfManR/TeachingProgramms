@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmailSendDLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -47,49 +48,74 @@ namespace WpfTestMailSender
 
         private void btnSendAtOnce_Click(object sender, RoutedEventArgs e)
         {
-            string strLogin = cbSenderSelect.Text;
-            string strPassword = cbSenderSelect.SelectedValue.ToString();
-            string smtpHost = cbSmtpSelect.Text;
-            int smtpPort = int.Parse(cbSmtpSelect.SelectedValue.ToString());
-            if (string.IsNullOrEmpty(strLogin))
-            {
-                new ErrorWindow("Выберите отправителя") { Owner = this }.ShowDialog();
-                return;
-            }
-            if (string.IsNullOrEmpty(strPassword))
-            {
-                new ErrorWindow("Укажите пароль отправителя") { Owner = this }.ShowDialog();
-                return;
-            }
-
-            EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword,smtpHost,smtpPort);
             try
             {
-                emailSender.SendMails((IQueryable<Email>)dgEmails.ItemsSource);
+                EmailSendServiceClass serviceClass = PrepairSendClass();
+                List<string> list = new List<string>();
+                foreach (Email item in dgEmails.ItemsSource) list.Add(item.Value);
+                serviceClass.SendMails(list);
+            }
+            catch (SendClassFillException ex)
+            {
+                new ErrorWindow(ex.Message) { Owner = this }.ShowDialog();
             }
             catch (Exception ex)
             {
-                new ErrorWindow(Texts.ErrorMsg + ex.ToString()) {Owner=this }.ShowDialog();
+                new ErrorWindow(Texts.CantSendMail + ex.ToString()) { Owner = this }.ShowDialog();
             }
+        }
+
+        EmailSendServiceClass PrepairSendClass()
+        {
+            if (rtbBody.Document == null) throw new SendClassFillException(Texts.LetterNotFilled);
+
+            string strLogin = cbSenderSelect.Text;
+            string strPassword = cbSenderSelect.SelectedValue.ToString();
+
+            if (string.IsNullOrEmpty(strLogin)) throw new SendClassFillException(Texts.LoginNotCorrect);
+            if (string.IsNullOrEmpty(strPassword)) throw new SendClassFillException(Texts.PassNotCorrect);
+
+            string smtpHost = cbSmtpSelect.Text;
+            int smtpPort = int.Parse(cbSmtpSelect.SelectedValue.ToString());
+            string subject = tbSubject.Text;
+            TextRange Letter = new TextRange(rtbBody.Document.ContentStart, rtbBody.Document.ContentEnd);
+
+            EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword, smtpHost, smtpPort, subject, Letter.Text);
+            return emailSender;
+            
         }
 
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
             SchedulerClass sc = new SchedulerClass();
             TimeSpan tsSendTime = sc.GetSendTime(tbTimePicker.Text);
+            
             if (tsSendTime == new TimeSpan())
             {
-                new ErrorWindow("Некорректный формат даты") { Owner = this }.ShowDialog();
+                new ErrorWindow(Texts.DateNotCorrect) { Owner = this }.ShowDialog();
                 return;
             }
             DateTime dtSendDateTime = (cldSchedulDateTimes.SelectedDate ?? DateTime.Today).Add(tsSendTime);
             if (dtSendDateTime < DateTime.Now)
             {
-                new ErrorWindow("Дата и время отправки писем не могут быть раньше, чем настоящее время") { Owner = this }.ShowDialog();
+                new ErrorWindow(Texts.DateAndTimeNotCorrect) { Owner = this }.ShowDialog();
                 return;
             }
-            EmailSendServiceClass emailSender = new EmailSendServiceClass(cbSenderSelect.Text, cbSenderSelect.SelectedValue.ToString());
-            sc.SendEmails(dtSendDateTime, emailSender, (IQueryable<Email>)dgEmails.ItemsSource);
+
+            try
+            {
+                EmailSendServiceClass serviceClass = PrepairSendClass();
+                sc.SendEmails(dtSendDateTime, serviceClass, (IQueryable<Email>)dgEmails.ItemsSource);
+            }
+            catch (SendClassFillException ex)
+            {
+                new ErrorWindow(ex.Message) { Owner = this }.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                new ErrorWindow(Texts.CantSendMail + ex.ToString()) { Owner = this }.ShowDialog();
+            }
+            
         }
 
         private void tscTabSwitcher_btnNextClick(object sender, RoutedEventArgs e)

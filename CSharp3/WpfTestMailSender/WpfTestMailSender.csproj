@@ -38,6 +38,9 @@
     <Reference Include="CodePasswordDLL">
       <HintPath>..\CodePasswordDLL\bin\Release\CodePasswordDLL.dll</HintPath>
     </Reference>
+    <Reference Include="EmailSendDLL">
+      <HintPath>..\EmailSendDLL\bin\Release\EmailSendDLL.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -101,11 +104,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Emails.dbml</DependentUpon>
     </Compile>
-    <Compile Include="EmailSendServiceClass.cs" />
     <Compile Include="ErrorWindow.xaml.cs">
       <DependentUpon>ErrorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SchedulerClass.cs" />
+    <Compile Include="SendClassFillException.cs" />
     <Compile Include="SendEndWindow.xaml.cs">
       <DependentUpon>SendEndWindow.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,11 @@
       <Project>{05d7aeac-e9c8-4fc9-a08b-7b7cc2843067}</Project>
       <Name>TabSwitcher</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\letter.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
