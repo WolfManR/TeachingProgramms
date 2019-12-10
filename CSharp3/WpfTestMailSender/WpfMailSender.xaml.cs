@@ -31,9 +31,9 @@ namespace WpfTestMailSender
             cbSenderSelect.SelectedValuePath = "Value";
             DBclass db = new DBclass();
             dgEmails.ItemsSource = db.Emails;
-            cbSmtpSelect.ItemsSource = db.Smtps;
-            cbSmtpSelect.DisplayMemberPath = "Key";
-            cbSmtpSelect.SelectedValuePath = "Value";
+            ctbiSelector.Items = db.Smtps;
+            ctbiSelector.ComboDisplayMemberPath = "Key";
+            ctbiSelector.ComboSelectedValuePath = "Value";
         }
 
         private void miClose_Click(object sender, RoutedEventArgs e)
@@ -75,8 +75,8 @@ namespace WpfTestMailSender
             if (string.IsNullOrEmpty(strLogin)) throw new SendClassFillException(Texts.LoginNotCorrect);
             if (string.IsNullOrEmpty(strPassword)) throw new SendClassFillException(Texts.PassNotCorrect);
 
-            string smtpHost = cbSmtpSelect.Text;
-            int smtpPort = int.Parse(cbSmtpSelect.SelectedValue.ToString());
+            string smtpHost = ctbiSelector.ComboText;
+            int smtpPort = int.Parse(ctbiSelector.ComboSelectedValue.ToString());
             string subject = tbSubject.Text;
             TextRange Letter = new TextRange(rtbBody.Document.ContentStart, rtbBody.Document.ContentEnd);
 

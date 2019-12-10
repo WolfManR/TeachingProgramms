@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTestMailSender"
-        xmlns:TabSwitcher="clr-namespace:TabSwitcher;assembly=TabSwitcher"
+        xmlns:MyControls="clr-namespace:TabSwitcher;assembly=TabSwitcher"
         xmlns:exCont="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="WpfMailSender" Height="450" Width="800">
@@ -15,12 +15,13 @@
             </MenuItem>
         </Menu>
 
-        <TabSwitcher:TabSwitcherControl Name="tscTabSwitcher" IsHidebtnPrevious="True" DockPanel.Dock="Bottom" btnNextClick="tscTabSwitcher_btnNextClick" btnPreviousClick="tscTabSwitcher_btnPreviousClick"/>
+        <MyControls:TabSwitcherControl Name="tscTabSwitcher" IsHidebtnPrevious="True" DockPanel.Dock="Bottom" btnNextClick="tscTabSwitcher_btnNextClick" btnPreviousClick="tscTabSwitcher_btnPreviousClick"/>
 
         <TabControl Name="tabControl">
             <TabItem Header="Формирование группы рассылки">
                 <DockPanel LastChildFill="True">
-                    <ToolBarTray DockPanel.Dock="Top" VerticalAlignment="Top" Height="65" Width="auto" Margin="0">
+                    
+                    <ToolBarTray DockPanel.Dock="Top" VerticalAlignment="Top" Height="125" Width="auto" Margin="0">
                         <ToolBar Name="tbSender" Height="30" Width="auto">
                             <Label Name="lSender" Content="Выбрать отправителя" Width="130" Height="25"/>
                             <ComboBox Name="cbSenderSelect" Width="260" Height="25" SelectedIndex="0" ToolTip="Выбрать email отправителя"/>
@@ -42,20 +43,10 @@
                             </Button>
                         </ToolBar>
 
-                        <ToolBar x:Name="tbSmtp" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="Auto" Band="1" BandIndex="0">
-                            <Label x:Name="lSmtp" Content="Выбрать smtp-сервер" Height="25" Width="130"/>
-                            <ComboBox x:Name="cbSmtpSelect" Height="25" Margin="0" VerticalAlignment="Top" Width="260" SelectedIndex="0" ToolTip="Выбрать smtp-сервер"/>
-                            <Button x:Name="btnAddSmtp" Width="25" Height="25" ToolTip="Добавить">
-                                <Image Source="Images\add.png"/>
-                            </Button>
-                            <Button x:Name="btnEditSmtp" Width="25" Height="25" ToolTip="Редактировать">
-                                <Image Source="Images\pencil.png"/>
-                            </Button>
-                            <Button x:Name="btnDeleteSmtp" Width="25" Height="25" ToolTip="Удалить">
-                                <Image Source="Images\delete.png"/>
-                            </Button>
+                        <ToolBar Band="1" BandIndex="0" Height="30"  VerticalAlignment="Top" Width="Auto" HorizontalAlignment="Left">
+                            <MyControls:tbiSelector Name="ctbiSelector" Title="Выбрать smtp-сервер"/>
                         </ToolBar>
-
+                        
                         <ToolBar x:Name="tbAddressee" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="230" Band="1" BandIndex="1" >
                             <Label x:Name="lAddressee" Content="Список адресатов" Height="25" Width="Auto"/>
                             <Button x:Name="btnAddAddressee" Width="25" Height="25" ToolTip="Добавить">
@@ -68,6 +59,7 @@
                                 <Image Source="Images\delete.png"/>
                             </Button>
                         </ToolBar>
+                        
                     </ToolBarTray>
                     <DataGrid Name="dgEmails"/>
                 </DockPanel>
