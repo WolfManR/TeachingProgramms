@@ -26,3 +26,5 @@
 3. Скачать и установить WPF Toolkit http://wpftoolkit.codeplex.com/releases/view/617027. Добавить вкладку на ToolBox “Wpf Toolkit controls”. Затем кликнуть правой кнопкой мыши по “Choose item”. В диалоге, который появился, выбрать кнопку “Browse”и выбрать dll с Toolkit.
 4. Во вкладке «Планировщик», заменить TextBox для ввода времени на элемент TimePicker.
 5. Добавить картинку Letter2.jpg к кнопке «Отправить сразу» во вкладке «Планировщик».
+
+иконки https://icons8.ru

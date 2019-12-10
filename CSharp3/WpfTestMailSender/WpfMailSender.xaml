@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTestMailSender"
+        xmlns:TabSwitcher="clr-namespace:TabSwitcher;assembly=WpfTestMailSender"
+        xmlns:TabSwitcher1="clr-namespace:TabSwitcher;assembly=TabSwitcher"
         mc:Ignorable="d"
         Title="WpfMailSender" Height="450" Width="800">
     <DockPanel LastChildFill="True">
@@ -12,6 +14,9 @@
                 <MenuItem Name="miClose" Header="Закрыть" Click="miClose_Click"/>
             </MenuItem>
         </Menu>
+        
+        <TabSwitcher1:TabSwitcherControl Name="tscTabSwitcher" IsHidebtnPrevious="True" DockPanel.Dock="Bottom" btnNextClick="tscTabSwitcher_btnNextClick" btnPreviousClick="tscTabSwitcher_btnPreviousClick"/>
+        
         <TabControl Name="tabControl">
             <TabItem Header="Формирование группы рассылки">
                 <DockPanel LastChildFill="True">
@@ -66,9 +71,9 @@
                     </ToolBarTray>
                     <DataGrid Name="dgEmails"/>
                 </DockPanel>
-                
+
             </TabItem>
-            
+
             <TabItem Name="tabPlanner" Header="Планировщик">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -76,7 +81,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <StackPanel>
-                <Calendar x:Name="cldSchedulDateTimes" SelectionMode="MultipleRange"/>
+                        <Calendar x:Name="cldSchedulDateTimes" SelectionMode="MultipleRange"/>
                         <TextBox Name="tbTimePicker"/>
                         <Button x:Name="btnSend" Click="btnSend_Click">
                             <Button.Content>
@@ -88,19 +93,28 @@
                         </Button>
                         <Button Name="btnSendAtOnce" Content="Отправить сразу" Click="btnSendAtOnce_Click"/>
                     </StackPanel>
-                    
+
                 </Grid>
             </TabItem>
-            
+
             <TabItem Header="Редактор писем">
-                <RichTextBox/>
+                <DockPanel LastChildFill="True">
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Title"  Foreground="Black" Margin="8,4" FontSize="18"/>
+                        <TextBox Grid.Column="1" Name="tbSubject" HorizontalAlignment="Stretch"/>
+                    </Grid>
+                    
+                    <RichTextBox Name="rtbBody"/>
+                </DockPanel>
             </TabItem>
-            
+
             <TabItem Header="Статистика">
-                
+
             </TabItem>
         </TabControl>
-        
-
     </DockPanel>
 </Window>

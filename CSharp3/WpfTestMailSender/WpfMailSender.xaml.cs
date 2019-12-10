@@ -30,6 +30,9 @@ namespace WpfTestMailSender
             cbSenderSelect.SelectedValuePath = "Value";
             DBclass db = new DBclass();
             dgEmails.ItemsSource = db.Emails;
+            cbSmtpSelect.ItemsSource = db.Smtps;
+            cbSmtpSelect.DisplayMemberPath = "Key";
+            cbSmtpSelect.SelectedValuePath = "Value";
         }
 
         private void miClose_Click(object sender, RoutedEventArgs e)
@@ -46,19 +49,28 @@ namespace WpfTestMailSender
         {
             string strLogin = cbSenderSelect.Text;
             string strPassword = cbSenderSelect.SelectedValue.ToString();
+            string smtpHost = cbSmtpSelect.Text;
+            int smtpPort = int.Parse(cbSmtpSelect.SelectedValue.ToString());
             if (string.IsNullOrEmpty(strLogin))
             {
-                MessageBox.Show("Выберите отправителя");
+                new ErrorWindow("Выберите отправителя") { Owner = this }.ShowDialog();
                 return;
             }
             if (string.IsNullOrEmpty(strPassword))
             {
-                MessageBox.Show("Укажите пароль отправителя");
+                new ErrorWindow("Укажите пароль отправителя") { Owner = this }.ShowDialog();
                 return;
             }
 
-            EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword);
-            emailSender.SendMails((IQueryable<Email>)dgEmails.ItemsSource);
+            EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword,smtpHost,smtpPort);
+            try
+            {
+                emailSender.SendMails((IQueryable<Email>)dgEmails.ItemsSource);
+            }
+            catch (Exception ex)
+            {
+                new ErrorWindow(Texts.ErrorMsg + ex.ToString()) {Owner=this }.ShowDialog();
+            }
         }
 
         private void btnSend_Click(object sender, RoutedEventArgs e)
@@ -67,17 +79,41 @@ namespace WpfTestMailSender
             TimeSpan tsSendTime = sc.GetSendTime(tbTimePicker.Text);
             if (tsSendTime == new TimeSpan())
             {
-                MessageBox.Show("Некорректный формат даты");
+                new ErrorWindow("Некорректный формат даты") { Owner = this }.ShowDialog();
                 return;
             }
             DateTime dtSendDateTime = (cldSchedulDateTimes.SelectedDate ?? DateTime.Today).Add(tsSendTime);
             if (dtSendDateTime < DateTime.Now)
             {
-                MessageBox.Show("Дата и время отправки писем не могут быть раньше, чем настоящее время");
+                new ErrorWindow("Дата и время отправки писем не могут быть раньше, чем настоящее время") { Owner = this }.ShowDialog();
                 return;
             }
             EmailSendServiceClass emailSender = new EmailSendServiceClass(cbSenderSelect.Text, cbSenderSelect.SelectedValue.ToString());
             sc.SendEmails(dtSendDateTime, emailSender, (IQueryable<Email>)dgEmails.ItemsSource);
+        }
+
+        private void tscTabSwitcher_btnNextClick(object sender, RoutedEventArgs e)
+        {
+            if (tabControl.SelectedIndex+1 == tabControl.Items.Count-1)
+            {
+                tabControl.SelectedIndex++;
+                tscTabSwitcher.IsHideBtnNext = true;
+                tscTabSwitcher.IsHidebtnPrevious = false;
+                return;
+            }
+            tabControl.SelectedIndex++;
+        }
+
+        private void tscTabSwitcher_btnPreviousClick(object sender, RoutedEventArgs e)
+        {
+            if (tabControl.SelectedIndex-1 == 0)
+            {
+                tabControl.SelectedIndex--;
+                tscTabSwitcher.IsHideBtnNext = false;
+                tscTabSwitcher.IsHidebtnPrevious = true;
+                return;
+            }
+            tabControl.SelectedIndex--;
         }
     }
 }

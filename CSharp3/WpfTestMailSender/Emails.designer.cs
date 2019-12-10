@@ -33,6 +33,9 @@ namespace WpfTestMailSender
     partial void InsertEmail(Email instance);
     partial void UpdateEmail(Email instance);
     partial void DeleteEmail(Email instance);
+    partial void InsertSmtp(Smtp instance);
+    partial void UpdateSmtp(Smtp instance);
+    partial void DeleteSmtp(Smtp instance);
     #endregion
 		
 		public EmailsDataContext() : 
@@ -70,6 +73,14 @@ namespace WpfTestMailSender
 			get
 			{
 				return this.GetTable<Email>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Smtp> Smtp
+		{
+			get
+			{
+				return this.GetTable<Smtp>();
 			}
 		}
 	}
@@ -159,6 +170,116 @@ namespace WpfTestMailSender
 					this._Name = value;
 					this.SendPropertyChanged("Name");
 					this.OnNameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Smtp")]
+	public partial class Smtp : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Host;
+		
+		private int _Port;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnHostChanging(string value);
+    partial void OnHostChanged();
+    partial void OnPortChanging(int value);
+    partial void OnPortChanged();
+    #endregion
+		
+		public Smtp()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Host", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Host
+		{
+			get
+			{
+				return this._Host;
+			}
+			set
+			{
+				if ((this._Host != value))
+				{
+					this.OnHostChanging(value);
+					this.SendPropertyChanging();
+					this._Host = value;
+					this.SendPropertyChanged("Host");
+					this.OnHostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Port", DbType="Int NOT NULL")]
+		public int Port
+		{
+			get
+			{
+				return this._Port;
+			}
+			set
+			{
+				if ((this._Port != value))
+				{
+					this.OnPortChanging(value);
+					this.SendPropertyChanging();
+					this._Port = value;
+					this.SendPropertyChanged("Port");
+					this.OnPortChanged();
 				}
 			}
 		}

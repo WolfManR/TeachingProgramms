@@ -14,12 +14,22 @@ namespace WpfTestMailSender
         private int iSmtpPort = 25;                // порт для smtp-server
         private string strBody;                    // текст письма для отправки
         private string strSubject;                 // тема письма для отправки
+        
         #endregion
         public EmailSendServiceClass(string sLogin, string sPassword)
         {
             strLogin = sLogin;
             strPassword = sPassword;
         }
+
+        public EmailSendServiceClass(string sLogin, string sPassword, string smtpHost, int smtpPort) : this(sLogin, sPassword)
+        {
+            strLogin = sLogin;
+            strPassword = sPassword;
+            this.strSmtp = smtpHost;
+            this.iSmtpPort = smtpPort;
+        }
+
         private void SendMail(string mail, string name) // Отправка email конкретному адресату
         {
             using (MailMessage mm = new MailMessage(strLogin, mail))
@@ -36,9 +46,9 @@ namespace WpfTestMailSender
                 {
                     sc.Send(mm);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    new ErrorWindow(Texts.ErrorMsg + ex.ToString()).ShowDialog();
+                    throw;
                 }
             }
         }//private void SendMail(string mail, string name)

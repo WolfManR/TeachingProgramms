@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace WpfTestMailSender
 {
@@ -15,7 +16,15 @@ namespace WpfTestMailSender
                 return from c in emails.Email select c;
             }
         }
-
+        public Dictionary<string,int> Smtps
+        {
+            get
+            {
+                Dictionary<string, int> pairs = new Dictionary<string, int>();
+                (from c in emails.Smtp select c).ToList().ForEach(p => pairs.Add(p.Host, p.Port));
+                return pairs;
+            }
+        }
     }
 
 }
