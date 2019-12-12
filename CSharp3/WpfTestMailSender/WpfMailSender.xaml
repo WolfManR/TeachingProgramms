@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfTestMailSender"
         xmlns:MyControls="clr-namespace:TabSwitcher;assembly=TabSwitcher"
         xmlns:exCont="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:Views="clr-namespace:WpfTestMailSender.View"
         mc:Ignorable="d"
         Title="WpfMailSender" Height="450" Width="800">
     <DockPanel LastChildFill="True">
@@ -18,10 +19,19 @@
         <MyControls:TabSwitcherControl Name="tscTabSwitcher" IsHidebtnPrevious="True" DockPanel.Dock="Bottom" btnNextClick="tscTabSwitcher_btnNextClick" btnPreviousClick="tscTabSwitcher_btnPreviousClick"/>
 
         <TabControl Name="tabControl">
-            <TabItem Header="Формирование группы рассылки">
-                <DockPanel LastChildFill="True">
-                    
-                    <ToolBarTray DockPanel.Dock="Top" VerticalAlignment="Top" Height="65" Width="auto" Margin="0">
+            <TabItem Header="Формирование группы рассылки" x:Name="tabMakingMailGroup">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="18*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <ToolBarTray HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Grid.ColumnSpan="2">
                         <ToolBar Name="tbSender" Height="30" Width="auto">
                             <Label Name="lSender" Content="Выбрать отправителя" Width="130" Height="25"/>
                             <ComboBox Name="cbSenderSelect" Width="260" Height="25" SelectedIndex="0" ToolTip="Выбрать email отправителя"/>
@@ -46,7 +56,7 @@
                         <ToolBar Band="1" BandIndex="0" Height="30"  VerticalAlignment="Top" Width="Auto" HorizontalAlignment="Left">
                             <MyControls:tbiSelector Name="ctbiSelector" Title="Выбрать smtp-сервер"/>
                         </ToolBar>
-                        
+
                         <ToolBar x:Name="tbAddressee" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="230" Band="1" BandIndex="1" >
                             <Label x:Name="lAddressee" Content="Список адресатов" Height="25" Width="Auto"/>
                             <Button x:Name="btnAddAddressee" Width="25" Height="25" ToolTip="Добавить">
@@ -59,11 +69,12 @@
                                 <Image Source="Images\delete.png"/>
                             </Button>
                         </ToolBar>
-                        
-                    </ToolBarTray>
-                    <DataGrid Name="dgEmails"/>
-                </DockPanel>
 
+                    </ToolBarTray>
+                    
+                    <Views:EmailInfoView x:Name="emailInfo" Grid.Row="1" Grid.Column="1" VerticalAlignment= "Stretch"  HorizontalAlignment="Stretch" Grid.ColumnSpan="1"/>
+                    <Views:SaveEmailView x:Name="saveEmail" Grid.Row="1" Grid.Column="0" VerticalAlignment= "Stretch" HorizontalAlignment="Left" Grid.ColumnSpan="1"/>
+                </Grid>
             </TabItem>
 
             <TabItem Name="tabPlanner" Header="Планировщик">

@@ -1,4 +1,10 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using WpfTestMailSender.Services;
 
 namespace WpfTestMailSender.ViewModel
 {
@@ -29,6 +35,58 @@ namespace WpfTestMailSender.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+        }
+        [PreferredConstructor]
+        public MainViewModel(IDataAccessService servProxy)
+        {
+            serviceProxy = servProxy;
+            Emails = new ObservableCollection<Email>();
+            ReadAllCommand = new RelayCommand<string>(GetEmails);
+
+            EmailInfo = new Email();
+            SaveCommand = new RelayCommand<Email>(SaveEmail);
+        }
+
+        ObservableCollection<Email> emails;
+        IDataAccessService serviceProxy;
+        private Email emailInfo;
+        public ObservableCollection<Email> Emails
+        {
+            get => emails; set
+            {
+                emails = value;
+                RaisePropertyChanged(nameof(Emails));
+            }
+        }
+        public Dictionary<string, int> Smtps { get => serviceProxy.GetSmtps(); }
+        public Email EmailInfo
+        {
+            get => emailInfo;
+            set
+            {
+                emailInfo = value;
+                RaisePropertyChanged(nameof(EmailInfo));
+            }
+        }
+
+        public RelayCommand<string> ReadAllCommand { get; set; }
+        public RelayCommand<Email> SaveCommand { get; set; }
+
+
+        void GetEmails(string name)
+        {
+            Emails.Clear();
+            if(string.IsNullOrEmpty(name)) foreach (var item in serviceProxy.GetEmails()) Emails.Add(item);
+            else (serviceProxy.GetEmails().Where(x => x.Name.Contains(name) )).ToList().ForEach(p => Emails.Add(p));
+        }
+        void SaveEmail(Email email)
+        {
+            EmailInfo.Id = serviceProxy.CreateEmail(email);
+            if (EmailInfo.Id != 0)
+            {
+                Emails.Add(EmailInfo);
+                RaisePropertyChanged(nameof(EmailInfo));
+            }
         }
     }
 }
