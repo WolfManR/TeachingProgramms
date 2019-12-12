@@ -21,7 +21,7 @@
             <TabItem Header="Формирование группы рассылки">
                 <DockPanel LastChildFill="True">
                     
-                    <ToolBarTray DockPanel.Dock="Top" VerticalAlignment="Top" Height="125" Width="auto" Margin="0">
+                    <ToolBarTray DockPanel.Dock="Top" VerticalAlignment="Top" Height="65" Width="auto" Margin="0">
                         <ToolBar Name="tbSender" Height="30" Width="auto">
                             <Label Name="lSender" Content="Выбрать отправителя" Width="130" Height="25"/>
                             <ComboBox Name="cbSenderSelect" Width="260" Height="25" SelectedIndex="0" ToolTip="Выбрать email отправителя"/>
