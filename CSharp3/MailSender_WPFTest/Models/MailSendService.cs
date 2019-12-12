@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Net;
 using System.Net.Mail;
 
@@ -8,40 +6,29 @@ namespace MailSender_WPFTest.Models
 {
     public class MailSendService
     {
-        public string SenderEmail { get; set; }
-        public string SenderPassword { get; set; }
         public string SMTPHost { get; set; }
         public int SMTPPort { get; set; }
-        public ObservableCollection<string> EmailsToSend { get; set; }
-        public MailMessage Mail { get; set; }
-        public SmtpClient Smtp { get; set; }
+        public bool EnableSSL { get; set; } = true;
+        public bool IsBodyHTML { get; set; } = false;
 
-        public MailSendService(string senderEmail, string senderPassword, string smtpHost, int smtpPort) : this(senderEmail, senderPassword, smtpHost, smtpPort, null) { }
-        public MailSendService(string senderEmail, string senderPassword, string smtpHost, int smtpPort, IList<string> emailsToSend)
-        {
-            SenderEmail = senderEmail; 
-            SenderPassword = senderPassword;
-            SMTPHost = smtpHost;
-            SMTPPort = smtpPort;
-            EmailsToSend = new ObservableCollection<string>(emailsToSend);
-        }
+        public MailSendService() { }
 
         // изменить на async
-        public void SendMail(string title, string letter)
+        public void SendMail(string senderEmail, string senderPassword, string title, string letter, params string[] emailsToSend)
         {
-            foreach (string mail in EmailsToSend)
+            foreach (string mail in emailsToSend)
             {
-                using (MailMessage mm = Mail ?? new MailMessage(SenderEmail, mail))
+                using (MailMessage mm = new MailMessage(senderEmail, mail))
                 {
                     mm.Subject = title;
                     mm.Body = letter;
-                    mm.IsBodyHtml = false;
+                    mm.IsBodyHtml = IsBodyHTML;
 
-                    using (SmtpClient sc = Smtp ?? new SmtpClient(SMTPHost, SMTPPort))
+                    using (SmtpClient sc = new SmtpClient(SMTPHost, SMTPPort))
                     {
-                        
-                        sc.EnableSsl = true;
-                        sc.Credentials = new NetworkCredential(SenderEmail, SenderPassword);
+
+                        sc.EnableSsl = EnableSSL;
+                        sc.Credentials = new NetworkCredential(senderEmail, senderPassword);
                         try
                         {
                             sc.Send(mm);
@@ -50,6 +37,29 @@ namespace MailSender_WPFTest.Models
                         {
                             throw;
                         }
+                    }
+                }
+            }
+        }
+
+        public static void SendMail(MailMessage letter, SmtpClient client, params string[] emailsToSend)
+        {
+            using (letter)
+            {
+                foreach (var item in emailsToSend)
+                {
+                    letter.To.Add(item);
+                }
+
+                using (client)
+                {
+                    try
+                    {
+                        client.Send(letter);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
                     }
                 }
             }

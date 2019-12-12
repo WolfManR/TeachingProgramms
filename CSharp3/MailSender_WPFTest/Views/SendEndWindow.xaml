@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender_WPFTest.Views"
         mc:Ignorable="d"
-        Title="SendEndWindow" Height="175" Width="400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="SendEndWindow" Height="175" Width="400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" BorderBrush="{StaticResource ControlBorderBrush}" BorderThickness="2">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

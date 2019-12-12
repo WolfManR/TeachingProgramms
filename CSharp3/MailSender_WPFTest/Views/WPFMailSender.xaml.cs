@@ -25,38 +25,25 @@ namespace MailSender_WPFTest.Views
     /// </summary>
     public partial class WPFMailSender : Window
     {
-        public WPFMailSenderViewModel ViewModel { get; set; } = new WPFMailSenderViewModel();
+        public WPFMailSenderViewModel ViewModel { get; set; } 
         public WPFMailSender()
         {
+            ViewModel = new WPFMailSenderViewModel(this);
             InitializeComponent();
         }
 
-        private void btnSendEmail_Click(object sender, RoutedEventArgs e)
-        {
-            MailSendService sendService = new MailSendService
-                (
-                  SenderEmail.Text,
-                  passwordBox.Password,
-                  Texts.smptGmailHost,
-                  Texts.smptGmailPort,
-                  new List<string> { Texts.ToMyGmailEmail, Texts.ToMyMailEmail }
-                );
-            try
-            {
-                sendService.SendMail(tbTitle.Text, tbLetter.Text);
-            }
-            catch (Exception ex)
-            {
-                new ErrorMessageView(Errors.CantSendMail+"\n" + ex.ToString()) { Owner=this, Title="Error"}.ShowDialog();
-            }
-
-            new SendEndWindow() { Owner = this }.ShowDialog();
-        }
-
+        
         private void btnSMTPSettings_Click(object sender, RoutedEventArgs e)
         {
             SMTP.IsOpen = !SMTP.IsOpen;
         }
 
+        private void cmbSMTPTempaltes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var smtp=((ComboBox)sender).SelectedItem as LinqToSQL.SMTP;
+            tbHost.Text = smtp.Host;
+            tbPort.Text = smtp.Port.ToString();
+            cbSSL.IsChecked = smtp.EnableSSL;
+        }
     }
 }

@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="TabSwitcher.tbiSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TabSwitcher"
+             mc:Ignorable="d"
+             d:DesignHeight="25" d:DesignWidth="490" Width="490" Height="25">
+    <StackPanel Orientation="Horizontal">
+        <Label Name="lSender" Content="{Binding Title,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}" VerticalContentAlignment="Center" Margin="2,0" Width="auto" Height="25"/>
+        <ComboBox Name="cbSelecter" ItemsSource="{Binding Items,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}" Width="260" SelectedIndex="0" ToolTip="Выбрать email отправителя"/>
+        <Button x:Name="btnAdd" VerticalAlignment="Center" ToolTip="Добавить" Click="btnAdd_Click">
+            <Image Source="Images/add.png" HorizontalAlignment="Right"   />
+        </Button>
+        <Button x:Name="btnEdit" VerticalAlignment="Center" ToolTip="Редактировать" Click="btnEdit_Click">
+            <Image Source="Images/pencil.png"/>
+        </Button>
+        <Button x:Name="btnDelete" VerticalAlignment="Center" ToolTip="Удалить" Click="btnDelete_Click">
+            <Image Source="Images/delete.png" HorizontalAlignment="Right"/>
+        </Button>
+    </StackPanel>
+</UserControl>
