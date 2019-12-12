@@ -33,7 +33,7 @@
                 Grid.Row="3"
                 FontWeight="Bold"
                 Width="140"
-                Command="{Binding ReadAllCommand}" CommandParameter="{Binding ElementName=tbName,Path=Text}"/>
+                Command="{Binding ReadAllCommand}"/>
         <DataGrid x:Name="dgEmails" Grid.Row="2" ItemsSource="{Binding Emails}"
                  ColumnWidth="*"  Margin="0,10,0,28" RenderTransformOrigin="0.5,0.5"
                    IsReadOnly="True" >
@@ -41,8 +41,8 @@
         <TextBlock HorizontalAlignment="Left" Margin="10,7,0,0" Grid.Row="1"
                    TextWrapping="Wrap" Text="Поиск по имени:" VerticalAlignment="Top"
                    Width="231"/>
-        <TextBox Name="tbName" HorizontalAlignment="Left" Height="30" Margin="262,7,0,0"
-                 Grid.Row="1" TextWrapping="Wrap" 
+        <TextBox HorizontalAlignment="Left" Height="30" Margin="262,7,0,0"
+                 Grid.Row="1" TextWrapping="Wrap" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" Width="310">
         </TextBox>
     </Grid>

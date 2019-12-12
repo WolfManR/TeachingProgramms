@@ -41,7 +41,7 @@ namespace WpfTestMailSender.ViewModel
         {
             serviceProxy = servProxy;
             Emails = new ObservableCollection<Email>();
-            ReadAllCommand = new RelayCommand<string>(GetEmails);
+            ReadAllCommand = new RelayCommand(GetEmails);
 
             EmailInfo = new Email();
             SaveCommand = new RelayCommand<Email>(SaveEmail);
@@ -50,6 +50,8 @@ namespace WpfTestMailSender.ViewModel
         ObservableCollection<Email> emails;
         IDataAccessService serviceProxy;
         private Email emailInfo;
+        private string name;
+
         public ObservableCollection<Email> Emails
         {
             get => emails; set
@@ -69,15 +71,26 @@ namespace WpfTestMailSender.ViewModel
             }
         }
 
-        public RelayCommand<string> ReadAllCommand { get; set; }
+        public RelayCommand ReadAllCommand { get; set; }
         public RelayCommand<Email> SaveCommand { get; set; }
 
-
-        void GetEmails(string name)
+        public string Name
+        {
+            get => name; 
+            set
+            {
+                if (name == value) return;
+                name = value;
+                RaisePropertyChanged(nameof(Name));
+                Emails.Clear();
+                (serviceProxy.GetEmails().Where(x => x.Name.Contains(Name))).ToList().ForEach(p => Emails.Add(p));
+            }
+        }
+        void GetEmails()
         {
             Emails.Clear();
-            if(string.IsNullOrEmpty(name)) foreach (var item in serviceProxy.GetEmails()) Emails.Add(item);
-            else (serviceProxy.GetEmails().Where(x => x.Name.Contains(name) )).ToList().ForEach(p => Emails.Add(p));
+            if (string.IsNullOrEmpty(Name)) foreach (var item in serviceProxy.GetEmails()) Emails.Add(item);
+            else (serviceProxy.GetEmails().Where(x => x.Name.Contains(Name))).ToList().ForEach(p => Emails.Add(p));
         }
         void SaveEmail(Email email)
         {
