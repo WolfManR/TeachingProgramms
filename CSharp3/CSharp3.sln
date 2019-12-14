@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender", "MailSenderPro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyControlsLibrary", "MailSenderProject\MyControlsLibrary\MyControlsLibrary.csproj", "{84D31863-4696-467A-908E-48B530DB6A06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodePasswordDLL.Tests", "CodePasswordDLL.Tests\CodePasswordDLL.Tests.csproj", "{640F4BD2-FC4D-4E6A-87A1-13204CF493C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,10 @@ Global
 		{84D31863-4696-467A-908E-48B530DB6A06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84D31863-4696-467A-908E-48B530DB6A06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84D31863-4696-467A-908E-48B530DB6A06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{640F4BD2-FC4D-4E6A-87A1-13204CF493C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{640F4BD2-FC4D-4E6A-87A1-13204CF493C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{640F4BD2-FC4D-4E6A-87A1-13204CF493C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{640F4BD2-FC4D-4E6A-87A1-13204CF493C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{047D6EE8-A532-423C-87CC-D0CD11B86A0F} = {F6B34E8B-8C86-4119-A7F8-496D7E25E55D}
 		{ACCD59E7-A4CC-4BB4-8C75-300C96BFCE27} = {97A47E17-F7CD-44D8-84D4-6DB67CD61513}
 		{84D31863-4696-467A-908E-48B530DB6A06} = {97A47E17-F7CD-44D8-84D4-6DB67CD61513}
+		{640F4BD2-FC4D-4E6A-87A1-13204CF493C3} = {F6B34E8B-8C86-4119-A7F8-496D7E25E55D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {484D3B20-7612-47B3-B9F9-60F0C6500004}
