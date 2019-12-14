@@ -12,7 +12,7 @@ namespace WpfTestMailSender
     /// Класс-планировщик, который создает расписание, следит за его выполнением и напоминает о событиях
     /// Также помогает автоматизировать рассылку писем в соответствии с расписанием
     /// </summary>
-    class SchedulerClass
+    public class SchedulerClass
     {
         DispatcherTimer timer = new DispatcherTimer(); // таймер 
         EmailSendServiceClass emailSender;         // экземпляр класса, отвечающего за отправку писем
