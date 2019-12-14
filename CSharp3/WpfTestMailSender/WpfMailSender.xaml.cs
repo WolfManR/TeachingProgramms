@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfTestMailSender.ViewModel;
 
 namespace WpfTestMailSender
 {
@@ -26,12 +27,13 @@ namespace WpfTestMailSender
         public WpfMailSender()
         {
             InitializeComponent();
+            var locator = (ViewModelLocator)FindResource("Locator");
+
             cbSenderSelect.ItemsSource = VariablesClass.Senders;
             cbSenderSelect.DisplayMemberPath = "Key";
             cbSenderSelect.SelectedValuePath = "Value";
-            DBclass db = new DBclass();
-            dgEmails.ItemsSource = db.Emails;
-            ctbiSelector.Items = db.Smtps;
+
+            ctbiSelector.Items = locator.Main.Smtps;
             ctbiSelector.ComboDisplayMemberPath = "Key";
             ctbiSelector.ComboSelectedValuePath = "Value";
         }
@@ -50,9 +52,11 @@ namespace WpfTestMailSender
         {
             try
             {
+                var locator = (ViewModelLocator)FindResource("Locator");
+
                 EmailSendServiceClass serviceClass = PrepairSendClass();
                 List<string> list = new List<string>();
-                foreach (Email item in dgEmails.ItemsSource) list.Add(item.Value);
+                foreach (Email item in locator.Main.Emails) list.Add(item.Value);
                 serviceClass.SendMails(list);
             }
             catch (SendClassFillException ex)
@@ -104,8 +108,9 @@ namespace WpfTestMailSender
 
             try
             {
+                var locator = (ViewModelLocator)FindResource("Locator");
                 EmailSendServiceClass serviceClass = PrepairSendClass();
-                sc.SendEmails(dtSendDateTime, serviceClass, (IQueryable<Email>)dgEmails.ItemsSource);
+                sc.SendEmails(dtSendDateTime, serviceClass, locator.Main.Emails);
             }
             catch (SendClassFillException ex)
             {

@@ -1,6 +1,7 @@
 ﻿using EmailSendDLL;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
@@ -16,7 +17,7 @@ namespace WpfTestMailSender
         DispatcherTimer timer = new DispatcherTimer(); // таймер 
         EmailSendServiceClass emailSender;         // экземпляр класса, отвечающего за отправку писем
         DateTime dtSend;                           // дата и время отправки
-        IQueryable<Email> emails;                  // коллекция email-ов адресатов
+        ObservableCollection<Email> emails;                  // коллекция email-ов адресатов
         /// <summary>
         /// Метод, который превращает строку из текстбокса tbTimePicker в TimeSpan
         /// </summary>
@@ -38,7 +39,7 @@ namespace WpfTestMailSender
         /// <param name="dtSend"></param>
         /// <param name="emailSender"></param>
         /// <param name="emails"></param>
-        public void SendEmails(DateTime dtSend, EmailSendServiceClass emailSender, IQueryable<Email> emails)
+        public void SendEmails(DateTime dtSend, EmailSendServiceClass emailSender, ObservableCollection<Email> emails)
         {
             this.emailSender = emailSender; // Экземпляр класса, отвечающего за отправку писем, присваиваем 
             this.dtSend = dtSend;
