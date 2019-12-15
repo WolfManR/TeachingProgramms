@@ -8,6 +8,7 @@
         xmlns:exCont="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Views="clr-namespace:WpfTestMailSender.View"
         mc:Ignorable="d"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
         Title="WpfMailSender" Height="450" Width="800">
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
@@ -85,7 +86,23 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel>
                         <Calendar x:Name="cldSchedulDateTimes" SelectionMode="MultipleRange"/>
-                        <exCont:TimePicker x:Name="tbTimePicker" ShowButtonSpinner="True" CurrentDateTimePart="Hour24" Format="LongTime" TextAlignment="Center" />
+                        <Button x:Name="btnAddLetter" Command="{Binding AddDateCommand}" CommandParameter="{Binding ElementName=cldSchedulDateTimes,Path=SelectedDates}">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Images/add.png" Width="16" Height="16" />
+                                    <TextBlock Margin="3,0,0,0" Text="Добавить письмо" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <ListView Height="100" ItemsSource="{Binding Dates}" Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemDataTemplateContentStyle}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <MyControls:Scheduler Date="{Binding Key}" RemoveCommand="{Binding DataContext.RemoveDateCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" OpenLetterWindowCommand="{Binding DataContext.OpenLetterEditCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            
+                        </ListView>
+                        
                         <Button x:Name="btnSend" Click="btnSend_Click">
                             <Button.Content>
                                 <StackPanel Orientation="Horizontal">

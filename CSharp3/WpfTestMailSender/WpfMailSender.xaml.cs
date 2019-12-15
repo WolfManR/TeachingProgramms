@@ -28,7 +28,7 @@ namespace WpfTestMailSender
         {
             InitializeComponent();
             var locator = (ViewModelLocator)FindResource("Locator");
-
+            locator.Main.view = this;
             cbSenderSelect.ItemsSource = VariablesClass.Senders;
             cbSenderSelect.DisplayMemberPath = "Key";
             cbSenderSelect.SelectedValuePath = "Value";
@@ -92,7 +92,7 @@ namespace WpfTestMailSender
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
             SchedulerClass sc = new SchedulerClass();
-            TimeSpan tsSendTime = sc.GetSendTime(tbTimePicker.Text);
+            TimeSpan tsSendTime = sc.GetSendTime(null);
             
             if (tsSendTime == new TimeSpan())
             {
@@ -110,7 +110,7 @@ namespace WpfTestMailSender
             {
                 var locator = (ViewModelLocator)FindResource("Locator");
                 EmailSendServiceClass serviceClass = PrepairSendClass();
-                sc.SendEmails(dtSendDateTime, serviceClass, locator.Main.Emails);
+                sc.SendEmails( serviceClass, locator.Main.Emails);
             }
             catch (SendClassFillException ex)
             {
@@ -146,5 +146,7 @@ namespace WpfTestMailSender
             }
             tabControl.SelectedIndex--;
         }
+
+        
     }
 }
