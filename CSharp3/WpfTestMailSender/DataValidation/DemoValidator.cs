@@ -8,8 +8,7 @@ namespace WpfTestMailSender.DataValidation
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            int IntValue = 0;
-            ValidationResult result = null;
+            int IntValue;
             try
             {
                 IntValue = Convert.ToInt16(value);

@@ -16,7 +16,6 @@ namespace WpfTestMailSender
     {
         DispatcherTimer timer = new DispatcherTimer(); // таймер 
         EmailSendServiceClass emailSender;         // экземпляр класса, отвечающего за отправку писем
-        DateTime dtSend;                           // дата и время отправки
         ObservableCollection<Email> emails;                  // коллекция email-ов адресатов
 
         Dictionary<DateTime, string> dicDates = new Dictionary<DateTime, string>();
@@ -52,10 +51,9 @@ namespace WpfTestMailSender
         /// <param name="dtSend"></param>
         /// <param name="emailSender"></param>
         /// <param name="emails"></param>
-        public void SendEmails(DateTime dtSend, EmailSendServiceClass emailSender, ObservableCollection<Email> emails)
+        public void SendEmails( EmailSendServiceClass emailSender, ObservableCollection<Email> emails)
         {
             this.emailSender = emailSender; // Экземпляр класса, отвечающего за отправку писем, присваиваем 
-            this.dtSend = dtSend;
             this.emails = emails;
             timer.Tick += Timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 1);
