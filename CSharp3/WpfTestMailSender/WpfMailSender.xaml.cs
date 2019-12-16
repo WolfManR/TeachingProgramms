@@ -28,7 +28,7 @@ namespace WpfTestMailSender
         {
             InitializeComponent();
             var locator = (ViewModelLocator)FindResource("Locator");
-            locator.Main.view = this;
+            locator.Main.View = this;
             cbSenderSelect.ItemsSource = VariablesClass.Senders;
             cbSenderSelect.DisplayMemberPath = "Key";
             cbSenderSelect.SelectedValuePath = "Value";
@@ -46,81 +46,6 @@ namespace WpfTestMailSender
         private void btnClock_Click(object sender, RoutedEventArgs e)
         {
             tabControl.SelectedItem = tabPlanner;
-        }
-
-        private void btnSendAtOnce_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var locator = (ViewModelLocator)FindResource("Locator");
-
-                EmailSendServiceClass serviceClass = PrepairSendClass();
-                List<string> list = new List<string>();
-                foreach (Email item in locator.Main.Emails) list.Add(item.Value);
-                serviceClass.SendMails(list);
-            }
-            catch (SendClassFillException ex)
-            {
-                new ErrorWindow(ex.Message) { Owner = this }.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                new ErrorWindow(Texts.CantSendMail + ex.ToString()) { Owner = this }.ShowDialog();
-            }
-        }
-
-        EmailSendServiceClass PrepairSendClass()
-        {
-            if (rtbBody.Document == null) throw new SendClassFillException(Texts.LetterNotFilled);
-
-            string strLogin = cbSenderSelect.Text;
-            string strPassword = cbSenderSelect.SelectedValue.ToString();
-
-            if (string.IsNullOrEmpty(strLogin)) throw new SendClassFillException(Texts.LoginNotCorrect);
-            if (string.IsNullOrEmpty(strPassword)) throw new SendClassFillException(Texts.PassNotCorrect);
-
-            string smtpHost = ctbiSelector.ComboText;
-            int smtpPort = int.Parse(ctbiSelector.ComboSelectedValue.ToString());
-            string subject = tbSubject.Text;
-            TextRange Letter = new TextRange(rtbBody.Document.ContentStart, rtbBody.Document.ContentEnd);
-
-            EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword, smtpHost, smtpPort, subject, Letter.Text);
-            return emailSender;
-            
-        }
-
-        private void btnSend_Click(object sender, RoutedEventArgs e)
-        {
-            SchedulerClass sc = new SchedulerClass();
-            TimeSpan tsSendTime = sc.GetSendTime(null);
-            
-            if (tsSendTime == new TimeSpan())
-            {
-                new ErrorWindow(Texts.DateNotCorrect) { Owner = this }.ShowDialog();
-                return;
-            }
-            DateTime dtSendDateTime = (cldSchedulDateTimes.SelectedDate ?? DateTime.Today).Add(tsSendTime);
-            if (dtSendDateTime < DateTime.Now)
-            {
-                new ErrorWindow(Texts.DateAndTimeNotCorrect) { Owner = this }.ShowDialog();
-                return;
-            }
-
-            try
-            {
-                var locator = (ViewModelLocator)FindResource("Locator");
-                EmailSendServiceClass serviceClass = PrepairSendClass();
-                sc.SendEmails( serviceClass, locator.Main.Emails);
-            }
-            catch (SendClassFillException ex)
-            {
-                new ErrorWindow(ex.Message) { Owner = this }.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                new ErrorWindow(Texts.CantSendMail + ex.ToString()) { Owner = this }.ShowDialog();
-            }
-            
         }
 
         private void tscTabSwitcher_btnNextClick(object sender, RoutedEventArgs e)

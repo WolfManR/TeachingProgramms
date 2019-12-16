@@ -134,6 +134,7 @@
     <Compile Include="ErrorWindow.xaml.cs">
       <DependentUpon>ErrorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MultiValueTransfer.cs" />
     <Compile Include="SchedulerClass.cs" />
     <Compile Include="SendClassFillException.cs" />
     <Compile Include="SendEndWindow.xaml.cs">
@@ -144,6 +145,7 @@
     <Compile Include="Texts.cs" />
     <Compile Include="VariablesClass.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="SchedulerLeter.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EmailInfoView.xaml.cs">
       <DependentUpon>EmailInfoView.xaml</DependentUpon>
