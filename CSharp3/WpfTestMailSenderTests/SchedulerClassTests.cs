@@ -59,6 +59,16 @@ namespace WpfTestMailSender.Tests
             Assert.AreEqual(0, sc.DatesEmailTexts.Count);
         }
 
+        [TestMethod()]
+        public void Dictionare_correct()
+        { 
+            CollectionAssert.AreEqual(sc.DatesEmailTexts, new Dictionary<DateTime, string>()
+            {
+                { new DateTime(2016, 12, 24, 22, 0, 0), "text1" },
+                { new DateTime(2016, 12, 24, 22, 30, 0), "text2" },
+                { new DateTime(2016, 12, 24, 23, 0, 0), "text3" }
+            });
+        }
 
         [TestMethod()]
         public void GetSendTime_empty_ts()
