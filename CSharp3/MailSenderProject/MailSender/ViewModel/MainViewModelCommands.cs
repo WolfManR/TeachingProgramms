@@ -1,33 +1,19 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using MailSender.Code;
-using MailSender.Data;
+﻿using GalaSoft.MvvmLight.Command;
 using MailSender.Data.LinqToSQL;
 using MailSender.Views;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
 
-namespace MailSender.BureauBlue.ViewModel
+namespace MailSender.ViewModel
 {
-    public class BureauBlueViewViewModel : ViewModelBase
+    public partial class MainViewModel
     {
-        public BureauBlueViewViewModel(IDataAccessService dataAccess)
-        {
-            dataService = dataAccess;
-            Emails = dataService.GetEmails();
-            SMTPs = dataService.GetSMTPList();
-        }
-
-        private readonly Window view;
-        private readonly IDataAccessService dataService;
-
         #region SendMailCmd
         private RelayCommand<object> sendMailCmd = null;
         public RelayCommand<object> SendMailCmd => sendMailCmd ?? (sendMailCmd = new RelayCommand<object>(
             (param) => {
                 var bindings = (object[])param;
+                SendService.SenderEmail = (string)bindings[0];
+                SendService.SenderPassword = ((System.Windows.Controls.PasswordBox)bindings[1]).Password;
                 SendService.SMTPHost = (string)bindings[2];
                 SendService.SMTPPort = int.Parse(bindings[3].ToString());
                 SendService.EnableSSL = (bool)bindings[4];
@@ -39,14 +25,14 @@ namespace MailSender.BureauBlue.ViewModel
                 try
                 {
                     // Find way to take Password correctly
-                    SendService.SendMail((string)bindings[0], ((System.Windows.Controls.PasswordBox)bindings[1]).Password, (string)bindings[5], (string)bindings[6], emails);
+                    SendService.SendMail((string)bindings[5], (string)bindings[6], emails);
                 }
                 catch (Exception ex)
                 {
-                    new ErrorMessage("Невозможно отправить письмо " + "\n" + ex.ToString()) { Owner = view, Title = "Error" }.ShowDialog();
+                    new ErrorMessage("Невозможно отправить письмо " + "\n" + ex.ToString()) { Owner = View, Title = "Error" }.ShowDialog();
                 }
 
-                new SendEndWindow() { Owner = view }.ShowDialog();
+                new SendEndWindow() { Owner = View }.ShowDialog();
 
             },
             param => param != null && SelectedEmails.Count != 0));
@@ -71,11 +57,5 @@ namespace MailSender.BureauBlue.ViewModel
             },
             param => param != null && param is Emails));
         #endregion
-
-        public MailSendService SendService { get; set; } = new MailSendService();
-
-        public ObservableCollection<Emails> Emails { get; set; }
-        public ObservableCollection<Emails> SelectedEmails { get; set; } = new ObservableCollection<Emails>();
-        public List<SMTP> SMTPs { get; set; } 
     }
 }

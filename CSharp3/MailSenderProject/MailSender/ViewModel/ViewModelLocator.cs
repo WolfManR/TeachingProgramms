@@ -15,7 +15,6 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using MailSender.Data;
-using MailSender.Modern.ViewModel;
 
 namespace MailSender.ViewModel
 {
@@ -43,11 +42,11 @@ namespace MailSender.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<ModernViewViewModel>();
+            SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<IDataAccessService, DataAccessService>();
         }
 
-        public ModernViewViewModel Main => ServiceLocator.Current.GetInstance<ModernViewViewModel>();
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
 
         public static void Cleanup()
         {

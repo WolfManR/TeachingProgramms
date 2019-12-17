@@ -71,7 +71,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BureauBlue\ViewModel\BureauBlueViewViewModel.cs" />
     <Compile Include="Code\Date.cs" />
     <Compile Include="Code\IMailSendService.cs" />
     <Compile Include="Code\MailSendService.cs" />
@@ -86,7 +85,8 @@
     </Compile>
     <Compile Include="Data\Models\Letter.cs" />
     <Compile Include="Data\Models\User.cs" />
-    <Compile Include="Modern\ViewModel\ModernViewViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModelCommands.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\ErrorMessage.xaml.cs">
       <DependentUpon>ErrorMessage.xaml</DependentUpon>
@@ -187,5 +187,6 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
