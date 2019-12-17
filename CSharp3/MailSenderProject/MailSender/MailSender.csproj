@@ -72,7 +72,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BureauBlue\ViewModel\BureauBlueViewViewModel.cs" />
+    <Compile Include="Code\Date.cs" />
+    <Compile Include="Code\IMailSendService.cs" />
     <Compile Include="Code\MailSendService.cs" />
+    <Compile Include="Code\SchedulerService.cs" />
+    <Compile Include="Code\Success.cs" />
     <Compile Include="Data\DataAccessService.cs" />
     <Compile Include="Data\IDataAccessService.cs" />
     <Compile Include="Data\LinqToSQL\Emails.designer.cs">
@@ -80,6 +84,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Emails.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Models\Letter.cs" />
+    <Compile Include="Data\Models\User.cs" />
     <Compile Include="Modern\ViewModel\ModernViewViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\ErrorMessage.xaml.cs">

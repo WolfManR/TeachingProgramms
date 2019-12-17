@@ -4,8 +4,10 @@ using System.Net.Mail;
 
 namespace MailSender.Code
 {
-    public class MailSendService
+    public class MailSendService : IMailSendService
     {
+        public string SenderEmail { get; set; }
+        public string SenderPassword { get; set; }
         public string SMTPHost { get; set; }
         public int SMTPPort { get; set; }
         public bool EnableSSL { get; set; } = true;
@@ -14,11 +16,11 @@ namespace MailSender.Code
         public MailSendService() { }
 
         // изменить на async
-        public void SendMail(string senderEmail, string senderPassword, string title, string letter, params string[] emailsToSend)
+        public void SendMail(string title, string letter, params string[] emailsToSend)
         {
             foreach (string mail in emailsToSend)
             {
-                using (MailMessage mm = new MailMessage(senderEmail, mail))
+                using (MailMessage mm = new MailMessage(SenderEmail, mail))
                 {
                     mm.Subject = title;
                     mm.Body = letter;
@@ -28,7 +30,7 @@ namespace MailSender.Code
                     {
 
                         sc.EnableSsl = EnableSSL;
-                        sc.Credentials = new NetworkCredential(senderEmail, senderPassword);
+                        sc.Credentials = new NetworkCredential(SenderEmail, SenderPassword);
                         try
                         {
                             sc.Send(mm);
