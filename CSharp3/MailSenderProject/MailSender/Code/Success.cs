@@ -2,6 +2,6 @@
 {
     public enum Success
     {
-        True, False, Error
+        Complete, NotSend, Error
     }
 }

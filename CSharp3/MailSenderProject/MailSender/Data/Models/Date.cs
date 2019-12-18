@@ -1,6 +1,7 @@
-﻿using System;
+﻿using MailSender.Code;
+using System;
 
-namespace MailSender.Code
+namespace MailSender.Data.Models
 {
     public class Date
     {

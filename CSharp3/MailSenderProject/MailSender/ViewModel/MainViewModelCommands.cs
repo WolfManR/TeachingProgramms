@@ -29,10 +29,10 @@ namespace MailSender.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    new ErrorMessage("Невозможно отправить письмо " + "\n" + ex.ToString()) { Owner = View, Title = "Error" }.ShowDialog();
+                    new ErrorMessage("Невозможно отправить письмо " + "\n" + ex.ToString()) { Owner = MainView??null, Title = "Error" }.ShowDialog();
                 }
 
-                new SendEndWindow() { Owner = View }.ShowDialog();
+                new SendEndWindow() { Owner = MainView ?? null }.ShowDialog();
 
             },
             param => param != null && SelectedEmails.Count != 0));

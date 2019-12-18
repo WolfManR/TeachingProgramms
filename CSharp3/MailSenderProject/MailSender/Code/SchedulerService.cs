@@ -9,7 +9,7 @@ namespace MailSender.Code
     public class SchedulerService
     {
         public User From { get; set; }
-        public Mail Mail { get; set; }
+        public Mail Letter { get; set; }
         public ObservableCollection<Emails> To { get; set; }
         public ObservableCollection<Date> Dates { get; set; }
         public bool Complete { get; set; }
@@ -21,9 +21,9 @@ namespace MailSender.Code
             {
                 switch (item.Complete)
                 {
-                    case Success.True:
+                    case Success.Complete:
                         continue;
-                    case Success.False when item.Time==now: 
+                    case Success.NotSend when item.Time==now: 
                         sendService.SenderEmail = From.Email;
                         sendService.SenderPassword = From.Password;
 
@@ -34,7 +34,7 @@ namespace MailSender.Code
                         sendService.IsBodyHTML = false;
                         try
                         {
-                            sendService.SendMail(Mail.Subject, Mail.GetLetterAsString(), To.Select(x => x.Email).ToArray());
+                            sendService.SendMail(Letter.Subject, Letter.GetLetterAsString(), To.Select(x => x.Email).ToArray());
                         }
                         catch (Exception)
                         {
@@ -42,9 +42,9 @@ namespace MailSender.Code
                             item.ErrorMsg = "Something Go Wrong";
                             throw;
                         }
-                        item.Complete = Success.True;
+                        item.Complete = Success.Complete;
                         break;
-                    case Success.False when item.Time > now:
+                    case Success.NotSend when item.Time > now:
                         throw new Exception($"Left send Time {item.Time}");
                     case Success.Error:
                         break;

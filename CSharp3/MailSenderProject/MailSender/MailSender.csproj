@@ -71,7 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Code\Date.cs" />
+    <Compile Include="Data\Models\Date.cs" />
     <Compile Include="Code\IMailSendService.cs" />
     <Compile Include="Code\MailSendService.cs" />
     <Compile Include="Code\SchedulerService.cs" />
@@ -83,7 +83,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Emails.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Data\Models\Letter.cs" />
+    <Compile Include="Data\Models\Mail.cs" />
     <Compile Include="Data\Models\User.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainViewModelCommands.cs" />

@@ -22,12 +22,12 @@ namespace MailSender.ViewModel
     public partial class MainViewModel:ViewModelBase
     {
         private readonly IDataAccessService dataService;
+        private readonly System.Windows.Window MainView  = App.Current.MainWindow;
         
         public ObservableCollection<Emails> Emails { get; set; }
         public ObservableCollection<Emails> SelectedEmails { get; set; } = new ObservableCollection<Emails>();
         public List<SMTP> SMTPs { get; set; }
         public IMailSendService SendService { get; set; } = new MailSendService();
-        public System.Windows.Window View { get; set; }
         public MainViewModel(IDataAccessService service)
         {
             dataService = service;
