@@ -8,7 +8,11 @@
         xmlns:exCont="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Views="clr-namespace:WpfTestMailSender.View"
         mc:Ignorable="d"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
         Title="WpfMailSender" Height="450" Width="800">
+    <Window.Resources>
+        <local:MultiValueTransfer x:Key="MultiTransfer"/>
+    </Window.Resources>
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -85,22 +89,56 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel>
                         <Calendar x:Name="cldSchedulDateTimes" SelectionMode="MultipleRange"/>
-                        <exCont:TimePicker x:Name="tbTimePicker" ShowButtonSpinner="True" CurrentDateTimePart="Hour24" Format="LongTime" TextAlignment="Center" />
-                        <Button x:Name="btnSend" Click="btnSend_Click">
+                        <Button x:Name="btnAddLetter" Command="{Binding AddDateCommand}" CommandParameter="{Binding ElementName=cldSchedulDateTimes,Path=SelectedDates}">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Images/add.png" Width="16" Height="16" />
+                                    <TextBlock Margin="3,0,0,0" Text="Добавить письмо" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <ListView Height="100" ItemsSource="{Binding Dates}" Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemDataTemplateContentStyle}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <MyControls:Scheduler Date="{Binding Date}" RemoveCommand="{Binding DataContext.RemoveDateCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" OpenLetterWindowCommand="{Binding DataContext.OpenLetterEditCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            
+                        </ListView>
+
+                        <Button x:Name="btnSend" Command="{Binding DataContext.SendSchedulerCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}">
                             <Button.Content>
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="Images/clock.png" Width="16" Height="16" />
                                     <TextBlock Margin="3,0,0,0" Text="Отправить запланированно" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Button.Content>
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource MultiTransfer}">
+                                    <Binding ElementName="cbSenderSelect" Path="Text"/>
+                                    <Binding ElementName="cbSenderSelect" Path="SelectedValue"/>
+                                    <Binding ElementName="ctbiSelector" Path="ComboText"/>
+                                    <Binding ElementName="ctbiSelector" Path="ComboSelectedValue"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                         </Button>
-                        <Button Name="btnSendAtOnce" Click="btnSendAtOnce_Click">
+                        <Button Name="btnSendAtOnce" Command="{Binding DataContext.SendAtOnceCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}">
                             <Button.Content>
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="Images/letter.png" Width="16" Height="16" />
                                     <TextBlock Margin="3,0,0,0" Text="Отправить сразу" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Button.Content>
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource MultiTransfer}">
+                                    <Binding ElementName="cbSenderSelect" Path="Text"/>
+                                    <Binding ElementName="cbSenderSelect" Path="SelectedValue"/>
+                                    <Binding ElementName="ctbiSelector" Path="ComboText"/>
+                                    <Binding ElementName="ctbiSelector" Path="ComboSelectedValue"/>
+                                    <Binding ElementName="tbSubject" Path="Text"/>
+                                    <Binding ElementName="rtbBody" Path="Document"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
                         </Button>
                     </StackPanel>
 

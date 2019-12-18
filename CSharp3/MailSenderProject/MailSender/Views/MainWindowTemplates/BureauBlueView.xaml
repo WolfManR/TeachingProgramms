@@ -1,0 +1,256 @@
+﻿<Window x:Class="MailSender.Views.MainWindowTemplates.BureauBlueView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MailSender"
+        
+        xmlns:code="clr-namespace:MailSender.Code"
+        
+        mc:Ignorable="d"
+        
+        
+        Title="BureauBlueView" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/BureauBlue/BureauBlueTheme.xaml"/>
+
+
+                <ResourceDictionary>
+                    <code:MultiValueConverter x:Key="MultiConv"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <TabControl>
+
+        <TabItem Header="Mail">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+
+                <!--#region Send Settings Panel -->
+
+                <!--#region SMTP Settings Panel -->
+                <Popup Name="SMTP" AllowsTransparency="True" PlacementTarget="{Binding ElementName=btnSMTPSettings}" Placement="Right" HorizontalOffset="4" PopupAnimation="Scroll" StaysOpen="False">
+                    <Border Padding="8,0,8,4" Background="White" BorderThickness="2" BorderBrush="{StaticResource NormalBorderBrush}" CornerRadius="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="8"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="SMTP" FontSize="20"/>
+                                <ComboBox Name="cmbSMTPTempaltes" ItemsSource="{Binding SMTPs}" Grid.Column="2" Width="80"  SelectionChanged="cmbSMTPTempaltes_SelectionChanged" ToolTip="Templates">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding For}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </Grid>
+                            <StackPanel Grid.Row="1">
+
+                                <StackPanel>
+                                    <Label Content="Host"/>
+                                    <TextBox Name="tbHost"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+
+                                    <StackPanel>
+                                        <Label Content="Port"/>
+                                        <TextBox Name="tbPort" MaxLength="6" Width="60" MaxLines="1"/>
+                                    </StackPanel>
+
+                                    <CheckBox Name="cbSSL" Content="SSL" VerticalAlignment="Bottom" Margin="10,2,4,8"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Popup>
+
+                <!--#endregion-->
+
+                <!--#region Send Panel -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--#region Sender Panel -->
+                    <Grid VerticalAlignment="Top" Margin="5,8,10,0" DataContext="{Binding SenderSettings}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Email"/>
+                                <Button x:Name="btnSMTPSettings" Grid.Column="1" FontFamily="Segoe MDL2 Assets" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="btnSMTPSettings_Click">&#xE713;</Button>
+                            </Grid>
+
+                            <TextBox Name="SenderEmail"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1">
+                            <Label Content="Password"/>
+                            <PasswordBox Name="passwordBox" PasswordChar="*"/>
+                        </StackPanel>
+                    </Grid>
+                    <!--#endregion-->
+
+
+
+                </Grid>
+                <!--#endregion-->
+
+                <!--#endregion-->
+
+                <!--#region Mail Panel -->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32" />
+                        <RowDefinition Height="28" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--#region Title Panel -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Title" FontSize="22" Margin="4,0,8,0" VerticalAlignment="Center"/>
+                        <TextBox Name="tbTitle" Grid.Column="1"/>
+                        <Button Grid.Column="2" Name="btnSendEmail" FontSize="28" FontFamily="Segoe MDL2 Assets"  Command="{Binding Path=DataContext.SendMailCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource MultiConv}">
+                                    <Binding ElementName="SenderEmail" Path="Text"/>
+                                    <Binding ElementName="passwordBox"/>
+                                    <Binding ElementName="tbHost" Path="Text"/>
+                                    <Binding ElementName="tbPort" Path="Text"/>
+                                    <Binding ElementName="cbSSL" Path="IsChecked"/>
+                                    <Binding ElementName="tbTitle" Path="Text"/>
+                                    <Binding ElementName="tbLetter" Path="Text"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                            &#xE724;
+                        </Button>
+                    </Grid>
+                    <!--#endregion-->
+
+                    <!--#region Letter Panel -->
+                    <TextBox Name="tbLetter" Grid.Row="2" Margin="4,0"/>
+                    <!--#endregion-->
+
+
+
+                </Grid>
+
+                <!--#endregion-->
+
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Scheduler">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Detination">
+            <!--#region Addressee Panel -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!--#region Add New Panel -->
+                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200">
+                    <StackPanel>
+                        <Label Content="Name"/>
+                        <TextBox/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Email"/>
+                        <TextBox/>
+                    </StackPanel>
+                </StackPanel>
+                <!--#endregion-->
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition x:Name="FullAddresseListColumn"/>
+                    </Grid.ColumnDefinitions>
+
+
+
+                    <!--#region Addressee List -->
+                    <ListView Name="lvSelectedEmailsList" ItemsSource="{Binding SelectedEmails}" SelectionMode="Single">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Email}"/>
+                                    <Label Margin="10,0" Content="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <!--#endregion-->
+
+                    <!--#region control panel -->
+                    <StackPanel Grid.Column="1" Margin="3,10">
+                        <Button Name="btnToSelected" FontFamily="Segoe MDL2 Assets" Command="{Binding Path=DataContext.AddToSelectedCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvFullEmailsList,Path=SelectedItem}">&#xE973;</Button>
+                        <Button Name="btnReturnFromSelected" FontFamily="Segoe MDL2 Assets" Command="{Binding Path=DataContext.ReturnFromSelectedCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=lvSelectedEmailsList,Path=SelectedItem}">&#xE974;</Button>
+                    </StackPanel>
+                    <!--#endregion-->
+
+                    <!--#region Full List Addressee -->
+                    <ListView Name="lvFullEmailsList" Grid.Column="2" ItemsSource="{Binding Emails}" SelectionMode="Single">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Email}"/>
+                                    <Label Margin="10,0" Content="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <!--#endregion-->
+                </Grid>
+            </Grid>
+            <!--#endregion-->
+        </TabItem>
+    </TabControl>
+</Window>

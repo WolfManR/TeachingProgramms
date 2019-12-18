@@ -13,7 +13,9 @@ namespace EmailSendDLL
         private string strSmtp;         
         private int iSmtpPort;          
         private string strBody;         
-        private string strSubject;  
+        private string strSubject;
+        public string Body { get=>strBody; set {strBody=value; } }
+        public string Subject { get=>strSubject; set {strSubject=value; } }
         #endregion
 
         public EmailSendServiceClass(string sLogin, string sPassword, string smtpHost, int smtpPort, string subject, string text)
