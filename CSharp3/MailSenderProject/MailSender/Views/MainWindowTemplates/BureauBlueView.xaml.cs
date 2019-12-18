@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MailSender.BureauBlue
+namespace MailSender.Views.MainWindowTemplates
 {
     /// <summary>
     /// Логика взаимодействия для BureauBlueView.xaml

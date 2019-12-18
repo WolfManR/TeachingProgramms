@@ -94,11 +94,11 @@
     <Compile Include="Views\SendEndWindow.xaml.cs">
       <DependentUpon>SendEndWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="BureauBlue\BureauBlueView.xaml">
+    <Page Include="Views\MainWindowTemplates\BureauBlueView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modern\ModernView.xaml">
+    <Page Include="Views\MainWindowTemplates\ModernView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -107,30 +107,30 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Code\MultiValueConverter.cs" />
-    <Compile Include="BureauBlue\BureauBlueView.xaml.cs">
+    <Compile Include="Views\MainWindowTemplates\BureauBlueView.xaml.cs">
       <DependentUpon>BureauBlueView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modern\ModernView.xaml.cs">
+    <Compile Include="Views\MainWindowTemplates\ModernView.xaml.cs">
       <DependentUpon>ModernView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Modern\Resources\Templates\ControlsTemplates.xaml">
+    <Page Include="Resources\Modern\Templates\ControlsTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modern\Resources\Texts\Locales\Ru-ru.xaml">
+    <Page Include="Resources\Modern\Texts\Locales\Ru-ru.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modern\Resources\Theme\Colors.xaml">
+    <Page Include="Resources\Modern\Theme\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modern\Resources\Theme\Styles.xaml">
+    <Page Include="Resources\Modern\Theme\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BureauBlue\Resources\Theme\BureauBlueTheme.xaml">
+    <Page Include="Resources\BureauBlue\BureauBlueTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
