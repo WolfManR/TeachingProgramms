@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ThreadTestApp
 {
@@ -13,15 +10,15 @@ namespace ThreadTestApp
     {
         public static void Work()
         {
-            //Console.WriteLine("Enter Factorial Number");
-            //Factorial fact = new Factorial(int.Parse(Console.ReadLine()));
-            //Thread factThread = new Thread(new ThreadStart(fact.CalcFactorial));
-            //factThread.Start();
+            Console.WriteLine("Enter Factorial Number");
+            Factorial fact = new Factorial(int.Parse(Console.ReadLine()));
+            Thread factThread = new Thread(new ThreadStart(fact.CalcFactorial));
+            factThread.Start();
 
-            //Console.WriteLine("Enter Number to calc sum of integer values before it");
-            //Sum sum = new Sum(int.Parse(Console.ReadLine()));
-            //Thread sumThread = new Thread(new ThreadStart(sum.CalcSum));
-            //sumThread.Start();
+            Console.WriteLine("Enter Number to calc sum of integer values before it");
+            Sum sum = new Sum(int.Parse(Console.ReadLine()));
+            Thread sumThread = new Thread(new ThreadStart(sum.CalcSum));
+            sumThread.Start();
 
             Console.WriteLine("Enter FileName of csv file");
             string csvFileName = Console.ReadLine();
