@@ -82,10 +82,16 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Border Style="{DynamicResource BorderStyle}" VerticalAlignment="Top" HorizontalAlignment="Center" Height="14" CornerRadius="0,0,6,6" Width="300" BorderThickness="2,0,2,2" >
-                <Label Content="{DynamicResource LoginErrorMsg}" FontSize="8" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Border>
-            <Border Grid.Row="1" VerticalAlignment="Top" Style="{DynamicResource BorderStyle}" Height="80" Width="270">
+            <Button x:Name="btnLogin" VerticalAlignment="Top" HorizontalAlignment="Center" Click="btnLogin_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border Style="{DynamicResource BorderStyle}" Height="14" CornerRadius="0,0,6,6" Width="300" BorderThickness="2,0,2,2">
+                            <Label Content="{DynamicResource LoginErrorMsg}" FontSize="8" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Border x:Name="LoginForm" Margin="0,-140,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{DynamicResource BorderStyle}" Height="80" Width="270">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -100,7 +106,7 @@
                     </StackPanel>
                     <StackPanel Height="auto" VerticalAlignment="Top" Grid.Column="1" Orientation="Horizontal" Margin="4,2">
                         <ComboBox x:Name="cmbSMTPTemplates" Width="80"/>
-                        <Button x:Name="btnSMTPSettings" FontFamily="Segoe MDL2 Assets">&#xE713;</Button>
+                        <Button x:Name="btnSMTPSettings" FontFamily="Segoe MDL2 Assets" Click="btnSMTPSettings_Click">&#xE713;</Button>
                     </StackPanel>
                 </Grid>
 
@@ -164,51 +170,12 @@
                     </EventTrigger>
                 </Border.Triggers>
                 <StackPanel Margin="2,1" VerticalAlignment="Center">
-                    <ToggleButton x:Name="tbtnScheduler">
-                        <ToggleButton.Triggers>
-                            <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                <BeginStoryboard>
-                                    <Storyboard Storyboard.TargetName="bControls">
-                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,-800,0,0" To="0,0,0,0" Duration="0:0:0.4"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                <BeginStoryboard>
-                                    <Storyboard Storyboard.TargetName="bControls">
-                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,-800,0,0" Duration="0:0:0.4"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </ToggleButton.Triggers>
+                    <Button x:Name="iScheduler" Click="iScheduler_Click">
                         <Ellipse Fill="Aqua" Height="20" Width="20"/>
-                    </ToggleButton>
-                    <ToggleButton x:Name="tbtnEmails">
-                        <ToggleButton.Triggers>
-                            <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                <BeginStoryboard>
-                                    <Storyboard Storyboard.TargetName="bControls">
-                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,-800,0,0" To="0,0,0,0" Duration="0:0:0.4"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                                <BeginStoryboard>
-                                    <Storyboard Storyboard.TargetName="tbtnScheduler" Storyboard.TargetProperty="IsChecked">
-                                        <BooleanAnimationUsingKeyFrames>
-                                            <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False"/>
-                                        </BooleanAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                <BeginStoryboard>
-                                    <Storyboard Storyboard.TargetName="bControls">
-                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,-800,0,0" Duration="0:0:0.4"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </ToggleButton.Triggers>
-                    <Rectangle Height="20" Width="30" Fill="AntiqueWhite"/>
-                    </ToggleButton>
+                    </Button>
+                    <Button x:Name="iEmails" Click="iEmails_Click">
+                        <Rectangle Height="20" Width="30" Fill="AntiqueWhite"/>
+                    </Button>
                 </StackPanel>
             </Border>
             <!--#endregion-->
@@ -218,7 +185,7 @@
                 <Grid>
 
                     <!--#region Schedulers Control -->
-                    <Grid x:Name="gSchedulersControl" Width="600" Height="230" Margin="4" Visibility="{Binding ElementName=tbtnScheduler,Path=IsChecked,Converter={StaticResource boolToVis}}">
+                    <Grid x:Name="gSchedulers" Width="600" Height="230" Margin="4" Visibility="Collapsed">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition/>
@@ -230,9 +197,9 @@
                         <ListView x:Name="lvShcedulers" Grid.Column="1" Margin="4,0"/>
                     </Grid>
                     <!--#endregion-->
-                    
+
                     <!--#region Emails Control -->
-                    <Grid x:Name="gEmailsControl" Width="600" Height="230" Margin="4" Visibility="{Binding ElementName=tbtnEmails,Path=IsChecked,Converter={StaticResource boolToVis}}">
+                    <Grid x:Name="gEmails" Width="600" Height="230" Margin="4" Visibility="Visible">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition/>
@@ -248,7 +215,7 @@
                                 <ColumnDefinition MinWidth="10" Width="auto"/>
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <!--#region Selected List -->
                             <ListView x:Name="lvSelectedEmails" ItemsSource="{Binding SelectedEmails}">
                                 <ListView.ItemTemplate>
