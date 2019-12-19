@@ -8,6 +8,7 @@ namespace ThreadTestApp
     {
         static void Main(string[] args)
         {
+            HW5.Work();
         }
 
         #region First Test
