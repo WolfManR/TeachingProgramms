@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
+using System.Threading;
 
 namespace EmailSendDLL
 {
@@ -17,7 +18,7 @@ namespace EmailSendDLL
         public string Body { get=>strBody; set {strBody=value; } }
         public string Subject { get=>strSubject; set {strSubject=value; } }
         #endregion
-
+        
         public EmailSendServiceClass(string sLogin, string sPassword, string smtpHost, int smtpPort, string subject, string text)
         {
             strLogin = sLogin;
@@ -28,9 +29,9 @@ namespace EmailSendDLL
             this.strSubject = subject;
         }
 
-        private void SendMail(string mail) // Отправка email конкретному адресату
+        private void SendMail(object mail) // Отправка email конкретному адресату
         {
-            using (MailMessage mm = new MailMessage(strLogin, mail))
+            using (MailMessage mm = new MailMessage(strLogin, (string)mail))
             {
                 mm.Subject = strSubject;
                 mm.Body = strBody;
@@ -52,9 +53,10 @@ namespace EmailSendDLL
         }//private void SendMail(string mail, string name)
         public void SendMails(IEnumerable<string> emails)
         {
-            foreach (string email in emails)
+            foreach (object email in emails)
             {
-                SendMail(email);
+                Thread thread = new Thread(new ParameterizedThreadStart(SendMail));
+                thread.Start(email);
             }
         }
     }  //private void SendMail(string mail, string name)
