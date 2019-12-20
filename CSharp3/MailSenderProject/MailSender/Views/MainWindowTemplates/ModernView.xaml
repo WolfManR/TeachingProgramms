@@ -86,7 +86,7 @@
                 <Button.Template>
                     <ControlTemplate>
                         <Border Style="{DynamicResource BorderStyle}" Height="14" CornerRadius="0,0,6,6" Width="300" BorderThickness="2,0,2,2">
-                            <Label Content="{DynamicResource LoginErrorMsg}" FontSize="8" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Label Content="{Binding UserEmail,Mode=OneWay,TargetNullValue={StaticResource LoginErrorMsg}}" FontSize="8" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
@@ -98,14 +98,23 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="4,2">
-                        <MyCont:TextBoxWithHeader x:Name="tbUserEmail" Header="Email" Width="100" HorizontalAlignment="Left"/>
+                        <StackPanel>
+                            <Label Content="Email"/>
+                            <TextBox x:Name="tbUserEmail" Text="{Binding UserEmail,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                        </StackPanel>
                         <StackPanel>
                             <TextBlock Text="Password"/>
                             <PasswordBox x:Name="psbUserPassword"/>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Height="auto" VerticalAlignment="Top" Grid.Column="1" Orientation="Horizontal" Margin="4,2">
-                        <ComboBox x:Name="cmbSMTPTemplates" Width="80"/>
+                        <ComboBox x:Name="cmbSMTPTemplates" Width="80" ItemsSource="{Binding SMTPs}" SelectedIndex="-1">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding For}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                         <Button x:Name="btnSMTPSettings" FontFamily="Segoe MDL2 Assets" Click="btnSMTPSettings_Click">&#xE713;</Button>
                     </StackPanel>
                 </Grid>
@@ -113,7 +122,7 @@
             </Border>
 
         </Grid>
-        <Popup Name="SMTP" AllowsTransparency="True" PlacementTarget="{Binding ElementName=btnSMTPSettings}" Placement="Right" HorizontalOffset="4" PopupAnimation="Scroll" StaysOpen="False">
+        <Popup Name="SMTP" AllowsTransparency="True" PlacementTarget="{Binding ElementName=btnSMTPSettings}" Placement="Right" HorizontalOffset="4" PopupAnimation="Scroll" StaysOpen="False" >
             <Border Padding="8,0,8,4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" Style="{DynamicResource BorderStyle}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -122,21 +131,21 @@
                     </Grid.RowDefinitions>
 
                     <Label Content="SMTP" FontSize="20"/>
-                    <StackPanel Grid.Row="1">
+                    <StackPanel Grid.Row="1" DataContext="{Binding ElementName=cmbSMTPTemplates,Path=SelectedItem}">
 
                         <StackPanel>
                             <Label Content="Host"/>
-                            <TextBox Name="tbHost"/>
+                            <TextBox Name="tbHost" Text="{Binding Host,Mode=OneWay}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
 
                             <StackPanel>
                                 <Label Content="Port"/>
-                                <TextBox Name="tbPort" MaxLength="6" Width="60" MaxLines="1"/>
+                                <TextBox Name="tbPort" MaxLength="6" Width="60" MaxLines="1" Text="{Binding Port,Mode=OneWay}"/>
                             </StackPanel>
 
-                            <CheckBox Name="cbSSL" Content="SSL" VerticalAlignment="Bottom" Margin="10,2,4,8"/>
+                            <CheckBox Name="cbSSL" Content="SSL" VerticalAlignment="Bottom" Margin="10,2,4,8" IsChecked="{Binding EnableSSL}"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -220,12 +229,43 @@
                             <ListView x:Name="lvSelectedEmails" ItemsSource="{Binding SelectedEmails}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Email}"/>
+                                        <DockPanel>
+                                            <Button x:Name="btnSelected" DockPanel.Dock="Right" Command="{Binding DataContext.ReturnFromSelectedCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=DataContext}">
+                                                Right
+                                            </Button>
+                                            <TextBlock Text="{Binding Email}"/>
+                                        </DockPanel>
+                                        <DataTemplate.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter TargetName="btnSelected" Property="Visibility" Value="Collapsed"/>
+                                            </MultiDataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter TargetName="btnSelected" Property="Visibility" Value="Visible"/>
+                                            </MultiDataTrigger>
+                                            <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                <Setter TargetName="btnSelected" Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
                             <!--#endregion-->
-
+                            
+                            <!--#region Controls -->
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                
+                                
+                            </StackPanel>
+                            <!--#endregion-->
+                            
                             <!--#region Full List -->
                             <ListView x:Name="lvEmails" Grid.Column="2" ItemsSource="{Binding Emails}">
                                 <ListView.ItemTemplate>
@@ -234,10 +274,33 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="1*"/>
                                                 <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="1*"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="{Binding Email}"/>
-                                            <TextBlock Grid.Column="1" Margin="15,0" Text="{Binding Name}"/>
+                                            <Button x:Name="btnNotSelected" Command="{Binding DataContext.AddToSelectedCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=DataContext}">
+                                                Left
+                                            </Button>
+                                            <TextBlock Grid.Column="1" Text="{Binding Email}"/>
+                                            <TextBlock Grid.Column="2" Margin="15,0" Text="{Binding Name}"/>
                                         </Grid>
+                                        <DataTemplate.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter TargetName="btnNotSelected" Property="Visibility" Value="Collapsed"/>
+                                            </MultiDataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter TargetName="btnNotSelected" Property="Visibility" Value="Visible"/>
+                                            </MultiDataTrigger>
+                                            <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                <Setter TargetName="btnNotSelected" Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
