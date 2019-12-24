@@ -2,6 +2,7 @@
 using MailSender.Code;
 using MailSender.Data;
 using MailSender.Data.LinqToSQL;
+using MailSender.Data.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -19,15 +20,25 @@ namespace MailSender.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public partial class MainViewModel:ViewModelBase
+    public partial class MainViewModel : ViewModelBase
     {
         private readonly IDataAccessService dataService;
-        private readonly System.Windows.Window MainView  = App.Current.MainWindow;
-        
+        private readonly System.Windows.Window MainView = App.Current.MainWindow;
+        private string userEmail;
+
         public ObservableCollection<Emails> Emails { get; set; }
         public ObservableCollection<Emails> SelectedEmails { get; set; } = new ObservableCollection<Emails>();
         public List<SMTP> SMTPs { get; set; }
         public IMailSendService SendService { get; set; } = new MailSendService();
+        public string UserEmail
+        {
+            get => userEmail; 
+            set
+            {
+                Set( ref userEmail , value);
+            }
+        }
+
         public MainViewModel(IDataAccessService service)
         {
             dataService = service;
