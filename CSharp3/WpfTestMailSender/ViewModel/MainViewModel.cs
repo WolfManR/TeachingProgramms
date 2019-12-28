@@ -120,7 +120,7 @@ namespace WpfTestMailSender.ViewModel
                     EmailSendServiceClass serviceClass = PrepairSendClass(arr,SendType.SendAtOnce);
                     List<string> list = new List<string>();
                     foreach (Email item in Emails) list.Add(item.Value);
-                    serviceClass.SendMails(list);
+                    serviceClass.SendMailsAsync(list);
                 }
                 catch (SendClassFillException ex)
                 {

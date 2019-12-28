@@ -73,7 +73,7 @@ namespace WpfTestMailSender
                 emailSender.Subject = $"Рассылка от {dicDates.Keys.First<DateTime>().ToShortTimeString()} ";
                 List<string> list = new List<string>();
                 emails.ToList().ForEach(x => list.Add(x.Value));
-                emailSender.SendMails(list);
+                emailSender.SendMailsAsync(list);
                 dicDates.Remove(dicDates.Keys.First<DateTime>());
             }
         }//private void Timer_Tick(object sender, EventArgs e)
