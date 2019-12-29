@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Runtime.Remoting.Contexts;
-using System.Threading;
 
 namespace ThreadTestApp
 {
@@ -8,7 +6,11 @@ namespace ThreadTestApp
     {
         static void Main(string[] args)
         {
-            HW5.Work();
+            //HW5.Work();
+            HW6.Work();
+
+
+            Console.ReadKey();
         }
 
         

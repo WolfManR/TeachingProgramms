@@ -10,7 +10,7 @@ namespace ThreadTestApp
         #region Parallel Base
         static class ParallelBase
         {
-            static void Main()
+            static void Base()
             {
                 Parallel.Invoke(ParallelMethod, ParallelMethod, ParallelMethod, () =>
                 {
@@ -32,7 +32,7 @@ namespace ThreadTestApp
         #region Parallel For
         static class ParallelFor
         {
-            static void Main()
+            static void Base()
             {
                 Parallel.For(1, 10, ParallelMethod);
             }
@@ -48,7 +48,7 @@ namespace ThreadTestApp
         #region Parallel ForEach
         static class ParallelForeach
         {
-            static void Main()
+            static void Base()
             {
                 List<int> collection = new List<int>() { 1, 2, 3, 5, 7, 9, 11, 13, 15, 17 };
                 ParallelLoopResult state = Parallel.ForEach(collection, ParallelMethod);

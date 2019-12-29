@@ -9,7 +9,7 @@ namespace ThreadTestApp
         #region Task Base
         static class TaskBase
         {
-            static void Main()
+            static void Base()
             {
                 Task task = new Task(TaskMethod);
                 task.Start();
@@ -28,7 +28,7 @@ namespace ThreadTestApp
         #region Task Factory
         static class TaskFactory
         {
-            static void Main()
+            static void Base()
             {
             Task[] tasksArr = new Task[10];
                 for (int i = 0; i < tasksArr.Length; i++)
@@ -50,7 +50,7 @@ namespace ThreadTestApp
         #region Task With Parameters
         static class TaskWithParameter
         {
-            static void Main()
+            static void Base()
             {
                 int timeSpan = 2000;
                 Task task1 = new Task(() => TaskMethodWithParameters(timeSpan));
@@ -71,7 +71,7 @@ namespace ThreadTestApp
         #region Task and It Result
         static class TaskResult
         {
-            static void Main()
+            static void Base()
             {
                 int x = 3;
                 int y = 2;
@@ -101,7 +101,7 @@ namespace ThreadTestApp
         #region Method that continue after Task
         static class TaskContinue
         {
-            static void Main()
+            static void Base()
             {
                 int x = 3;
                 int y = 2;
