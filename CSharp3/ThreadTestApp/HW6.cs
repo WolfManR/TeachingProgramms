@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
@@ -11,9 +8,9 @@ namespace ThreadTestApp
     {
         static int x = 50; //half size for read purpose
         static int y = 50;
-        static int[,] matrica1= new int[x,y];
-        static int[,] matrica2= new int[x,y];
-        static int[,] resultMatrica = new int[x,y];
+        static int[,] matrica1 = new int[x, y];
+        static int[,] matrica2 = new int[x, y];
+        static int[,] resultMatrica = new int[x, y];
         static Random r = new Random();
         public static void Work()
         {
@@ -74,15 +71,15 @@ namespace ThreadTestApp
                 Console.WriteLine("Put Info files in directory \"input\" that now created");
                 return;
             }
-            FileInfo[] files=directory.GetFiles("*.txt");
+            FileInfo[] files = directory.GetFiles("*.txt");
             if (files.Length == 0)
             {
                 Console.WriteLine("There no files");
-                await Task.Run(()=>
+                await Task.Run(() =>
                 {
                     for (int i = 0; i < 100; i++)
                     {
-                        using (StreamWriter sw= new StreamWriter($"{directory.FullName}/input{i}.txt"))
+                        using (StreamWriter sw = new StreamWriter($"{directory.FullName}/input{i}.txt"))
                         {
                             sw.WriteLine($"{r.Next(1, 3)} {r.NextDouble()} {r.NextDouble()}");
                         }
@@ -92,29 +89,22 @@ namespace ThreadTestApp
             }
             else
             {
-                DirectoryInfo resultDirectory = new DirectoryInfo("Result");
-                if (resultDirectory.Exists && resultDirectory.GetFiles().Length > 0)
-                {
-                    resultDirectory.Delete(true);
-                    resultDirectory.Create();
-                }
-                else resultDirectory.Create();
                 await Task.Run(() =>
                 {
-                    for (int i = 0; i < files.Length; i++)
+                    using (StreamWriter sw = File.CreateText($"result.dat"))
                     {
-                        using (StreamReader sr =files[i].OpenText())
+                        for (int i = 0; i < files.Length; i++)
                         {
-                            using(StreamWriter sw = File.CreateText($"{resultDirectory.FullName}/result{i}.txt"))
+                            using (StreamReader sr = files[i].OpenText())
                             {
-                            var line =sr.ReadLineAsync().Result.Split(' ');
+                                var line = sr.ReadLineAsync().Result.Split(' ');
                                 switch (line[0])
                                 {
                                     case "1":
-                                        sw.WriteLine(double.Parse(line[1]) * double.Parse(line[2]));
+                                        sw.WriteLine($"{i} {double.Parse(line[1]) * double.Parse(line[2])}");
                                         break;
                                     case "2":
-                                        sw.WriteLine(double.Parse(line[1]) / double.Parse(line[2]));
+                                        sw.WriteLine($"{i} {double.Parse(line[1]) / double.Parse(line[2])}");
                                         break;
                                     default:
                                         break;
