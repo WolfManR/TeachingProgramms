@@ -1,4 +1,4 @@
-﻿using MailSender.Data.LinqToSQL;
+﻿using MailSender.Data.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -7,8 +7,7 @@ namespace MailSender.Data
     public interface IDataAccessService
     {
         ObservableCollection<Emails> GetEmails();
-        Dictionary<string, int> GetSMTPDictionary();
-        List<SMTP> GetSMTPList();
+        List<SMTP> GetSMTPs();
         int CreateEmail(Emails email);
     }
 }

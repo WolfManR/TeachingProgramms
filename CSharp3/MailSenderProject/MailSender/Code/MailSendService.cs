@@ -4,7 +4,7 @@ using System.Net.Mail;
 
 namespace MailSender.Code
 {
-    public class MailSendService : IMailSendService
+    public class MailSendService
     {
         public string SenderEmail { get; set; }
         public string SenderPassword { get; set; }
@@ -12,8 +12,6 @@ namespace MailSender.Code
         public int SMTPPort { get; set; }
         public bool EnableSSL { get; set; } = true;
         public bool IsBodyHTML { get; set; } = false;
-
-        public MailSendService() { }
 
         // изменить на async
         public void SendMail(string title, string letter, params string[] emailsToSend)

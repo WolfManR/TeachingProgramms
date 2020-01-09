@@ -1,7 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using MailSender.Code;
 using MailSender.Data;
-using MailSender.Data.LinqToSQL;
 using MailSender.Data.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,27 +22,26 @@ namespace MailSender.ViewModel
     public partial class MainViewModel : ViewModelBase
     {
         private readonly IDataAccessService dataService;
-        private readonly System.Windows.Window MainView = App.Current.MainWindow;
+        private MailSendService sendService=null;
         private string userEmail;
 
-        public ObservableCollection<Emails> Emails { get; set; }
-        public ObservableCollection<Emails> SelectedEmails { get; set; } = new ObservableCollection<Emails>();
-        public List<SMTP> SMTPs { get; set; }
-        public IMailSendService SendService { get; set; } = new MailSendService();
-        public string UserEmail
-        {
-            get => userEmail; 
-            set
-            {
-                Set( ref userEmail , value);
-            }
-        }
+        public string UserEmail { get => userEmail; set => Set(ref userEmail, value); }
+        public List<SMTP> SMTPs { get; }
+        
+        public ObservableCollection<Emails> Emails { get; }
+        public ObservableCollection<Emails> SelectedEmails { get; } = new ObservableCollection<Emails>();
+
+        public ObservableCollection<SchedulerTask> SchedulerTasks { get; }
+
+        public Scheduler Scheduler { get; }
+        public MailSendService SendService => sendService??(sendService = new MailSendService()); 
+        public ObservableCollection<Date> Dates { get; } = new ObservableCollection<Date>();
 
         public MainViewModel(IDataAccessService service)
         {
             dataService = service;
             Emails = dataService.GetEmails();
-            SMTPs = dataService.GetSMTPList();
+            SMTPs = dataService.GetSMTPs();
         }
     }
 }

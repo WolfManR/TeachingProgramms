@@ -48,8 +48,6 @@
       <HintPath>..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -57,7 +55,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -71,19 +68,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Code\Encrypter.cs" />
+    <Compile Include="Code\MessageDialog.cs" />
+    <Compile Include="Code\Scheduler.cs" />
+    <Compile Include="Data\DataContext.cs" />
     <Compile Include="Data\Models\Date.cs" />
-    <Compile Include="Code\IMailSendService.cs" />
     <Compile Include="Code\MailSendService.cs" />
-    <Compile Include="Code\SchedulerService.cs" />
+    <Compile Include="Data\Models\SchedulerTask.cs" />
     <Compile Include="Code\Success.cs" />
     <Compile Include="Data\DataAccessService.cs" />
     <Compile Include="Data\IDataAccessService.cs" />
-    <Compile Include="Data\LinqToSQL\Emails.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Emails.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Models\Mail.cs" />
+    <Compile Include="Data\Models\SMTP.cs" />
+    <Compile Include="Data\Models\Emails.cs" />
+    <Compile Include="Data\Models\TaskAndEmails.cs" />
     <Compile Include="Data\Models\User.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainViewModelCommands.cs" />
@@ -161,14 +158,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Data\LinqToSQL\Emails.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Emails.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Data\LinqToSQL\Emails.dbml.layout">
-      <DependentUpon>Emails.dbml</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
