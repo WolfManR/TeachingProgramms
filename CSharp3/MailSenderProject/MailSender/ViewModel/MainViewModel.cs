@@ -22,19 +22,18 @@ namespace MailSender.ViewModel
     public partial class MainViewModel : ViewModelBase
     {
         private readonly IDataAccessService dataService;
-        private MailSendService sendService=null;
+        private readonly Scheduler scheduler;
+        private MailSendService sendService;
         private string userEmail;
+        private SMTP currentSMTP;
 
         public string UserEmail { get => userEmail; set => Set(ref userEmail, value); }
+        public SMTP CurrentSMTP { get => currentSMTP; set => Set(ref currentSMTP, value); }
         public List<SMTP> SMTPs { get; }
-        
+
         public ObservableCollection<Emails> Emails { get; }
         public ObservableCollection<Emails> SelectedEmails { get; } = new ObservableCollection<Emails>();
-
         public ObservableCollection<SchedulerTask> SchedulerTasks { get; }
-
-        public Scheduler Scheduler { get; }
-        public MailSendService SendService => sendService??(sendService = new MailSendService()); 
         public ObservableCollection<Date> Dates { get; } = new ObservableCollection<Date>();
 
         public MainViewModel(IDataAccessService service)

@@ -15,11 +15,15 @@ namespace MailSender.Data
         }
 
         public List<SMTP> GetSMTPs() => context.SMTPs;
-        public int CreateEmail(Emails email)
+        public int CreateEmail(string email,string name)
         {
-            //context.Emails.InsertOnSubmit(email);
-            //context.SubmitChanges();
-            return email.Id;
+            int id = context.Emails.Count;
+            context.Emails.Add(new Emails { Id = id, Email = email, Name = name });
+            return id;
         }
+
+        public ObservableCollection<SchedulerTask> GetTasks() => new ObservableCollection<SchedulerTask>(context.Tasks);
+
+        public ObservableCollection<Date> GetDates() => new ObservableCollection<Date>(context.Dates);
     }
 }

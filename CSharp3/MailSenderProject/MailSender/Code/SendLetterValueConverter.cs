@@ -7,7 +7,7 @@ using System.Windows.Documents;
 
 namespace MailSender.Code
 {
-    public class MultiValueConverter : IMultiValueConverter
+    public class SendLetterValueConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

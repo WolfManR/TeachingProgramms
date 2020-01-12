@@ -15,15 +15,15 @@ namespace MailSender.ViewModel
             (param) => {
                 var (doc, subject, password, smtp) = ((FlowDocument,string,string,SMTP))param;
 
-                SendService.SenderEmail = UserEmail;
-                SendService.SenderPassword = password;
+                sendService.SenderEmail = UserEmail;
+                sendService.SenderPassword = password;
 
-                SendService.SMTPHost = smtp.Host;
-                SendService.SMTPPort = smtp.Port;
-                SendService.EnableSSL = smtp.EnableSSL;
+                sendService.SMTPHost = smtp.Host;
+                sendService.SMTPPort = smtp.Port;
+                sendService.EnableSSL = smtp.EnableSSL;
                 try
                 {
-                    SendService.SendMail(subject, new TextRange(doc.ContentStart,doc.ContentEnd).Text, SelectedEmails.Select(x => x.Email).ToArray());
+                    sendService.SendMail(subject, new TextRange(doc.ContentStart,doc.ContentEnd).Text, SelectedEmails.Select(x => x.Email).ToArray());
                 }
                 catch (Exception ex)
                 {
@@ -39,12 +39,12 @@ namespace MailSender.ViewModel
         public RelayCommand<object> AddTaskToSchedulerCmd => addTaskToSchedulerCmd ?? (addTaskToSchedulerCmd = new RelayCommand<object>(
             (param) => {
                 var (doc, subject, password, smtp) = ((FlowDocument, string, string, SMTP))param;
-                Scheduler.AddTask(new SchedulerTask
+                scheduler.AddTask(new SchedulerTask
                 {
-                    From=new User { Email=UserEmail,Password=password,SmtpSettings=smtp},
-                    Subject=subject,
-                    Letter=doc,
-                    To=Emails
+                    From=new User { Email= UserEmail, Password = password, SmtpSettings = smtp },
+                    Subject= subject,
+                    Letter= doc,
+                    To= Emails
                 }, Dates.ToList());
             },
             param=>param!=null&&Dates.Count>0));
@@ -68,6 +68,17 @@ namespace MailSender.ViewModel
                 SelectedEmails.Remove(param);
             },
             param => param != null && param is Emails));
+        #endregion
+
+        #region AddNewEmailCmd
+        private RelayCommand<object> addNewEmailCmd = null;
+        public RelayCommand<object> AddNewEmailCmd => addNewEmailCmd ?? (addNewEmailCmd = new RelayCommand<object>(
+            (param) =>
+            {
+                var (email, name) = ((string,string))param;
+                dataService.CreateEmail(email, name);
+                dataService.GetEmails().Except(SelectedEmails.Union(Emails)).ToList().ForEach(x => Emails.Add(x));
+            }));
         #endregion
     }
 }

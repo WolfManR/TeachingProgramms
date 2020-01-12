@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
-        
+        xmlns:code="clr-namespace:MailSender.Code"
         DataContext="{Binding Main,Source={StaticResource Locator}}"
         xmlns:MyCont="clr-namespace:MyControlsLibrary;assembly=MyControlsLibrary"
         mc:Ignorable="d"
@@ -17,6 +17,8 @@
                 <ResourceDictionary Source="/Resources/Modern/Templates/ControlsTemplates.xaml"/>
                 <ResourceDictionary>
                     <BooleanToVisibilityConverter x:Key="boolToVis"/>
+                    <code:NewEmailsValueConverter x:Key="newEmailConv"/>
+                    <code:SendLetterValueConverter x:Key="sendLetterConv"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -123,7 +125,7 @@
                         </StackPanel>
 
                         <StackPanel Height="auto" VerticalAlignment="Top" Grid.Column="1" Orientation="Horizontal" Margin="4,2">
-                            <ComboBox x:Name="cmbSMTPTemplates" Width="80" ItemsSource="{Binding SMTPs}" SelectedIndex="-1">
+                            <ComboBox x:Name="cmbSMTPTemplates" Width="80" ItemsSource="{Binding SMTPs}" SelectedItem="{Binding CurrentSMTP,Mode=OneWayToSource}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding For}"/>
@@ -146,18 +148,18 @@
                         </Grid.RowDefinitions>
 
                         <Label Content="SMTP" FontSize="20"/>
-                        <StackPanel Grid.Row="1" DataContext="{Binding ElementName=cmbSMTPTemplates,Path=SelectedItem}">
+                        <StackPanel Grid.Row="1" DataContext="{Binding CurrentSMTP}">
 
                             <StackPanel>
                                 <Label Content="Host"/>
-                                <TextBox Name="tbHost" Text="{Binding Host,Mode=OneWay}"/>
+                                <TextBox Name="tbHost" Text="{Binding Host}"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
 
                                 <StackPanel>
                                     <Label Content="Port"/>
-                                    <TextBox Name="tbPort" MaxLength="6" Width="60" MaxLines="1" Text="{Binding Port,Mode=OneWay}"/>
+                                    <TextBox Name="tbPort" MaxLength="6" Width="60" MaxLines="1" Text="{Binding Port}"/>
                                 </StackPanel>
 
                                 <CheckBox Name="cbSSL" Content="SSL" VerticalAlignment="Bottom" Margin="10,2,4,8" IsChecked="{Binding EnableSSL}"/>
@@ -232,6 +234,29 @@
                         </Grid.RowDefinitions>
 
                         <!--#region Emails Controls -->
+                        <Grid HorizontalAlignment="Right" Margin="5" Background="WhiteSmoke">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition MinWidth="140"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label Content="Email" Margin="0,0,8,0"/>
+                            <TextBox x:Name="tbNewEmail" Grid.Column="1"/>
+                            <Label Grid.Row="1" Content="Имя"/>
+                            <TextBox x:Name="tbNewName" Grid.Row="1" Grid.Column="1"/>
+                            <Button Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Command="{Binding AddNewEmailCmd}">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource newEmailConv}">
+                                        <Binding ElementName="tbNewEmail" Path="Text"/>
+                                        <Binding ElementName="tbNewName" Path="Text"/>
+                                    </MultiBinding>
+                                </Button.CommandParameter>Add</Button>
+                        </Grid>
                         <!--#endregion-->
 
                         <!--#region Emails Main View -->

@@ -8,6 +8,8 @@ namespace MailSender.Data
     {
         ObservableCollection<Emails> GetEmails();
         List<SMTP> GetSMTPs();
-        int CreateEmail(Emails email);
+        ObservableCollection<SchedulerTask> GetTasks();
+        ObservableCollection<Date> GetDates();
+        int CreateEmail(string email,string name);
     }
 }
