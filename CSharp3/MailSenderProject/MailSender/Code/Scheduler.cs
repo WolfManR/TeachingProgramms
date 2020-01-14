@@ -9,13 +9,11 @@ namespace MailSender.Code
     public class Scheduler
     {
         public MailSendService SendService { get; set; }
-        public ObservableCollection<SchedulerTask> Tasks { get; set; }
         public ObservableCollection<Date> Dates { get; set; }
         public int Timer { get; set; }
 
-        public void AddTask(SchedulerTask task,List<Date> dates) 
+        public void AddTask(List<Date> dates) 
         {
-            Tasks.Add(task);
             dates.ForEach(x => Dates.Add(x));
         }
 

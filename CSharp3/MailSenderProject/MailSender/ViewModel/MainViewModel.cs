@@ -41,6 +41,7 @@ namespace MailSender.ViewModel
             dataService = service;
             Emails = dataService.GetEmails();
             SMTPs = dataService.GetSMTPs();
+            SchedulerTasks = dataService.GetTasks();
         }
     }
 }

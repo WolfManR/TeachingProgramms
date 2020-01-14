@@ -24,6 +24,11 @@ namespace MailSender.Data
 
         public ObservableCollection<SchedulerTask> GetTasks() => new ObservableCollection<SchedulerTask>(context.Tasks);
 
-        public ObservableCollection<Date> GetDates() => new ObservableCollection<Date>(context.Dates);
+        public ObservableCollection<Date> GetDates() 
+        {
+            var list = context.Dates;
+            list.Sort((x, y) => x.Time.CompareTo(y.Time));
+            return new ObservableCollection<Date>(list); 
+        }
     }
 }
