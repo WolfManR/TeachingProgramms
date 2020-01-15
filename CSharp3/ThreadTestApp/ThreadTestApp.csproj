@@ -49,7 +49,7 @@
     <Compile Include="ParallelTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TastTest.cs" />
+    <Compile Include="TaskTest.cs" />
     <Compile Include="ThreadTest.cs" />
   </ItemGroup>
   <ItemGroup>
