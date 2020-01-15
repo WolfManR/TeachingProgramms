@@ -1,7 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using MailSender.Data.LinqToSQL;
-using MailSender.Views;
+using MailSender.Code;
+using MailSender.Data.Models;
 using System;
+using System.Linq;
+using System.Windows.Documents;
 
 namespace MailSender.ViewModel
 {
@@ -11,31 +13,41 @@ namespace MailSender.ViewModel
         private RelayCommand<object> sendMailCmd = null;
         public RelayCommand<object> SendMailCmd => sendMailCmd ?? (sendMailCmd = new RelayCommand<object>(
             (param) => {
-                var bindings = (object[])param;
-                SendService.SenderEmail = (string)bindings[0];
-                SendService.SenderPassword = ((System.Windows.Controls.PasswordBox)bindings[1]).Password;
-                SendService.SMTPHost = (string)bindings[2];
-                SendService.SMTPPort = int.Parse(bindings[3].ToString());
-                SendService.EnableSSL = (bool)bindings[4];
-                string[] emails = new string[SelectedEmails.Count];
-                for (int i = 0; i < SelectedEmails.Count; i++)
-                {
-                    emails[i] = SelectedEmails[i].Email;
-                }
+                var (doc, subject, password, smtp) = ((FlowDocument,string,string,SMTP))param;
+
+                sendService.SenderEmail = UserEmail;
+                sendService.SenderPassword = password;
+
+                sendService.SMTPHost = smtp.Host;
+                sendService.SMTPPort = smtp.Port;
+                sendService.EnableSSL = smtp.EnableSSL;
                 try
                 {
-                    // Find way to take Password correctly
-                    SendService.SendMail((string)bindings[5], (string)bindings[6], emails);
+                    sendService.SendMail(subject, new TextRange(doc.ContentStart,doc.ContentEnd).Text, SelectedEmails.Select(x => x.Email).ToArray());
                 }
                 catch (Exception ex)
                 {
-                    new ErrorMessage("Невозможно отправить письмо " + "\n" + ex.ToString()) { Owner = MainView??null, Title = "Error" }.ShowDialog();
+                    MessageDialog.ShowDialog(MessageDialogType.Error,"Невозможно отправить письмо " + "\n" + ex.ToString(),"Error");
                 }
-
-                new SendEndWindow() { Owner = MainView ?? null }.ShowDialog();
-
+                MessageDialog.ShowDialog(MessageDialogType.WorkDone);
             },
-            param => param != null && SelectedEmails.Count != 0));
+            param => param != null && SelectedEmails.Count != 0 && Dates.Count==0));
+        #endregion
+
+        #region AddTaskToSchedulerCmd
+        private RelayCommand<object> addTaskToSchedulerCmd = null;
+        public RelayCommand<object> AddTaskToSchedulerCmd => addTaskToSchedulerCmd ?? (addTaskToSchedulerCmd = new RelayCommand<object>(
+            (param) => {
+                var (doc, subject, password, smtp) = ((FlowDocument, string, string, SMTP))param;
+                scheduler.AddTask(new SchedulerTask
+                {
+                    From=new User { Email= UserEmail, Password = password, SmtpSettings = smtp },
+                    Subject= subject,
+                    Letter= doc,
+                    To= Emails
+                }, Dates.ToList());
+            },
+            param=>param!=null&&Dates.Count>0));
         #endregion
 
         #region addToSelectedCmd
@@ -56,6 +68,17 @@ namespace MailSender.ViewModel
                 SelectedEmails.Remove(param);
             },
             param => param != null && param is Emails));
+        #endregion
+
+        #region AddNewEmailCmd
+        private RelayCommand<object> addNewEmailCmd = null;
+        public RelayCommand<object> AddNewEmailCmd => addNewEmailCmd ?? (addNewEmailCmd = new RelayCommand<object>(
+            (param) =>
+            {
+                var (email, name) = ((string,string))param;
+                dataService.CreateEmail(email, name);
+                dataService.GetEmails().Except(SelectedEmails.Union(Emails)).ToList().ForEach(x => Emails.Add(x));
+            }));
         #endregion
     }
 }

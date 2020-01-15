@@ -45,8 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HW5.cs" />
+    <Compile Include="HW6.cs" />
+    <Compile Include="ParallelTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TastTest.cs" />
+    <Compile Include="ThreadTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

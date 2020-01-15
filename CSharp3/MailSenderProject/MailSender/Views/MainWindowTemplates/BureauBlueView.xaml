@@ -18,7 +18,7 @@
 
 
                 <ResourceDictionary>
-                    <code:MultiValueConverter x:Key="MultiConv"/>
+                    <code:SendLetterValueConverter x:Key="MultiConv"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

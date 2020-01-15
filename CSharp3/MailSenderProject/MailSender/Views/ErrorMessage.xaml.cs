@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace MailSender.Views
 {
@@ -20,10 +8,12 @@ namespace MailSender.Views
     public partial class ErrorMessage : Window
     {
         public string Msg { get; }
-        public ErrorMessage(string msg)
+        public string TitleIcon { get; }
+        public ErrorMessage(string msg,string titleIcon=null)
         {
             InitializeComponent();
             Msg = msg;
+            TitleIcon = titleIcon;
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)

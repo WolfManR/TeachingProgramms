@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
-        
+        xmlns:code="clr-namespace:MailSender.Code"
         DataContext="{Binding Main,Source={StaticResource Locator}}"
         xmlns:MyCont="clr-namespace:MyControlsLibrary;assembly=MyControlsLibrary"
         mc:Ignorable="d"
@@ -17,6 +17,8 @@
                 <ResourceDictionary Source="/Resources/Modern/Templates/ControlsTemplates.xaml"/>
                 <ResourceDictionary>
                     <BooleanToVisibilityConverter x:Key="boolToVis"/>
+                    <code:NewEmailsValueConverter x:Key="newEmailConv"/>
+                    <code:SendLetterValueConverter x:Key="sendLetterConv"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -69,8 +71,13 @@
             <!--#endregion-->
 
             <!--#region Bottom Controls -->
-            <Grid Grid.Row="2" Margin="2,2,2,4">
-                <Button Height="40" Width="200" Content="Отправить"/>
+            <Grid Grid.Row="2" Margin="2,2,2,4" Height="40" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnSendAtOnce" Width="200" Content="Отправить" Command="{Binding SendMailCmd}" CommandParameter="{x:Null}"/>
+                <Button x:Name="btnSendLater" Grid.Column="1" Width="200" Content="Отложенная отправка" Visibility="{Binding RelativeSource={RelativeSource Self},Path=IsEnabled,Converter={StaticResource boolToVis}}" Command="{Binding AddTaskToSchedulerCmd}" CommandParameter="{x:Null}"/>
             </Grid>
             <!--#endregion-->
         </Grid>
@@ -91,66 +98,78 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Border x:Name="LoginForm" Margin="0,-140,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{DynamicResource BorderStyle}" Height="80" Width="270">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Margin="4,2">
-                        <StackPanel>
-                            <Label Content="Email"/>
-                            <TextBox x:Name="tbUserEmail" Text="{Binding UserEmail,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBlock Text="Password"/>
-                            <PasswordBox x:Name="psbUserPassword"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel Height="auto" VerticalAlignment="Top" Grid.Column="1" Orientation="Horizontal" Margin="4,2">
-                        <ComboBox x:Name="cmbSMTPTemplates" Width="80" ItemsSource="{Binding SMTPs}" SelectedIndex="-1">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding For}"/>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <Button x:Name="btnSMTPSettings" FontFamily="Segoe MDL2 Assets" Click="btnSMTPSettings_Click">&#xE713;</Button>
-                    </StackPanel>
-                </Grid>
 
-            </Border>
+            <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-        </Grid>
-        <Popup Name="SMTP" AllowsTransparency="True" PlacementTarget="{Binding ElementName=btnSMTPSettings}" Placement="Right" HorizontalOffset="4" PopupAnimation="Scroll" StaysOpen="False" >
-            <Border Padding="8,0,8,4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" Style="{DynamicResource BorderStyle}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <!--#region Login Main Form -->
+                <Border x:Name="LoginForm" Margin="0,-140,0,0" VerticalAlignment="Top" Style="{DynamicResource BorderStyle}" Height="80">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="120"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                    <Label Content="SMTP" FontSize="20"/>
-                    <StackPanel Grid.Row="1" DataContext="{Binding ElementName=cmbSMTPTemplates,Path=SelectedItem}">
-
-                        <StackPanel>
-                            <Label Content="Host"/>
-                            <TextBox Name="tbHost" Text="{Binding Host,Mode=OneWay}"/>
+                        <StackPanel Margin="4,2">
+                            <StackPanel>
+                                <Label Content="Email"/>
+                                <TextBox x:Name="tbUserEmail" Text="{Binding UserEmail,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Password"/>
+                                <PasswordBox x:Name="psbUserPassword"/>
+                            </StackPanel>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Height="auto" VerticalAlignment="Top" Grid.Column="1" Orientation="Horizontal" Margin="4,2">
+                            <ComboBox x:Name="cmbSMTPTemplates" Width="80" ItemsSource="{Binding SMTPs}" SelectedItem="{Binding CurrentSMTP,Mode=OneWayToSource}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding For}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button x:Name="btnSMTPSettings" FontFamily="Segoe MDL2 Assets" Click="btnSMTPSettings_Click">&#xE713;</Button>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+                <!--#endregion-->
+
+                <!--#region STMP Settings -->
+                <Border x:Name="SMTPSettings" Grid.Column="1" Margin="0,-240,0,0" Padding="8,0,8,4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" Style="{DynamicResource BorderStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="SMTP" FontSize="20"/>
+                        <StackPanel Grid.Row="1" DataContext="{Binding CurrentSMTP}">
 
                             <StackPanel>
-                                <Label Content="Port"/>
-                                <TextBox Name="tbPort" MaxLength="6" Width="60" MaxLines="1" Text="{Binding Port,Mode=OneWay}"/>
+                                <Label Content="Host"/>
+                                <TextBox Name="tbHost" Text="{Binding Host}"/>
                             </StackPanel>
 
-                            <CheckBox Name="cbSSL" Content="SSL" VerticalAlignment="Bottom" Margin="10,2,4,8" IsChecked="{Binding EnableSSL}"/>
+                            <StackPanel Orientation="Horizontal">
+
+                                <StackPanel>
+                                    <Label Content="Port"/>
+                                    <TextBox Name="tbPort" MaxLength="6" Width="60" MaxLines="1" Text="{Binding Port}"/>
+                                </StackPanel>
+
+                                <CheckBox Name="cbSSL" Content="SSL" VerticalAlignment="Bottom" Margin="10,2,4,8" IsChecked="{Binding EnableSSL}"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </Grid>
-            </Border>
-        </Popup>
+                    </Grid>
+                </Border>
+                <!--#endregion-->
+            </Grid>
+        </Grid>
         <!--#endregion-->
 
         <!--#region Other Settings View -->
@@ -190,11 +209,11 @@
             <!--#endregion-->
 
             <!--#region Control Panels -->
-            <Border x:Name="bControls" Margin="0,-800,0,0" Style="{DynamicResource BorderStyle}" HorizontalAlignment="Right">
+            <Border x:Name="bControls"  MinWidth="600" MinHeight="230" Margin="0,-800,0,0" Style="{DynamicResource BorderStyle}" HorizontalAlignment="Right">
                 <Grid>
 
-                    <!--#region Schedulers Control -->
-                    <Grid x:Name="gSchedulers" Width="600" Height="230" Margin="4" Visibility="Collapsed">
+                    <!--#region Dates Control -->
+                    <Grid x:Name="gDates" Margin="4" Visibility="Collapsed">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition/>
@@ -203,18 +222,41 @@
                             <Calendar/>
                             <TextBox/>
                         </StackPanel>
-                        <ListView x:Name="lvShcedulers" Grid.Column="1" Margin="4,0"/>
+                        <ListView x:Name="lvDates" Grid.Column="1" Margin="4,0"/>
                     </Grid>
                     <!--#endregion-->
 
                     <!--#region Emails Control -->
-                    <Grid x:Name="gEmails" Width="600" Height="230" Margin="4" Visibility="Visible">
+                    <Grid x:Name="gEmails" Margin="4" Visibility="Visible">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
                         <!--#region Emails Controls -->
+                        <Grid HorizontalAlignment="Right" Margin="5" Background="WhiteSmoke">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition MinWidth="140"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label Content="Email" Margin="0,0,8,0"/>
+                            <TextBox x:Name="tbNewEmail" Grid.Column="1"/>
+                            <Label Grid.Row="1" Content="Имя"/>
+                            <TextBox x:Name="tbNewName" Grid.Row="1" Grid.Column="1"/>
+                            <Button Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Command="{Binding AddNewEmailCmd}">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource newEmailConv}">
+                                        <Binding ElementName="tbNewEmail" Path="Text"/>
+                                        <Binding ElementName="tbNewName" Path="Text"/>
+                                    </MultiBinding>
+                                </Button.CommandParameter>Add</Button>
+                        </Grid>
                         <!--#endregion-->
 
                         <!--#region Emails Main View -->
@@ -258,14 +300,14 @@
                                 </ListView.ItemTemplate>
                             </ListView>
                             <!--#endregion-->
-                            
+
                             <!--#region Controls -->
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                
-                                
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="False">
+                                <Button Content="&lt;&lt;"/>
+                                <Button Content="&gt;&gt;"/>
                             </StackPanel>
                             <!--#endregion-->
-                            
+
                             <!--#region Full List -->
                             <ListView x:Name="lvEmails" Grid.Column="2" ItemsSource="{Binding Emails}">
                                 <ListView.ItemTemplate>

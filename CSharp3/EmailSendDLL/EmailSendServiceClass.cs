@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace EmailSendDLL
 {
@@ -29,8 +30,9 @@ namespace EmailSendDLL
             this.strSubject = subject;
         }
 
-        private void SendMail(object mail) // Отправка email конкретному адресату
+        private Task SendMail(object mail) // Отправка email конкретному адресату
         {
+            return Task.Run(() => { 
             using (MailMessage mm = new MailMessage(strLogin, (string)mail))
             {
                 mm.Subject = strSubject;
@@ -50,14 +52,14 @@ namespace EmailSendDLL
                     throw;
                 }
             }
-        }//private void SendMail(string mail, string name)
-        public void SendMails(IEnumerable<string> emails)
+            });
+        }
+        public async void SendMailsAsync(IEnumerable<string> emails)
         {
             foreach (object email in emails)
             {
-                Thread thread = new Thread(new ParameterizedThreadStart(SendMail));
-                thread.Start(email);
+                await SendMail(email);
             }
         }
-    }  //private void SendMail(string mail, string name)
+    }
 }

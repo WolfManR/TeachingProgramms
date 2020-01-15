@@ -1,37 +1,34 @@
-﻿using MailSender.Data.LinqToSQL;
+﻿using MailSender.Data.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace MailSender.Data
 {
     public class DataAccessService : IDataAccessService
     {
-        readonly EmailsDataContext context= new EmailsDataContext();
+        readonly DataContext context= new DataContext();
 
 
         public ObservableCollection<Emails> GetEmails()
         {
-            ObservableCollection<Emails> emails = new ObservableCollection<Emails>();
-            foreach (var item in context.Emails)
-            {
-                emails.Add(item);
-            }
-            return emails;
+            return new ObservableCollection<Emails>(context.Emails);
         }
 
-        public Dictionary<string, int> GetSMTPDictionary()
+        public List<SMTP> GetSMTPs() => context.SMTPs;
+        public int CreateEmail(string email,string name)
         {
-            Dictionary<string, int> pairs = new Dictionary<string, int>();
-            (from c in context.SMTP select c).ToList().ForEach(p => pairs.Add(p.Host, p.Port));
-            return pairs;
+            int id = context.Emails.Count;
+            context.Emails.Add(new Emails { Id = id, Email = email, Name = name });
+            return id;
         }
-        public List<SMTP> GetSMTPList() => (from c in context.SMTP select c).ToList();
-        public int CreateEmail(Emails email)
+
+        public ObservableCollection<SchedulerTask> GetTasks() => new ObservableCollection<SchedulerTask>(context.Tasks);
+
+        public ObservableCollection<Date> GetDates() 
         {
-            context.Emails.InsertOnSubmit(email);
-            context.SubmitChanges();
-            return email.Id;
+            var list = context.Dates;
+            list.Sort((x, y) => x.Time.CompareTo(y.Time));
+            return new ObservableCollection<Date>(list); 
         }
     }
 }

@@ -1,21 +1,23 @@
-﻿using MailSender.Data.LinqToSQL;
-using MailSender.Data.Models;
+﻿using MailSender.Data.Models;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace MailSender.Code
 {
-    public class SchedulerService
+    public class Scheduler
     {
-        public User From { get; set; }
-        public Mail Letter { get; set; }
-        public ObservableCollection<Emails> To { get; set; }
+        public MailSendService SendService { get; set; }
         public ObservableCollection<Date> Dates { get; set; }
-        public bool Complete { get; set; }
+        public int Timer { get; set; }
 
+        public void AddTask(List<Date> dates) 
+        {
+            dates.ForEach(x => Dates.Add(x));
+        }
 
-        public void CheckDates(DateTime now,IMailSendService sendService)
+        public void CheckDates(DateTime now)
         {
             foreach (var item in Dates)
             {
@@ -23,18 +25,18 @@ namespace MailSender.Code
                 {
                     case Success.Complete:
                         continue;
-                    case Success.NotSend when item.Time==now: 
-                        sendService.SenderEmail = From.Email;
-                        sendService.SenderPassword = From.Password;
+                    case Success.NotSend when item.Time == now:
+                        SendService.SenderEmail = item.Task.From.Email;
+                        SendService.SenderPassword = item.Task.From.Password;
 
-                        sendService.SMTPHost = From.SmtpSettings.Host;
-                        sendService.SMTPPort = From.SmtpSettings.Port;
-                        sendService.EnableSSL = From.SmtpSettings.EnableSSL;
+                        SendService.SMTPHost = item.Task.From.SmtpSettings.Host;
+                        SendService.SMTPPort = item.Task.From.SmtpSettings.Port;
+                        SendService.EnableSSL = item.Task.From.SmtpSettings.EnableSSL;
 
-                        sendService.IsBodyHTML = false;
+                        SendService.IsBodyHTML = false;
                         try
                         {
-                            sendService.SendMail(Letter.Subject, Letter.GetLetterAsString(), To.Select(x => x.Email).ToArray());
+                            SendService.SendMail(item.Task.Subject, item.Task.GetLetterAsString(), item.Task.To.Select(x => x.Email).ToArray());
                         }
                         catch (Exception)
                         {

@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label FontFamily="Segoe MDL2 Assets"  FontSize="26" VerticalAlignment="Center" Margin="4,0,8,0">&#xE783;</Label>
+            <Label FontFamily="Segoe MDL2 Assets" Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}},Path=TitleIcon}" FontSize="26" VerticalAlignment="Center" Margin="4,0,8,0"/>
             <Label Grid.Column="1" Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}},Path=Title}" FontSize="22" VerticalAlignment="Center"/>
         </Grid>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
