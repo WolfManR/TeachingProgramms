@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="37882bdcfd5e4ac99b02d96b4b94a4fb" Name="Diagram1" >
+        <EntityTypeShape EntityType="EmailsModel.Email" Width="1.5" PointX="2.75" PointY="2" />
+        <EntityTypeShape EntityType="EmailsModel.Smtp" Width="1.5" PointX="2.125" PointY="5.125" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
