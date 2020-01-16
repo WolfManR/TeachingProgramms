@@ -56,6 +56,7 @@ namespace WpfTestMailSender.ViewModel
             OpenLetterEditCommand = new RelayCommand<DateTime>(GetLetter);
             SendAtOnceCommand = new RelayCommand<object>(SendAtOnce);
             SendSchedulerCommand = new RelayCommand<object>(SendScheduler);
+            DeleteEmailCommand = new RelayCommand<Email>(DeleteEmail);
         }
 
 
@@ -112,6 +113,7 @@ namespace WpfTestMailSender.ViewModel
         public RelayCommand<DateTime> OpenLetterEditCommand { get; set; }
         public RelayCommand<object> SendAtOnceCommand { get; set; }
         public RelayCommand<object> SendSchedulerCommand { get; set; }
+        public RelayCommand<Email> DeleteEmailCommand { get; set; }
         void SendAtOnce(object array)
         {
             if (array is object[] arr)
@@ -219,11 +221,25 @@ namespace WpfTestMailSender.ViewModel
         }
         void SaveEmail(Email email)
         {
+            if (serviceProxy.IsEmailExist(email))
+            {
+                serviceProxy.UpdateEmail(email);
+                return;
+            }
+
             EmailInfo.Id = serviceProxy.AddEmail(email);
             if (EmailInfo.Id != 0)
             {
                 Emails.Add(EmailInfo);
                 RaisePropertyChanged(nameof(EmailInfo));
+            }
+        }
+        void DeleteEmail(Email email)
+        {
+            if (email != null)
+            {
+                serviceProxy.DeleteEmail(email);
+                GetEmails();
             }
         }
     }

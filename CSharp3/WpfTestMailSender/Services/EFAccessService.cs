@@ -10,6 +10,7 @@ namespace WpfTestMailSender.Services
     {
         ObservableCollection<Common.Email> GetEmails();
         Dictionary<string, int> GetSmtps();
+        bool IsEmailExist(Email email);
         int AddEmail(Common.Email email);
         int UpdateEmail(Common.Email email);
         int DeleteEmail(Common.Email email);
@@ -28,6 +29,11 @@ namespace WpfTestMailSender.Services
             Dictionary<string, int> pairs = new Dictionary<string, int>();
             (from c in context.Smtps select c).ToList().ForEach(p => pairs.Add(p.Host, p.Port));
             return pairs;
+        }
+        public bool IsEmailExist(Email email)
+        {
+            if (context.Emails.Find(email.Id) != null) return true;
+            return false;
         }
         public int AddEmail(Common.Email email)
         {
