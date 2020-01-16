@@ -1,3 +1,4 @@
+using Common;
 using EmailSendDLL;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -41,7 +42,7 @@ namespace WpfTestMailSender.ViewModel
             ////}
         }
         [PreferredConstructor]
-        public MainViewModel(IDataAccessService servProxy)
+        public MainViewModel(IEFAccessService servProxy)
         {
             serviceProxy = servProxy;
             Emails = new ObservableCollection<Email>();
@@ -59,7 +60,7 @@ namespace WpfTestMailSender.ViewModel
 
 
         ObservableCollection<Email> emails;
-        IDataAccessService serviceProxy;
+        IEFAccessService serviceProxy;
         private Email emailInfo;
         private string name;
 
@@ -218,7 +219,7 @@ namespace WpfTestMailSender.ViewModel
         }
         void SaveEmail(Email email)
         {
-            EmailInfo.Id = serviceProxy.CreateEmail(email);
+            EmailInfo.Id = serviceProxy.AddEmail(email);
             if (EmailInfo.Id != 0)
             {
                 Emails.Add(EmailInfo);

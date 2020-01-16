@@ -43,7 +43,7 @@ namespace WpfTestMailSender.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<IDataAccessService, DataAccessService>();
+            SimpleIoc.Default.Register<IEFAccessService, EFAccessService>();
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
