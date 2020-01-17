@@ -21,15 +21,15 @@ namespace CinemaManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        CinemaEntitiesContainer context = new CinemaEntitiesContainer();
+        DataAccess dataAccess = new DataAccess(new CinemaEntitiesContainer());
         public ObservableCollection<FilmShow> Films { get; set; }
         public ObservableCollection<Order> Orders { get; set; }
         public FilmShow CurrentFilmShow { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            Films = new ObservableCollection<FilmShow>(context.FilmShows);
-            Orders = new ObservableCollection<Order>(context.Orders);
+            Films = new ObservableCollection<FilmShow>(dataAccess.GetFilmShows());
+            Orders = new ObservableCollection<Order>(dataAccess.GetOrders());
         }
 
         private void btnSell_Click(object sender, RoutedEventArgs e)
@@ -49,20 +49,19 @@ namespace CinemaManager
         {
             if (int.TryParse(tbTicketsCount.Text, out int tickets))
             {
-                context.Orders.Add(new Order { SellTime = DateTime.Now, TicketsCount = tickets, FilmShowId = (lvFilmShows.SelectedItem as FilmShow)?.Id ?? throw new Exception("FilmShow not selected") });
-                context.SaveChanges();
+                dataAccess.AddOrder(new Order { SellTime = DateTime.Now, TicketsCount = tickets, FilmShowId = (lvFilmShows.SelectedItem as FilmShow)?.Id ?? throw new Exception("FilmShow not selected") });
             }
         }
 
         void ReloadFilms()
         {
             Films.Clear();
-            context.FilmShows.ToList().ForEach(x => Films.Add(x));
+            dataAccess.GetFilmShows().ToList().ForEach(x => Films.Add(x));
         }
         void ReloadOrders()
         {
             Orders.Clear();
-            context.Orders.ToList().ForEach(x => Orders.Add(x));
+            dataAccess.GetOrders().ToList().ForEach(x => Orders.Add(x));
         }
     }
 }
