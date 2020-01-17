@@ -1,31 +1,78 @@
-﻿class Program
+﻿using System;
+using Math;
+
+
+namespace ConsoleProgram
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Здравствуйте вас приветствует математическая программа");
-        Console.WriteLine("пажалуйста введите число. ");
-
-        String S = Console.ReadLine();
-
-        if (S == "q")
+        static int Main(string[] args)
         {
-            return;
-        }
-        int M = Int32.Parse(S);
-        int c1 = 1; int c2 = 0;
-        int c3 = 0;
-        for (int i = 1; i <= M; i++)
-        {
-            c1 = c1 * i;
-            c2 = c2 + i;
-            if (i % 2 == 0)
+            Console.WriteLine("Здравствуйте вас приветствует математическая программа");
+
+            Console.WriteLine("пожалуйста введите число. ");
+            string userInput = Console.ReadLine();
+            if (userInput == "q") return;
+
+            if (int.TryParse(userInput, out int userNumber))
             {
-                c3 = i;
+                Mathematics mathematics = new Mathematics();
+                mathematics.CalcAll(userNumber);
+
+
+                Console.WriteLine($"Факториал равен { mathematics.Factorial }");
+                Console.WriteLine($"Сумма от 1 до { userNumber } равна { mathematics.Sum }");
+                Console.WriteLine($"Максимальное четное число меньше { userNumber } равно { mathematics.MaxEven }");
+            }
+            else Console.WriteLine("Вы ввели не число");
+
+            Console.ReadKey();
+            return 0;
+        }
+    }
+}
+
+
+namespace Math
+{
+    public sealed class Mathematics
+    {
+        #region Fields
+
+        private int _factorial = 1;
+        private int _sum = 0;
+        private int _maxEven = 0;
+
+        #endregion
+
+
+        #region Properties
+
+        public int Factorial => _factorial;
+
+        public int Sum => _sum;
+
+        public int MaxEven => _maxEven;
+
+        #endregion
+
+
+        #region Methods
+
+        /// <summary>
+        /// Calcs All values of Mathematics class
+        /// </summary>
+        /// <param name="max">maximum number</param>
+        public void CalcAll(int max)
+        {
+            for (int i = 1; i <= max; i++)
+            {
+                _factorial *= i;
+                _sum += i;
+                if (i % 2 == 0) _maxEven = i;
             }
         }
-        Console.WriteLine("Факториал равет " + c1); Console.WriteLine("Сума от 1 до N равна " + c2);
 
-        Console.WriteLine("максимальное четное число меньше N равно" + c3);
-        Console.ReadLine();
+        #endregion
     }
 }
