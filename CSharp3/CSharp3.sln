@@ -37,6 +37,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3FA80486-E77A-4095-857B-FAF84B4EC153}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson7", "Lesson7", "{59AF9A22-B89D-4FDA-AFF1-DDB710F273F9}"
+	ProjectSection(SolutionItems) = preProject
+		Program.cs = Program.cs
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaManager", "CinemaManager\CinemaManager.csproj", "{489AAD31-3AC5-42BB-9991-1B87D9DA23C7}"
 EndProject
