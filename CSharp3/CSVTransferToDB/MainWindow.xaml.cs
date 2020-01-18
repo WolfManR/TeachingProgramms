@@ -23,7 +23,8 @@ namespace CSVTransferToDB
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<People> Peoples { get; set; } = new ObservableCollection<People>();
+        PeopleEntitiesContainer container = new PeopleEntitiesContainer();
+        public ObservableCollection<Person> Peoples { get; set; } = new ObservableCollection<Person>();
         public MainWindow()
         {
             InitializeComponent();
@@ -39,10 +40,31 @@ namespace CSVTransferToDB
                     while (!sr.EndOfStream)
                     {
                         string[] line = sr.ReadLine().Split(',');
-                        Peoples.Add(new People { FIO = line[0], Email = line[1], Phone = line[2] });
+                        Peoples.Add(new Person { FIO = line[0], Email = line[1], Phone = line[2] });
                     }
                 }
             }
+        }
+
+        private void btnSendToDB_Click(object sender, RoutedEventArgs e)
+        {
+            container.People.AddRange(Peoples);
+            container.SaveChanges();
+        }
+    }
+
+    public class PersonVM
+    {
+        private Person person;
+
+        public Person Person => person;
+        public string PersonFIO { get; set; }
+        public string PersonEmail { get; set; }
+        public string PersonPhone { get; set; }
+
+        public PersonVM(Person person)
+        {
+            this.person = person;
         }
     }
 }
