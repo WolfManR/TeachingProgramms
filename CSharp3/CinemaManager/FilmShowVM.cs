@@ -1,34 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaManager
 {
-    public class FilmShowVM:INotifyPropertyChanged
+    public class FilmShowVM : INotifyPropertyChanged
     {
-        private FilmShow Film;
-        public FilmShowVM(FilmShow filmShow)
+        private FilmShow film;
+        DataAccess dataAccess;
+
+        public FilmShowVM(FilmShow filmShow, DataAccess dataAccess)
         {
-            Film = filmShow;
+            film = filmShow;
+            this.dataAccess = dataAccess;
         }
-        public string FilmShowName 
-        { 
-            get=>Film.Name; 
-            set 
+        public string FilmShowName
+        {
+            get => film.Name;
+            set
             {
-                if (Film.Name == value) return;
-                
+                if (film.Name == value) return;
+                film.Name = value;
+                OnPropertyChanged();
             }
         }
-        public DateTime FilmShowStartTime { get; set; }
+        public DateTime FilmShowStartTime
+        {
+            get => film.StartTime; 
+            set
+            {
+                if(film.StartTime == value) return;
+                film.StartTime = value;
+                OnPropertyChanged();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName]string prop = "")
         {
+            dataAccess.UpdateFilmShow(film);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
