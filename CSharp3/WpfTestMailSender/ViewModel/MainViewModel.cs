@@ -1,3 +1,4 @@
+using Common;
 using EmailSendDLL;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -41,7 +42,7 @@ namespace WpfTestMailSender.ViewModel
             ////}
         }
         [PreferredConstructor]
-        public MainViewModel(IDataAccessService servProxy)
+        public MainViewModel(IEFAccessService servProxy)
         {
             serviceProxy = servProxy;
             Emails = new ObservableCollection<Email>();
@@ -55,11 +56,12 @@ namespace WpfTestMailSender.ViewModel
             OpenLetterEditCommand = new RelayCommand<DateTime>(GetLetter);
             SendAtOnceCommand = new RelayCommand<object>(SendAtOnce);
             SendSchedulerCommand = new RelayCommand<object>(SendScheduler);
+            DeleteEmailCommand = new RelayCommand<Email>(DeleteEmail);
         }
 
 
         ObservableCollection<Email> emails;
-        IDataAccessService serviceProxy;
+        IEFAccessService serviceProxy;
         private Email emailInfo;
         private string name;
 
@@ -111,6 +113,7 @@ namespace WpfTestMailSender.ViewModel
         public RelayCommand<DateTime> OpenLetterEditCommand { get; set; }
         public RelayCommand<object> SendAtOnceCommand { get; set; }
         public RelayCommand<object> SendSchedulerCommand { get; set; }
+        public RelayCommand<Email> DeleteEmailCommand { get; set; }
         void SendAtOnce(object array)
         {
             if (array is object[] arr)
@@ -218,11 +221,25 @@ namespace WpfTestMailSender.ViewModel
         }
         void SaveEmail(Email email)
         {
-            EmailInfo.Id = serviceProxy.CreateEmail(email);
+            if (serviceProxy.IsEmailExist(email))
+            {
+                serviceProxy.UpdateEmail(email);
+                return;
+            }
+
+            EmailInfo.Id = serviceProxy.AddEmail(email);
             if (EmailInfo.Id != 0)
             {
                 Emails.Add(EmailInfo);
                 RaisePropertyChanged(nameof(EmailInfo));
+            }
+        }
+        void DeleteEmail(Email email)
+        {
+            if (email != null)
+            {
+                serviceProxy.DeleteEmail(email);
+                GetEmails();
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace WpfTestMailSender
+namespace Common
 {
     public partial class Email : INotifyPropertyChanging, INotifyPropertyChanged, IDataErrorInfo
     {
@@ -12,10 +12,13 @@ namespace WpfTestMailSender
             {
                 if (propertyName == "Value")
                 {
-                    if (_Value != null && _Value.Length < 4) return "Необходимо указать правильный e-mail!";
+                    if (Value != null && Value.Length < 4) return "Необходимо указать правильный e-mail!";
                 }
                 return "";
             }
         }
+
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

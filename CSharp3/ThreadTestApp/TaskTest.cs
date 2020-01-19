@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ThreadTestApp
 {
-    namespace TastTest
+    namespace TaskTest
     {
         #region Task Base
         static class TaskBase

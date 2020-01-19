@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CinemaEntities.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CinemaEntitiesStoreContainer">
+    <EntitySet Name="Orders" EntityType="CinemaEntities.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FilmShows" EntityType="CinemaEntities.Store.FilmShows" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FilmShowOrder" Association="CinemaEntities.Store.FilmShowOrder">
+      <End Role="FilmShow" EntitySet="FilmShows" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TicketsCount" Type="int" Nullable="false" />
+    <Property Name="SellTime" Type="datetime" Nullable="false" />
+    <Property Name="FilmShowId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FilmShows">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StartTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FilmShowOrder">
+    <End Role="FilmShow" Type="CinemaEntities.Store.FilmShows" Multiplicity="1" />
+    <End Role="Order" Type="CinemaEntities.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FilmShow">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="FilmShowId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="CinemaEntities" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="CinemaEntitiesContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Orders" EntityType="CinemaEntities.Order" />
+          <EntitySet Name="FilmShows" EntityType="CinemaEntities.FilmShow" />
+          <AssociationSet Name="FilmShowOrder" Association="CinemaEntities.FilmShowOrder">
+            <End Role="FilmShow" EntitySet="FilmShows" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketsCount" Type="Int32" Nullable="false" />
+          <Property Name="SellTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="FilmShows" Relationship="CinemaEntities.FilmShowOrder" FromRole="Order" ToRole="FilmShow" />
+          <Property Name="FilmShowId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FilmShow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="CinemaEntities.FilmShowOrder" FromRole="FilmShow" ToRole="Order" />
+        </EntityType>
+        <Association Name="FilmShowOrder">
+          <End Type="CinemaEntities.FilmShow" Role="FilmShow" Multiplicity="1" />
+          <End Type="CinemaEntities.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FilmShow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="FilmShowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CinemaEntitiesStoreContainer" CdmEntityContainer="CinemaEntitiesContainer">
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(CinemaEntities.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TicketsCount" ColumnName="TicketsCount" />
+          <ScalarProperty Name="SellTime" ColumnName="SellTime" />
+          <ScalarProperty Name="FilmShowId" ColumnName="FilmShowId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmShows">
+      <EntityTypeMapping TypeName="IsTypeOf(CinemaEntities.FilmShow)">
+        <MappingFragment StoreEntitySet="FilmShows">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
